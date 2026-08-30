@@ -1,0 +1,171 @@
+{
+  "url": "http://localhost:3000/",
+  "at": "2026-08-30T23:26:47.690Z",
+  "passed": 23,
+  "total": 23,
+  "results": [
+    {
+      "name": "A · WebMCP runtime available",
+      "pass": true
+    },
+    {
+      "name": "B · initial tools match ORDER_ACTIVE",
+      "pass": true,
+      "detail": [
+        "get_order",
+        "get_resolution_options",
+        "prepare_resolution"
+      ]
+    },
+    {
+      "name": "C · confirm_resolution is NOT registered before approval",
+      "pass": true
+    },
+    {
+      "name": "D · readOnly annotations correct",
+      "pass": true,
+      "detail": {
+        "get_order": true,
+        "get_resolution_options": true,
+        "prepare_resolution": false
+      }
+    },
+    {
+      "name": "E · prepare schema enumerates only eligible options",
+      "pass": true,
+      "detail": [
+        "replacement",
+        "refund",
+        "keep_partial_refund"
+      ]
+    },
+    {
+      "name": "F · get_resolution_options returns 3 policy options",
+      "pass": true,
+      "detail": [
+        "replacement",
+        "refund",
+        "keep_partial_refund"
+      ]
+    },
+    {
+      "name": "G · ineligible option rejected by prepare",
+      "pass": true,
+      "detail": "Not an eligible resolution for this order"
+    },
+    {
+      "name": "H · prepare stages the resolution and drops prepare_resolution",
+      "pass": true,
+      "detail": [
+        "get_order",
+        "get_resolution_options"
+      ]
+    },
+    {
+      "name": "I · confirm_resolution not reachable before approval",
+      "pass": true,
+      "detail": "tool confirm_resolution not registered"
+    },
+    {
+      "name": "I2 · state unchanged by the attempt",
+      "pass": true,
+      "detail": "RESOLUTION_PREPARED"
+    },
+    {
+      "name": "J · pre-approval payload requires approval",
+      "pass": true,
+      "detail": {
+        "humanApproved": false,
+        "requires": true
+      }
+    },
+    {
+      "name": "K · human approval registers confirm_resolution",
+      "pass": true,
+      "detail": [
+        "confirm_resolution",
+        "get_order",
+        "get_resolution_options"
+      ]
+    },
+    {
+      "name": "L · M0.6 REGRESSION — post-approval payload does not ask for approval again",
+      "pass": true,
+      "detail": {
+        "humanApproved": true,
+        "requires": false,
+        "status": "approved_by_customer"
+      }
+    },
+    {
+      "name": "M · confirm with a stale/mismatched id is rejected",
+      "pass": true,
+      "detail": "The approved resolution is not the one supplied"
+    },
+    {
+      "name": "N · approved confirm executes and reaches RESOLVED",
+      "pass": true,
+      "detail": {
+        "ref": "R-1042",
+        "tools": [
+          "get_order"
+        ]
+      }
+    },
+    {
+      "name": "O · scenario switch resets tools and state",
+      "pass": true,
+      "detail": [
+        "get_order",
+        "get_resolution_options",
+        "prepare_resolution"
+      ]
+    },
+    {
+      "name": "O2 · schema enum follows the new scenario",
+      "pass": true,
+      "detail": [
+        "exchange",
+        "refund",
+        "store_credit"
+      ]
+    },
+    {
+      "name": "P · human can choose another option",
+      "pass": true,
+      "detail": "store_credit"
+    },
+    {
+      "name": "P2 · choosing another does not auto-approve",
+      "pass": true
+    },
+    {
+      "name": "Q · agent confirming the pre-swap option is rejected",
+      "pass": true,
+      "detail": "The approved resolution is not the one supplied"
+    },
+    {
+      "name": "R · confirming the actually-approved option succeeds",
+      "pass": true,
+      "detail": "SC-2087"
+    },
+    {
+      "name": "S · third scenario exposes its own policy options",
+      "pass": true,
+      "detail": [
+        "return_refund",
+        "keep_shipping_refund",
+        "keep_store_credit"
+      ]
+    },
+    {
+      "name": "T · cancel returns prepare_resolution to the agent",
+      "pass": true,
+      "detail": [
+        "get_order",
+        "get_resolution_options",
+        "prepare_resolution"
+      ]
+    }
+  ]
+}

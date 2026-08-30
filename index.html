@@ -3,1791 +3,345 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post-Purchase Resolution — M0 Spike</title>
-  <meta name="description" content="WebMCP-powered post-purchase resolution: agent-assisted order issue resolution with human approval.">
+  <title>Post-Purchase Resolution</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ═══════════════════════════════════════════════════════
-       DESIGN SYSTEM
-       ═══════════════════════════════════════════════════════ */
     :root {
-      --bg-primary: #0a0a0f;
-      --bg-card: #12121a;
-      --bg-card-hover: #1a1a25;
-      --bg-surface: #1e1e2a;
-      --bg-elevated: #252535;
-
-      --text-primary: #f0f0f5;
-      --text-secondary: #9090a8;
-      --text-muted: #606078;
-
+      --bg: #0d0d12;
+      --bg-card: #16161f;
+      --bg-raised: #1c1c28;
+      --border: rgba(255,255,255,0.08);
+      --border-strong: rgba(255,255,255,0.14);
+      --text: #f0f0f5;
+      --text-secondary: #b8b8c8;
+      --text-muted: #7a7a8c;
       --accent: #6c5ce7;
       --accent-light: #a29bfe;
-      --accent-glow: rgba(108, 92, 231, 0.25);
-
+      --accent-glow: rgba(108,92,231,0.14);
       --success: #00b894;
-      --success-glow: rgba(0, 184, 148, 0.2);
+      --success-glow: rgba(0,184,148,0.12);
       --warning: #fdcb6e;
-      --warning-glow: rgba(253, 203, 110, 0.15);
       --danger: #e17055;
-      --danger-glow: rgba(225, 112, 85, 0.15);
-      --info: #74b9ff;
-
-      --border: rgba(255, 255, 255, 0.06);
-      --border-accent: rgba(108, 92, 231, 0.3);
-
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --radius-xl: 20px;
-
-      --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
-      --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
-      --shadow-lg: 0 8px 40px rgba(0,0,0,0.5);
-      --shadow-glow: 0 0 30px var(--accent-glow);
-
-      --transition-fast: 150ms ease;
-      --transition-normal: 250ms ease;
-      --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+      --danger-glow: rgba(225,112,85,0.12);
+      --radius: 14px;
+      --t: 200ms cubic-bezier(0.4,0,0.2,1);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin:0; padding:0; box-sizing:border-box; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      min-height: 100vh;
-      line-height: 1.6;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
     }
 
-    /* ═══════════════════════════════════════════════════════
-       LAYOUT
-       ═══════════════════════════════════════════════════════ */
-    .app-container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
+    .wrap { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
+
+    /* ── header ─────────────────────────────────────────── */
+    .top {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; margin-bottom:24px; flex-wrap:wrap;
+    }
+    .brand { font-size:20px; font-weight:700; letter-spacing:-0.02em; }
+    .brand span { color: var(--accent-light); }
+
+    .badge {
+      display:inline-flex; align-items:center; gap:7px;
+      padding:6px 13px; border-radius:100px;
+      background: var(--accent-glow); border:1px solid rgba(108,92,231,0.28);
+      font-size:11px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase;
+      color: var(--accent-light); white-space:nowrap;
+    }
+    .badge::before { content:''; width:6px; height:6px; border-radius:50%; background:currentColor; }
+
+    /* ── scenario selector ──────────────────────────────── */
+    .fixtures { margin-bottom:22px; }
+    .fixtures-label {
+      font-size:10px; font-weight:600; letter-spacing:0.09em; text-transform:uppercase;
+      color: var(--text-muted); margin-bottom:8px;
+    }
+    .fixtures-row { display:flex; gap:8px; flex-wrap:wrap; }
+    .fixture-btn {
+      padding:8px 15px; border-radius:100px; cursor:pointer;
+      background: var(--bg-card); border:1px solid var(--border);
+      color: var(--text-secondary); font-family:inherit; font-size:13px; font-weight:500;
+      transition: all var(--t);
+    }
+    .fixture-btn:hover { border-color: var(--border-strong); color: var(--text); }
+    .fixture-btn.on {
+      background: var(--accent-glow); border-color: rgba(108,92,231,0.45); color: var(--accent-light);
     }
 
-    /* ═══════════════════════════════════════════════════════
-       HEADER
-       ═══════════════════════════════════════════════════════ */
-    .app-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 32px;
+    /* ── state rail ─────────────────────────────────────── */
+    .rail {
+      display:flex; align-items:center; gap:6px;
+      padding:14px 16px; background:var(--bg-card);
+      border:1px solid var(--border); border-radius:var(--radius); margin-bottom:20px;
+      overflow-x:auto;
+    }
+    .step { display:flex; align-items:center; gap:7px; flex-shrink:0; }
+    .dot { width:8px; height:8px; border-radius:50%; background:var(--text-muted); opacity:0.4; transition:all var(--t); }
+    .step span {
+      font-size:11px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase;
+      color:var(--text-muted); white-space:nowrap;
+    }
+    .step.done .dot { background:var(--success); opacity:1; }
+    .step.done span { color:var(--text-secondary); }
+    .step.now .dot { background:var(--accent-light); opacity:1; box-shadow:0 0 0 4px var(--accent-glow); }
+    .step.now span { color:var(--accent-light); }
+    .conn { flex:1; min-width:14px; height:1px; background:var(--border); }
+    .conn.done { background:rgba(0,184,148,0.4); }
+
+    /* ── cards ──────────────────────────────────────────── */
+    .card {
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:var(--radius); padding:22px; margin-bottom:16px;
     }
 
-    .app-header h1 {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
+    .order-top { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; }
+    .order-id { font-size:11px; font-weight:600; letter-spacing:0.09em; text-transform:uppercase; color:var(--text-muted); }
+    .pill {
+      padding:4px 11px; border-radius:100px; font-size:11px; font-weight:600;
+      display:inline-flex; align-items:center; gap:6px;
+    }
+    .pill::before { content:''; width:5px; height:5px; border-radius:50%; background:currentColor; }
+    .pill--issue { background:var(--danger-glow); color:var(--danger); }
+    .pill--working { background:var(--accent-glow); color:var(--accent-light); }
+    .pill--done { background:var(--success-glow); color:var(--success); }
+
+    .product { font-size:21px; font-weight:600; letter-spacing:-0.02em; }
+    .price { font-size:14px; color:var(--text-secondary); margin-top:2px; }
+
+    .note {
+      display:flex; gap:10px; align-items:flex-start;
+      margin-top:14px; padding:11px 13px; border-radius:10px; font-size:13px;
+    }
+    .note--issue { background:var(--danger-glow); border:1px solid rgba(225,112,85,0.2); color:#f0b8a4; }
+    .note--ctx { background:rgba(253,203,110,0.08); border:1px solid rgba(253,203,110,0.18); color:#f5d9a0; }
+    .note-ico { flex-shrink:0; }
+
+    /* ── section heads ──────────────────────────────────── */
+    .head {
+      font-size:11px; font-weight:600; letter-spacing:0.09em;
+      text-transform:uppercase; color:var(--text-muted); margin-bottom:11px;
     }
 
-    .app-header h1 span {
-      color: var(--accent-light);
+    /* ── option list ────────────────────────────────────── */
+    .opt {
+      border:1px solid var(--border); border-radius:11px; padding:14px 15px;
+      margin-bottom:9px; transition:all var(--t); background:var(--bg-raised);
     }
+    .opt:last-child { margin-bottom:0; }
+    .opt-top { display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
+    .opt-name { font-size:14px; font-weight:600; }
+    .opt-timing { font-size:12px; color:var(--accent-light); white-space:nowrap; font-weight:500; }
+    .opt-recv { font-size:13px; color:var(--text-secondary); margin-top:4px; }
+    .opt-meta { font-size:11.5px; color:var(--text-muted); margin-top:6px; }
 
-    .webmcp-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      background: var(--accent-glow);
-      border: 1px solid var(--border-accent);
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--accent-light);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+    .opt--pick { cursor:pointer; }
+    .opt--pick:hover { border-color:var(--border-strong); }
+    .opt--sel { border-color:rgba(108,92,231,0.5); background:var(--accent-glow); }
+
+    /* ── decision card (hero) ───────────────────────────── */
+    .decision {
+      border:1px solid rgba(108,92,231,0.35); border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(108,92,231,0.09), rgba(108,92,231,0.02));
+      padding:24px; margin-bottom:16px;
     }
-
-    .webmcp-badge::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent-light);
-      animation: pulse-dot 2s ease-in-out infinite;
+    .decision-label {
+      font-size:11px; font-weight:700; letter-spacing:0.11em; text-transform:uppercase;
+      color:var(--accent-light); margin-bottom:9px;
     }
+    .decision-title { font-size:26px; font-weight:700; letter-spacing:-0.03em; margin-bottom:3px; }
+    .decision-recv { font-size:14px; color:var(--text-secondary); margin-bottom:18px; }
 
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
+    /* agent reasoning vs merchant policy — must never look alike */
+    .block { border-radius:11px; padding:14px 15px; margin-bottom:12px; }
+
+    .block--agent {
+      background:rgba(108,92,231,0.10);
+      border:1px dashed rgba(162,155,254,0.45);
     }
-
-    /* ═══════════════════════════════════════════════════════
-       ORDER CARD
-       ═══════════════════════════════════════════════════════ */
-    .order-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      margin-bottom: 20px;
-      transition: border-color var(--transition-normal);
+    .block--merchant {
+      background:var(--bg-raised);
+      border:1px solid var(--border);
     }
-
-    .order-card:hover {
-      border-color: rgba(255, 255, 255, 0.1);
+    .block-tag {
+      font-size:10px; font-weight:700; letter-spacing:0.09em; text-transform:uppercase;
+      display:flex; align-items:center; gap:7px; margin-bottom:9px;
     }
-
-    .order-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 20px;
+    .block--agent .block-tag { color:var(--accent-light); }
+    .block--merchant .block-tag { color:var(--success); }
+    .block-tag small {
+      font-weight:500; letter-spacing:0.02em; text-transform:none;
+      font-size:10.5px; color:var(--text-muted);
     }
+    .block--agent p { font-size:13.5px; color:#d5d1f5; font-style:italic; }
 
-    .order-id {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
+    .terms { display:grid; gap:9px; }
+    .term { display:flex; gap:12px; font-size:13px; align-items:baseline; }
+    .term-k { color:var(--text-muted); min-width:112px; flex-shrink:0; font-size:12px; }
+    .term-v { color:var(--text); }
+    .term-v ul { list-style:none; }
+    .term-v li { position:relative; padding-left:13px; }
+    .term-v li::before { content:'·'; position:absolute; left:3px; color:var(--text-muted); }
 
-    .order-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
-
-    .order-status--delivered {
-      background: var(--success-glow);
-      color: var(--success);
-      border: 1px solid rgba(0, 184, 148, 0.2);
-    }
-
-    .order-status--issue {
-      background: var(--danger-glow);
-      color: var(--danger);
-      border: 1px solid rgba(225, 112, 85, 0.2);
-    }
-
-    .order-status--resolving {
-      background: var(--warning-glow);
-      color: var(--warning);
-      border: 1px solid rgba(253, 203, 110, 0.2);
-    }
-
-    .order-status--resolved {
-      background: var(--success-glow);
-      color: var(--success);
-      border: 1px solid rgba(0, 184, 148, 0.2);
-    }
-
-    .order-status::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: currentColor;
-    }
-
-    .order-product {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 4px;
-    }
-
-    .order-price {
-      font-size: 15px;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
-    }
-
-    .order-issue {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-      background: var(--danger-glow);
-      border: 1px solid rgba(225, 112, 85, 0.15);
-      border-radius: var(--radius-sm);
-      font-size: 14px;
-      color: var(--danger);
-    }
-
-    .order-issue-icon {
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .order-context {
-      margin-top: 12px;
-      padding: 12px 16px;
-      background: var(--warning-glow);
-      border: 1px solid rgba(253, 203, 110, 0.12);
-      border-radius: var(--radius-sm);
-      font-size: 13px;
-      color: var(--warning);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       STATE INDICATOR
-       ═══════════════════════════════════════════════════════ */
-    .state-indicator {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      margin-bottom: 20px;
-      padding: 16px 20px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-    }
-
-    .state-step {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      white-space: nowrap;
-      transition: color var(--transition-normal);
-    }
-
-    .state-step.active {
-      color: var(--accent-light);
-    }
-
-    .state-step.completed {
-      color: var(--success);
-    }
-
-    .state-step-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--text-muted);
-      transition: all var(--transition-normal);
-      flex-shrink: 0;
-    }
-
-    .state-step.active .state-step-dot {
-      background: var(--accent-light);
-      box-shadow: 0 0 8px var(--accent-glow);
-    }
-
-    .state-step.completed .state-step-dot {
-      background: var(--success);
-    }
-
-    .state-connector {
-      flex: 1;
-      height: 1px;
-      background: var(--text-muted);
-      margin: 0 8px;
-      opacity: 0.3;
-      min-width: 12px;
-    }
-
-    .state-connector.completed {
-      background: var(--success);
-      opacity: 0.6;
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       RESOLUTION PANEL
-       ═══════════════════════════════════════════════════════ */
-    .resolution-panel {
-      background: var(--bg-card);
-      border: 1px solid var(--border-accent);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      margin-bottom: 20px;
-      animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: var(--shadow-glow);
-    }
-
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .resolution-panel.hidden {
-      display: none;
-    }
-
-    .resolution-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent-light);
-      margin-bottom: 16px;
-    }
-
-    .resolution-type {
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 4px;
-    }
-
-    .resolution-detail {
-      font-size: 15px;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-    }
-
-    .resolution-detail strong {
-      color: var(--success);
-      font-weight: 600;
-    }
-
-    .resolution-note {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-    }
-
-    .resolution-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       RESOLVED STATE
-       ═══════════════════════════════════════════════════════ */
-    .resolved-panel {
-      background: var(--bg-card);
-      border: 1px solid rgba(0, 184, 148, 0.25);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      margin-bottom: 20px;
-      animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 0 30px var(--success-glow);
-    }
-
-    .resolved-panel.hidden {
-      display: none;
-    }
-
-    .resolved-check {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: var(--success-glow);
-      border: 2px solid var(--success);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin-bottom: 16px;
-      animation: checkPop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
-    }
-
-    @keyframes checkPop {
-      from { transform: scale(0); }
-      to { transform: scale(1); }
-    }
-
-    .resolved-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--success);
-      margin-bottom: 12px;
-    }
-
-    .resolved-id {
-      font-size: 14px;
-      color: var(--text-secondary);
-      margin-top: 8px;
-    }
-
-    .resolved-id code {
-      background: var(--bg-elevated);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      font-size: 13px;
-      color: var(--text-primary);
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       BUTTONS
-       ═══════════════════════════════════════════════════════ */
+    /* ── buttons ────────────────────────────────────────── */
+    .actions { display:flex; gap:9px; flex-wrap:wrap; margin-top:18px; }
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px 24px;
-      border-radius: var(--radius-sm);
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: all var(--transition-fast);
-      letter-spacing: 0.01em;
+      padding:10px 19px; border-radius:9px; border:1px solid transparent;
+      font-family:inherit; font-size:13.5px; font-weight:600; cursor:pointer;
+      transition:all var(--t);
+    }
+    .btn:disabled { opacity:0.45; cursor:not-allowed; }
+    .btn-go { background:var(--success); color:#04140f; }
+    .btn-go:hover:not(:disabled) { filter:brightness(1.1); }
+    .btn-alt { background:transparent; border-color:var(--border-strong); color:var(--text-secondary); }
+    .btn-alt:hover:not(:disabled) { color:var(--text); border-color:var(--text-muted); }
+    .btn-no { background:transparent; border-color:rgba(225,112,85,0.3); color:var(--danger); }
+    .btn-no:hover:not(:disabled) { background:var(--danger-glow); }
+    .btn-ghost { background:transparent; border-color:var(--border); color:var(--text-muted); font-size:12.5px; padding:8px 15px; }
+    .btn-ghost:hover { color:var(--text-secondary); border-color:var(--border-strong); }
+
+    /* ── resolved ───────────────────────────────────────── */
+    .resolved {
+      border:1px solid rgba(0,184,148,0.3); border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(0,184,148,0.09), rgba(0,184,148,0.02));
+      padding:24px; margin-bottom:16px;
+    }
+    .check {
+      width:42px; height:42px; border-radius:50%;
+      background:var(--success-glow); border:1px solid rgba(0,184,148,0.35);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--success); font-size:20px; margin-bottom:13px;
+    }
+    .ref {
+      display:inline-block; margin-top:12px; padding:5px 11px; border-radius:7px;
+      background:rgba(0,184,148,0.1); border:1px solid rgba(0,184,148,0.22);
+      font-family:'SF Mono',ui-monospace,monospace; font-size:12.5px; color:var(--success);
     }
 
-    .btn:active { transform: scale(0.97); }
+    /* ── audit ──────────────────────────────────────────── */
+    .audit { display:flex; flex-direction:column; }
+    .entry {
+      display:flex; gap:11px; align-items:baseline;
+      padding:9px 0; border-bottom:1px solid var(--border); font-size:13px;
+    }
+    .entry:last-child { border-bottom:none; }
+    .who {
+      font-size:9.5px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase;
+      padding:3px 7px; border-radius:5px; flex-shrink:0; min-width:56px; text-align:center;
+    }
+    .who--AGENT { background:var(--accent-glow); color:var(--accent-light); }
+    .who--HUMAN { background:rgba(253,203,110,0.13); color:var(--warning); }
+    .who--SYSTEM { background:var(--success-glow); color:var(--success); }
+    .what { flex:1; color:var(--text-secondary); }
+    .when { font-size:11px; color:var(--text-muted); font-family:'SF Mono',ui-monospace,monospace; flex-shrink:0; }
+    .empty { padding:16px 0; text-align:center; color:var(--text-muted); font-size:13px; }
 
-    .btn-primary {
-      background: var(--accent);
-      color: white;
-      box-shadow: 0 2px 12px var(--accent-glow);
+    /* ── protocol panel ─────────────────────────────────── */
+    details.proto { margin-top:20px; }
+    details.proto summary {
+      cursor:pointer; list-style:none; padding:12px 16px;
+      background:var(--bg-card); border:1px solid var(--border); border-radius:11px;
+      font-size:12.5px; font-weight:500; color:var(--text-muted);
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    details.proto summary::-webkit-details-marker { display:none; }
+    details.proto summary::after { content:'▾'; transition:transform var(--t); }
+    details.proto[open] summary::after { transform:rotate(180deg); }
+    details.proto summary:hover { color:var(--text-secondary); border-color:var(--border-strong); }
+    .proto-body {
+      border:1px solid var(--border); border-top:none;
+      border-radius:0 0 11px 11px; padding:18px 16px; background:var(--bg-card);
+    }
+    .chips { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:6px; }
+    .chip {
+      display:inline-flex; align-items:center; gap:6px;
+      padding:5px 11px; border-radius:100px; font-size:11.5px; font-weight:500;
+      font-family:'SF Mono',ui-monospace,monospace;
+      background:var(--bg-raised); border:1px solid var(--border); color:var(--text-secondary);
+    }
+    .chip::before { content:''; width:5px; height:5px; border-radius:50%; background:currentColor; }
+    .chip--r { border-color:rgba(0,184,148,0.28); color:var(--success); }
+    .chip--w { border-color:rgba(108,92,231,0.3); color:var(--accent-light); }
+    .proto-sub { font-size:11px; color:var(--text-muted); margin:14px 0 7px; }
+    pre.last {
+      background:var(--bg); border:1px solid var(--border); border-radius:9px;
+      padding:11px 13px; font-family:'SF Mono',ui-monospace,monospace; font-size:11.5px;
+      color:var(--text-secondary); overflow-x:auto; white-space:pre-wrap; word-break:break-word;
     }
 
-    .btn-primary:hover {
-      background: #7c6cf0;
-      box-shadow: 0 4px 20px var(--accent-glow);
+    .foot {
+      margin-top:26px; padding-top:18px; border-top:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
     }
+    .foot-txt { font-size:11.5px; color:var(--text-muted); }
 
-    .btn-success {
-      background: var(--success);
-      color: #0a0a0f;
-      box-shadow: 0 2px 12px var(--success-glow);
-    }
+    .hidden { display:none !important; }
 
-    .btn-success:hover {
-      background: #00d2a0;
-      box-shadow: 0 4px 20px var(--success-glow);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--text-secondary);
-      border: 1px solid var(--border);
-    }
-
-    .btn-ghost:hover {
-      background: var(--bg-surface);
-      color: var(--text-primary);
-      border-color: rgba(255, 255, 255, 0.12);
-    }
-
-    .btn-danger-ghost {
-      background: transparent;
-      color: var(--danger);
-      border: 1px solid rgba(225, 112, 85, 0.2);
-    }
-
-    .btn-danger-ghost:hover {
-      background: var(--danger-glow);
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       AUDIT TRAIL
-       ═══════════════════════════════════════════════════════ */
-    .audit-section {
-      margin-top: 28px;
-    }
-
-    .audit-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-    }
-
-    .audit-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .audit-trail {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-    }
-
-    .audit-entry {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--border);
-      font-size: 13px;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .audit-entry:last-child { border-bottom: none; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateX(-8px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    .audit-actor {
-      font-weight: 600;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .audit-actor--agent { color: var(--accent-light); }
-    .audit-actor--human { color: var(--warning); }
-    .audit-actor--system { color: var(--success); }
-
-    .audit-message {
-      color: var(--text-secondary);
-    }
-
-    .audit-time {
-      margin-left: auto;
-      font-size: 11px;
-      color: var(--text-muted);
-      white-space: nowrap;
-      flex-shrink: 0;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-    }
-
-    .audit-empty {
-      padding: 20px;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 13px;
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       TOOLS PANEL (debug / evidence)
-       ═══════════════════════════════════════════════════════ */
-    .tools-panel {
-      margin-top: 20px;
-    }
-
-    .tools-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-    }
-
-    .tools-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .tools-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .tool-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 500;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      color: var(--text-secondary);
-      transition: all var(--transition-normal);
-    }
-
-    .tool-chip--read {
-      border-color: rgba(0, 184, 148, 0.2);
-      color: var(--success);
-    }
-
-    .tool-chip--write {
-      border-color: rgba(108, 92, 231, 0.2);
-      color: var(--accent-light);
-    }
-
-    .tool-chip::before {
-      content: '';
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: currentColor;
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       FOOTER / RESET
-       ═══════════════════════════════════════════════════════ */
-    .app-footer {
-      margin-top: 32px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .app-footer-info {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       RESPONSIVE
-       ═══════════════════════════════════════════════════════ */
-    @media (max-width: 600px) {
-      .app-container { padding: 24px 16px 60px; }
-      .order-product { font-size: 18px; }
-      .resolution-type { font-size: 20px; }
-      .state-step span { display: none; }
-      .resolution-actions { flex-direction: column; }
-      .app-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    @media (max-width:600px) {
+      .wrap { padding:22px 14px 60px; }
+      .decision-title { font-size:22px; }
+      .term { flex-direction:column; gap:2px; }
+      .term-k { min-width:0; }
+      .actions .btn { flex:1; }
     }
   </style>
 </head>
 <body>
-  <div class="app-container">
+  <div class="wrap">
 
-    <!-- HEADER -->
-    <header class="app-header">
-      <h1>Post-Purchase <span>Resolution</span></h1>
-      <div class="webmcp-badge" id="webmcp-badge">WebMCP Active</div>
+    <header class="top">
+      <div class="brand">Post-Purchase <span>Resolution</span></div>
+      <div class="badge" id="badge">WebMCP Standby</div>
     </header>
 
-    <!-- STATE INDICATOR -->
-    <div class="state-indicator" id="state-indicator">
-      <div class="state-step active" id="step-order" data-state="ORDER_DELIVERED">
-        <div class="state-step-dot"></div>
-        <span>Order</span>
-      </div>
-      <div class="state-connector" id="conn-1"></div>
-      <div class="state-step" id="step-prepared" data-state="RESOLUTION_PREPARED">
-        <div class="state-step-dot"></div>
-        <span>Prepared</span>
-      </div>
-      <div class="state-connector" id="conn-2"></div>
-      <div class="state-step" id="step-approval" data-state="AWAITING_APPROVAL">
-        <div class="state-step-dot"></div>
-        <span>Approval</span>
-      </div>
-      <div class="state-connector" id="conn-3"></div>
-      <div class="state-step" id="step-resolved" data-state="RESOLVED">
-        <div class="state-step-dot"></div>
-        <span>Resolved</span>
-      </div>
-    </div>
+    <section class="fixtures">
+      <div class="fixtures-label">Demo fixture — pick a scenario</div>
+      <div class="fixtures-row" id="fixtures"></div>
+    </section>
 
-    <!-- ORDER CARD -->
-    <div class="order-card" id="order-card">
-      <div class="order-header">
-        <div class="order-id">Order #1042</div>
-        <div class="order-status order-status--issue" id="order-status-badge">
-          <span id="order-status-text">Damaged</span>
-        </div>
-      </div>
-      <div class="order-product">Wireless Headphones</div>
-      <div class="order-price">$129.00</div>
-      <div class="order-issue" id="order-issue">
-        <span class="order-issue-icon">⚠</span>
-        <span>Product arrived damaged — left earphone not working</span>
-      </div>
-      <div class="order-context" id="order-context">
-        <span>⏱</span>
-        <span>Customer travels tomorrow — needs fast resolution</span>
-      </div>
-    </div>
+    <div class="rail" id="rail"></div>
 
-    <!-- RESOLUTION PANEL (shown after prepare_replacement) -->
-    <div class="resolution-panel hidden" id="resolution-panel">
-      <div class="resolution-label">Resolution Ready</div>
-      <div class="resolution-type">Replacement</div>
-      <div class="resolution-detail">Arrives <strong>tomorrow</strong></div>
-      <div class="resolution-detail">Same product — Wireless Headphones</div>
-      <div class="resolution-note">Return original item within 14 days. Prepaid return label included.</div>
-      <div class="resolution-actions">
-        <button class="btn btn-success" id="btn-approve" onclick="handleApprove()">✓ Approve</button>
-        <button class="btn btn-danger-ghost" id="btn-cancel" onclick="handleCancel()">Cancel</button>
-      </div>
-    </div>
+    <section class="card" id="order-card"></section>
 
-    <!-- RESOLVED PANEL -->
-    <div class="resolved-panel hidden" id="resolved-panel">
-      <div class="resolved-check">✓</div>
-      <div class="resolved-label">Replacement Created</div>
-      <div class="resolution-type">Wireless Headphones</div>
-      <div class="resolution-detail">Arrives <strong>tomorrow</strong></div>
-      <div class="resolved-id">Replacement ID: <code>R-1042</code></div>
-      <div class="resolution-note">Return original item within 14 days. Tracking details will be emailed shortly.</div>
-    </div>
+    <!-- resolution surface: options / decision card / resolved -->
+    <div id="surface"></div>
 
-    <!-- AUDIT TRAIL -->
-    <div class="audit-section">
-      <div class="audit-header">
-        <div class="audit-title">Activity Log</div>
-      </div>
-      <div class="audit-trail" id="audit-trail">
-        <div class="audit-empty" id="audit-empty">No activity yet — waiting for agent interaction</div>
-      </div>
-    </div>
+    <section class="card">
+      <div class="head">Activity</div>
+      <div class="audit" id="audit"></div>
+    </section>
 
-    <!-- ACTIVE TOOLS (visible for evidence) -->
-    <div class="tools-panel">
-      <div class="tools-header">
-        <div class="tools-title">Active WebMCP Tools</div>
+    <details class="proto">
+      <summary><span>How the agent interacts</span></summary>
+      <div class="proto-body">
+        <div class="proto-sub" style="margin-top:0">Tools registered right now</div>
+        <div class="chips" id="tool-chips"></div>
+        <div class="proto-sub">Lifecycle</div>
+        <div style="font-size:12px;color:var(--text-muted);line-height:1.7" id="lifecycle"></div>
+        <div class="proto-sub">Most recent tool call</div>
+        <pre class="last" id="last-call">No tool calls yet.</pre>
       </div>
-      <div class="tools-list" id="tools-list"></div>
-    </div>
+    </details>
 
-    <!-- FOOTER -->
-    <div class="app-footer">
-      <div class="app-footer-info">M0 Spike · WebMCP Challenge 2026</div>
-      <button class="btn btn-ghost" id="btn-reset" onclick="handleReset()">↺ Reset Demo</button>
+    <div class="foot">
+      <div class="foot-txt">
+        Deterministic merchant fixtures implementing realistic post-purchase policies.
+        Resolution execution is real within this application's state machine; no external
+        commerce system is connected.
+      </div>
+      <button class="btn btn-ghost" id="reset">↺ Reset scenario</button>
     </div>
 
   </div>
 
-  <script>
-    // ═══════════════════════════════════════════════════════
-    // STATE MACHINE
-    // ═══════════════════════════════════════════════════════
-
-    const STATES = {
-      ORDER_DELIVERED: 'ORDER_DELIVERED',
-      RESOLUTION_PREPARED: 'RESOLUTION_PREPARED',
-      AWAITING_APPROVAL: 'AWAITING_APPROVAL',
-      RESOLVED: 'RESOLVED',
-    };
-
-    // Fixture order data (deterministic truth — NOT invented by agent)
-    const ORDER_DATA = {
-      order_id: '1042',
-      product: 'Wireless Headphones',
-      price: 129.00,
-      currency: 'USD',
-      status: 'delivered',
-      delivered_date: '2026-08-26',
-      issue: {
-        type: 'damaged',
-        description: 'Left earphone not working',
-        reported_date: '2026-08-27',
-      },
-      customer_context: 'Travels tomorrow — needs fast resolution',
-      resolution: null,
-    };
-
-    let currentState = STATES.ORDER_DELIVERED;
-    let auditLog = [];
-
-    // Expose state for testing (Puppeteer evaluate runs in isolated world)
-    Object.defineProperty(window, 'currentState', {
-      get() { return currentState; },
-      set(v) { currentState = v; },
-      configurable: true,
-    });
-
-    // AbortControllers for dynamic tool lifecycle
-    let controllers = {};
-
-    // Stored tool definitions, so tools can be (re)registered against the real
-    // WebMCP runtime if document.modelContext is injected AFTER page load
-    // (host browsers such as agent in-app browsers may attach it late).
-    let toolDefs = {};
-
-    // True once a real document.modelContext runtime has been detected.
-    let webmcpReady = ('modelContext' in document);
-
-    // ═══════════════════════════════════════════════════════
-    // AUDIT TRAIL
-    // ═══════════════════════════════════════════════════════
-
-    function addAuditEntry(actor, message) {
-      const now = new Date();
-      const time = now.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-
-      auditLog.push({ actor, message, time });
-
-      const trail = document.getElementById('audit-trail');
-      const empty = document.getElementById('audit-empty');
-      if (empty) empty.remove();
-
-      const entry = document.createElement('div');
-      entry.className = 'audit-entry';
-
-      let actorClass = 'audit-actor--system';
-      if (actor === 'Agent') actorClass = 'audit-actor--agent';
-      if (actor === 'Human') actorClass = 'audit-actor--human';
-
-      entry.innerHTML = `
-        <span class="audit-actor ${actorClass}">${actor}</span>
-        <span class="audit-message">${message}</span>
-        <span class="audit-time">${time}</span>
-      `;
-
-      trail.appendChild(entry);
-      trail.scrollTop = trail.scrollHeight;
-    }
-
-    // ═══════════════════════════════════════════════════════
-    // UI STATE SYNC
-    // ═══════════════════════════════════════════════════════
-
-    function updateUI() {
-      // State indicator steps
-      const steps = ['step-order', 'step-prepared', 'step-approval', 'step-resolved'];
-      const connectors = ['conn-1', 'conn-2', 'conn-3'];
-      const stateOrder = [STATES.ORDER_DELIVERED, STATES.RESOLUTION_PREPARED, STATES.AWAITING_APPROVAL, STATES.RESOLVED];
-      const currentIndex = stateOrder.indexOf(currentState);
-
-      steps.forEach((id, i) => {
-        const el = document.getElementById(id);
-        el.className = 'state-step';
-        if (i < currentIndex) el.classList.add('completed');
-        if (i === currentIndex) el.classList.add('active');
-      });
-
-      connectors.forEach((id, i) => {
-        const el = document.getElementById(id);
-        el.className = 'state-connector';
-        if (i < currentIndex) el.classList.add('completed');
-      });
-
-      // Order status badge
-      const statusBadge = document.getElementById('order-status-badge');
-      const statusText = document.getElementById('order-status-text');
-
-      statusBadge.className = 'order-status';
-      switch (currentState) {
-        case STATES.ORDER_DELIVERED:
-          statusBadge.classList.add('order-status--issue');
-          statusText.textContent = 'Damaged';
-          break;
-        case STATES.RESOLUTION_PREPARED:
-        case STATES.AWAITING_APPROVAL:
-          statusBadge.classList.add('order-status--resolving');
-          statusText.textContent = 'Resolving';
-          break;
-        case STATES.RESOLVED:
-          statusBadge.classList.add('order-status--resolved');
-          statusText.textContent = 'Resolved';
-          break;
-      }
-
-      // Resolution panel visibility
-      const resPanel = document.getElementById('resolution-panel');
-      const resVisible = (currentState === STATES.RESOLUTION_PREPARED || currentState === STATES.AWAITING_APPROVAL);
-      resPanel.classList.toggle('hidden', !resVisible);
-
-      // Resolved panel visibility
-      const resolvedPanel = document.getElementById('resolved-panel');
-      resolvedPanel.classList.toggle('hidden', currentState !== STATES.RESOLVED);
-
-      // Issue visibility
-      const issueEl = document.getElementById('order-issue');
-      const contextEl = document.getElementById('order-context');
-      if (currentState === STATES.RESOLVED) {
-        issueEl.style.display = 'none';
-        contextEl.style.display = 'none';
-      } else {
-        issueEl.style.display = 'flex';
-        contextEl.style.display = 'flex';
-      }
-
-      // Update active tools display
-      updateToolsDisplay();
-    }
-
-    function updateToolsDisplay() {
-      const list = document.getElementById('tools-list');
-      list.innerHTML = '';
-
-      const activeTools = getActiveToolNames();
-      activeTools.forEach(name => {
-        const chip = document.createElement('div');
-        const isRead = name === 'get_order';
-        chip.className = `tool-chip ${isRead ? 'tool-chip--read' : 'tool-chip--write'}`;
-        chip.textContent = name;
-        list.appendChild(chip);
-      });
-    }
-
-    function getActiveToolNames() {
-      return Object.keys(controllers).filter(name => !controllers[name].signal.aborted);
-    }
-
-    // ═══════════════════════════════════════════════════════
-    // WEBMCP TOOL REGISTRATION
-    // ═══════════════════════════════════════════════════════
-
-    async function registerTool(toolDef, name) {
-      // Always remember the definition so we can re-register later if the
-      // WebMCP runtime attaches after load.
-      toolDefs[name] = toolDef;
-
-      if (!webmcpReady) {
-        // Standby: the page has declared its tools but no agent runtime is
-        // attached yet. Track locally so the UI stays truthful, and wait.
-        console.warn(`[WebMCP] runtime not attached yet — tool "${name}" held in standby`);
-        controllers[name] = new AbortController();
-        updateToolsDisplay();
-        return;
-      }
-
-      const controller = new AbortController();
-      controllers[name] = controller;
-
-      try {
-        await document.modelContext.registerTool(toolDef, { signal: controller.signal });
-        console.log(`[WebMCP] ✓ Registered: ${name}`);
-      } catch (err) {
-        console.error(`[WebMCP] ✗ Failed to register ${name}:`, err);
-      }
-
-      updateToolsDisplay();
-    }
-
-    function unregisterTool(name) {
-      if (controllers[name]) {
-        controllers[name].abort();
-        delete controllers[name];
-        delete toolDefs[name];
-        console.log(`[WebMCP] ✗ Unregistered: ${name}`);
-        updateToolsDisplay();
-      }
-    }
-
-    function unregisterAllTools() {
-      Object.keys(controllers).forEach(name => {
-        if (controllers[name] && !controllers[name].signal.aborted) {
-          controllers[name].abort();
-        }
-      });
-      controllers = {};
-      toolDefs = {};
-      updateToolsDisplay();
-    }
-
-    // ═══════════════════════════════════════════════════════
-    // TOOL DEFINITIONS
-    // ═══════════════════════════════════════════════════════
-
-    function buildOrderResponse() {
-      const data = { ...ORDER_DATA };
-
-      // Add resolution info based on current state
-      switch (currentState) {
-        // Staged, but the customer has NOT approved yet.
-        case STATES.RESOLUTION_PREPARED:
-          data.resolution = {
-            type: 'replacement',
-            status: 'prepared',
-            replacement_product: 'Wireless Headphones',
-            estimated_arrival: 'tomorrow',
-            return_deadline: '14 days',
-            requires_human_approval: true,
-            human_approved: false,
-            next_step: 'Waiting for the customer to approve this replacement in the website UI.',
-          };
-          break;
-
-        // The customer HAS approved in the UI. Report that truthfully: the
-        // approval gate is cleared and nothing further is required of the
-        // human. Reporting "awaiting_human_approval" here would tell the
-        // agent the opposite of what actually happened.
-        case STATES.AWAITING_APPROVAL:
-          data.resolution = {
-            type: 'replacement',
-            status: 'approved_by_customer',
-            replacement_product: 'Wireless Headphones',
-            estimated_arrival: 'tomorrow',
-            return_deadline: '14 days',
-            requires_human_approval: false,
-            human_approved: true,
-            next_step: 'The customer has approved this replacement. It is ready to be finalized.',
-          };
-          break;
-        case STATES.RESOLVED:
-          data.resolution = {
-            type: 'replacement',
-            status: 'confirmed',
-            replacement_id: 'R-1042',
-            replacement_product: 'Wireless Headphones',
-            estimated_arrival: 'tomorrow',
-            return_deadline: '14 days',
-            confirmed_at: new Date().toISOString(),
-          };
-          break;
-        default:
-          data.resolution = null;
-      }
-
-      return data;
-    }
-
-    function registerInitialTools() {
-      // TOOL 1: get_order (READ — always available)
-      registerTool({
-        name: 'get_order',
-        description: 'Get the current order details including product, status, issue, and any pending or completed resolution. Returns complete order state as JSON.',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            order_id: {
-              type: 'string',
-              description: 'The order ID to look up (e.g. "1042")',
-            },
-          },
-          required: ['order_id'],
-          additionalProperties: false,
-        },
-        annotations: {
-          readOnlyHint: true,
-        },
-        execute: async (args) => {
-          console.log('[WebMCP] get_order called with:', args);
-
-          if (args.order_id !== '1042') {
-            addAuditEntry('Agent', `Looked up order #${args.order_id} — not found`);
-            return JSON.stringify({ error: 'Order not found', order_id: args.order_id });
-          }
-
-          addAuditEntry('Agent', 'Inspected order #1042');
-          return JSON.stringify(buildOrderResponse());
-        },
-      }, 'get_order');
-
-      // TOOL 2: prepare_replacement (WRITE — only in ORDER_DELIVERED state)
-      registerTool({
-        name: 'prepare_replacement',
-        description: 'Prepare a replacement shipment for a damaged order. This stages the replacement for human approval — it does NOT execute it. The customer must explicitly approve via the website UI before the replacement is created. Only works when the order has a reported issue and no pending resolution.',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            order_id: {
-              type: 'string',
-              description: 'The order ID to prepare replacement for',
-            },
-            reason: {
-              type: 'string',
-              description: 'Brief reason for the replacement request',
-            },
-          },
-          required: ['order_id', 'reason'],
-          additionalProperties: false,
-        },
-        annotations: {
-          readOnlyHint: false,
-        },
-        execute: async (args) => {
-          console.log('[WebMCP] prepare_replacement called with:', args);
-
-          if (args.order_id !== '1042') {
-            return JSON.stringify({ error: 'Order not found', order_id: args.order_id });
-          }
-
-          if (currentState !== STATES.ORDER_DELIVERED) {
-            return JSON.stringify({
-              error: 'Cannot prepare replacement in current state',
-              current_state: currentState,
-              hint: currentState === STATES.RESOLUTION_PREPARED
-                ? 'A resolution is already prepared. Waiting for human approval.'
-                : 'Order has already been resolved.',
-            });
-          }
-
-          // Transition state
-          currentState = STATES.RESOLUTION_PREPARED;
-
-          addAuditEntry('Agent', `Prepared replacement for order #1042 — reason: "${args.reason}"`);
-
-          // Dynamic tool lifecycle: remove prepare_replacement, add confirm_replacement asynchronously
-          setTimeout(() => {
-            unregisterTool('prepare_replacement');
-            registerConfirmTool();
-            updateUI();
-          }, 50);
-
-          updateUI();
-
-          return JSON.stringify({
-            success: true,
-            resolution: {
-              type: 'replacement',
-              status: 'prepared',
-              replacement_product: 'Wireless Headphones',
-              estimated_arrival: 'tomorrow',
-              return_deadline: '14 days',
-              next_step: 'Customer must approve this replacement via the website UI. Call get_order to check if the customer has approved.',
-              requires_human_approval: true,
-            },
-          });
-        },
-      }, 'prepare_replacement');
-    }
-
-    function registerConfirmTool() {
-      // TOOL 3: confirm_replacement (WRITE — only after human approval)
-      registerTool({
-        name: 'confirm_replacement',
-        description: 'Confirm and finalize a previously prepared replacement. IMPORTANT: This will only succeed AFTER the customer has approved the replacement via the website UI. If the customer has not yet clicked "Approve", this will return an error. Use get_order to check the current approval status.',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            order_id: {
-              type: 'string',
-              description: 'The order ID to confirm replacement for',
-            },
-          },
-          required: ['order_id'],
-          additionalProperties: false,
-        },
-        annotations: {
-          readOnlyHint: false,
-        },
-        execute: async (args) => {
-          console.log('[WebMCP] confirm_replacement called with:', args);
-
-          if (args.order_id !== '1042') {
-            return JSON.stringify({ error: 'Order not found', order_id: args.order_id });
-          }
-
-          if (currentState !== STATES.AWAITING_APPROVAL) {
-            if (currentState === STATES.RESOLUTION_PREPARED) {
-              return JSON.stringify({
-                error: 'Customer has not approved yet',
-                current_state: currentState,
-                hint: 'The replacement is prepared but the customer has not clicked Approve on the website. Please wait for human approval, then try again.',
-              });
-            }
-            if (currentState === STATES.RESOLVED) {
-              return JSON.stringify({
-                error: 'Replacement already confirmed',
-                current_state: currentState,
-                replacement_id: 'R-1042',
-              });
-            }
-            return JSON.stringify({
-              error: 'No resolution has been prepared yet',
-              current_state: currentState,
-            });
-          }
-
-          // Transition to resolved
-          currentState = STATES.RESOLVED;
-
-          addAuditEntry('System', 'Replacement R-1042 created — arrives tomorrow');
-
-          // Remove confirm tool, no more write tools asynchronously
-          setTimeout(() => {
-            unregisterTool('confirm_replacement');
-            updateUI();
-          }, 50);
-
-          updateUI();
-
-          return JSON.stringify({
-            success: true,
-            replacement: {
-              id: 'R-1042',
-              product: 'Wireless Headphones',
-              estimated_arrival: 'tomorrow',
-              return_deadline: '14 days',
-              status: 'confirmed',
-            },
-          });
-        },
-      }, 'confirm_replacement');
-    }
-
-    // ═══════════════════════════════════════════════════════
-    // HUMAN ACTIONS (UI-only, not WebMCP tools)
-    // ═══════════════════════════════════════════════════════
-
-    function handleApprove() {
-      if (currentState !== STATES.RESOLUTION_PREPARED) return;
-
-      currentState = STATES.AWAITING_APPROVAL;
-      addAuditEntry('Human', 'Approved replacement for order #1042');
-
-      updateUI();
-
-      // After human approves, the agent can call confirm_replacement
-      // The confirm_replacement tool is already registered (added after prepare)
-    }
-
-    function handleCancel() {
-      if (currentState !== STATES.RESOLUTION_PREPARED && currentState !== STATES.AWAITING_APPROVAL) return;
-
-      // Go back to initial state
-      addAuditEntry('Human', 'Cancelled resolution for order #1042');
-
-      // Cleanup tools
-      unregisterTool('confirm_replacement');
-
-      currentState = STATES.ORDER_DELIVERED;
-
-      // Re-register prepare tool
-      registerTool({
-        name: 'prepare_replacement',
-        description: 'Prepare a replacement shipment for a damaged order. This stages the replacement for human approval — it does NOT execute it. The customer must explicitly approve via the website UI before the replacement is created.',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            order_id: {
-              type: 'string',
-              description: 'The order ID to prepare replacement for',
-            },
-            reason: {
-              type: 'string',
-              description: 'Brief reason for the replacement request',
-            },
-          },
-          required: ['order_id', 'reason'],
-          additionalProperties: false,
-        },
-        annotations: { readOnlyHint: false },
-        execute: async (args) => {
-          // Same logic as initial registration
-          if (args.order_id !== '1042') {
-            return JSON.stringify({ error: 'Order not found' });
-          }
-          if (currentState !== STATES.ORDER_DELIVERED) {
-            return JSON.stringify({ error: 'Cannot prepare replacement in current state', current_state: currentState });
-          }
-          currentState = STATES.RESOLUTION_PREPARED;
-          addAuditEntry('Agent', `Prepared replacement for order #1042 — reason: "${args.reason}"`);
-          setTimeout(() => {
-            unregisterTool('prepare_replacement');
-            registerConfirmTool();
-            updateUI();
-          }, 50);
-          updateUI();
-          return JSON.stringify({
-            success: true,
-            resolution: {
-              type: 'replacement',
-              status: 'prepared',
-              replacement_product: 'Wireless Headphones',
-              estimated_arrival: 'tomorrow',
-              return_deadline: '14 days',
-              next_step: 'Customer must approve this replacement via the website UI.',
-              requires_human_approval: true,
-            },
-          });
-        },
-      }, 'prepare_replacement');
-
-      updateUI();
-    }
-
-    function handleReset() {
-      // Full reset
-      unregisterAllTools();
-
-      currentState = STATES.ORDER_DELIVERED;
-      auditLog = [];
-
-      // Clear audit trail UI
-      const trail = document.getElementById('audit-trail');
-      trail.innerHTML = '<div class="audit-empty" id="audit-empty">No activity yet — waiting for agent interaction</div>';
-
-      // Re-register initial tools
-      registerInitialTools();
-
-      addAuditEntry('System', 'Demo reset — all state cleared');
-
-      updateUI();
-    }
-
-    // ═══════════════════════════════════════════════════════
-    // INITIALIZATION
-    // ═══════════════════════════════════════════════════════
-
-    // ═══════════════════════════════════════════════════════
-    // TOOLCHANGE EVENT LOG (evidence collection)
-    // ═══════════════════════════════════════════════════════
-
-    const toolchangeLog = [];
-    window.toolchangeLog = toolchangeLog; // Expose for testing
-
-    function setupToolchangeListener() {
-      if (!('modelContext' in document)) return;
-
-      document.modelContext.addEventListener('toolchange', (event) => {
-        const entry = {
-          timestamp: new Date().toISOString(),
-          type: 'toolchange',
-          currentState: currentState,
-        };
-        toolchangeLog.push(entry);
-        console.log('[WebMCP:toolchange]', JSON.stringify(entry));
-      });
-
-      console.log('[WebMCP] ✓ toolchange event listener registered');
-    }
-
-    // ═══════════════════════════════════════════════════════
-    // INIT
-    // ═══════════════════════════════════════════════════════
-
-    // Badge reflects the REAL runtime state. Two honest states only:
-    //   Active  — a document.modelContext runtime is attached, tools are live
-    //   Standby — tools are declared, no agent runtime attached yet
-    // "Unavailable" is a developer diagnostic, not judge-facing copy.
-    function setBadge(state) {
-      const badge = document.getElementById('webmcp-badge');
-      if (!badge) return;
-      if (state === 'active') {
-        badge.textContent = 'WebMCP Active';
-        badge.style.borderColor = '';
-        badge.style.color = '';
-        badge.style.background = '';
-      } else {
-        badge.textContent = 'WebMCP Standby';
-        badge.style.borderColor = 'rgba(255, 255, 255, 0.12)';
-        badge.style.color = 'var(--text-muted)';
-        badge.style.background = 'transparent';
-      }
-    }
-
-    // Attach to the WebMCP runtime the moment it exists. Some host browsers
-    // inject document.modelContext AFTER load, so a single check at startup
-    // would latch a false negative and the page would never publish its tools.
-    function attachWebMCP() {
-      if (webmcpReady) return true;
-      if (!('modelContext' in document)) return false;
-
-      webmcpReady = true;
-      console.log('[WebMCP] ✓ document.modelContext detected');
-      console.log('[WebMCP] typeof document.modelContext:', typeof document.modelContext);
-      setBadge('active');
-      setupToolchangeListener();
-
-      // Re-register any tools that were held in standby against the real runtime.
-      const pending = Object.keys(toolDefs);
-      if (pending.length) {
-        console.log('[WebMCP] Re-registering standby tools:', pending.join(', '));
-        pending.forEach(name => {
-          if (controllers[name]) controllers[name].abort();
-          delete controllers[name];
-          registerTool(toolDefs[name], name);
-        });
-      }
-      updateUI();
-      return true;
-    }
-
-    function watchForWebMCP(timeoutMs = 15000, intervalMs = 150) {
-      if (attachWebMCP()) return;
-      const started = Date.now();
-      const timer = setInterval(() => {
-        if (attachWebMCP()) { clearInterval(timer); return; }
-        if (Date.now() - started > timeoutMs) {
-          clearInterval(timer);
-          console.warn('[WebMCP] ✗ No document.modelContext runtime detected — standby');
-          console.warn('[WebMCP]   Chrome: chrome://flags → "WebMCP for testing"');
-          console.warn('[WebMCP]   Or open this page in a WebMCP-capable agent browser.');
-        }
-      }, intervalMs);
-    }
-
-    function init() {
-      console.log('[Post-Purchase Resolution] M0 Spike initializing...');
-
-      setBadge(webmcpReady ? 'active' : 'standby');
-
-      // Register tools (against the real runtime if present, else standby)
-      registerInitialTools();
-
-      // Keep watching — handles runtimes injected after page load
-      watchForWebMCP();
-
-      // Initial UI
-      updateUI();
-
-      console.log('[Post-Purchase Resolution] M0 Spike ready.');
-    }
-
-    // ═══════════════════════════════════════════════════════
-    // WEBMCP RUNTIME TEST HARNESS (?test=webmcp)
-    // Uses REAL document.modelContext APIs — NOT debug simulation
-    // ═══════════════════════════════════════════════════════
-
-    const testResults = {};
-
-    async function runWebMCPTests() {
-      const params = new URLSearchParams(window.location.search);
-      if (!params.has('test') || params.get('test') !== 'webmcp') return;
-
-      console.log('═══════════════════════════════════════');
-      console.log('[M0.5] REAL WEBMCP VERIFICATION STARTING');
-      console.log('═══════════════════════════════════════');
-
-      // TEST A: WebMCP Runtime
-      console.log('\n[TEST A] WebMCP Runtime');
-      const hasModelContext = 'modelContext' in document;
-      const mcType = typeof document.modelContext;
-      testResults.TEST_A_WEBMCP_RUNTIME = {
-        pass: hasModelContext && mcType !== 'undefined',
-        hasModelContext,
-        typeof: mcType,
-      };
-      console.log('[TEST A] document.modelContext available:', hasModelContext);
-      console.log('[TEST A] typeof:', mcType);
-      console.log('[TEST A] RESULT:', testResults.TEST_A_WEBMCP_RUNTIME.pass ? 'PASS' : 'FAIL');
-
-      if (!hasModelContext) {
-        console.error('[M0.5] CRITICAL: document.modelContext not available. Cannot proceed.');
-        console.error('[M0.5] Enable: chrome://flags/#enable-webmcp-testing');
-        testResults.OVERALL = 'FAIL — WebMCP runtime not available';
-        printTestSummary();
-        return;
-      }
-
-      // Short delay to let tools register
-      await new Promise(r => setTimeout(r, 500));
-
-      // TEST B: Real Tool Discovery
-      console.log('\n[TEST B] Real Tool Discovery');
-      try {
-        const tools = await document.modelContext.getTools();
-        const toolNames = tools.map(t => t.name || t.tool?.name).filter(Boolean);
-        testResults.TEST_B_TOOL_DISCOVERY = {
-          pass: toolNames.includes('get_order') && toolNames.includes('prepare_replacement'),
-          tools: toolNames,
-          rawTools: JSON.parse(JSON.stringify(tools)),
-          hasConfirmBeforeUse: toolNames.includes('confirm_replacement'),
-        };
-        console.log('[TEST B] Discovered tools:', JSON.stringify(toolNames));
-        console.log('[TEST B] confirm_replacement should NOT be present:', !toolNames.includes('confirm_replacement'));
-        console.log('[TEST B] RESULT:', testResults.TEST_B_TOOL_DISCOVERY.pass ? 'PASS' : 'FAIL');
-      } catch (err) {
-        testResults.TEST_B_TOOL_DISCOVERY = { pass: false, error: err.message };
-        console.error('[TEST B] FAIL:', err.message);
-      }
-
-      // TEST C: Tool Annotations
-      console.log('\n[TEST C] Tool Annotations');
-      try {
-        const tools = await document.modelContext.getTools();
-        const getOrderTool = tools.find(t => (t.name || t.tool?.name) === 'get_order');
-        const prepareTool = tools.find(t => (t.name || t.tool?.name) === 'prepare_replacement');
-
-        const getOrderAnnotations = getOrderTool?.annotations || getOrderTool?.tool?.annotations || null;
-        const prepareAnnotations = prepareTool?.annotations || prepareTool?.tool?.annotations || null;
-
-        testResults.TEST_C_ANNOTATIONS = {
-          pass: getOrderAnnotations?.readOnlyHint === true,
-          get_order_annotations: getOrderAnnotations,
-          prepare_replacement_annotations: prepareAnnotations,
-        };
-        console.log('[TEST C] get_order annotations:', JSON.stringify(getOrderAnnotations));
-        console.log('[TEST C] prepare_replacement annotations:', JSON.stringify(prepareAnnotations));
-        console.log('[TEST C] get_order readOnlyHint === true:', getOrderAnnotations?.readOnlyHint === true);
-        console.log('[TEST C] RESULT:', testResults.TEST_C_ANNOTATIONS.pass ? 'PASS' : 'FAIL');
-      } catch (err) {
-        testResults.TEST_C_ANNOTATIONS = { pass: false, error: err.message };
-        console.error('[TEST C] FAIL:', err.message);
-      }
-
-      // TEST D: Real Tool Execution (get_order)
-      console.log('\n[TEST D] Real get_order Execution');
-      try {
-        const result = await document.modelContext.executeTool('get_order', { order_id: '1042' });
-        const parsed = typeof result === 'string' ? JSON.parse(result) : result;
-        testResults.TEST_D_REAL_GET_ORDER = {
-          pass: parsed?.order_id === '1042' || parsed?.product === 'Wireless Headphones',
-          raw: result,
-          parsed: parsed,
-        };
-        console.log('[TEST D] Raw result:', result);
-        console.log('[TEST D] RESULT:', testResults.TEST_D_REAL_GET_ORDER.pass ? 'PASS' : 'FAIL');
-      } catch (err) {
-        testResults.TEST_D_REAL_GET_ORDER = { pass: false, error: err.message };
-        console.error('[TEST D] FAIL:', err.message);
-      }
-
-      // TEST E: Real prepare_replacement + Dynamic Lifecycle
-      console.log('\n[TEST E] Real prepare_replacement Execution + Lifecycle');
-      const toolsBefore = (await document.modelContext.getTools()).map(t => t.name || t.tool?.name).filter(Boolean);
-      console.log('[TEST E] Tools BEFORE prepare:', JSON.stringify(toolsBefore));
-
-      try {
-        const result = await document.modelContext.executeTool('prepare_replacement', {
-          order_id: '1042',
-          reason: 'Product arrived damaged - M0.5 real test',
-        });
-        const parsed = typeof result === 'string' ? JSON.parse(result) : result;
-
-        await new Promise(r => setTimeout(r, 300)); // Wait for lifecycle change
-
-        const toolsAfter = (await document.modelContext.getTools()).map(t => t.name || t.tool?.name).filter(Boolean);
-        console.log('[TEST E] Tools AFTER prepare:', JSON.stringify(toolsAfter));
-        console.log('[TEST E] prepare_replacement removed:', !toolsAfter.includes('prepare_replacement'));
-        console.log('[TEST E] confirm_replacement added:', toolsAfter.includes('confirm_replacement'));
-
-        testResults.TEST_E_PREPARE_LIFECYCLE = {
-          pass: parsed?.success === true
-            && !toolsAfter.includes('prepare_replacement')
-            && toolsAfter.includes('confirm_replacement'),
-          raw: result,
-          toolsBefore,
-          toolsAfter,
-          toolchangeLog: [...toolchangeLog],
-        };
-        console.log('[TEST E] RESULT:', testResults.TEST_E_PREPARE_LIFECYCLE.pass ? 'PASS' : 'FAIL');
-      } catch (err) {
-        testResults.TEST_E_PREPARE_LIFECYCLE = { pass: false, error: err.message };
-        console.error('[TEST E] FAIL:', err.message);
-      }
-
-      // TEST F: Negative Approval Test (confirm BEFORE human approval)
-      console.log('\n[TEST F] Negative Approval Test (confirm BEFORE approval)');
-      const stateBefore = currentState;
-      try {
-        const result = await document.modelContext.executeTool('confirm_replacement', { order_id: '1042' });
-        const parsed = typeof result === 'string' ? JSON.parse(result) : result;
-        const stateAfter = currentState;
-
-        testResults.TEST_F_NEGATIVE_APPROVAL = {
-          pass: parsed?.error != null && stateAfter !== STATES.RESOLVED,
-          stateBefore,
-          stateAfter,
-          raw: result,
-          stateUnchanged: stateBefore === stateAfter,
-          errorReturned: parsed?.error || null,
-        };
-        console.log('[TEST F] State before:', stateBefore);
-        console.log('[TEST F] State after:', stateAfter);
-        console.log('[TEST F] Error returned:', parsed?.error);
-        console.log('[TEST F] State unchanged:', stateBefore === stateAfter);
-        console.log('[TEST F] RESULT:', testResults.TEST_F_NEGATIVE_APPROVAL.pass ? 'PASS' : 'FAIL');
-      } catch (err) {
-        // An error/rejection also counts as PASS for negative test
-        testResults.TEST_F_NEGATIVE_APPROVAL = {
-          pass: true,
-          stateBefore,
-          stateAfter: currentState,
-          error: err.message,
-          note: 'Tool execution threw error — negative test PASS',
-        };
-        console.log('[TEST F] Tool threw error (expected):', err.message);
-        console.log('[TEST F] RESULT: PASS');
-      }
-
-      // TEST G & H: Require manual human approval click — log instructions
-      console.log('\n[TEST G] HUMAN APPROVAL — REQUIRES MANUAL ACTION');
-      console.log('[TEST G] Please click the ✓ Approve button on the page.');
-      console.log('[TEST G] After clicking, run: window._continueTests() in the console.');
-
-      // Expose continuation function
-      window._continueTests = async function() {
-        console.log('\n[TEST G] Human Approval Verification');
-        const stateAfterApproval = currentState;
-        const toolsAfterApproval = (await document.modelContext.getTools()).map(t => t.name || t.tool?.name).filter(Boolean);
-
-        testResults.TEST_G_HUMAN_APPROVAL = {
-          pass: stateAfterApproval === STATES.AWAITING_APPROVAL,
-          state: stateAfterApproval,
-          toolsAvailable: toolsAfterApproval,
-          confirmAvailable: toolsAfterApproval.includes('confirm_replacement'),
-        };
-        console.log('[TEST G] State:', stateAfterApproval);
-        console.log('[TEST G] Tools:', JSON.stringify(toolsAfterApproval));
-        console.log('[TEST G] RESULT:', testResults.TEST_G_HUMAN_APPROVAL.pass ? 'PASS' : 'FAIL');
-
-        // TEST H: Real confirm after approval
-        console.log('\n[TEST H] Real confirm_replacement After Approval');
-        try {
-          const result = await document.modelContext.executeTool('confirm_replacement', { order_id: '1042' });
-          const parsed = typeof result === 'string' ? JSON.parse(result) : result;
-
-          await new Promise(r => setTimeout(r, 300));
-
-          const toolsAfterConfirm = (await document.modelContext.getTools()).map(t => t.name || t.tool?.name).filter(Boolean);
-
-          testResults.TEST_H_REAL_CONFIRM = {
-            pass: parsed?.success === true && currentState === STATES.RESOLVED,
-            raw: result,
-            state: currentState,
-            toolsAfter: toolsAfterConfirm,
-            confirmRemoved: !toolsAfterConfirm.includes('confirm_replacement'),
-          };
-          console.log('[TEST H] State:', currentState);
-          console.log('[TEST H] Tools after:', JSON.stringify(toolsAfterConfirm));
-          console.log('[TEST H] RESULT:', testResults.TEST_H_REAL_CONFIRM.pass ? 'PASS' : 'FAIL');
-        } catch (err) {
-          testResults.TEST_H_REAL_CONFIRM = { pass: false, error: err.message };
-          console.error('[TEST H] FAIL:', err.message);
-        }
-
-        // TEST I: Reset
-        console.log('\n[TEST I] Reset');
-        handleReset();
-        await new Promise(r => setTimeout(r, 500));
-
-        const toolsAfterReset = (await document.modelContext.getTools()).map(t => t.name || t.tool?.name).filter(Boolean);
-
-        testResults.TEST_I_RESET = {
-          pass: currentState === STATES.ORDER_DELIVERED
-            && toolsAfterReset.includes('get_order')
-            && toolsAfterReset.includes('prepare_replacement')
-            && !toolsAfterReset.includes('confirm_replacement'),
-          state: currentState,
-          tools: toolsAfterReset,
-        };
-        console.log('[TEST I] State:', currentState);
-        console.log('[TEST I] Tools:', JSON.stringify(toolsAfterReset));
-        console.log('[TEST I] RESULT:', testResults.TEST_I_RESET.pass ? 'PASS' : 'FAIL');
-
-        // Final summary
-        testResults.toolchangeLog = [...toolchangeLog];
-        printTestSummary();
-
-        // Expose raw results
-        window._m05Results = testResults;
-        console.log('\n[M0.5] Full results: window._m05Results');
-        console.log('[M0.5] JSON: JSON.stringify(window._m05Results, null, 2)');
-      };
-
-      // Expose partial results already available
-      window._m05Results = testResults;
-    }
-
-    function printTestSummary() {
-      console.log('\n═══════════════════════════════════════');
-      console.log('[M0.5] TEST SUMMARY');
-      console.log('═══════════════════════════════════════');
-
-      const tests = [
-        ['A', 'WebMCP Runtime', testResults.TEST_A_WEBMCP_RUNTIME],
-        ['B', 'Tool Discovery', testResults.TEST_B_TOOL_DISCOVERY],
-        ['C', 'Annotations', testResults.TEST_C_ANNOTATIONS],
-        ['D', 'Real get_order', testResults.TEST_D_REAL_GET_ORDER],
-        ['E', 'Prepare + Lifecycle', testResults.TEST_E_PREPARE_LIFECYCLE],
-        ['F', 'Negative Approval', testResults.TEST_F_NEGATIVE_APPROVAL],
-        ['G', 'Human Approval', testResults.TEST_G_HUMAN_APPROVAL],
-        ['H', 'Real Confirm', testResults.TEST_H_REAL_CONFIRM],
-        ['I', 'Reset', testResults.TEST_I_RESET],
-      ];
-
-      for (const [letter, name, result] of tests) {
-        const status = result ? (result.pass ? 'PASS ✓' : 'FAIL ✗') : 'PENDING …';
-        console.log(`  TEST ${letter}: ${name.padEnd(20)} ${status}`);
-      }
-
-      const allPassed = tests.every(([, , r]) => r?.pass);
-      console.log('═══════════════════════════════════════');
-      console.log(`  OVERALL: ${allPassed ? 'FULL PASS ✓' : 'NOT YET FULL PASS'}`);
-      console.log('═══════════════════════════════════════');
-    }
-
-    // ═══════════════════════════════════════════════════════
-    // DEBUG PANEL (only with ?debug)
-    // ═══════════════════════════════════════════════════════
-
-    // The debug panel drives the state machine WITHOUT WebMCP. It is a
-    // development harness only and must never appear in the judge-facing
-    // deployment. Gate: explicit ?debug=1 AND a local host, or an explicit
-    // opt-in flag set by hand in this browser (localStorage ppr_dev = '1').
-    function debugEnabled() {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('debug') !== '1') return false;
-
-      const host = window.location.hostname;
-      const isLocal = host === 'localhost' || host === '127.0.0.1' || host === '' || host === '[::1]';
-      let optedIn = false;
-      try { optedIn = window.localStorage.getItem('ppr_dev') === '1'; } catch (e) { optedIn = false; }
-
-      return isLocal || optedIn;
-    }
-
-    function initDebugPanel() {
-      if (!debugEnabled()) return;
-
-      console.warn('[HARNESS] Debug simulation panel ACTIVE — state changes from this panel are NOT WebMCP agent actions.');
-      document.documentElement.setAttribute('data-debug-harness', 'active');
-
-      const panel = document.createElement('div');
-      panel.id = 'debug-panel';
-      panel.style.cssText = 'position:fixed;bottom:12px;left:12px;z-index:9999;background:#1a1a25;border:1px solid rgba(108,92,231,0.3);border-radius:10px;padding:10px 14px;display:flex;gap:8px;align-items:center;font-size:11px;box-shadow:0 4px 20px rgba(0,0,0,0.5);';
-
-      const label = document.createElement('span');
-      label.textContent = 'DEBUG HARNESS — NOT WEBMCP';
-      label.style.cssText = 'color:#a29bfe;font-weight:700;letter-spacing:0.06em;margin-right:4px;';
-      panel.appendChild(label);
-
-      const btnStyle = 'padding:6px 12px;border:1px solid rgba(255,255,255,0.1);border-radius:6px;background:#252535;color:#f0f0f5;font-size:11px;font-family:Inter,sans-serif;cursor:pointer;font-weight:500;';
-
-      const btnPrepare = document.createElement('button');
-      btnPrepare.id = 'debug-prepare';
-      btnPrepare.textContent = 'Simulate prepare_replacement';
-      btnPrepare.style.cssText = btnStyle;
-      btnPrepare.onclick = () => {
-        if (currentState !== STATES.ORDER_DELIVERED) return;
-        currentState = STATES.RESOLUTION_PREPARED;
-        addAuditEntry('Agent', 'Prepared replacement for order #1042 - reason: "Product arrived damaged"');
-        unregisterTool('prepare_replacement');
-        registerConfirmTool();
-        updateUI();
-      };
-      panel.appendChild(btnPrepare);
-
-      const btnApproveDbg = document.createElement('button');
-      btnApproveDbg.id = 'debug-approve';
-      btnApproveDbg.textContent = 'Simulate Human Approve';
-      btnApproveDbg.style.cssText = btnStyle;
-      btnApproveDbg.onclick = () => handleApprove();
-      panel.appendChild(btnApproveDbg);
-
-      const btnConfirm = document.createElement('button');
-      btnConfirm.id = 'debug-confirm';
-      btnConfirm.textContent = 'Simulate confirm_replacement';
-      btnConfirm.style.cssText = btnStyle;
-      btnConfirm.onclick = () => {
-        if (currentState !== STATES.AWAITING_APPROVAL) return;
-        currentState = STATES.RESOLVED;
-        addAuditEntry('System', 'Replacement R-1042 created - arrives tomorrow');
-        unregisterTool('confirm_replacement');
-        updateUI();
-      };
-      panel.appendChild(btnConfirm);
-
-      document.body.appendChild(panel);
-    }
-
-    // ═══════════════════════════════════════════════════════
-    // BOOT
-    // ═══════════════════════════════════════════════════════
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        init();
-        initDebugPanel();
-        runWebMCPTests();
-      });
-    } else {
-      init();
-      initDebugPanel();
-      runWebMCPTests();
-    }
-  </script>
+  <script type="module" src="./src/app.js"></script>
 </body>
 </html>
