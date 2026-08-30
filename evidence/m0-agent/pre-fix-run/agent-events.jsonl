@@ -1,0 +1,48 @@
+{"ts":"2026-08-30T22:18:40.156Z","kind":"console","type":"log","text":"[Post-Purchase Resolution] M0 Spike initializing..."}
+{"ts":"2026-08-30T22:18:40.162Z","kind":"console","type":"log","text":"[Post-Purchase Resolution] M0 Spike ready."}
+{"ts":"2026-08-30T22:18:40.164Z","kind":"console","type":"log","text":"[WebMCP] ✓ Registered: get_order"}
+{"ts":"2026-08-30T22:18:40.164Z","kind":"console","type":"log","text":"[WebMCP] ✓ Registered: prepare_replacement"}
+{"ts":"2026-08-30T22:18:40.334Z","kind":"console","type":"error","text":"Failed to load resource: the server responded with a status of 404 ()"}
+{"ts":"2026-08-30T22:18:43.406Z","kind":"bridge_ready","url":"https://post-purchase-resolution.vercel.app/","state":{"state":"ORDER_DELIVERED","badge":"WebMCP Active","resolutionReadyVisible":false,"resolvedVisible":false,"replacementId":null,"activeToolChips":["get_order","prepare_replacement"],"debugHarnessPresent":false,"auditTrail":[]},"tools":[{"name":"get_order","description":"Get the current order details including product, status, issue, and any pending or completed resolution. Returns complete order state as JSON.","inputSchema":{"type":"object","properties":{"order_id":{"type":"string","description":"The order ID to look up (e.g. \"1042\")"}},"required":["order_id"],"additionalProperties":false},"annotations":{"readOnlyHint":true,"untrustedContentHint":false}},{"name":"prepare_replacement","description":"Prepare a replacement shipment for a damaged order. This stages the replacement for human approval — it does NOT execute it. The customer must explicitly approve via the website UI before the replacement is created. Only works when the order has a reported issue and no pending resolution.","inputSchema":{"type":"object","properties":{"order_id":{"type":"string","description":"The order ID to prepare replacement for"},"reason":{"type":"string","description":"Brief reason for the replacement request"}},"required":["order_id","reason"],"additionalProperties":false},"annotations":{"readOnlyHint":false,"untrustedContentHint":false}}]}
+{"ts":"2026-08-30T22:18:52.172Z","kind":"console","type":"log","text":"[WebMCP] ✓ Registered: get_order"}
+{"ts":"2026-08-30T22:18:52.179Z","kind":"console","type":"log","text":"[WebMCP] ✓ Registered: prepare_replacement"}
+{"ts":"2026-08-30T22:18:52.184Z","kind":"toolchange","tools":["get_order","prepare_replacement"],"state":"ORDER_DELIVERED"}
+{"ts":"2026-08-30T22:18:52.189Z","kind":"toolchange","tools":["get_order","prepare_replacement"],"state":"ORDER_DELIVERED"}
+{"ts":"2026-08-30T22:18:52.190Z","kind":"toolchange","tools":["get_order","prepare_replacement"],"state":"ORDER_DELIVERED"}
+{"ts":"2026-08-30T22:18:52.193Z","kind":"toolchange","tools":["get_order","prepare_replacement"],"state":"ORDER_DELIVERED"}
+{"ts":"2026-08-30T22:18:52.778Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_DELIVERED"}
+{"ts":"2026-08-30T22:18:53.794Z","kind":"screenshot","file":"01_live_url.png"}
+{"ts":"2026-08-30T22:19:05.919Z","kind":"agent_tool_call","tool":"get_order","args":{"order_id":"1042"},"stateBefore":"ORDER_DELIVERED"}
+{"ts":"2026-08-30T22:19:05.923Z","kind":"console","type":"log","text":"[WebMCP] get_order called with: [object Object]"}
+{"ts":"2026-08-30T22:19:06.335Z","kind":"agent_tool_result","tool":"get_order","ok":true,"result":"{\"order_id\":\"1042\",\"product\":\"Wireless Headphones\",\"price\":129,\"currency\":\"USD\",\"status\":\"delivered\",\"delivered_date\":\"2026-08-26\",\"issue\":{\"type\":\"damaged\",\"description\":\"Left earphone not working\",\"reported_date\":\"2026-08-27\"},\"customer_context\":\"Travels tomorrow — needs fast resolution\",\"resolution\":null}","stateAfter":"ORDER_DELIVERED","toolsAfter":["get_order","prepare_replacement"]}
+{"ts":"2026-08-30T22:19:14.269Z","kind":"screenshot","file":"02_agent_discovery.png"}
+{"ts":"2026-08-30T22:19:14.399Z","kind":"screenshot","file":"03_get_order_agent.png"}
+{"ts":"2026-08-30T22:19:29.086Z","kind":"agent_tool_call","tool":"get_order","args":{"order_id":"1042"},"stateBefore":"ORDER_DELIVERED"}
+{"ts":"2026-08-30T22:19:29.094Z","kind":"console","type":"log","text":"[WebMCP] get_order called with: [object Object]"}
+{"ts":"2026-08-30T22:19:29.512Z","kind":"agent_tool_result","tool":"get_order","ok":true,"result":"{\"order_id\":\"1042\",\"product\":\"Wireless Headphones\",\"price\":129,\"currency\":\"USD\",\"status\":\"delivered\",\"delivered_date\":\"2026-08-26\",\"issue\":{\"type\":\"damaged\",\"description\":\"Left earphone not working\",\"reported_date\":\"2026-08-27\"},\"customer_context\":\"Travels tomorrow — needs fast resolution\",\"resolution\":null}","stateAfter":"ORDER_DELIVERED","toolsAfter":["get_order","prepare_replacement"]}
+{"ts":"2026-08-30T22:19:32.357Z","kind":"agent_tool_call","tool":"prepare_replacement","args":{"order_id":"1042","reason":"Item delivered damaged — left earphone not working (reported 2026-08-27). Customer travels 2026-08-31, so expedited replacement requested."},"stateBefore":"ORDER_DELIVERED"}
+{"ts":"2026-08-30T22:19:32.363Z","kind":"console","type":"log","text":"[WebMCP] prepare_replacement called with: [object Object]"}
+{"ts":"2026-08-30T22:19:32.422Z","kind":"console","type":"log","text":"[WebMCP] ✗ Unregistered: prepare_replacement"}
+{"ts":"2026-08-30T22:19:32.424Z","kind":"console","type":"log","text":"[WebMCP] ✓ Registered: confirm_replacement"}
+{"ts":"2026-08-30T22:19:32.425Z","kind":"toolchange","tools":["confirm_replacement","get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-30T22:19:32.427Z","kind":"toolchange","tools":["confirm_replacement","get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-30T22:19:32.812Z","kind":"agent_tool_result","tool":"prepare_replacement","ok":true,"result":"{\"success\":true,\"resolution\":{\"type\":\"replacement\",\"status\":\"prepared\",\"replacement_product\":\"Wireless Headphones\",\"estimated_arrival\":\"tomorrow\",\"return_deadline\":\"14 days\",\"next_step\":\"Customer must approve this replacement via the website UI. Call get_order to check if the customer has approved.\",\"requires_human_approval\":true}}","stateAfter":"RESOLUTION_PREPARED","toolsAfter":["confirm_replacement","get_order"]}
+{"ts":"2026-08-30T22:19:41.353Z","kind":"screenshot","file":"04_prepare_agent.png"}
+{"ts":"2026-08-30T22:19:41.359Z","kind":"j3_observation_window_start"}
+{"ts":"2026-08-30T22:19:56.379Z","kind":"j3_observation_window_end"}
+{"ts":"2026-08-30T22:19:56.590Z","kind":"screenshot","file":"05_waiting_for_approval.png"}
+{"ts":"2026-08-30T22:19:57.118Z","kind":"human_approval","actor":"HUMAN","control":"#btn-approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"AWAITING_APPROVAL","toolsAfter":["confirm_replacement","get_order"]}
+{"ts":"2026-08-30T22:19:58.059Z","kind":"screenshot","file":"06_human_approval.png"}
+{"ts":"2026-08-30T22:20:11.225Z","kind":"agent_tool_call","tool":"get_order","args":{"order_id":"1042"},"stateBefore":"AWAITING_APPROVAL"}
+{"ts":"2026-08-30T22:20:11.231Z","kind":"console","type":"log","text":"[WebMCP] get_order called with: [object Object]"}
+{"ts":"2026-08-30T22:20:11.650Z","kind":"agent_tool_result","tool":"get_order","ok":true,"result":"{\"order_id\":\"1042\",\"product\":\"Wireless Headphones\",\"price\":129,\"currency\":\"USD\",\"status\":\"delivered\",\"delivered_date\":\"2026-08-26\",\"issue\":{\"type\":\"damaged\",\"description\":\"Left earphone not working\",\"reported_date\":\"2026-08-27\"},\"customer_context\":\"Travels tomorrow — needs fast resolution\",\"resolution\":{\"type\":\"replacement\",\"status\":\"awaiting_human_approval\",\"replacement_product\":\"Wireless Headphones\",\"estimated_arrival\":\"tomorrow\",\"return_deadline\":\"14 days\",\"requires_human_approval\":true}}","stateAfter":"AWAITING_APPROVAL","toolsAfter":["confirm_replacement","get_order"]}
+{"ts":"2026-08-30T22:20:23.002Z","kind":"screenshot","file":"07_agent_resume.png"}
+{"ts":"2026-08-30T22:20:23.156Z","kind":"screenshot","file":"08_confirm_agent.png"}
+{"ts":"2026-08-30T22:20:23.274Z","kind":"screenshot","file":"09_resolved_agent.png"}
+{"ts":"2026-08-30T22:20:23.283Z","kind":"console","type":"log","text":"[WebMCP] ✓ Registered: get_order"}
+{"ts":"2026-08-30T22:20:23.284Z","kind":"console","type":"log","text":"[WebMCP] ✓ Registered: prepare_replacement"}
+{"ts":"2026-08-30T22:20:23.284Z","kind":"toolchange","tools":["get_order","prepare_replacement"],"state":"ORDER_DELIVERED"}
+{"ts":"2026-08-30T22:20:23.285Z","kind":"toolchange","tools":["get_order","prepare_replacement"],"state":"ORDER_DELIVERED"}
+{"ts":"2026-08-30T22:20:23.286Z","kind":"toolchange","tools":["get_order","prepare_replacement"],"state":"ORDER_DELIVERED"}
+{"ts":"2026-08-30T22:20:23.288Z","kind":"toolchange","tools":["get_order","prepare_replacement"],"state":"ORDER_DELIVERED"}
+{"ts":"2026-08-30T22:20:23.887Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_DELIVERED"}

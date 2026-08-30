@@ -993,15 +993,34 @@
 
       // Add resolution info based on current state
       switch (currentState) {
+        // Staged, but the customer has NOT approved yet.
         case STATES.RESOLUTION_PREPARED:
-        case STATES.AWAITING_APPROVAL:
           data.resolution = {
             type: 'replacement',
-            status: currentState === STATES.AWAITING_APPROVAL ? 'awaiting_human_approval' : 'prepared',
+            status: 'prepared',
             replacement_product: 'Wireless Headphones',
             estimated_arrival: 'tomorrow',
             return_deadline: '14 days',
             requires_human_approval: true,
+            human_approved: false,
+            next_step: 'Waiting for the customer to approve this replacement in the website UI.',
+          };
+          break;
+
+        // The customer HAS approved in the UI. Report that truthfully: the
+        // approval gate is cleared and nothing further is required of the
+        // human. Reporting "awaiting_human_approval" here would tell the
+        // agent the opposite of what actually happened.
+        case STATES.AWAITING_APPROVAL:
+          data.resolution = {
+            type: 'replacement',
+            status: 'approved_by_customer',
+            replacement_product: 'Wireless Headphones',
+            estimated_arrival: 'tomorrow',
+            return_deadline: '14 days',
+            requires_human_approval: false,
+            human_approved: true,
+            next_step: 'The customer has approved this replacement. It is ready to be finalized.',
           };
           break;
         case STATES.RESOLVED:
