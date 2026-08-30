@@ -1,0 +1,8 @@
+{
+  "pass": true,
+  "state": "AWAITING_APPROVAL",
+  "tools": [
+    "confirm_replacement",
+    "get_order"
+  ]
+}

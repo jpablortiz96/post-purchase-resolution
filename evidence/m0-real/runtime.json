@@ -1,0 +1,86 @@
+{
+  "TEST_A_WEBMCP_RUNTIME": {
+    "pass": true,
+    "typeof": "object",
+    "constructor": "ModelContext"
+  },
+  "TEST_B_TOOL_DISCOVERY": {
+    "pass": true,
+    "tools": [
+      "get_order",
+      "prepare_replacement"
+    ],
+    "count": 2
+  },
+  "TEST_C_ANNOTATIONS": {
+    "pass": true,
+    "get_order": {
+      "readOnlyHint": true,
+      "untrustedContentHint": false
+    },
+    "prepare_replacement": {
+      "readOnlyHint": false,
+      "untrustedContentHint": false
+    }
+  },
+  "TEST_D_REAL_GET_ORDER": {
+    "pass": true,
+    "result": "{\"order_id\":\"1042\",\"product\":\"Wireless Headphones\",\"price\":129,\"currency\":\"USD\",\"status\":\"delivered\",\"delivered_date\":\"2026-08-26\",\"issue\":{\"type\":\"damaged\",\"description\":\"Left earphone not working\",\"",
+    "order_id": "1042",
+    "product": "Wireless Headphones"
+  },
+  "TEST_E_PREPARE_LIFECYCLE": {
+    "pass": true,
+    "toolsBefore": [
+      "get_order",
+      "prepare_replacement"
+    ],
+    "toolsAfter": [
+      "confirm_replacement",
+      "get_order"
+    ],
+    "prepareResult": {
+      "raw": "{\"success\":true,\"resolution\":{\"type\":\"replacement\",\"status\":\"prepared\",\"replacement_product\":\"Wireless Headphones\",\"estimated_arrival\":\"tomorrow\",\"return_deadline\":\"14 days\",\"next_step\":\"Customer must approve this replacement via the website UI. Call get_order to check if the customer has approved.\"",
+      "success": true
+    },
+    "state": "RESOLUTION_PREPARED"
+  },
+  "TEST_F_NEGATIVE_APPROVAL": {
+    "pass": true,
+    "stateBefore": "RESOLUTION_PREPARED",
+    "stateAfter": "RESOLUTION_PREPARED",
+    "errorReturned": "Customer has not approved yet"
+  },
+  "TEST_G_HUMAN_APPROVAL": {
+    "pass": true,
+    "state": "AWAITING_APPROVAL",
+    "tools": [
+      "confirm_replacement",
+      "get_order"
+    ]
+  },
+  "TEST_H_REAL_CONFIRM": {
+    "pass": true,
+    "state": "RESOLVED",
+    "toolsAfter": [
+      "get_order"
+    ],
+    "confirmRemoved": true,
+    "confirmResult": {
+      "raw": "{\"success\":true,\"replacement\":{\"id\":\"R-1042\",\"product\":\"Wireless Headphones\",\"estimated_arrival\":\"tomorrow\",\"return_deadline\":\"14 days\",\"status\":\"confirmed\"}}",
+      "success": true,
+      "replacement_id": "R-1042"
+    }
+  },
+  "TEST_I_RESET": {
+    "pass": true,
+    "state": "ORDER_DELIVERED",
+    "tools": [
+      "get_order",
+      "prepare_replacement"
+    ]
+  },
+  "toolchangeLog": [],
+  "chromeVersion": "Chrome/151.0.7922.174",
+  "timestamp": "2026-08-30T22:02:12.336Z"
+}

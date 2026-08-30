@@ -1,0 +1,16 @@
+{
+  "pass": true,
+  "toolsBefore": [
+    "get_order",
+    "prepare_replacement"
+  ],
+  "toolsAfter": [
+    "confirm_replacement",
+    "get_order"
+  ],
+  "prepareResult": {
+    "raw": "{\"success\":true,\"resolution\":{\"type\":\"replacement\",\"status\":\"prepared\",\"replacement_product\":\"Wireless Headphones\",\"estimated_arrival\":\"tomorrow\",\"return_deadline\":\"14 days\",\"next_step\":\"Customer must approve this replacement via the website UI. Call get_order to check if the customer has approved.\"",
+    "success": true
+  },
+  "state": "RESOLUTION_PREPARED"
+}

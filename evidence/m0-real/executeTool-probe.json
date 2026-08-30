@@ -1,0 +1,45 @@
+{
+  "toolCount": 2,
+  "toolNames": [
+    "get_order",
+    "prepare_replacement"
+  ],
+  "firstToolKeys": [
+    "description",
+    "inputSchema",
+    "name",
+    "annotations",
+    "origin",
+    "title",
+    "window"
+  ],
+  "attempt1": {
+    "method": "toolFromGetTools + JSON.stringify",
+    "result": "{\"order_id\":\"1042\",\"product\":\"Wireless Headphones\",\"price\":129,\"currency\":\"USD\",\"status\":\"delivered\",\"delivered_date\":\"2026-08-26\",\"issue\":{\"type\":\"damaged\",\"description\":\"Left earphone not working\",\"reported_date\":\"2026-08-27\"},\"customer_context\":\"Travels tomorrow — needs fast resolution\",\"resolution\":null}",
+    "type": "string"
+  },
+  "attempt2": {
+    "method": "toolFromGetTools + plainObject",
+    "error": "Failed to parse input arguments"
+  },
+  "attempt3": {
+    "method": "stringName + JSON.stringify",
+    "error": "Failed to execute 'executeTool' on 'ModelContext': The provided value is not of type 'RegisteredTool'."
+  },
+  "attempt4": {
+    "method": "stringName + plainObject",
+    "error": "Failed to execute 'executeTool' on 'ModelContext': The provided value is not of type 'RegisteredTool'."
+  },
+  "attempt5": {
+    "method": "stringName only",
+    "error": "Failed to execute 'executeTool' on 'ModelContext': 2 arguments required, but only 1 present."
+  },
+  "attempt6": {
+    "method": "{name} + JSON.stringify",
+    "error": "Failed to execute 'executeTool' on 'ModelContext': Failed to read the 'description' property from 'RegisteredToolDeprecated': Required member is undefined."
+  },
+  "attempt7": {
+    "method": "cleanTool (no window) + JSON.stringify",
+    "error": "Failed to execute 'executeTool' on 'ModelContext': Failed to read the 'window' property from 'RegisteredTool': Required member is undefined."
+  }
+}
