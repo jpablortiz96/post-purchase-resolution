@@ -7,7 +7,7 @@ const { spawn } = require('child_process');
 const path = require('path');
 const http = require('http');
 
-const MCP_CONFIG = path.join(__dirname, 'mcp.json');
+const MCP_CONFIG = process.env.MCP_CONFIG || path.join(__dirname, 'mcp.json');
 const CLAUDE = process.env.CLAUDE_CODE_EXECPATH;
 const AGENT_CWD = process.env.AGENT_CWD || path.join(__dirname, 'run');
 const MODEL = process.env.AGENT_MODEL || 'opus';
