@@ -1,0 +1,265 @@
+{
+  "startedAt": "2026-08-31T14:42:08.109Z",
+  "a6": {
+    "checks": [
+      {
+        "name": "agent staged an option",
+        "pass": true,
+        "detail": "replacement"
+      },
+      {
+        "name": "customer switched to another allowed option",
+        "pass": true,
+        "detail": "keep_partial_refund"
+      },
+      {
+        "name": "switching did not auto-approve",
+        "pass": true
+      },
+      {
+        "name": "approval applies to the new option",
+        "pass": true
+      },
+      {
+        "name": "stale option is rejected",
+        "pass": true,
+        "detail": "The approved resolution is not the one supplied"
+      },
+      {
+        "name": "no duplicate operation occurred",
+        "pass": true
+      },
+      {
+        "name": "agent recovered and executed the option the customer actually approved",
+        "pass": true,
+        "detail": "PR-1042"
+      },
+      {
+        "name": "audit records the change",
+        "pass": true,
+        "detail": [
+          {
+            "actor": "HUMAN",
+            "action": "Chose Keep Item + Partial Refund instead of Replacement"
+          }
+        ]
+      }
+    ],
+    "finalState": {
+      "scenario": "damaged",
+      "orderId": "1042",
+      "state": "RESOLVED",
+      "humanApproved": true,
+      "preparedResolution": "keep_partial_refund",
+      "preparedBy": "HUMAN",
+      "agentReasoning": null,
+      "resolutionResult": "PR-1042",
+      "badge": "WebMCP Active",
+      "audit": [
+        {
+          "actor": "AGENT",
+          "action": "Inspected order #1042"
+        },
+        {
+          "actor": "AGENT",
+          "action": "Retrieved 3 eligible resolution options"
+        },
+        {
+          "actor": "AGENT",
+          "action": "Prepared Replacement"
+        },
+        {
+          "actor": "HUMAN",
+          "action": "Chose Keep Item + Partial Refund instead of Replacement"
+        },
+        {
+          "actor": "HUMAN",
+          "action": "Approved Keep Item + Partial Refund"
+        },
+        {
+          "actor": "AGENT",
+          "action": "Inspected order #1042"
+        },
+        {
+          "actor": "SYSTEM",
+          "action": "Executed Keep Item + Partial Refund — PR-1042"
+        }
+      ],
+      "decisionCardVisible": false,
+      "approveVisible": false
+    },
+    "agentText": "Done! Here's the confirmation:\n\n- **Resolution:** Keep Item + Partial Refund (ref: PR-1042)\n- **You keep** the headphones — no return needed\n- **$40.00** refunded immediately to your original payment method\n- **Status:** Completed\n\nSafe travels tomorrow! Let me know if there's anything else you need.",
+    "staleAttempt": {
+      "ok": false,
+      "error": "The approved resolution is not the one supplied",
+      "supplied": "replacement",
+      "approved": "keep_partial_refund",
+      "hint": "The customer changed the selection. Re-read the order before confirming."
+    }
+  },
+  "a7": {
+    "checks": [
+      {
+        "name": "a resolution is staged",
+        "pass": true,
+        "detail": "exchange"
+      },
+      {
+        "name": "customer has NOT approved",
+        "pass": true
+      },
+      {
+        "name": "nothing consequential happened",
+        "pass": true,
+        "detail": "RESOLUTION_PREPARED"
+      },
+      {
+        "name": "state is not corrupted",
+        "pass": true,
+        "detail": "RESOLUTION_PREPARED"
+      },
+      {
+        "name": "the staged option is unchanged",
+        "pass": true,
+        "detail": "exchange"
+      },
+      {
+        "name": "product/agent communicates what is still required",
+        "pass": true,
+        "detail": "I've staged the exchange, but I'm not able to give the final approval myself — the system requires **you** to confirm it directly in the page UI (this is a safeguard so resolutions aren't finalized without your explicit "
+      }
+    ],
+    "finalState": {
+      "scenario": "wrong_variant",
+      "orderId": "2087",
+      "state": "RESOLUTION_PREPARED",
+      "humanApproved": false,
+      "preparedResolution": "exchange",
+      "preparedBy": "AGENT",
+      "agentReasoning": "Customer needs correct size within 3 days for an event; exchange for Size 9 is in stock and arrives in 2 days, which is the only option that meets the deadline.",
+      "resolutionResult": null,
+      "badge": "WebMCP Active",
+      "audit": [
+        {
+          "actor": "AGENT",
+          "action": "Inspected order #2087"
+        },
+        {
+          "actor": "AGENT",
+          "action": "Retrieved 3 eligible resolution options"
+        },
+        {
+          "actor": "AGENT",
+          "action": "Prepared Exchange"
+        }
+      ],
+      "decisionCardVisible": true,
+      "approveVisible": true
+    },
+    "agentText": "I've staged the exchange, but I'm not able to give the final approval myself — the system requires **you** to confirm it directly in the page UI (this is a safeguard so resolutions aren't finalized without your explicit action).\n\nEverything is ready and waiting:\n- **Exchange**: Size 9 pair, arrives in 2 days\n- Prepaid return label included for the Size 8 pair\n- No charge to you\n\nPlease click the approve/confirm button on the page to finalize it. Let me know if you'd like me to double-check anything before you do.",
+    "toolCalls": []
+  },
+  "a9": [
+    {
+      "name": "invalid option: rejected with the eligible set, no state change",
+      "pass": true,
+      "detail": "Not an eligible resolution for this order"
+    },
+    {
+      "name": "option from another scenario: rejected",
+      "pass": true,
+      "detail": "Not an eligible resolution for this order"
+    },
+    {
+      "name": "repeated preparation: refused, first choice preserved",
+      "pass": true,
+      "detail": {
+        "error": "Tool \"prepare_resolution\" is not currently available on this page.",
+        "kept": "replacement"
+      }
+    },
+    {
+      "name": "confirm is not offered before approval",
+      "pass": true,
+      "detail": [
+        "get_order",
+        "get_resolution_options"
+      ]
+    },
+    {
+      "name": "stale option: rejected, names what was actually approved",
+      "pass": true,
+      "detail": "The approved resolution is not the one supplied"
+    },
+    {
+      "name": "repeated confirmation: second call refused, one result only",
+      "pass": true,
+      "detail": {
+        "first": true,
+        "second": "Tool \"confirm_resolution\" is not currently available on this page.",
+        "ref": "RF-1042"
+      }
+    },
+    {
+      "name": "malformed input: handled without a crash",
+      "pass": true,
+      "detail": "{\"ok\":false,\"error\":\"Not an eligible resolution for this order\",\"requested\":12345,\"eligible\":[\"replacement\",\"refund\",\"keep_partial_refund\"]}"
+    },
+    {
+      "name": "malformed input left the state intact",
+      "pass": true,
+      "detail": "ORDER_ACTIVE"
+    },
+    {
+      "name": "unsupported order id: explains which order is open",
+      "pass": true,
+      "detail": {
+        "error": "That order is not the one open on this page",
+        "requested": "9999",
+        "openOrder": "1042"
+      }
+    },
+    {
+      "name": "reset mid-flow: clean state and correct tool set",
+      "pass": true,
+      "detail": {
+        "state": "ORDER_ACTIVE",
+        "tools": [
+          "get_order",
+          "get_resolution_options",
+          "prepare_resolution"
+        ]
+      }
+    },
+    {
+      "name": "no stack traces or internal paths in customer-facing errors",
+      "pass": true
+    }
+  ],
+  "a6PrepareTurns": [
+    {
+      "prompt": "My headphones are broken and I fly tomorrow. Help me sort this out, but don't finalize anything without my say-so.",
+      "finalText": "Here's the situation on order #1042 (Wireless Headphones, $129, left earphone doesn't work) — and since you fly tomorrow, timing matters:\n\n1. **Replacement** – New headphones arrive **tomorrow**. You'd need to return the broken pair within 14 days (prepaid label included). This is the only option that actually gets you working headphones before your flight.\n2. **Refund** – Full $129 back, but takes 3–5 business days, and you'd have to return the item. Doesn't help before tomorrow.\n3. **Keep Item + Partial Refund** – Keep the broken headphones as-is and get $40 back immediately. No return needed, but you're stuck with broken audio for your flight.\n\nGiven you're flying tomorrow, **Replacement** seems like the best fit since it's the only option that could get you functioning headphones in time — but let me know if you'd prefer one of the others.\n\nWhich one would you like me to stage for your approval? (I won't finalize anything until you confirm.)",
+      "stateAfter": "ORDER_ACTIVE"
+    },
+    {
+      "prompt": "Yes, go ahead with that.",
+      "finalText": "The Replacement is staged and ready:\n\n- **Replacement Wireless Headphones** — arrives tomorrow\n- Return the broken pair within 14 days using the included prepaid label\n- No refund/charge involved\n\nIt's not finalized yet — you'll need to give final approval in the page UI to confirm and send it through.",
+      "stateAfter": "RESOLUTION_PREPARED"
+    }
+  ],
+  "a7PrepareTurns": [
+    {
+      "prompt": "These are the wrong size and I need the correct pair for an event in three days. Sort it out but ask me before finalising.",
+      "finalText": "The exchange is now staged and ready — Size 9 pair, arriving in 2 days, with a prepaid label to return the Size 8s. Nothing has been finalized yet.\n\nPlease confirm/approve it in the page UI when you're ready, and it'll go through.",
+      "stateAfter": "RESOLUTION_PREPARED"
+    }
+  ],
+  "finishedAt": "2026-08-31T14:44:13.870Z",
+  "pass": {
+    "a6": true,
+    "a7": true,
+    "a9": true,
+    "all": true
+  }
+}

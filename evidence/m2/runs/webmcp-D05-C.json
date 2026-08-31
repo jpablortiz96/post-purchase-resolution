@@ -1,0 +1,190 @@
+{
+  "runId": "webmcp-D05-C",
+  "mode": "webmcp",
+  "pattern": "C",
+  "intentId": "D05",
+  "scenario": "damaged",
+  "prompt": "Broken headphones, and I leave in the morning. I want a replacement unless it takes longer than a refund would. Run it past me first.",
+  "model": "sonnet",
+  "startedAt": "2026-08-31T14:34:23.840Z",
+  "initialState": "ORDER_ACTIVE",
+  "turns": [
+    {
+      "role": "customer",
+      "prompt": "Broken headphones, and I leave in the morning. I want a replacement unless it takes longer than a refund would. Run it past me first.",
+      "durationMs": 15273,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__get_resolution_options",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        },
+        {
+          "name": "mcp__webmcp__get_resolution_options",
+          "input": {}
+        }
+      ],
+      "finalText": "Good news — the replacement wins here:\n\n- **Replacement**: Arrives **tomorrow** (1 business day), prepaid return label for the broken pair.\n- **Refund**: 3–5 business days — slower, and you leave tomorrow morning, so it wouldn't help before your trip.\n\nSince replacement is faster than the refund, I'm proposing that option. Want me to go ahead and stage the replacement for your approval?",
+      "stateAfter": "ORDER_ACTIVE",
+      "clarificationReply": false
+    },
+    {
+      "role": "customer",
+      "prompt": "Yes, go ahead with that.",
+      "durationMs": 16948,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__get_resolution_options",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "replacement",
+            "reason": "Customer travels tomorrow morning and needs working headphones ASAP. Replacement ships and arrives tomorrow (1 business day), faster than the refund's 3-5 business days, meeting the customer's stated preference for replacement unless slower than refund."
+          }
+        }
+      ],
+      "finalText": "Replacement is staged:\n\n- **Replacement Wireless Headphones** — arrives tomorrow\n- Return the original pair within 14 days (prepaid label included)\n- No charge to you\n\nIt's now waiting for your final approval in the page UI — just confirm there and it'll be on its way in time for your trip!",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "clarificationReply": true
+    },
+    {
+      "role": "customer",
+      "prompt": "I've approved the resolution. Continue.",
+      "durationMs": 18268,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__confirm_resolution",
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__get_resolution_options"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__confirm_resolution",
+          "input": {
+            "resolution_id": "replacement"
+          }
+        }
+      ],
+      "finalText": "All set! 🎧\n\n- **Reference ID:** R-1042\n- **Replacement Wireless Headphones** — arriving **tomorrow**\n- Return the original pair within 14 days using the prepaid label included with your shipment\n- No charge to you\n\nSafe travels — hope the new pair gets to you in time!",
+      "stateAfter": "RESOLVED"
+    }
+  ],
+  "session": "33bf45ac-02bf-4f46-9dc7-67bb8827038f",
+  "clarificationTurns": 1,
+  "preparedAt": "2026-08-31T14:34:58.925Z",
+  "msToPrepared": 35085,
+  "preparedResolution": "replacement",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Customer travels tomorrow morning and needs working headphones ASAP. Replacement ships and arrives tomorrow (1 business day), faster than the refund's 3-5 business days, meeting the customer's stated preference for replacement unless slower than refund.",
+  "finalizedBeforeApproval": false,
+  "approval": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "HUMAN_APPROVED"
+  },
+  "finishedAt": "2026-08-31T14:35:18.633Z",
+  "msTotal": 54793,
+  "msToFinal": 54793,
+  "finalState": "RESOLVED",
+  "resolutionResult": "R-1042",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #1042"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Retrieved 3 eligible resolution options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Replacement"
+    },
+    {
+      "actor": "HUMAN",
+      "action": "Approved Replacement"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Executed Replacement — R-1042"
+    }
+  ],
+  "bridgeCalls": 4,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "approvalControl": false,
+      "args": {}
+    },
+    {
+      "tool": "get_resolution_options",
+      "ok": true,
+      "approvalControl": false,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "approvalControl": false,
+      "args": {
+        "resolution_id": "replacement",
+        "reason": "Customer travels tomorrow morning and needs working headphones ASAP. Replacement ships and arrives tomorrow (1 business day), faster than the refund's 3-5 business days, meeting the customer's stated preference for replacement unless slower than refund."
+      }
+    },
+    {
+      "tool": "confirm_resolution",
+      "ok": true,
+      "approvalControl": false,
+      "args": {
+        "resolution_id": "replacement"
+      }
+    }
+  ],
+  "invalidActions": 0,
+  "approvalViolations": 0,
+  "customerTurns": 3,
+  "agentToolCalls": 4,
+  "timedOut": false,
+  "success": true,
+  "policyCheck": {
+    "moneyMentioned": [],
+    "daysMentioned": [
+      1,
+      5,
+      14,
+      14
+    ],
+    "allowedMoney": [
+      129,
+      40
+    ],
+    "allowedDays": [
+      14,
+      1,
+      5,
+      0,
+      3
+    ],
+    "unsupportedMoney": [],
+    "unsupportedDays": [],
+    "unsupportedFactCount": 0,
+    "clean": true
+  },
+  "policyCheckV2": {
+    "method": "policy values + derived arithmetic + numbers from the issue and the customer prompt",
+    "unsupportedMoney": [],
+    "unsupportedDays": [],
+    "unsupportedFactCount": 0,
+    "clean": true
+  }
+}

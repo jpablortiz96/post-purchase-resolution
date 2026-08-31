@@ -1,0 +1,317 @@
+{
+  "damaged": {
+    "order": {
+      "orderId": "1042",
+      "product": "Wireless Headphones",
+      "price": 129,
+      "currency": "USD",
+      "status": "delivered",
+      "orderedDate": "2026-08-22",
+      "promisedDate": "2026-08-26",
+      "deliveredDate": "2026-08-26"
+    },
+    "issue": {
+      "type": "DAMAGED",
+      "headline": "Arrived damaged",
+      "description": "Left earphone does not work.",
+      "reportedDate": "2026-08-27"
+    },
+    "options": [
+      {
+        "id": "replacement",
+        "type": "REPLACEMENT",
+        "label": "Replacement",
+        "eligible": true,
+        "customerReceives": "Replacement Wireless Headphones",
+        "economicImpact": {
+          "currency": "USD",
+          "refundToCustomer": 0,
+          "storeCreditToCustomer": 0,
+          "customerKeepsItem": false,
+          "replacementShipped": true
+        },
+        "timing": {
+          "summary": "Arrives tomorrow",
+          "businessDays": 1,
+          "immediate": false
+        },
+        "returnRequired": true,
+        "requirements": [
+          "Return the original item within 14 days",
+          "Prepaid return label included"
+        ],
+        "availability": {
+          "applicable": true,
+          "inStock": true,
+          "shipsBy": "tomorrow"
+        },
+        "estimatedCompletion": "Arrives tomorrow"
+      },
+      {
+        "id": "refund",
+        "type": "REFUND",
+        "label": "Refund",
+        "eligible": true,
+        "customerReceives": "129.00 USD refunded to original payment method",
+        "economicImpact": {
+          "currency": "USD",
+          "refundToCustomer": 129,
+          "storeCreditToCustomer": 0,
+          "customerKeepsItem": false,
+          "replacementShipped": false
+        },
+        "timing": {
+          "summary": "3–5 business days",
+          "businessDays": 5,
+          "immediate": false
+        },
+        "returnRequired": true,
+        "requirements": [
+          "Return the original item",
+          "Prepaid return label included"
+        ],
+        "availability": {
+          "applicable": true
+        },
+        "estimatedCompletion": "3–5 business days"
+      },
+      {
+        "id": "keep_partial_refund",
+        "type": "PARTIAL_REFUND",
+        "label": "Keep Item + Partial Refund",
+        "eligible": true,
+        "customerReceives": "Keep the Wireless Headphones and receive 40.00 USD back",
+        "economicImpact": {
+          "currency": "USD",
+          "refundToCustomer": 40,
+          "storeCreditToCustomer": 0,
+          "customerKeepsItem": true,
+          "replacementShipped": false
+        },
+        "timing": {
+          "summary": "Processed immediately",
+          "businessDays": 0,
+          "immediate": true
+        },
+        "returnRequired": false,
+        "requirements": [
+          "No return needed — the damaged item stays with the customer"
+        ],
+        "availability": {
+          "applicable": true
+        },
+        "estimatedCompletion": "Processed immediately"
+      }
+    ]
+  },
+  "wrong_variant": {
+    "order": {
+      "orderId": "2087",
+      "product": "Running Shoes",
+      "price": 96,
+      "currency": "USD",
+      "status": "delivered",
+      "orderedDate": "2026-08-24",
+      "promisedDate": "2026-08-28",
+      "deliveredDate": "2026-08-28",
+      "orderedVariant": "Size 9",
+      "receivedVariant": "Size 8"
+    },
+    "issue": {
+      "type": "WRONG_VARIANT",
+      "headline": "Wrong size received",
+      "description": "Customer ordered size 9 and received size 8.",
+      "reportedDate": "2026-08-29"
+    },
+    "options": [
+      {
+        "id": "exchange",
+        "type": "EXCHANGE",
+        "label": "Exchange",
+        "eligible": true,
+        "customerReceives": "Running Shoes in Size 9",
+        "economicImpact": {
+          "currency": "USD",
+          "refundToCustomer": 0,
+          "storeCreditToCustomer": 0,
+          "customerKeepsItem": false,
+          "replacementShipped": true
+        },
+        "timing": {
+          "summary": "Arrives in 2 days",
+          "businessDays": 2,
+          "immediate": false
+        },
+        "returnRequired": true,
+        "requirements": [
+          "Return the Size 8 pair",
+          "Prepaid return label included"
+        ],
+        "availability": {
+          "applicable": true,
+          "inStock": true,
+          "variant": "Size 9"
+        },
+        "estimatedCompletion": "Arrives in 2 days"
+      },
+      {
+        "id": "refund",
+        "type": "REFUND",
+        "label": "Refund",
+        "eligible": true,
+        "customerReceives": "96.00 USD refunded to original payment method",
+        "economicImpact": {
+          "currency": "USD",
+          "refundToCustomer": 96,
+          "storeCreditToCustomer": 0,
+          "customerKeepsItem": false,
+          "replacementShipped": false
+        },
+        "timing": {
+          "summary": "3–5 business days",
+          "businessDays": 5,
+          "immediate": false
+        },
+        "returnRequired": true,
+        "requirements": [
+          "Return the Size 8 pair",
+          "Prepaid return label included"
+        ],
+        "availability": {
+          "applicable": true
+        },
+        "estimatedCompletion": "3–5 business days"
+      },
+      {
+        "id": "store_credit",
+        "type": "STORE_CREDIT",
+        "label": "Store Credit",
+        "eligible": true,
+        "customerReceives": "105.00 USD in store credit",
+        "economicImpact": {
+          "currency": "USD",
+          "refundToCustomer": 0,
+          "storeCreditToCustomer": 105,
+          "customerKeepsItem": false,
+          "replacementShipped": false
+        },
+        "timing": {
+          "summary": "Available immediately",
+          "businessDays": 0,
+          "immediate": true
+        },
+        "returnRequired": true,
+        "requirements": [
+          "Return the Size 8 pair",
+          "Prepaid return label included"
+        ],
+        "availability": {
+          "applicable": true
+        },
+        "estimatedCompletion": "Available immediately"
+      }
+    ]
+  },
+  "arrived_late": {
+    "order": {
+      "orderId": "3155",
+      "product": "Birthday Gift",
+      "price": 74,
+      "currency": "USD",
+      "status": "delivered",
+      "orderedDate": "2026-08-20",
+      "promisedDate": "2026-08-26",
+      "deliveredDate": "2026-08-28"
+    },
+    "issue": {
+      "type": "ARRIVED_LATE",
+      "headline": "Arrived after the promised date",
+      "description": "Order arrived two days after the promised delivery date.",
+      "reportedDate": "2026-08-28"
+    },
+    "options": [
+      {
+        "id": "return_refund",
+        "type": "REFUND",
+        "label": "Return + Refund",
+        "eligible": true,
+        "customerReceives": "74.00 USD refunded to original payment method",
+        "economicImpact": {
+          "currency": "USD",
+          "refundToCustomer": 74,
+          "storeCreditToCustomer": 0,
+          "customerKeepsItem": false,
+          "replacementShipped": false
+        },
+        "timing": {
+          "summary": "3–5 business days",
+          "businessDays": 5,
+          "immediate": false
+        },
+        "returnRequired": true,
+        "requirements": [
+          "Return the item",
+          "Prepaid return label included"
+        ],
+        "availability": {
+          "applicable": true
+        },
+        "estimatedCompletion": "3–5 business days"
+      },
+      {
+        "id": "keep_shipping_refund",
+        "type": "SHIPPING_REFUND",
+        "label": "Keep Item + Shipping Refund",
+        "eligible": true,
+        "customerReceives": "Keep the item and receive 12.00 USD shipping refund",
+        "economicImpact": {
+          "currency": "USD",
+          "refundToCustomer": 12,
+          "storeCreditToCustomer": 0,
+          "customerKeepsItem": true,
+          "replacementShipped": false
+        },
+        "timing": {
+          "summary": "Processed immediately",
+          "businessDays": 0,
+          "immediate": true
+        },
+        "returnRequired": false,
+        "requirements": [
+          "No return needed"
+        ],
+        "availability": {
+          "applicable": true
+        },
+        "estimatedCompletion": "Processed immediately"
+      },
+      {
+        "id": "keep_store_credit",
+        "type": "STORE_CREDIT",
+        "label": "Keep Item + Store Credit",
+        "eligible": true,
+        "customerReceives": "Keep the item and receive 20.00 USD in store credit",
+        "economicImpact": {
+          "currency": "USD",
+          "refundToCustomer": 0,
+          "storeCreditToCustomer": 20,
+          "customerKeepsItem": true,
+          "replacementShipped": false
+        },
+        "timing": {
+          "summary": "Available immediately",
+          "businessDays": 0,
+          "immediate": true
+        },
+        "returnRequired": false,
+        "requirements": [
+          "No return needed"
+        ],
+        "availability": {
+          "applicable": true
+        },
+        "estimatedCompletion": "Available immediately"
+      }
+    ]
+  }
+}

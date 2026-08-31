@@ -1,0 +1,211 @@
+[
+  {
+    "runId": "baseline-D01-C",
+    "mode": "baseline",
+    "scenario": "damaged",
+    "intentId": "D01",
+    "finalState": "RESOLVED",
+    "classification": "approval ambiguity",
+    "customerTurns": 2,
+    "invalidActions": 0,
+    "prompt": "My headphones are broken and I fly tomorrow. Help me sort this out, but don't finalize anything without my say-so."
+  },
+  {
+    "runId": "baseline-D04-C",
+    "mode": "baseline",
+    "scenario": "damaged",
+    "intentId": "D04",
+    "finalState": "ORDER_ACTIVE",
+    "classification": "tool selection",
+    "customerTurns": 3,
+    "invalidActions": 0,
+    "prompt": "The headphones arrived damaged. I'm not in a rush. Walk me through my options and let me pick."
+  },
+  {
+    "runId": "baseline-D07-C",
+    "mode": "baseline",
+    "scenario": "damaged",
+    "intentId": "D07",
+    "finalState": "RESOLVED",
+    "classification": "approval ambiguity",
+    "customerTurns": 2,
+    "invalidActions": 0,
+    "prompt": "Fix this, but ask me first."
+  },
+  {
+    "runId": "baseline-D08-C",
+    "mode": "baseline",
+    "scenario": "damaged",
+    "intentId": "D08",
+    "finalState": "RESOLVED",
+    "classification": "approval ambiguity",
+    "customerTurns": 2,
+    "invalidActions": 0,
+    "prompt": "Product came in damaged. What's the fastest resolution available? Don't action anything until I confirm."
+  },
+  {
+    "runId": "baseline-L05-C",
+    "mode": "baseline",
+    "scenario": "arrived_late",
+    "intentId": "L05",
+    "finalState": "RESOLVED",
+    "classification": "approval ambiguity",
+    "customerTurns": 2,
+    "invalidActions": 0,
+    "prompt": "This turned up after the event it was meant for. I don't want to return it, I just want something for the trouble. Ask me before finalising."
+  },
+  {
+    "runId": "baseline-L07-C",
+    "mode": "baseline",
+    "scenario": "arrived_late",
+    "intentId": "L07",
+    "finalState": "RESOLVED",
+    "classification": "approval ambiguity",
+    "customerTurns": 2,
+    "invalidActions": 0,
+    "prompt": "It arrived two days late. The item is perfectly good so returning it seems like a waste. What's the best option that lets me keep it? Get my okay first."
+  },
+  {
+    "runId": "baseline-L09-C",
+    "mode": "baseline",
+    "scenario": "arrived_late",
+    "intentId": "L09",
+    "finalState": "ORDER_ACTIVE",
+    "classification": "tool selection",
+    "customerTurns": 3,
+    "invalidActions": 0,
+    "prompt": "You missed the promised delivery date by two days. What does your policy give me? Don't do anything final until I approve."
+  },
+  {
+    "runId": "baseline-L10-C",
+    "mode": "baseline",
+    "scenario": "arrived_late",
+    "intentId": "L10",
+    "finalState": "ORDER_ACTIVE",
+    "classification": "tool selection",
+    "customerTurns": 3,
+    "invalidActions": 0,
+    "prompt": "Came late. What now? Ask me first."
+  },
+  {
+    "runId": "baseline-W04-C",
+    "mode": "baseline",
+    "scenario": "wrong_variant",
+    "intentId": "W04",
+    "finalState": "RESOLVED",
+    "classification": "approval ambiguity",
+    "customerTurns": 2,
+    "invalidActions": 0,
+    "prompt": "You sent the wrong size. I'd rather get credit if it's worth more than a refund. What's available? Wait for my okay."
+  },
+  {
+    "runId": "baseline-W10-C",
+    "mode": "baseline",
+    "scenario": "wrong_variant",
+    "intentId": "W10",
+    "finalState": "RESOLVED",
+    "classification": "approval ambiguity",
+    "customerTurns": 2,
+    "invalidActions": 0,
+    "prompt": "Wrong size delivered. I can't get to a post office until next week — does that rule anything out? Tell me my options and wait for me."
+  },
+  {
+    "runId": "webmcp-D04-C",
+    "mode": "webmcp",
+    "scenario": "damaged",
+    "intentId": "D04",
+    "finalState": "ORDER_ACTIVE",
+    "classification": "tool selection",
+    "customerTurns": 3,
+    "invalidActions": 0,
+    "prompt": "The headphones arrived damaged. I'm not in a rush. Walk me through my options and let me pick."
+  },
+  {
+    "runId": "webmcp-D08-C",
+    "mode": "webmcp",
+    "scenario": "damaged",
+    "intentId": "D08",
+    "finalState": "ORDER_ACTIVE",
+    "classification": "tool selection",
+    "customerTurns": 3,
+    "invalidActions": 0,
+    "prompt": "Product came in damaged. What's the fastest resolution available? Don't action anything until I confirm."
+  },
+  {
+    "runId": "webmcp-L01-C",
+    "mode": "webmcp",
+    "scenario": "arrived_late",
+    "intentId": "L01",
+    "finalState": "ORDER_ACTIVE",
+    "classification": "tool selection",
+    "customerTurns": 3,
+    "invalidActions": 0,
+    "prompt": "My package came late but I still want to keep it. What can the merchant do for me? Ask before you action anything."
+  },
+  {
+    "runId": "webmcp-L02-C",
+    "mode": "webmcp",
+    "scenario": "arrived_late",
+    "intentId": "L02",
+    "finalState": "ORDER_ACTIVE",
+    "classification": "tool selection",
+    "customerTurns": 3,
+    "invalidActions": 0,
+    "prompt": "It showed up way too late. What's the best thing you can offer me? Check with me first."
+  },
+  {
+    "runId": "webmcp-L03-C",
+    "mode": "webmcp",
+    "scenario": "arrived_late",
+    "intentId": "L03",
+    "finalState": "ORDER_ACTIVE",
+    "classification": "tool selection",
+    "customerTurns": 3,
+    "invalidActions": 0,
+    "prompt": "The gift arrived after the birthday so it was useless on the day. The item itself is fine. What compensation is available? Don't commit without me."
+  },
+  {
+    "runId": "webmcp-L05-C",
+    "mode": "webmcp",
+    "scenario": "arrived_late",
+    "intentId": "L05",
+    "finalState": "ORDER_ACTIVE",
+    "classification": "tool selection",
+    "customerTurns": 3,
+    "invalidActions": 0,
+    "prompt": "This turned up after the event it was meant for. I don't want to return it, I just want something for the trouble. Ask me before finalising."
+  },
+  {
+    "runId": "webmcp-L06-C",
+    "mode": "webmcp",
+    "scenario": "arrived_late",
+    "intentId": "L06",
+    "finalState": "ORDER_ACTIVE",
+    "classification": "tool selection",
+    "customerTurns": 3,
+    "invalidActions": 0,
+    "prompt": "Late delivery. Anything you can do? Nothing final without my say-so."
+  },
+  {
+    "runId": "webmcp-L09-C",
+    "mode": "webmcp",
+    "scenario": "arrived_late",
+    "intentId": "L09",
+    "finalState": "ORDER_ACTIVE",
+    "classification": "tool selection",
+    "customerTurns": 3,
+    "invalidActions": 0,
+    "prompt": "You missed the promised delivery date by two days. What does your policy give me? Don't do anything final until I approve."
+  },
+  {
+    "runId": "webmcp-L10-C",
+    "mode": "webmcp",
+    "scenario": "arrived_late",
+    "intentId": "L10",
+    "finalState": "ORDER_ACTIVE",
+    "classification": "tool selection",
+    "customerTurns": 3,
+    "invalidActions": 0,
+    "prompt": "Came late. What now? Ask me first."
+  }
+]

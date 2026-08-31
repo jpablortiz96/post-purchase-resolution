@@ -1,12 +1,15 @@
 {
   "url": "https://post-purchase-resolution.vercel.app/",
-  "at": "2026-08-31T00:06:26.294Z",
-  "passed": 10,
+  "at": "2026-08-31T00:09:43.507Z",
+  "passed": 12,
   "total": 12,
   "customerControls": [
     "Damaged",
     "Wrong Size",
     "Arrived Late",
+    "Choose this",
+    "Choose this",
+    "Choose this",
     "↺ Reset scenario"
   ],
   "results": [
@@ -17,10 +20,8 @@
     },
     {
       "name": "no console errors on load",
-      "pass": false,
-      "detail": [
-        "Failed to load resource: the server responded with a status of 404 ()"
-      ]
+      "pass": true,
+      "detail": []
     },
     {
       "name": "no debug/simulation panel",
@@ -73,11 +74,14 @@
     },
     {
       "name": "CUSTOMER CAN START A RESOLUTION UNAIDED",
-      "pass": false,
+      "pass": true,
       "detail": [
         "Damaged",
         "Wrong Size",
         "Arrived Late",
+        "Choose this",
+        "Choose this",
+        "Choose this",
         "↺ Reset scenario"
       ]
     },

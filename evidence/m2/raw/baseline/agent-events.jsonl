@@ -1,0 +1,693 @@
+{"ts":"2026-08-31T14:30:30.457Z","kind":"bridge_ready","url":"https://post-purchase-resolution.vercel.app/","state":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:30:57.361Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:30:57.362Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:30:57.363Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:30:57.365Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:30:57.366Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:30:57.367Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:30:58.066Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:30:58.080Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:30:58.082Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:30:58.083Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:30:58.084Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:30:58.085Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:30:58.086Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:30:58.885Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:31:11.900Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:31:29.864Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:31:30.388Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:31:32.454Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:31:33.018Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"✓ Approve this resolution","approvalControl":true,"executedWithoutConsent":false,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:31:34.346Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:31:34.347Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:31:34.897Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:31:38.451Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:31:38.452Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:31:38.453Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:31:38.454Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:31:39.156Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:31:39.164Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:31:39.165Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:31:39.166Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:31:39.167Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:31:39.168Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:31:39.169Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:31:39.972Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:31:51.902Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:32:09.216Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:32:09.766Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:32:13.268Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:32:13.880Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:32:26.442Z","kind":"baseline_read","actor":"AGENT","state":"HUMAN_APPROVED","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Complete resolution now","c5:Cancel","c6:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:32:28.007Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:32:28.008Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:32:28.565Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:32:31.800Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:32:31.801Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:32:31.802Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:32:31.802Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:32:32.503Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:32:32.509Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:32:32.510Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:32:32.511Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:32:32.512Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:32:32.513Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:32:32.514Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:32:33.319Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:32:45.699Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:33:01.781Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:33:02.328Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:33:05.557Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:33:06.170Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:33:18.849Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:33:18.850Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:33:19.400Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:33:22.399Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:33:22.400Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:33:22.401Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:33:22.403Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:33:23.098Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:33:23.113Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:33:23.114Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:33:23.115Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:33:23.117Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:33:23.119Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:33:23.120Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:33:23.912Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:33:35.937Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:34:10.514Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:34:10.516Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:34:10.517Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:34:10.518Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:34:10.519Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:34:10.521Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:34:11.214Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:34:11.224Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:34:11.225Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:34:11.227Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:34:11.227Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:34:11.228Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:34:11.229Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:34:12.029Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:34:24.783Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:34:40.083Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:34:40.644Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:34:43.705Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:34:44.314Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:34:56.853Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:34:56.855Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:34:57.410Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:35:00.319Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:00.321Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:00.322Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:00.323Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:01.027Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:01.034Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:01.035Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:01.037Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:01.038Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:01.039Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:01.041Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:01.842Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:35:30.326Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:35:34.949Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:35:35.507Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:35:40.202Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:35:40.807Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:35:54.286Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:35:54.287Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:35:54.846Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:35:58.167Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:58.169Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:58.171Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:58.173Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:58.873Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:58.881Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:58.882Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:58.883Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:58.885Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:58.886Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:58.887Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:35:59.690Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:36:11.936Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:36:31.401Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:36:31.951Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:36:34.149Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:36:34.723Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"✓ Approve this resolution","approvalControl":true,"executedWithoutConsent":false,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:36:36.789Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:36:36.797Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:36:37.355Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:36:41.314Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:36:41.315Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:36:41.316Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:36:41.316Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:36:42.021Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:36:42.030Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:36:42.031Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:36:42.032Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:36:42.033Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:36:42.034Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:36:42.035Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:36:42.842Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:36:54.972Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:37:13.687Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:37:14.242Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:37:16.028Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:37:16.582Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"✓ Approve this resolution","approvalControl":true,"executedWithoutConsent":false,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:37:18.214Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:37:18.215Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:37:18.763Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:37:22.091Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:37:22.092Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:37:22.093Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:37:22.094Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:37:22.787Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:37:22.799Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:37:22.800Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:37:22.800Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:37:22.801Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:37:22.802Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:37:22.802Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:37:23.599Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:37:36.634Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:37:53.582Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:37:54.130Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:37:57.421Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:37:58.017Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:38:09.705Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:38:09.707Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:38:10.256Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:38:14.375Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:38:14.377Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:38:14.378Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:38:14.379Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:38:15.088Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:38:15.103Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:38:15.104Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:38:15.105Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:38:15.106Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:38:15.106Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:38:15.107Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:38:15.918Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:38:28.707Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:38:49.893Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:38:50.447Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:38:53.924Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:38:54.524Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:39:07.810Z","kind":"baseline_read","actor":"AGENT","state":"HUMAN_APPROVED","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Complete resolution now","c5:Cancel","c6:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:39:09.196Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:39:09.197Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:39:09.747Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:39:12.811Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:39:12.812Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:39:12.812Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:39:12.813Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:39:13.508Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:39:13.522Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:39:13.523Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:39:13.525Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:39:13.526Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:39:13.527Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:39:13.527Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:39:14.322Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:39:26.708Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:39:42.079Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:39:42.628Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:39:46.016Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:39:46.616Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:39:58.257Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:39:58.258Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:39:58.817Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:40:02.169Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:40:02.170Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:40:02.171Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:40:02.172Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:40:02.874Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:40:02.885Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:40:02.886Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:40:02.887Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:40:02.888Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:40:02.889Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:40:02.890Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:40:03.689Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:40:16.873Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:40:55.014Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:40:55.566Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:40:59.021Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:40:59.625Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:41:12.469Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:41:12.470Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:41:13.030Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:41:16.275Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:16.276Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:16.277Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:16.277Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:16.984Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:16.995Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:16.996Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:16.997Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:16.998Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:16.999Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:16.999Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:17.799Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:41:32.400Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:41:35.011Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:41:35.570Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:41:39.406Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:41:40.008Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:41:53.179Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:41:53.181Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:41:53.737Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:41:57.052Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:57.054Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:57.055Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:57.056Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:57.761Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:57.772Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:57.773Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:57.774Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:57.775Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:57.776Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:57.776Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:41:58.573Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:42:10.720Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:42:26.827Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:42:27.387Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:42:29.872Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:42:30.428Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"✓ Approve this resolution","approvalControl":true,"executedWithoutConsent":false,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:42:31.906Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:42:31.909Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:42:32.465Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:42:35.871Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:42:35.871Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:42:35.872Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:42:35.873Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:42:36.568Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:42:36.578Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:42:36.579Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:42:36.580Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:42:36.580Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:42:36.581Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:42:36.582Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:42:37.384Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:42:49.434Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:42:51.837Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:42:52.393Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:42:56.257Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:42:56.863Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:43:08.902Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:43:08.903Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:43:09.453Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:43:12.940Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:43:12.941Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:43:12.942Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:43:12.943Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:43:13.647Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:43:13.656Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:43:13.657Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:43:13.658Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:43:13.658Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:43:13.659Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:43:13.660Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:43:14.455Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:43:28.034Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:43:44.653Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:43:45.198Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:43:48.805Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:43:49.421Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:44:01.468Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:44:01.469Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:44:02.020Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:44:05.674Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:05.677Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:05.678Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:05.679Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:06.389Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:06.410Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:06.414Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:06.416Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:06.418Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:06.419Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:06.419Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:07.205Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:44:19.160Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:44:36.460Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:44:37.015Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:44:40.469Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:44:41.068Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:44:52.741Z","kind":"baseline_read","actor":"AGENT","state":"HUMAN_APPROVED","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Complete resolution now","c5:Cancel","c6:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:44:54.474Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:44:54.475Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:44:55.045Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:44:58.515Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:58.516Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:58.517Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:58.518Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:59.220Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:59.230Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:59.231Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:59.231Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:59.232Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:59.233Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:44:59.234Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:45:00.033Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:45:11.687Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:45:27.102Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:45:27.655Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:45:30.742Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:45:31.351Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:45:43.718Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:45:43.719Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:45:44.278Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:45:47.461Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:45:47.462Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:45:47.462Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:45:47.463Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:45:48.171Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:45:48.179Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:45:48.180Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:45:48.183Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:45:48.184Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:45:48.185Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:45:48.186Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:45:48.982Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:46:00.851Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:46:16.579Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:46:17.134Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:46:21.960Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:46:22.553Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:46:34.171Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:46:34.173Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:46:34.722Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:46:38.256Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:46:38.257Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:46:38.257Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:46:38.258Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:46:38.954Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:46:38.974Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:46:38.975Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:46:38.978Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:46:38.980Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:46:38.982Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:46:38.984Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:46:39.769Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:46:51.933Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:47:13.305Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:47:13.850Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:47:17.136Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:47:17.684Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"✓ Approve this resolution","approvalControl":true,"executedWithoutConsent":false,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:47:20.815Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:47:20.817Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:47:21.368Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:47:25.445Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:47:25.452Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:47:25.454Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:47:25.461Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:47:26.162Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:47:26.184Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:47:26.186Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:47:26.187Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:47:26.191Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:47:26.193Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:47:26.195Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:47:26.982Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:47:41.787Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:48:00.051Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:48:00.591Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:48:03.946Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:48:04.550Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:48:18.636Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:48:18.638Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:48:19.184Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:48:23.007Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:48:23.009Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:48:23.011Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:48:23.013Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:48:23.709Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:48:23.728Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:48:23.730Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:48:23.732Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:48:23.734Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:48:23.736Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:48:23.738Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:48:24.534Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:48:38.251Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:48:55.214Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:48:55.772Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:48:59.821Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:49:00.430Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:49:12.942Z","kind":"baseline_read","actor":"AGENT","state":"HUMAN_APPROVED","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Complete resolution now","c5:Cancel","c6:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:49:14.420Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:49:14.422Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:49:14.986Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:49:18.150Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:49:18.151Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:49:18.151Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:49:18.152Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:49:18.848Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:49:18.857Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:49:18.858Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:49:18.860Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:49:18.861Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:49:18.861Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:49:18.862Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:49:19.660Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:49:31.149Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:50:02.984Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:50:03.543Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:50:07.248Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:50:07.855Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:50:19.405Z","kind":"baseline_read","actor":"AGENT","state":"HUMAN_APPROVED","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Complete resolution now","c5:Cancel","c6:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:50:21.906Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:50:21.907Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:50:22.468Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:50:26.326Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:50:26.327Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:50:26.328Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:50:26.329Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:50:27.022Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:50:27.041Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:50:27.043Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:50:27.047Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:50:27.049Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:50:27.051Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:50:27.054Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:50:27.833Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:50:39.973Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:51:01.056Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:51:01.625Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:51:05.687Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:51:06.302Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:51:17.718Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:51:17.719Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:51:18.270Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:51:22.163Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:51:22.165Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:51:22.167Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:51:22.168Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:51:22.865Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:51:22.875Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:51:22.876Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:51:22.877Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:51:22.878Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:51:22.878Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:51:22.879Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:51:23.680Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:51:35.868Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:51:51.253Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:51:51.814Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:51:53.683Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:51:54.240Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"✓ Approve this resolution","approvalControl":true,"executedWithoutConsent":false,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:51:56.347Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:51:56.348Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:51:56.894Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:51:59.626Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:51:59.628Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:51:59.632Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:51:59.635Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:52:00.337Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:52:00.359Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:52:00.362Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:52:00.372Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:52:00.379Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:52:00.381Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:52:00.386Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:52:01.166Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:52:12.318Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:52:49.090Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:52:49.650Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:52:52.542Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:52:53.154Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:53:05.254Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:53:05.255Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:53:05.817Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:53:08.716Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:08.720Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:08.721Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:08.723Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:09.433Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:09.461Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:09.464Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:09.469Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:09.472Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:09.475Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:09.479Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:10.263Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:53:21.901Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:53:36.714Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:53:37.260Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:53:39.225Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:53:39.788Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"✓ Approve this resolution","approvalControl":true,"executedWithoutConsent":false,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:53:41.332Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:53:41.334Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:53:41.891Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:53:44.817Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:44.818Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:44.819Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:44.820Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:45.519Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:45.529Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:45.531Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:45.532Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:45.534Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:45.537Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:45.539Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:53:46.328Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:53:57.452Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:54:14.214Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:54:14.773Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:54:17.371Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:54:17.979Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:54:28.862Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:54:28.863Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T14:54:29.417Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T14:54:32.934Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:54:32.935Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:54:32.936Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:54:32.937Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:54:33.638Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:54:33.644Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:54:33.645Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:54:33.646Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:54:33.646Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:54:33.647Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:54:33.647Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:54:34.450Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:54:45.988Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:55:17.197Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:55:17.200Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:55:17.202Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:55:17.203Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:55:17.204Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:55:17.204Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:55:17.903Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:55:17.912Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:55:17.913Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:55:17.914Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:55:17.915Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:55:17.915Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:55:17.916Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:55:18.713Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:55:30.271Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:56:47.304Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:56:47.304Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:56:47.305Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:56:47.306Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:56:47.306Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:56:47.309Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:56:48.006Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:56:48.032Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:56:48.033Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:56:48.034Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:56:48.035Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:56:48.036Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:56:48.037Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:56:48.831Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:57:02.173Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:57:46.058Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:57:46.059Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:57:46.060Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:57:46.061Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:57:46.061Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:57:46.062Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:57:46.753Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:57:46.762Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:57:46.763Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:57:46.764Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:57:46.764Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:57:46.765Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:57:46.766Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:57:47.574Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:57:59.733Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:58:16.992Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:58:17.540Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:58:20.446Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:58:21.056Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:58:29.493Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:58:29.494Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:58:29.495Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:58:29.495Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:58:29.496Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:58:29.497Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:58:30.202Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:58:30.222Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:58:30.224Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:58:30.225Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:58:30.227Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:58:30.228Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:58:30.230Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:58:31.023Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:58:43.077Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T14:58:57.822Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:58:58.372Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T14:59:01.476Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T14:59:02.078Z","kind":"human_approval","actor":"HUMAN","control":"#approve","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED","toolsAfter":["confirm_resolution","get_order","get_resolution_options"]}
+{"ts":"2026-08-31T14:59:10.527Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:59:10.528Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:59:10.529Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:59:10.529Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:59:10.530Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:59:10.531Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:59:11.232Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:59:11.243Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:59:11.244Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:59:11.244Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:59:11.245Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:59:11.246Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:59:11.246Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T14:59:12.055Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T14:59:23.822Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T15:00:04.857Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:04.859Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:04.862Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:04.865Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:04.867Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:04.869Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:05.559Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:05.583Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:05.588Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:05.591Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:05.594Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:05.596Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:05.599Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:06.389Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
+{"ts":"2026-08-31T15:00:18.140Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T15:00:33.499Z","kind":"toolchange","tools":["get_order","get_resolution_options"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T15:00:34.056Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T15:00:36.328Z","kind":"toolchange","tools":["confirm_resolution","get_order","get_resolution_options"],"state":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T15:00:36.880Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"✓ Approve this resolution","approvalControl":true,"executedWithoutConsent":false,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"HUMAN_APPROVED"}
+{"ts":"2026-08-31T15:00:38.390Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T15:00:38.393Z","kind":"toolchange","tools":["get_order"],"state":"RESOLVED"}
+{"ts":"2026-08-31T15:00:38.944Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Complete resolution now","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"HUMAN_APPROVED","stateAfter":"RESOLVED"}
+{"ts":"2026-08-31T15:00:50.077Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:50.078Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:50.079Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:50.080Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:50.785Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:50.794Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:50.795Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:50.797Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:50.798Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:50.799Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:50.800Z","kind":"toolchange","tools":["get_order","get_resolution_options","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T15:00:51.607Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","humanApproved":false,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"approveVisible":false}}
