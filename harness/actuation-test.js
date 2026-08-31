@@ -25,7 +25,7 @@ const OUT = process.env.OUT_DIR || path.join(__dirname, '..', 'evidence', 'm3', 
 const CLAUDE = process.env.CLAUDE_CODE_EXECPATH;
 const MODEL = process.env.AGENT_MODEL || 'sonnet';
 const AGENT_CWD = process.env.AGENT_CWD || path.join(__dirname, 'run');
-const COMBINED = path.join(__dirname, 'mcp-combined.json');
+const COMBINED = process.env.MCP_COMBINED_CONFIG || require('./mcp-configs.js').generate({ combinedPort: BRIDGE_PORT }).combined;
 
 fs.mkdirSync(OUT, { recursive: true });
 

@@ -22,9 +22,11 @@ const MODEL = process.env.AGENT_MODEL || 'sonnet';
 const AGENT_CWD = process.env.AGENT_CWD || path.join(__dirname, 'run');
 const BRIDGE = 'http://127.0.0.1:' + (process.env.BRIDGE_PORT || 4320);
 
+// Generated from __dirname so a clean clone works on any machine.
+const GEN = require('./mcp-configs.js').generate();
 const CONFIG = {
-  webmcp: process.env.MCP_WEBMCP_CONFIG || path.join(__dirname, 'mcp-m1.json'),
-  baseline: process.env.MCP_BASELINE_CONFIG || path.join(__dirname, 'mcp-baseline.json'),
+  webmcp: process.env.MCP_WEBMCP_CONFIG || GEN.webmcp,
+  baseline: process.env.MCP_BASELINE_CONFIG || GEN.baseline,
 };
 
 const SYSTEM_PROMPT =

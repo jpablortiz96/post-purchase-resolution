@@ -1,9 +1,0 @@
-{
-  "mcpServers": {
-    "browser": {
-      "command": "node",
-      "args": ["d:/Post-Purchase Resolution/harness/mcp-browser.js"],
-      "env": { "BRIDGE_PORT": "4321" }
-    }
-  }
-}
