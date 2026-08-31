@@ -1,0 +1,142 @@
+{
+  "url": "https://post-purchase-resolution.vercel.app/",
+  "at": "2026-08-31T21:46:06.599Z",
+  "passed": 27,
+  "total": 27,
+  "consoleErrors": [],
+  "results": [
+    {
+      "name": "live URL loads over HTTPS",
+      "pass": true
+    },
+    {
+      "name": "WebMCP discovery works",
+      "pass": true
+    },
+    {
+      "name": "damaged · get_order returns 3 merchant options",
+      "pass": true
+    },
+    {
+      "name": "damaged · prepare_resolution stages it",
+      "pass": true
+    },
+    {
+      "name": "damaged · choose another works",
+      "pass": true
+    },
+    {
+      "name": "damaged · stale protection holds",
+      "pass": true
+    },
+    {
+      "name": "damaged · approve & complete works",
+      "pass": true,
+      "detail": "PR-1042"
+    },
+    {
+      "name": "damaged · committed by the customer",
+      "pass": true
+    },
+    {
+      "name": "damaged · audit trail records authority",
+      "pass": true,
+      "detail": [
+        "AGENT",
+        "AGENT",
+        "CUSTOMER",
+        "CUSTOMER",
+        "SYSTEM"
+      ]
+    },
+    {
+      "name": "damaged · reset works",
+      "pass": true
+    },
+    {
+      "name": "wrong_variant · get_order returns 3 merchant options",
+      "pass": true
+    },
+    {
+      "name": "wrong_variant · prepare_resolution stages it",
+      "pass": true
+    },
+    {
+      "name": "wrong_variant · choose another works",
+      "pass": true
+    },
+    {
+      "name": "wrong_variant · stale protection holds",
+      "pass": true
+    },
+    {
+      "name": "wrong_variant · approve & complete works",
+      "pass": true,
+      "detail": "SC-2087"
+    },
+    {
+      "name": "wrong_variant · committed by the customer",
+      "pass": true
+    },
+    {
+      "name": "wrong_variant · audit trail records authority",
+      "pass": true,
+      "detail": [
+        "AGENT",
+        "AGENT",
+        "CUSTOMER",
+        "CUSTOMER",
+        "SYSTEM"
+      ]
+    },
+    {
+      "name": "wrong_variant · reset works",
+      "pass": true
+    },
+    {
+      "name": "arrived_late · get_order returns 3 merchant options",
+      "pass": true
+    },
+    {
+      "name": "arrived_late · prepare_resolution stages it",
+      "pass": true
+    },
+    {
+      "name": "arrived_late · choose another works",
+      "pass": true
+    },
+    {
+      "name": "arrived_late · stale protection holds",
+      "pass": true
+    },
+    {
+      "name": "arrived_late · approve & complete works",
+      "pass": true,
+      "detail": "SR-3155"
+    },
+    {
+      "name": "arrived_late · committed by the customer",
+      "pass": true
+    },
+    {
+      "name": "arrived_late · audit trail records authority",
+      "pass": true,
+      "detail": [
+        "AGENT",
+        "AGENT",
+        "CUSTOMER",
+        "CUSTOMER",
+        "SYSTEM"
+      ]
+    },
+    {
+      "name": "arrived_late · reset works",
+      "pass": true
+    },
+    {
+      "name": "no console-breaking errors",
+      "pass": true,
+      "detail": []
+    }
+  ]
+}

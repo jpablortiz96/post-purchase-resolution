@@ -1,0 +1,101 @@
+{
+  "url": "https://post-purchase-resolution.vercel.app/",
+  "at": "2026-08-31T21:45:09.608Z",
+  "passed": 13,
+  "total": 13,
+  "customerControls": [
+    "Damaged",
+    "Wrong Size",
+    "Arrived Late",
+    "Choose this",
+    "Choose this",
+    "Choose this",
+    "↺ Reset scenario"
+  ],
+  "results": [
+    {
+      "name": "https + 200",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "no console errors on load",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "no debug/simulation panel",
+      "pass": true
+    },
+    {
+      "name": "no \"simulate\" wording in customer UI",
+      "pass": true
+    },
+    {
+      "name": "no \"debug\" wording in customer UI",
+      "pass": true
+    },
+    {
+      "name": "badge reads Active in a WebMCP environment",
+      "pass": true,
+      "detail": "WebMCP Active"
+    },
+    {
+      "name": "initial state is clean",
+      "pass": true,
+      "detail": "ORDER_ACTIVE"
+    },
+    {
+      "name": "all three scenarios reachable",
+      "pass": true,
+      "detail": [
+        "Damaged",
+        "Wrong Size",
+        "Arrived Late"
+      ]
+    },
+    {
+      "name": "merchant options are visible to the customer",
+      "pass": true,
+      "detail": [
+        "Replacement",
+        "Refund",
+        "Keep Item + Partial Refund"
+      ]
+    },
+    {
+      "name": "tools register in a supported WebMCP environment",
+      "pass": true,
+      "detail": [
+        "get_order",
+        "prepare_resolution"
+      ]
+    },
+    {
+      "name": "no completion capability is exposed to agents",
+      "pass": true,
+      "detail": [
+        "get_order",
+        "prepare_resolution"
+      ]
+    },
+    {
+      "name": "CUSTOMER CAN START A RESOLUTION UNAIDED",
+      "pass": true,
+      "detail": [
+        "Damaged",
+        "Wrong Size",
+        "Arrived Late",
+        "Choose this",
+        "Choose this",
+        "Choose this",
+        "↺ Reset scenario"
+      ]
+    },
+    {
+      "name": "reset works",
+      "pass": true,
+      "detail": "ORDER_ACTIVE"
+    }
+  ]
+}
