@@ -119,5 +119,12 @@
     "unsupportedDays": [],
     "unsupportedFactCount": 0,
     "clean": true
+  },
+  "policyCheckV2": {
+    "method": "policy values + derived arithmetic + numbers from the issue and the customer prompt",
+    "unsupportedMoney": [],
+    "unsupportedDays": [],
+    "unsupportedFactCount": 0,
+    "clean": true
   }
 }

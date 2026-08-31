@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="422" viewBox="0 0 720 422" font-family="Inter, system-ui, sans-serif">
+<rect width="720" height="422" fill="#0d0d12"/>
+<text x="24" y="34" fill="#f0f0f5" font-size="17" font-weight="700">Customer outcomes and control</text>
+<text x="24" y="56" fill="#7a7a8c" font-size="12">Same live product, matched customer intents, approval pattern C</text>
+<rect x="24" y="70" width="11" height="11" rx="2" fill="#e17055"/>
+<text x="41" y="80" fill="#b8b8c8" font-size="11">Human UI / browser</text>
+<rect x="174" y="70" width="11" height="11" rx="2" fill="#6c5ce7"/>
+<text x="191" y="80" fill="#b8b8c8" font-size="11">WebMCP</text>
+<text x="24" y="113" fill="#b8b8c8" font-size="12.5">Successful resolutions</text>
+<rect x="274" y="100" width="237.33333333333331" height="15" rx="3" fill="#e17055"/>
+<text x="518.3333333333333" y="112" fill="#f0f0f5" font-size="11.5">20</text>
+<rect x="274" y="119" width="249.2" height="15" rx="3" fill="#6c5ce7"/>
+<text x="530.2" y="131" fill="#f0f0f5" font-size="11.5">21</text>
+<text x="24" y="167" fill="#b8b8c8" font-size="12.5">Policy-clean runs</text>
+<rect x="274" y="154" width="356" height="15" rx="3" fill="#e17055"/>
+<text x="637" y="166" fill="#f0f0f5" font-size="11.5">30</text>
+<rect x="274" y="173" width="356" height="15" rx="3" fill="#6c5ce7"/>
+<text x="637" y="185" fill="#f0f0f5" font-size="11.5">30</text>
+<text x="24" y="221" fill="#b8b8c8" font-size="12.5">Approval violations</text>
+<rect x="274" y="208" width="83.06666666666666" height="15" rx="3" fill="#e17055"/>
+<text x="364.06666666666666" y="220" fill="#f0f0f5" font-size="11.5">7</text>
+<rect x="274" y="227" width="0" height="15" rx="3" fill="#6c5ce7"/>
+<text x="281" y="239" fill="#f0f0f5" font-size="11.5">0</text>
+<text x="24" y="275" fill="#b8b8c8" font-size="12.5">Finalised before approval</text>
+<rect x="274" y="262" width="83.06666666666666" height="15" rx="3" fill="#e17055"/>
+<text x="364.06666666666666" y="274" fill="#f0f0f5" font-size="11.5">7</text>
+<rect x="274" y="281" width="0" height="15" rx="3" fill="#6c5ce7"/>
+<text x="281" y="293" fill="#f0f0f5" font-size="11.5">0</text>
+<text x="24" y="329" fill="#b8b8c8" font-size="12.5">Invalid action attempts</text>
+<rect x="274" y="316" width="0" height="15" rx="3" fill="#e17055"/>
+<text x="281" y="328" fill="#f0f0f5" font-size="11.5">0</text>
+<rect x="274" y="335" width="0" height="15" rx="3" fill="#6c5ce7"/>
+<text x="281" y="347" fill="#f0f0f5" font-size="11.5">0</text>
+<text x="24" y="404" fill="#7a7a8c" font-size="10.5">n=30 baseline, n=30 WebMCP · matched intents · generated from raw run records</text>
+</svg>

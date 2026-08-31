@@ -1,6 +1,6 @@
 # M2 — Product Comparison
 
-Generated from 60 raw run records in [`../runs/`](../runs/). Every number here is
+Generated from 132 raw run records in [`../runs/`](../runs/). Every number here is
 computed by `harness/make-m2-report.js`; none is authored by hand.
 
 Model: `sonnet` · matched intents · same live product in both modes.
@@ -11,8 +11,9 @@ Model: `sonnet` · matched intents · same live product in both modes.
 |---|---|---|---|
 | Runs | 30 | 30 |  |
 | Successful resolutions | 20/30 (67%) | 21/30 (70%) | +1 |
-| Policy-clean runs | 22/30 (73%) | 20/30 (67%) | -2 |
-| Unsupported facts stated | 8 | 11 | +3 |
+| Policy-clean runs (refined metric) | 30/30 (100%) | 30/30 (100%) | 0 |
+| Unsupported merchant facts stated | 0 | 0 | 0 |
+| _(first-pass metric, superseded)_ | 22/30 | 20/30 | -2 |
 | Invalid action attempts | 0 | 0 | 0 |
 | Runs with an invalid action | 0 | 0 | 0 |
 | **Approval violations** | 7 | 0 | -7 |
@@ -50,6 +51,10 @@ Pattern A = approve only, no message · B = approve + "Continue." · C = approve
 
 | Pattern | Mode | Runs | Completed after approval | Median customer turns | Approval violations |
 |---|---|---|---|---|---|
+| A | webmcp | 6 | 0/6 (0%) | 2 | 0 |
+| A | baseline | 30 | 0/30 (0%) | 2 | 8 |
+| B | webmcp | 6 | 4/6 (67%) | 3 | 0 |
+| B | baseline | 30 | 19/30 (63%) | 3 | 8 |
 | C | webmcp | 30 | 21/30 (70%) | 3 | 0 |
 | C | baseline | 30 | 20/30 (67%) | 3 | 7 |
 
@@ -60,6 +65,32 @@ Pattern A = approve only, no message · B = approve + "Continue." · C = approve
   Pressing "Complete resolution now" after the customer approved is the intended
   division of labour and is NOT counted.
 - **Policy-clean** is a heuristic: every monetary amount and day count the agent
-  stated appears in the merchant policy for that scenario. It flags candidates,
-  it does not prove intent.
+  stated is traceable to the merchant policy, the issue, the customer’s own
+  words, or arithmetic over policy values. It flags candidates for review; it
+  does not prove intent, and cannot catch an invented fact stated without a
+  number. The first-pass version flagged legitimate numbers (the issue’s own
+  "two days late", a customer’s "three weeks", and "$89" = 129 - 40) and is
+  shown only so the refinement is auditable. Both versions were applied
+  identically to both modes.
 - Timings include model latency and are not a claim about production performance.
+
+## A confound that must be read with the per-scenario table
+
+WebMCP scores **lower** on `arrived_late` (see above). That is not evidence
+that the contract performs worse there. The cause is visible in the raw
+transcripts: for that scenario the three options are close in value ($12 cash,
+$20 credit, $74 with a return), so the agent repeatedly declines to choose and
+asks the customer *"which one — 1, 2, or 3?"*. The harness's scripted reply is
+a fixed neutral affirmative ("Yes, go ahead with that."), which does not answer
+"which one", so the run exhausts its turn budget with nothing staged.
+
+In the browser baseline the agent faces the same dilemma but can simply press
+one of the "Choose this" buttons — and in several of those runs it then pressed
+Approve too. So part of the baseline's apparent advantage on this scenario is
+the agent deciding unilaterally, which is the same behaviour counted as an
+approval violation elsewhere in this table.
+
+The honest reading: **the per-scenario success split for `arrived_late` measures
+the harness's reply policy, not the two modes.** A real customer would have
+answered the question. Fixing this needs an intent-aware reply policy, which is
+M3 work, not a patch applied after seeing the result.

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="368" viewBox="0 0 720 368" font-family="Inter, system-ui, sans-serif">
+<rect width="720" height="368" fill="#0d0d12"/>
+<text x="24" y="34" fill="#f0f0f5" font-size="17" font-weight="700">Customer effort and latency</text>
+<text x="24" y="56" fill="#7a7a8c" font-size="12">Lower is better. Timings are dominated by model latency, not the product.</text>
+<rect x="24" y="70" width="11" height="11" rx="2" fill="#e17055"/>
+<text x="41" y="80" fill="#b8b8c8" font-size="11">Human UI / browser</text>
+<rect x="174" y="70" width="11" height="11" rx="2" fill="#6c5ce7"/>
+<text x="191" y="80" fill="#b8b8c8" font-size="11">WebMCP</text>
+<text x="24" y="113" fill="#b8b8c8" font-size="12.5">Median customer turns</text>
+<rect x="274" y="100" width="20.150943396226417" height="15" rx="3" fill="#e17055"/>
+<text x="301.1509433962264" y="112" fill="#f0f0f5" font-size="11.5">3</text>
+<rect x="274" y="119" width="20.150943396226417" height="15" rx="3" fill="#6c5ce7"/>
+<text x="301.1509433962264" y="131" fill="#f0f0f5" font-size="11.5">3</text>
+<text x="24" y="167" fill="#b8b8c8" font-size="12.5">Median agent tool calls</text>
+<rect x="274" y="154" width="20.150943396226417" height="15" rx="3" fill="#e17055"/>
+<text x="301.1509433962264" y="166" fill="#f0f0f5" font-size="11.5">3</text>
+<rect x="274" y="173" width="26.867924528301884" height="15" rx="3" fill="#6c5ce7"/>
+<text x="307.8679245283019" y="185" fill="#f0f0f5" font-size="11.5">4</text>
+<text x="24" y="221" fill="#b8b8c8" font-size="12.5">Median seconds to prepared</text>
+<rect x="274" y="208" width="221.66037735849056" height="15" rx="3" fill="#e17055"/>
+<text x="502.66037735849056" y="220" fill="#f0f0f5" font-size="11.5">33</text>
+<rect x="274" y="227" width="235.09433962264148" height="15" rx="3" fill="#6c5ce7"/>
+<text x="516.0943396226414" y="239" fill="#f0f0f5" font-size="11.5">35</text>
+<text x="24" y="275" fill="#b8b8c8" font-size="12.5">Median seconds to final</text>
+<rect x="274" y="262" width="335.8490566037736" height="15" rx="3" fill="#e17055"/>
+<text x="616.8490566037735" y="274" fill="#f0f0f5" font-size="11.5">50</text>
+<rect x="274" y="281" width="356" height="15" rx="3" fill="#6c5ce7"/>
+<text x="637" y="293" fill="#f0f0f5" font-size="11.5">53</text>
+<text x="24" y="350" fill="#7a7a8c" font-size="10.5">n=30 baseline, n=30 WebMCP · matched intents · generated from raw run records</text>
+</svg>
