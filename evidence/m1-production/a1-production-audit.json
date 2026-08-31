@@ -1,0 +1,90 @@
+{
+  "url": "https://post-purchase-resolution.vercel.app/",
+  "at": "2026-08-31T00:06:26.294Z",
+  "passed": 10,
+  "total": 12,
+  "customerControls": [
+    "Damaged",
+    "Wrong Size",
+    "Arrived Late",
+    "↺ Reset scenario"
+  ],
+  "results": [
+    {
+      "name": "https + 200",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "no console errors on load",
+      "pass": false,
+      "detail": [
+        "Failed to load resource: the server responded with a status of 404 ()"
+      ]
+    },
+    {
+      "name": "no debug/simulation panel",
+      "pass": true
+    },
+    {
+      "name": "no \"simulate\" wording in customer UI",
+      "pass": true
+    },
+    {
+      "name": "no \"debug\" wording in customer UI",
+      "pass": true
+    },
+    {
+      "name": "badge reads Active in a WebMCP environment",
+      "pass": true,
+      "detail": "WebMCP Active"
+    },
+    {
+      "name": "initial state is clean",
+      "pass": true,
+      "detail": "ORDER_ACTIVE"
+    },
+    {
+      "name": "all three scenarios reachable",
+      "pass": true,
+      "detail": [
+        "Damaged",
+        "Wrong Size",
+        "Arrived Late"
+      ]
+    },
+    {
+      "name": "merchant options are visible to the customer",
+      "pass": true,
+      "detail": [
+        "Replacement",
+        "Refund",
+        "Keep Item + Partial Refund"
+      ]
+    },
+    {
+      "name": "tools register in a supported WebMCP environment",
+      "pass": true,
+      "detail": [
+        "get_order",
+        "get_resolution_options",
+        "prepare_resolution"
+      ]
+    },
+    {
+      "name": "CUSTOMER CAN START A RESOLUTION UNAIDED",
+      "pass": false,
+      "detail": [
+        "Damaged",
+        "Wrong Size",
+        "Arrived Late",
+        "↺ Reset scenario"
+      ]
+    },
+    {
+      "name": "reset works",
+      "pass": true,
+      "detail": "ORDER_ACTIVE"
+    }
+  ]
+}

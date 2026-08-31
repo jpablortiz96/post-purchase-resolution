@@ -267,7 +267,7 @@ function renderOrder() {
   `;
 }
 
-function optionRow(o, { pickable = false, selected = false } = {}) {
+function optionRow(o, { pickable = false, selected = false, chooseable = false } = {}) {
   const e = o.economicImpact;
   const bits = [];
   if (e.refundToCustomer > 0) bits.push(`${money(e.refundToCustomer, e.currency)} back`);
@@ -275,6 +275,13 @@ function optionRow(o, { pickable = false, selected = false } = {}) {
   if (e.replacementShipped) bits.push('item shipped');
   if (e.customerKeepsItem) bits.push('keeps item');
   bits.push(o.returnRequired ? 'return required' : 'no return');
+
+  const reqs = o.requirements.length
+    ? `<div class="opt-meta">${o.requirements.map(esc).join(' · ')}</div>` : '';
+
+  // A customer must be able to start a resolution without an assistant.
+  const choose = chooseable
+    ? `<div class="opt-action"><button class="btn btn-alt" data-choose="${o.id}">Choose this</button></div>` : '';
 
   return `
     <div class="opt ${pickable ? 'opt--pick' : ''} ${selected ? 'opt--sel' : ''}" ${pickable ? `data-pick="${o.id}"` : ''}>
@@ -284,6 +291,8 @@ function optionRow(o, { pickable = false, selected = false } = {}) {
       </div>
       <div class="opt-recv">${esc(o.customerReceives)}</div>
       <div class="opt-meta">${esc(bits.join(' · '))}</div>
+      ${reqs}
+      ${choose}
     </div>`;
 }
 
@@ -349,12 +358,16 @@ function renderSurface() {
       : '';
 
     const buttons = approved
-      ? `<div class="actions">
-           <button class="btn btn-go" disabled>✓ Approved — waiting for the agent to finalise</button>
+      ? `<div class="approved-note">
+           You approved this. It has not been carried out yet — complete it here,
+           or let your assistant finalise it for you.
+         </div>
+         <div class="actions">
+           <button class="btn btn-go" id="complete">Complete resolution now</button>
            <button class="btn btn-no" id="cancel">Cancel</button>
          </div>`
       : choosing ? '' : `<div class="actions">
-           <button class="btn btn-go" id="approve">✓ Approve</button>
+           <button class="btn btn-go" id="approve">✓ Approve this resolution</button>
            <button class="btn btn-alt" id="choose">Choose another</button>
            <button class="btn btn-no" id="cancel">Cancel</button>
          </div>`;
@@ -389,9 +402,10 @@ function renderSurface() {
   el.innerHTML = `
     <section class="card">
       <div class="head">${cancelled ? 'Resolution cancelled — options still available' : 'Resolutions available under merchant policy'}</div>
-      ${options.map(o => optionRow(o)).join('')}
+      ${options.map(o => optionRow(o, { chooseable: true })).join('')}
       <div class="opt-meta" style="margin-top:12px">
-        An agent can stage one of these for your approval. Nothing is issued until you approve it.
+        Choose one to review it, or ask your assistant to recommend one.
+        Nothing is issued until you approve it.
       </div>
     </section>`;
 }
@@ -462,8 +476,15 @@ function note(actor, action, metadata) {
 }
 
 document.addEventListener('click', (ev) => {
-  const t = ev.target.closest('[data-scenario], [data-pick], button');
+  const t = ev.target.closest('[data-scenario], [data-pick], [data-choose], button');
   if (!t) return;
+
+  // Customer stages a resolution themselves, without an assistant.
+  if (t.dataset.choose) {
+    session.prepare({ resolutionId: t.dataset.choose, reason: null, actor: 'HUMAN' });
+    render();
+    return;
+  }
 
   if (t.dataset.scenario) {
     session.reset(t.dataset.scenario);
@@ -478,6 +499,12 @@ document.addEventListener('click', (ev) => {
   switch (t.id) {
     case 'approve':
       session.approve();
+      render();
+      break;
+    case 'complete':
+      // Same guarded transition the assistant would use: it still requires
+      // HUMAN_APPROVED and a matching resolution id.
+      session.confirm({ resolutionId: session.preparedResolution.option.id, actor: 'HUMAN' });
       render();
       break;
     case 'cancel':
