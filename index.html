@@ -150,10 +150,27 @@
     .opt-action { margin-top:11px; }
     .opt-action .btn { padding:7px 14px; font-size:12.5px; }
 
-    .approved-note {
+    .commit-note {
       margin-top:16px; padding:11px 13px; border-radius:10px; font-size:13px;
-      background:var(--success-glow); border:1px solid rgba(0,184,148,0.22); color:#9fe3cf;
+      background:rgba(253,203,110,0.08); border:1px solid rgba(253,203,110,0.2); color:#f5d9a0;
     }
+
+    /* authority strip — product trust UX, not a debug panel */
+    .authority {
+      display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap;
+    }
+    .auth-card {
+      flex:1 1 230px; padding:13px 15px; border-radius:12px;
+      background:var(--bg-card); border:1px solid var(--border);
+    }
+    .auth-card h3 {
+      font-size:10.5px; font-weight:700; letter-spacing:0.09em; text-transform:uppercase;
+      margin-bottom:6px; display:flex; align-items:center; gap:7px;
+    }
+    .auth-card p { font-size:12.5px; color:var(--text-secondary); line-height:1.5; }
+    .auth-card--agent h3 { color:var(--accent-light); }
+    .auth-card--you h3 { color:var(--success); }
+    .auth-card--you { border-color:rgba(0,184,148,0.25); background:linear-gradient(180deg, rgba(0,184,148,0.06), transparent); }
 
     /* ── decision card (hero) ───────────────────────────── */
     .decision {
@@ -316,6 +333,17 @@
     </section>
 
     <div class="rail" id="rail"></div>
+
+    <section class="authority">
+      <div class="auth-card auth-card--agent">
+        <h3>Your assistant can</h3>
+        <p>Look up your order, compare what this merchant allows, and get one ready for you.</p>
+      </div>
+      <div class="auth-card auth-card--you">
+        <h3>Only you can</h3>
+        <p>Change the choice, or approve and complete it. Nothing is issued until you do.</p>
+      </div>
+    </section>
 
     <section class="card" id="order-card"></section>
 

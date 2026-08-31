@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "webmcp": {
+      "command": "node",
+      "args": ["d:/Post-Purchase Resolution/harness/mcp-webmcp.js"],
+      "env": { "BRIDGE_PORT": "4330" }
+    },
+    "browser": {
+      "command": "node",
+      "args": ["d:/Post-Purchase Resolution/harness/mcp-browser.js"],
+      "env": { "BRIDGE_PORT": "4330" }
+    }
+  }
+}

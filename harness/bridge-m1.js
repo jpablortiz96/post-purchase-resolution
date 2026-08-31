@@ -72,7 +72,7 @@ async function readState() {
       scenario: s.scenario.key,
       orderId: s.order.orderId,
       state: s.state,
-      humanApproved: s.humanApproved,
+      committedBy: s.committedBy,
       preparedResolution: s.preparedResolution ? s.preparedResolution.option.id : null,
       preparedBy: s.preparedResolution ? s.preparedResolution.preparedBy : null,
       agentReasoning: s.preparedResolution ? s.preparedResolution.reason : null,
@@ -80,7 +80,7 @@ async function readState() {
       badge: document.getElementById('badge').textContent.trim(),
       audit: s.audit.map(e => ({ actor: e.actor, action: e.action })),
       decisionCardVisible: !!document.querySelector('.decision'),
-      approveVisible: !!document.getElementById('approve'),
+      commitVisible: !!document.getElementById('commit'),
     };
   });
 }
@@ -216,6 +216,23 @@ async function main() {
         return json(res, 200, snap);
       }
 
+      // Mechanical actuation probe: press a control by id with no user gesture.
+      if (u.pathname === '/browser/click_by_id' && req.method === 'POST') {
+        const b = await readBody(req);
+        const before = await readState();
+        const ok = await page.evaluate((id) => {
+          const el = document.getElementById(id);
+          if (!el || el.offsetParent === null) return false;
+          el.click();
+          return true;
+        }, b.id);
+        await sleep(600);
+        const after = await readState();
+        logEvent({ kind: 'actuation_probe', actor: 'SCRIPT', id: b.id, ok,
+                   stateBefore: before.state, stateAfter: after.state });
+        return json(res, 200, { ok, before, after });
+      }
+
       if (u.pathname === '/browser/click' && req.method === 'POST') {
         const b = await readBody(req);
         const before = await readState();
@@ -247,11 +264,11 @@ async function main() {
       // ── HUMAN SURFACE ──
       if (u.pathname === '/approve' && req.method === 'POST') {
         const before = await readState();
-        const clicked = await clickEl('#approve');
+        const clicked = await clickEl('#commit');
         await sleep(600);
         const after = await readState();
         const tl = await readTools();
-        logEvent({ kind: 'human_approval', actor: 'HUMAN', control: '#approve', clicked,
+        logEvent({ kind: 'customer_commit', actor: 'CUSTOMER', control: '#commit', clicked,
                    stateBefore: before.state, stateAfter: after.state,
                    toolsAfter: Array.isArray(tl) ? tl.map(t => t.name) : tl });
         return json(res, 200, { clicked, before, after, toolsAfter: Array.isArray(tl) ? tl.map(t => t.name) : tl });
