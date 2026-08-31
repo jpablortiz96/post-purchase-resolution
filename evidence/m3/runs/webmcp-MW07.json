@@ -1,0 +1,118 @@
+{
+  "runId": "webmcp-MW07",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "MW07",
+  "scenario": "wrong_variant",
+  "prompt": "Wrong size. I'd rather have credit to spend here than cash back, assuming it's worth more.",
+  "profile": {
+    "goal": "maximise_value_staying_with_merchant",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "store_credit",
+    "acceptable": [
+      "store_credit"
+    ],
+    "unacceptable": [
+      "refund"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": true,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:57:27.215Z",
+  "turns": [
+    {
+      "prompt": "Wrong size. I'd rather have credit to spend here than cash back, assuming it's worth more.",
+      "fromProfile": false,
+      "durationMs": 19689,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        },
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "store_credit",
+            "reason": "Customer prefers store credit over a cash refund, and store credit ($105) is worth more than the refund amount ($96) for this order."
+          }
+        }
+      ],
+      "finalText": "I've staged the **Store Credit** option for you:\n\n- **You receive:** $105.00 in store credit (vs. $96.00 if you took a cash refund)\n- **Availability:** Immediate\n- **Requirement:** Return the Size 8 pair (prepaid return label included)\n\nThis is just staged for your review — you'll need to go into the page and confirm/complete it yourself to finalize. Let me know if you'd like anything changed first.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "1b57e5c8-9dbb-4658-ba81-c3860af4a4a7",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 22138,
+  "preparedResolution": "store_credit",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Customer prefers store credit over a cash refund, and store credit ($105) is worth more than the refund amount ($96) for this order.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:57:50.382Z",
+  "msTotal": 23167,
+  "msToCompleted": 23167,
+  "finalState": "RESOLVED",
+  "resolutionResult": "SC-2087",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #2087 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Store Credit"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Store Credit"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created SC-2087"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "store_credit",
+        "reason": "Customer prefers store credit over a cash refund, and store credit ($105) is worth more than the refund amount ($96) for this order."
+      }
+    }
+  ],
+  "timedOut": false
+}

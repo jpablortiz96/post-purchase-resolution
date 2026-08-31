@@ -1,0 +1,112 @@
+{
+  "runId": "baseline-MW07",
+  "milestone": "M3",
+  "mode": "baseline",
+  "intentId": "MW07",
+  "scenario": "wrong_variant",
+  "prompt": "Wrong size. I'd rather have credit to spend here than cash back, assuming it's worth more.",
+  "profile": {
+    "goal": "maximise_value_staying_with_merchant",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "store_credit",
+    "acceptable": [
+      "store_credit"
+    ],
+    "unacceptable": [
+      "refund"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": true,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:56:54.140Z",
+  "turns": [
+    {
+      "prompt": "Wrong size. I'd rather have credit to spend here than cash back, assuming it's worth more.",
+      "fromProfile": false,
+      "durationMs": 17705,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__browser__click",
+        "mcp__browser__read_page"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__browser__read_page",
+          "input": {}
+        },
+        {
+          "name": "mcp__browser__click",
+          "input": {
+            "ref": "c6"
+          }
+        }
+      ],
+      "finalText": "I've prepared the **Store Credit** option for you:\n\n- **You receive:** $105.00 in store credit (vs. $96.00 cash refund)\n- **Timing:** Available immediately\n- **Requirement:** Return the Size 8 pair (prepaid label included)\n\nNothing has been issued yet — it's sitting there for your review. If this looks right, click **\"✓ Approve & complete\"** to finalize it, or let me know if you'd like to change the choice or cancel.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "a1f6d749-1973-46fe-8fed-661752878806",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 20150,
+  "preparedResolution": "store_credit",
+  "preparedBy": "CUSTOMER",
+  "agentReasoning": null,
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:57:15.317Z",
+  "msTotal": 21177,
+  "msToCompleted": 21177,
+  "finalState": "RESOLVED",
+  "resolutionResult": "SC-2087",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "CUSTOMER",
+      "action": "Prepared Store Credit"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Store Credit"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created SC-2087"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "read_page",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "click",
+      "ok": true,
+      "args": {
+        "ref": "c6"
+      }
+    }
+  ],
+  "timedOut": false
+}

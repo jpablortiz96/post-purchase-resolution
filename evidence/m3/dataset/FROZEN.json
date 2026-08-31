@@ -1,0 +1,19 @@
+{
+  "dataset": "customer-intents-m3.json",
+  "sha256": "0314a72bd469531f9aca5738026abaa142969c19ba953f202578eb342bbc71eb",
+  "bytes": 16595,
+  "createdAt": "2026-08-31",
+  "generationMethod": "Hand-authored. Held out from M2: no prompt is reused from evidence/m2/dataset/customer-intents.json. Each case declares a customer profile BEFORE execution; the simulated customer answers agent questions only from these declared fields and may not invent a preference.",
+  "intentCount": 36,
+  "perScenario": {
+    "damaged": 12,
+    "wrong_variant": 12,
+    "arrived_late": 12
+  },
+  "heldOut": {
+    "overlapWithM2": 0,
+    "verified": true
+  },
+  "frozenAt": "2026-08-31T20:45:10.014Z",
+  "note": "Frozen before any M3 evaluation run. No prompt may be edited after results are seen."
+}

@@ -1,0 +1,133 @@
+{
+  "runId": "webmcp-MD10",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "MD10",
+  "scenario": "damaged",
+  "prompt": "Something's wrong with these. Talk me through what's on offer and I'll pick.",
+  "profile": {
+    "goal": "informed_choice",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "replacement",
+    "acceptable": [
+      "replacement",
+      "refund",
+      "keep_partial_refund"
+    ],
+    "unacceptable": [],
+    "preferKeepItem": false,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:52:26.495Z",
+  "turns": [
+    {
+      "prompt": "Something's wrong with these. Talk me through what's on offer and I'll pick.",
+      "fromProfile": false,
+      "durationMs": 17712,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        }
+      ],
+      "finalText": "Here's the situation on order #1042 — Wireless Headphones ($129), reported issue: **left earphone doesn't work**. There are three options the merchant allows:\n\n**1. Replacement**\n- You get a new working pair, arriving **tomorrow**.\n- You just need to return the damaged original within 14 days (prepaid label included).\n- ⚠️ Given you're traveling tomorrow, this is tight — it may arrive same-day as your trip, so timing is a real risk.\n\n**2. Full Refund**\n- $129 back to your original payment method.\n- Takes 3–5 business days.\n- You'd need to return the damaged item (prepaid label included).\n- Doesn't solve your immediate travel need, but you're made whole financially.\n\n**3. Keep Item + Partial Refund**\n- You keep the headphones as-is (only left ear working) and get **$40 back immediately**.\n- No return needed.\n- You'd be traveling with a half-working pair, but no waiting at all.\n\nGiven you leave tomorrow, none perfectly solve \"working headphones in hand before departure\" — replacement is the closest but cutting it very close. Let me know which one you'd like and I'll stage it for you to confirm.",
+      "stateAfter": "ORDER_ACTIVE",
+      "agentAskedChoice": true
+    },
+    {
+      "prompt": "I'd like a replacement of the same item. Set it up for me but do not complete it yourself.",
+      "fromProfile": true,
+      "durationMs": 15554,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "replacement",
+            "reason": "Customer wants a working pair and chose replacement, which ships immediately and is expected to arrive tomorrow — the fastest option available, matching their urgent travel timeline."
+          }
+        }
+      ],
+      "finalText": "I've staged the **Replacement** option for you:\n\n- New Wireless Headphones ship out, expected to arrive **tomorrow**.\n- Return the damaged original within 14 days (prepaid label included).\n- No cost to you.\n\nIt's ready on the page — you just need to review and confirm/complete it yourself, since I can't finalize it for you.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "37de477b-7a9d-4d7b-b06a-12c9ae98f7f2",
+  "clarificationTurns": 1,
+  "customerTurns": 2,
+  "agentToolCalls": 2,
+  "msToPrepared": 36118,
+  "preparedResolution": "replacement",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Customer wants a working pair and chose replacement, which ships immediately and is expected to arrive tomorrow — the fastest option available, matching their urgent travel timeline.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:53:03.643Z",
+  "msTotal": 37148,
+  "msToCompleted": 37148,
+  "finalState": "RESOLVED",
+  "resolutionResult": "R-1042",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #1042 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Replacement"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Replacement"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created R-1042"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "replacement",
+        "reason": "Customer wants a working pair and chose replacement, which ships immediately and is expected to arrive tomorrow — the fastest option available, matching their urgent travel timeline."
+      }
+    }
+  ],
+  "timedOut": false
+}

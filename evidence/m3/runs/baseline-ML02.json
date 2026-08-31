@@ -1,0 +1,113 @@
+{
+  "runId": "baseline-ML02",
+  "milestone": "M3",
+  "mode": "baseline",
+  "intentId": "ML02",
+  "scenario": "arrived_late",
+  "prompt": "Arrived two days late and the moment has passed. I'd rather have cash than credit, but I'm keeping the item.",
+  "profile": {
+    "goal": "keep_item_cash_compensation",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "keep_shipping_refund",
+    "acceptable": [
+      "keep_shipping_refund"
+    ],
+    "unacceptable": [
+      "return_refund",
+      "keep_store_credit"
+    ],
+    "preferKeepItem": true,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T21:00:14.848Z",
+  "turns": [
+    {
+      "prompt": "Arrived two days late and the moment has passed. I'd rather have cash than credit, but I'm keeping the item.",
+      "fromProfile": false,
+      "durationMs": 18040,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__browser__click",
+        "mcp__browser__read_page"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__browser__read_page",
+          "input": {}
+        },
+        {
+          "name": "mcp__browser__click",
+          "input": {
+            "ref": "c5"
+          }
+        }
+      ],
+      "finalText": "I've prepared the **Keep Item + Shipping Refund** option for Order #3155:\n\n- **You get:** $12.00 refunded to your original payment method (cash, not credit)\n- **You keep:** the item, no return required\n- **Timing:** processed immediately\n\nNothing has been issued yet — it's sitting there ready for your review. If this looks right, click **\"✓ Approve & complete\"** and I can do that for you, or let me know if you'd like to change the choice or cancel instead.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "a7ad4153-9547-4922-abd8-1dda27d65e86",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 20480,
+  "preparedResolution": "keep_shipping_refund",
+  "preparedBy": "CUSTOMER",
+  "agentReasoning": null,
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T21:00:36.344Z",
+  "msTotal": 21496,
+  "msToCompleted": 21496,
+  "finalState": "RESOLVED",
+  "resolutionResult": "SR-3155",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "CUSTOMER",
+      "action": "Prepared Keep Item + Shipping Refund"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Keep Item + Shipping Refund"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created SR-3155"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "read_page",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "click",
+      "ok": true,
+      "args": {
+        "ref": "c5"
+      }
+    }
+  ],
+  "timedOut": false
+}

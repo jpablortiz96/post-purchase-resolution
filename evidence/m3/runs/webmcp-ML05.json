@@ -1,0 +1,119 @@
+{
+  "runId": "webmcp-ML05",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "ML05",
+  "scenario": "arrived_late",
+  "prompt": "You missed the promised date by two days. I'll keep it, but I want something for the inconvenience. Cash if possible.",
+  "profile": {
+    "goal": "keep_item_cash_compensation",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "keep_shipping_refund",
+    "acceptable": [
+      "keep_shipping_refund"
+    ],
+    "unacceptable": [
+      "return_refund",
+      "keep_store_credit"
+    ],
+    "preferKeepItem": true,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T21:02:12.516Z",
+  "turns": [
+    {
+      "prompt": "You missed the promised date by two days. I'll keep it, but I want something for the inconvenience. Cash if possible.",
+      "fromProfile": false,
+      "durationMs": 21956,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        },
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "keep_shipping_refund",
+            "reason": "Order arrived 2 days after the promised date; customer wants to keep the item but requested cash compensation for the delay. This is the only cash-back option available under policy for a kept item."
+          }
+        }
+      ],
+      "finalText": "I've staged the **Keep Item + Shipping Refund** option for you: keep the item and get **$12.00 refunded to your original payment method**, processed immediately, no return needed.\n\nYou'll see it ready on the page — just complete/confirm it there to finalize it. Let me know if you'd rather go with the store credit option instead.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "bfabc762-55ba-43c1-9e56-f5ff5c2fbc2f",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 24431,
+  "preparedResolution": "keep_shipping_refund",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Order arrived 2 days after the promised date; customer wants to keep the item but requested cash compensation for the delay. This is the only cash-back option available under policy for a kept item.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T21:02:37.975Z",
+  "msTotal": 25459,
+  "msToCompleted": 25459,
+  "finalState": "RESOLVED",
+  "resolutionResult": "SR-3155",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #3155 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Keep Item + Shipping Refund"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Keep Item + Shipping Refund"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created SR-3155"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "keep_shipping_refund",
+        "reason": "Order arrived 2 days after the promised date; customer wants to keep the item but requested cash compensation for the delay. This is the only cash-back option available under policy for a kept item."
+      }
+    }
+  ],
+  "timedOut": false
+}

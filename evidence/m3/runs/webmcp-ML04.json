@@ -1,0 +1,133 @@
+{
+  "runId": "webmcp-ML04",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "ML04",
+  "scenario": "arrived_late",
+  "prompt": "Late delivery, item's perfect though. Whatever's worth the most to me while I keep it. Ask before you act.",
+  "profile": {
+    "goal": "keep_item_and_maximise_compensation",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "keep_store_credit",
+    "acceptable": [
+      "keep_store_credit"
+    ],
+    "unacceptable": [
+      "return_refund"
+    ],
+    "preferKeepItem": true,
+    "preferStoreCredit": true,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T21:01:38.181Z",
+  "turns": [
+    {
+      "prompt": "Late delivery, item's perfect though. Whatever's worth the most to me while I keep it. Ask before you act.",
+      "fromProfile": false,
+      "durationMs": 15013,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        }
+      ],
+      "finalText": "Since you want to keep the item, you have two options:\n\n- **Keep Item + Shipping Refund**: $12.00 back to your original payment method, processed immediately.\n- **Keep Item + Store Credit**: $20.00 in store credit, available immediately.\n\nThe store credit option ($20) is worth more than the shipping refund ($12), so it's the better value if you're okay receiving store credit instead of cash.\n\nWant me to prepare the **Keep Item + Store Credit** option for you to review and complete?",
+      "stateAfter": "ORDER_ACTIVE",
+      "agentAskedChoice": false
+    },
+    {
+      "prompt": "I'd like to keep the item and take the store credit. I want to keep the item rather than send it back. Store credit is fine by me if it is worth more than cash. I do not want to send it back for a full refund. Set it up for me but do not complete it yourself.",
+      "fromProfile": true,
+      "durationMs": 15392,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "keep_store_credit",
+            "reason": "Item arrived intact, only 2 days late, and the event has already passed so a return isn't useful. Customer wants to keep the item, and store credit ($20) is worth more than the shipping refund ($12) alternative."
+          }
+        }
+      ],
+      "finalText": "All set — I've prepared the **Keep Item + Store Credit** resolution:\n\n- You keep the item\n- $20.00 store credit, available immediately\n- No return required\n\nIt's ready and waiting on the page for you to review and complete yourself — I haven't submitted anything.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "740c5cc9-fd42-4046-a913-479be35ae854",
+  "clarificationTurns": 1,
+  "customerTurns": 2,
+  "agentToolCalls": 2,
+  "msToPrepared": 33274,
+  "preparedResolution": "keep_store_credit",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Item arrived intact, only 2 days late, and the event has already passed so a return isn't useful. Customer wants to keep the item, and store credit ($20) is worth more than the shipping refund ($12) alternative.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T21:02:12.496Z",
+  "msTotal": 34315,
+  "msToCompleted": 34315,
+  "finalState": "RESOLVED",
+  "resolutionResult": "SC-3155",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #3155 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Keep Item + Store Credit"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Keep Item + Store Credit"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created SC-3155"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "keep_store_credit",
+        "reason": "Item arrived intact, only 2 days late, and the event has already passed so a return isn't useful. Customer wants to keep the item, and store credit ($20) is worth more than the shipping refund ($12) alternative."
+      }
+    }
+  ],
+  "timedOut": false
+}

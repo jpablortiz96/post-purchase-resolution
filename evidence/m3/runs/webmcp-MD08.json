@@ -1,0 +1,134 @@
+{
+  "runId": "webmcp-MD08",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "MD08",
+  "scenario": "damaged",
+  "prompt": "Left bud is dead and I leave first thing tomorrow. If a new pair can't get here in time, tell me and we'll do something else.",
+  "profile": {
+    "goal": "working_product_before_travel",
+    "urgency": "high",
+    "maxWaitDays": 1,
+    "preferred": "replacement",
+    "acceptable": [
+      "replacement",
+      "keep_partial_refund"
+    ],
+    "unacceptable": [
+      "refund"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:51:29.677Z",
+  "turns": [
+    {
+      "prompt": "Left bud is dead and I leave first thing tomorrow. If a new pair can't get here in time, tell me and we'll do something else.",
+      "fromProfile": false,
+      "durationMs": 15818,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        }
+      ],
+      "finalText": "Good news — a replacement can actually make it in time: it's set to **arrive tomorrow**, before you leave.\n\nHere are your options:\n\n1. **Replacement** – New headphones arrive tomorrow. You just return the damaged pair within 14 days (prepaid label included). ✅ Fits your deadline.\n2. **Refund** – Full $129 back, but takes 3–5 business days and requires returning the item. Won't help before you leave.\n3. **Keep + Partial Refund** – Keep the broken headphones as-is and get $40 back immediately, no return needed.\n\nSince you're traveling tomorrow and need working headphones, the **replacement** seems like the best fit — want me to stage that one for you?",
+      "stateAfter": "ORDER_ACTIVE",
+      "agentAskedChoice": false
+    },
+    {
+      "prompt": "I'd like a replacement of the same item. I do not want my money back. It needs to work within about 1 day. Set it up for me but do not complete it yourself.",
+      "fromProfile": true,
+      "durationMs": 15360,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "replacement",
+            "reason": "Customer travels tomorrow and needs working headphones by then. Replacement ships to arrive tomorrow, meeting the deadline, and keeps them with the same product rather than a refund."
+          }
+        }
+      ],
+      "finalText": "I've staged the **Replacement** option for you — it's set to arrive tomorrow, before your trip. Just review and confirm it on the page yourself to complete it (I can't finalize it on your behalf). Once confirmed, you'll get a prepaid label to return the damaged pair within 14 days. Safe travels!",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "1cfbed3a-f074-4137-b992-2b59927e39b4",
+  "clarificationTurns": 1,
+  "customerTurns": 2,
+  "agentToolCalls": 2,
+  "msToPrepared": 34018,
+  "preparedResolution": "replacement",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Customer travels tomorrow and needs working headphones by then. Replacement ships to arrive tomorrow, meeting the deadline, and keeps them with the same product rather than a refund.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:52:04.727Z",
+  "msTotal": 35050,
+  "msToCompleted": 35050,
+  "finalState": "RESOLVED",
+  "resolutionResult": "R-1042",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #1042 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Replacement"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Replacement"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created R-1042"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "replacement",
+        "reason": "Customer travels tomorrow and needs working headphones by then. Replacement ships to arrive tomorrow, meeting the deadline, and keeps them with the same product rather than a refund."
+      }
+    }
+  ],
+  "timedOut": false
+}

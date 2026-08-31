@@ -1,0 +1,147 @@
+{
+  "runId": "webmcp-ML06",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "ML06",
+  "scenario": "arrived_late",
+  "prompt": "Came late for the occasion. Walk me through what's available and I'll choose.",
+  "profile": {
+    "goal": "informed_choice",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "keep_store_credit",
+    "acceptable": [
+      "keep_store_credit",
+      "keep_shipping_refund",
+      "return_refund"
+    ],
+    "unacceptable": [],
+    "preferKeepItem": false,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T21:02:37.983Z",
+  "turns": [
+    {
+      "prompt": "Came late for the occasion. Walk me through what's available and I'll choose.",
+      "fromProfile": false,
+      "durationMs": 16596,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        }
+      ],
+      "finalText": "Sorry the Birthday Gift ($74) missed the date — it arrived Aug 28, two days after the Aug 26 promise. Since the item itself is fine, here's what you can choose from:\n\n1. **Return + Refund** – Send the item back (prepaid label included) and get the full **$74 refunded** to your original payment method. Takes 3–5 business days.\n2. **Keep Item + Shipping Refund** – Keep the gift as-is and get **$12 back** immediately, no return needed.\n3. **Keep Item + Store Credit** – Keep the gift and get **$20 in store credit**, available immediately.\n\nLet me know which one you'd like, and I'll set it up for you to confirm.",
+      "stateAfter": "ORDER_ACTIVE",
+      "agentAskedChoice": true
+    },
+    {
+      "prompt": "I'd like to keep the item and take the store credit. I would rather have actual money than credit. Set it up for me but do not complete it yourself.",
+      "fromProfile": true,
+      "durationMs": 16819,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [],
+      "finalText": "Just to make sure I set up the right one — you said you'd like the store credit option, but also mentioned you'd rather have actual money than credit. Those point to different options:\n\n- **Keep Item + Shipping Refund**: keep the gift, get **$12 real cash** back immediately.\n- **Keep Item + Store Credit**: keep the gift, get **$20 in store credit** (not cash).\n\nSince you said you prefer actual money, would you like me to prepare the **$12 cash refund** instead, or did you still want to go with the **$20 store credit**?",
+      "stateAfter": "ORDER_ACTIVE",
+      "agentAskedChoice": true
+    },
+    {
+      "prompt": "To be clear: I'd like to keep the item and take the store credit. I would rather have actual money than credit. Set it up for me but do not complete it yourself.",
+      "fromProfile": true,
+      "durationMs": 17314,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "keep_store_credit",
+            "reason": "Customer confirmed they want to keep the item and receive the $20 store credit, despite noting a general preference for cash over credit."
+          }
+        }
+      ],
+      "finalText": "Got it — I've prepared the **Keep Item + Store Credit** resolution ($20 store credit, no return needed, available immediately). It's ready and waiting on the page, but as requested I haven't completed it. You'll need to review and confirm it yourself when you're ready.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "4241ca72-a1ad-4bf5-b45f-c2b50ed156d2",
+  "clarificationTurns": 2,
+  "customerTurns": 3,
+  "agentToolCalls": 2,
+  "msToPrepared": 54004,
+  "preparedResolution": "keep_store_credit",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Customer confirmed they want to keep the item and receive the $20 store credit, despite noting a general preference for cash over credit.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T21:03:33.023Z",
+  "msTotal": 55040,
+  "msToCompleted": 55040,
+  "finalState": "RESOLVED",
+  "resolutionResult": "SC-3155",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #3155 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Keep Item + Store Credit"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Keep Item + Store Credit"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created SC-3155"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "keep_store_credit",
+        "reason": "Customer confirmed they want to keep the item and receive the $20 store credit, despite noting a general preference for cash over credit."
+      }
+    }
+  ],
+  "timedOut": false
+}

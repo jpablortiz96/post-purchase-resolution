@@ -1,0 +1,113 @@
+{
+  "runId": "baseline-MD08",
+  "milestone": "M3",
+  "mode": "baseline",
+  "intentId": "MD08",
+  "scenario": "damaged",
+  "prompt": "Left bud is dead and I leave first thing tomorrow. If a new pair can't get here in time, tell me and we'll do something else.",
+  "profile": {
+    "goal": "working_product_before_travel",
+    "urgency": "high",
+    "maxWaitDays": 1,
+    "preferred": "replacement",
+    "acceptable": [
+      "replacement",
+      "keep_partial_refund"
+    ],
+    "unacceptable": [
+      "refund"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:51:49.675Z",
+  "turns": [
+    {
+      "prompt": "Left bud is dead and I leave first thing tomorrow. If a new pair can't get here in time, tell me and we'll do something else.",
+      "fromProfile": false,
+      "durationMs": 17622,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__browser__click",
+        "mcp__browser__read_page"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__browser__read_page",
+          "input": {}
+        },
+        {
+          "name": "mcp__browser__click",
+          "input": {
+            "ref": "c4"
+          }
+        }
+      ],
+      "finalText": "I've prepared the **Replacement** option for order #1042:\n\n- New Wireless Headphones shipped at no charge\n- **Arrives tomorrow** — before your trip ✅\n- Return of the damaged original required within 14 days (prepaid label included)\n\nNothing has been submitted yet — this is just staged for your review. If it looks right, click **\"✓ Approve & complete\"** to finalize it. Want me to go ahead and approve it, or would you rather review/change it first?",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "5fb4f23b-a9f9-4e10-8311-9e42c9e34480",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 20066,
+  "preparedResolution": "replacement",
+  "preparedBy": "CUSTOMER",
+  "agentReasoning": null,
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:52:10.779Z",
+  "msTotal": 21104,
+  "msToCompleted": 21104,
+  "finalState": "RESOLVED",
+  "resolutionResult": "R-1042",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "CUSTOMER",
+      "action": "Prepared Replacement"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Replacement"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created R-1042"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "read_page",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "click",
+      "ok": true,
+      "args": {
+        "ref": "c4"
+      }
+    }
+  ],
+  "timedOut": false
+}

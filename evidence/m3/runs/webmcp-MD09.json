@@ -1,0 +1,119 @@
+{
+  "runId": "webmcp-MD09",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "MD09",
+  "scenario": "damaged",
+  "prompt": "Broken headphones. Money back please, I'll buy elsewhere. Nothing final until I say.",
+  "profile": {
+    "goal": "money_back",
+    "urgency": "medium",
+    "maxWaitDays": 7,
+    "preferred": "refund",
+    "acceptable": [
+      "refund"
+    ],
+    "unacceptable": [
+      "replacement",
+      "keep_partial_refund"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:52:04.741Z",
+  "turns": [
+    {
+      "prompt": "Broken headphones. Money back please, I'll buy elsewhere. Nothing final until I say.",
+      "fromProfile": false,
+      "durationMs": 18265,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        },
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "refund",
+            "reason": "Customer's headphones arrived damaged (left earphone not working) and they'd prefer to buy elsewhere rather than wait for a replacement, so a full refund of $129 is the best fit."
+          }
+        }
+      ],
+      "finalText": "Here's what I found and prepared for your order (Wireless Headphones, $129):\n\n**Refund — prepared, not yet submitted**\n- You get: $129.00 refunded to your original payment method\n- Timing: 3–5 business days\n- Requirement: Return the original item (a prepaid return label is included)\n\nNothing has been finalized — this is just staged for your review. When you're ready, you'll need to confirm/complete it yourself on the page. Let me know if you'd like any changes first.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "670d8c0e-b14e-4480-ad68-be568d7797bc",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 20724,
+  "preparedResolution": "refund",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Customer's headphones arrived damaged (left earphone not working) and they'd prefer to buy elsewhere rather than wait for a replacement, so a full refund of $129 is the best fit.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:52:26.493Z",
+  "msTotal": 21752,
+  "msToCompleted": 21752,
+  "finalState": "RESOLVED",
+  "resolutionResult": "RF-1042",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #1042 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Refund"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Refund"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created RF-1042"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "refund",
+        "reason": "Customer's headphones arrived damaged (left earphone not working) and they'd prefer to buy elsewhere rather than wait for a replacement, so a full refund of $129 is the best fit."
+      }
+    }
+  ],
+  "timedOut": false
+}

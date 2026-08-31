@@ -1,0 +1,118 @@
+{
+  "runId": "webmcp-ML07",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "ML07",
+  "scenario": "arrived_late",
+  "prompt": "Two days late for a birthday. I shop here often so credit works fine for me, as long as it's the better deal.",
+  "profile": {
+    "goal": "keep_item_and_maximise_compensation",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "keep_store_credit",
+    "acceptable": [
+      "keep_store_credit"
+    ],
+    "unacceptable": [
+      "return_refund"
+    ],
+    "preferKeepItem": true,
+    "preferStoreCredit": true,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T21:03:33.033Z",
+  "turns": [
+    {
+      "prompt": "Two days late for a birthday. I shop here often so credit works fine for me, as long as it's the better deal.",
+      "fromProfile": false,
+      "durationMs": 19210,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        },
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "keep_store_credit",
+            "reason": "Item arrived intact, just 2 days late for the birthday — customer is keeping the item and prefers store credit since they shop here often. Store credit ($20) is the higher-value option compared to the shipping refund ($12)."
+          }
+        }
+      ],
+      "finalText": "I've prepared the **Keep Item + Store Credit** option ($20.00) for order #3155 — no return needed, available immediately. This is the best value compared to the $12 shipping refund alternative.\n\nI can't finalize it for you — you'll need to confirm/complete it on the page yourself. Let me know if you'd like anything else!",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "4f002e35-e878-4184-8125-33ecee356f38",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 21659,
+  "preparedResolution": "keep_store_credit",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Item arrived intact, just 2 days late for the birthday — customer is keeping the item and prefers store credit since they shop here often. Store credit ($20) is the higher-value option compared to the shipping refund ($12).",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T21:03:55.716Z",
+  "msTotal": 22683,
+  "msToCompleted": 22683,
+  "finalState": "RESOLVED",
+  "resolutionResult": "SC-3155",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #3155 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Keep Item + Store Credit"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Keep Item + Store Credit"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created SC-3155"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "keep_store_credit",
+        "reason": "Item arrived intact, just 2 days late for the birthday — customer is keeping the item and prefers store credit since they shop here often. Store credit ($20) is the higher-value option compared to the shipping refund ($12)."
+      }
+    }
+  ],
+  "timedOut": false
+}

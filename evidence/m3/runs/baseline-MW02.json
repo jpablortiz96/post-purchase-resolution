@@ -1,0 +1,113 @@
+{
+  "runId": "baseline-MW02",
+  "milestone": "M3",
+  "mode": "baseline",
+  "intentId": "MW02",
+  "scenario": "wrong_variant",
+  "prompt": "Wrong size arrived. I've gone off the idea, just refund me.",
+  "profile": {
+    "goal": "money_back",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "refund",
+    "acceptable": [
+      "refund"
+    ],
+    "unacceptable": [
+      "exchange",
+      "store_credit"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:54:46.161Z",
+  "turns": [
+    {
+      "prompt": "Wrong size arrived. I've gone off the idea, just refund me.",
+      "fromProfile": false,
+      "durationMs": 16444,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__browser__click",
+        "mcp__browser__read_page"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__browser__read_page",
+          "input": {}
+        },
+        {
+          "name": "mcp__browser__click",
+          "input": {
+            "ref": "c5"
+          }
+        }
+      ],
+      "finalText": "I've set up the refund for Order #2087 (Running Shoes, $96.00):\n\n- **Refund:** $96.00 back to your original payment method\n- **Timing:** 3–5 business days\n- **Requirement:** Return the Size 8 pair (prepaid return label included)\n\nNothing has been issued yet — this is only prepared. Since only you can finalize it, let me know if you'd like me to click **\"✓ Approve & complete\"**, or if you'd rather review/change anything first.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "49d27156-a757-443e-9e45-cd1ddbcf5a15",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 18906,
+  "preparedResolution": "refund",
+  "preparedBy": "CUSTOMER",
+  "agentReasoning": null,
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:55:06.093Z",
+  "msTotal": 19932,
+  "msToCompleted": 19932,
+  "finalState": "RESOLVED",
+  "resolutionResult": "RF-2087",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "CUSTOMER",
+      "action": "Prepared Refund"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Refund"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created RF-2087"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "read_page",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "click",
+      "ok": true,
+      "args": {
+        "ref": "c5"
+      }
+    }
+  ],
+  "timedOut": false
+}

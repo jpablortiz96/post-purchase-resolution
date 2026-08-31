@@ -1,0 +1,119 @@
+{
+  "runId": "webmcp-MW04",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "MW04",
+  "scenario": "wrong_variant",
+  "prompt": "These are the wrong size. Get me the correct pair. Don't finalise without checking with me.",
+  "profile": {
+    "goal": "correct_variant",
+    "urgency": "medium",
+    "maxWaitDays": 4,
+    "preferred": "exchange",
+    "acceptable": [
+      "exchange"
+    ],
+    "unacceptable": [
+      "refund",
+      "store_credit"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:55:45.440Z",
+  "turns": [
+    {
+      "prompt": "These are the wrong size. Get me the correct pair. Don't finalise without checking with me.",
+      "fromProfile": false,
+      "durationMs": 20476,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        },
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "exchange",
+            "reason": "Customer received the wrong size (8 instead of 9) and needs correct shoes for an event in 3 days. Exchange for Size 9 is in stock and arrives in 2 days, which meets the deadline, at no additional cost."
+          }
+        }
+      ],
+      "finalText": "I've staged the **Exchange** for Size 9 (arrives in 2 days, no extra cost, prepaid return label for the Size 8 pair). It's ready but **not finalized** — you'll need to confirm/complete it yourself on the page.\n\nLet me know if you'd rather go with the refund or store credit instead, or if you're good to proceed with the exchange as staged.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "ca64e42a-d84e-482b-8cd5-a1ab2fe5271a",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 22932,
+  "preparedResolution": "exchange",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Customer received the wrong size (8 instead of 9) and needs correct shoes for an event in 3 days. Exchange for Size 9 is in stock and arrives in 2 days, which meets the deadline, at no additional cost.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:56:09.398Z",
+  "msTotal": 23958,
+  "msToCompleted": 23958,
+  "finalState": "RESOLVED",
+  "resolutionResult": "X-2087",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #2087 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Exchange"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Exchange"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created X-2087"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "exchange",
+        "reason": "Customer received the wrong size (8 instead of 9) and needs correct shoes for an event in 3 days. Exchange for Size 9 is in stock and arrives in 2 days, which meets the deadline, at no additional cost."
+      }
+    }
+  ],
+  "timedOut": false
+}

@@ -1,0 +1,112 @@
+{
+  "runId": "baseline-ML07",
+  "milestone": "M3",
+  "mode": "baseline",
+  "intentId": "ML07",
+  "scenario": "arrived_late",
+  "prompt": "Two days late for a birthday. I shop here often so credit works fine for me, as long as it's the better deal.",
+  "profile": {
+    "goal": "keep_item_and_maximise_compensation",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "keep_store_credit",
+    "acceptable": [
+      "keep_store_credit"
+    ],
+    "unacceptable": [
+      "return_refund"
+    ],
+    "preferKeepItem": true,
+    "preferStoreCredit": true,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T21:02:49.596Z",
+  "turns": [
+    {
+      "prompt": "Two days late for a birthday. I shop here often so credit works fine for me, as long as it's the better deal.",
+      "fromProfile": false,
+      "durationMs": 21468,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__browser__click",
+        "mcp__browser__read_page"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__browser__read_page",
+          "input": {}
+        },
+        {
+          "name": "mcp__browser__click",
+          "input": {
+            "ref": "c6"
+          }
+        }
+      ],
+      "finalText": "I compared the two \"keep the item\" options since you don't need to return anything either way:\n\n- **Keep Item + Shipping Refund**: $12.00 cash\n- **Keep Item + Store Credit**: $20.00 credit ✅ better deal\n\n(The Return + Refund option pays $74, but that requires shipping the gift back, which doesn't make sense for a gift you're keeping.)\n\nI've prepared **Keep Item + Store Credit ($20.00)** on order #3155. Nothing has been issued yet — it's sitting in \"Ready for you\" status. Click **\"✓ Approve & complete\"** whenever you're ready to finalize it, or let me know if you'd like to change the choice.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "25cf0689-2789-4648-8a70-82d227b889dd",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 23936,
+  "preparedResolution": "keep_store_credit",
+  "preparedBy": "CUSTOMER",
+  "agentReasoning": null,
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T21:03:14.568Z",
+  "msTotal": 24972,
+  "msToCompleted": 24972,
+  "finalState": "RESOLVED",
+  "resolutionResult": "SC-3155",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "CUSTOMER",
+      "action": "Prepared Keep Item + Store Credit"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Keep Item + Store Credit"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created SC-3155"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "read_page",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "click",
+      "ok": true,
+      "args": {
+        "ref": "c6"
+      }
+    }
+  ],
+  "timedOut": false
+}

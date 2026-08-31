@@ -1,0 +1,134 @@
+{
+  "runId": "webmcp-MD07",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "MD07",
+  "scenario": "damaged",
+  "prompt": "Damaged on arrival. I've lost confidence in the product, I want out entirely. Ask me first.",
+  "profile": {
+    "goal": "exit_entirely",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "refund",
+    "acceptable": [
+      "refund"
+    ],
+    "unacceptable": [
+      "replacement",
+      "keep_partial_refund"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:50:56.183Z",
+  "turns": [
+    {
+      "prompt": "Damaged on arrival. I've lost confidence in the product, I want out entirely. Ask me first.",
+      "fromProfile": false,
+      "durationMs": 14177,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        }
+      ],
+      "finalText": "Since you want out entirely — not a replacement, just your money back — the **Refund** option fits best:\n\n- **You receive:** $129.00 (full price) refunded to your original payment method\n- **Timing:** 3–5 business days\n- **Requirement:** Return the original item (prepaid return label included)\n\nWant me to prepare this refund resolution for you to review and complete?",
+      "stateAfter": "ORDER_ACTIVE",
+      "agentAskedChoice": false
+    },
+    {
+      "prompt": "I'd like my money back. I do not want a replacement of the same item, or to keep the item and take the partial refund. Set it up for me but do not complete it yourself.",
+      "fromProfile": true,
+      "durationMs": 15410,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "refund",
+            "reason": "Item arrived damaged (left earphone non-functional) and customer has lost confidence in the product, explicitly declining replacement and the keep-item partial refund. A full refund of $129.00 is the appropriate resolution to exit the purchase entirely."
+          }
+        }
+      ],
+      "finalText": "The refund has been set up and is ready for your review — not completed yet.\n\n**Summary:**\n- **Resolution:** Full Refund\n- **You receive:** $129.00 back to your original payment method\n- **Timing:** 3–5 business days\n- **Requirement:** Return the original item (prepaid return label included)\n\nIt's now sitting in \"prepared\" status on the page. You'll need to complete/confirm it yourself when you're ready — let me know if you'd like anything adjusted first.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "7b711359-8d2a-4374-b9b1-db2b2330c734",
+  "clarificationTurns": 1,
+  "customerTurns": 2,
+  "agentToolCalls": 2,
+  "msToPrepared": 32459,
+  "preparedResolution": "refund",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Item arrived damaged (left earphone non-functional) and customer has lost confidence in the product, explicitly declining replacement and the keep-item partial refund. A full refund of $129.00 is the appropriate resolution to exit the purchase entirely.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:51:29.673Z",
+  "msTotal": 33490,
+  "msToCompleted": 33490,
+  "finalState": "RESOLVED",
+  "resolutionResult": "RF-1042",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #1042 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Refund"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Refund"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created RF-1042"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "refund",
+        "reason": "Item arrived damaged (left earphone non-functional) and customer has lost confidence in the product, explicitly declining replacement and the keep-item partial refund. A full refund of $129.00 is the appropriate resolution to exit the purchase entirely."
+      }
+    }
+  ],
+  "timedOut": false
+}

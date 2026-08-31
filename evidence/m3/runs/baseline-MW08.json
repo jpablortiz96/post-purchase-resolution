@@ -1,0 +1,113 @@
+{
+  "runId": "baseline-MW08",
+  "milestone": "M3",
+  "mode": "baseline",
+  "intentId": "MW08",
+  "scenario": "wrong_variant",
+  "prompt": "Not the size I ordered. Sort out the swap but let me approve it first.",
+  "profile": {
+    "goal": "correct_variant",
+    "urgency": "medium",
+    "maxWaitDays": 4,
+    "preferred": "exchange",
+    "acceptable": [
+      "exchange"
+    ],
+    "unacceptable": [
+      "refund",
+      "store_credit"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:57:15.320Z",
+  "turns": [
+    {
+      "prompt": "Not the size I ordered. Sort out the swap but let me approve it first.",
+      "fromProfile": false,
+      "durationMs": 18351,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__browser__click",
+        "mcp__browser__read_page"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__browser__read_page",
+          "input": {}
+        },
+        {
+          "name": "mcp__browser__click",
+          "input": {
+            "ref": "c4"
+          }
+        }
+      ],
+      "finalText": "I've prepared the **Exchange** for Order #2087:\n\n- **You receive:** Running Shoes in Size 9\n- **Cost:** Free (item shipped at no charge)\n- **Timing:** Arrives in 2 days — well within your 3-day window\n- **Return:** Required — Size 8 pair, with a prepaid return label included\n\nNothing has been issued yet — it's waiting on your approval. When you're ready, just say \"approve\" and I'll click **Approve & complete**, or let me know if you'd rather switch to Refund or Store Credit instead.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "514fc4a3-a96b-47d2-b5ef-bbf11fe54cd7",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 20809,
+  "preparedResolution": "exchange",
+  "preparedBy": "CUSTOMER",
+  "agentReasoning": null,
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:57:37.152Z",
+  "msTotal": 21832,
+  "msToCompleted": 21832,
+  "finalState": "RESOLVED",
+  "resolutionResult": "X-2087",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "CUSTOMER",
+      "action": "Prepared Exchange"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Exchange"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created X-2087"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "read_page",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "click",
+      "ok": true,
+      "args": {
+        "ref": "c4"
+      }
+    }
+  ],
+  "timedOut": false
+}

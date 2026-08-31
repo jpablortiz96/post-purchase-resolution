@@ -1,0 +1,113 @@
+{
+  "runId": "baseline-MD03",
+  "milestone": "M3",
+  "mode": "baseline",
+  "intentId": "MD03",
+  "scenario": "damaged",
+  "prompt": "Left ear is dead. Honestly they're still fine for calls, so I'd rather keep them and get something back than post anything anywhere.",
+  "profile": {
+    "goal": "keep_item_with_compensation",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "keep_partial_refund",
+    "acceptable": [
+      "keep_partial_refund"
+    ],
+    "unacceptable": [
+      "refund",
+      "replacement"
+    ],
+    "preferKeepItem": true,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:49:13.805Z",
+  "turns": [
+    {
+      "prompt": "Left ear is dead. Honestly they're still fine for calls, so I'd rather keep them and get something back than post anything anywhere.",
+      "fromProfile": false,
+      "durationMs": 17810,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__browser__click",
+        "mcp__browser__read_page"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__browser__read_page",
+          "input": {}
+        },
+        {
+          "name": "mcp__browser__click",
+          "input": {
+            "ref": "c6"
+          }
+        }
+      ],
+      "finalText": "I've set it up: **Keep Item + Partial Refund** — you keep the headphones and get $40.00 back, no return, processed immediately.\n\nSince this is your decision to finalize, let me know if you'd like me to click **\"✓ Approve & complete\"** to lock it in, or if you want to review anything else first.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "3f1e19da-d2dc-4e92-9ed7-7b298f1f2a4d",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 20251,
+  "preparedResolution": "keep_partial_refund",
+  "preparedBy": "CUSTOMER",
+  "agentReasoning": null,
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:49:35.080Z",
+  "msTotal": 21275,
+  "msToCompleted": 21275,
+  "finalState": "RESOLVED",
+  "resolutionResult": "PR-1042",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "CUSTOMER",
+      "action": "Prepared Keep Item + Partial Refund"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Keep Item + Partial Refund"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created PR-1042"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "read_page",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "click",
+      "ok": true,
+      "args": {
+        "ref": "c6"
+      }
+    }
+  ],
+  "timedOut": false
+}

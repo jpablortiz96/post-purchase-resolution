@@ -1,0 +1,118 @@
+{
+  "runId": "webmcp-MD02",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "MD02",
+  "scenario": "damaged",
+  "prompt": "Bought these last week, one earpiece is silent. I'm not travelling, I just want my money back.",
+  "profile": {
+    "goal": "money_back",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "refund",
+    "acceptable": [
+      "refund"
+    ],
+    "unacceptable": [
+      "replacement"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:48:46.812Z",
+  "turns": [
+    {
+      "prompt": "Bought these last week, one earpiece is silent. I'm not travelling, I just want my money back.",
+      "fromProfile": false,
+      "durationMs": 21858,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        },
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "refund",
+            "reason": "Item arrived with a defective (silent) left earpiece, reported within days of delivery. Customer is not traveling and prefers a full refund over a replacement."
+          }
+        }
+      ],
+      "finalText": "The refund is now staged and ready for you to review. Just head to the page to confirm and complete it — once done, you'll receive $129.00 back to your original payment method within 3–5 business days. A prepaid return label will be included so you can send the defective headphones back at no cost.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "148379ba-5edb-49c4-ab20-50e79b36b5f4",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 24303,
+  "preparedResolution": "refund",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Item arrived with a defective (silent) left earpiece, reported within days of delivery. Customer is not traveling and prefers a full refund over a replacement.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:49:12.149Z",
+  "msTotal": 25337,
+  "msToCompleted": 25337,
+  "finalState": "RESOLVED",
+  "resolutionResult": "RF-1042",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #1042 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Refund"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Refund"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created RF-1042"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "refund",
+        "reason": "Item arrived with a defective (silent) left earpiece, reported within days of delivery. Customer is not traveling and prefers a full refund over a replacement."
+      }
+    }
+  ],
+  "timedOut": false
+}

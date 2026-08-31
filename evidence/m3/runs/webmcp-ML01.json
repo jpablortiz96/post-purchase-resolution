@@ -1,0 +1,133 @@
+{
+  "runId": "webmcp-ML01",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "ML01",
+  "scenario": "arrived_late",
+  "prompt": "This was a birthday present and it turned up after the party. The thing itself is fine. What do I get for that?",
+  "profile": {
+    "goal": "keep_item_and_maximise_compensation",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "keep_store_credit",
+    "acceptable": [
+      "keep_store_credit"
+    ],
+    "unacceptable": [
+      "return_refund"
+    ],
+    "preferKeepItem": true,
+    "preferStoreCredit": true,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T21:00:17.261Z",
+  "turns": [
+    {
+      "prompt": "This was a birthday present and it turned up after the party. The thing itself is fine. What do I get for that?",
+      "fromProfile": false,
+      "durationMs": 17016,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        }
+      ],
+      "finalText": "Since the item itself is fine and just arrived late, here's what's available for your $74 order (order #3155):\n\n1. **Return + Refund** – Send it back and get the full $74.00 refunded (3–5 business days, prepaid label included). Since you said the item is fine, this is probably not what you want.\n2. **Keep Item + Shipping Refund** – Keep the item, get **$12.00** back, processed immediately.\n3. **Keep Item + Store Credit** – Keep the item, get **$20.00 in store credit**, available immediately.\n\nGiven that you're happy with the product and just want something for the late delivery, options 2 or 3 make the most sense. The store credit ($20) is the higher-value option if you might shop there again; the shipping refund ($12) gets actual cash back instead.\n\nWhich would you like me to prepare for you?",
+      "stateAfter": "ORDER_ACTIVE",
+      "agentAskedChoice": true
+    },
+    {
+      "prompt": "I'd like to keep the item and take the store credit. I want to keep the item rather than send it back. Store credit is fine by me if it is worth more than cash. I do not want to send it back for a full refund. Set it up for me but do not complete it yourself.",
+      "fromProfile": true,
+      "durationMs": 15858,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "keep_store_credit",
+            "reason": "The gift itself arrived intact and in good condition — only the delivery timing was an issue. You've chosen to keep the item, and store credit ($20) is worth more than the shipping refund alternative ($12), so this best matches your preference."
+          }
+        }
+      ],
+      "finalText": "All set — I've prepared the **Keep Item + Store Credit** resolution for order #3155:\n\n- You keep the item (no return needed)\n- $20.00 store credit, available immediately\n\nIt's staged but not finalized. You'll need to complete/confirm it yourself on the page — I can't finalize it for you. Let me know if you'd like anything changed before you do.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "f579fd8e-86ab-4fa5-816a-1452dd6b972b",
+  "clarificationTurns": 1,
+  "customerTurns": 2,
+  "agentToolCalls": 2,
+  "msToPrepared": 35747,
+  "preparedResolution": "keep_store_credit",
+  "preparedBy": "AGENT",
+  "agentReasoning": "The gift itself arrived intact and in good condition — only the delivery timing was an issue. You've chosen to keep the item, and store credit ($20) is worth more than the shipping refund alternative ($12), so this best matches your preference.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T21:00:54.037Z",
+  "msTotal": 36776,
+  "msToCompleted": 36776,
+  "finalState": "RESOLVED",
+  "resolutionResult": "SC-3155",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #3155 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Keep Item + Store Credit"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Keep Item + Store Credit"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created SC-3155"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "keep_store_credit",
+        "reason": "The gift itself arrived intact and in good condition — only the delivery timing was an issue. You've chosen to keep the item, and store credit ($20) is worth more than the shipping refund alternative ($12), so this best matches your preference."
+      }
+    }
+  ],
+  "timedOut": false
+}

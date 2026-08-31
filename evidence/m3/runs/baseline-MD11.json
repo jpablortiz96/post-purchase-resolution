@@ -1,0 +1,127 @@
+{
+  "runId": "baseline-MD11",
+  "milestone": "M3",
+  "mode": "baseline",
+  "intentId": "MD11",
+  "scenario": "damaged",
+  "prompt": "The left earphone is dead and I'm abroad from tomorrow for a month, so I can't post anything back for weeks.",
+  "profile": {
+    "goal": "no_return_possible",
+    "urgency": "high",
+    "maxWaitDays": 1,
+    "preferred": "keep_partial_refund",
+    "acceptable": [
+      "keep_partial_refund"
+    ],
+    "unacceptable": [
+      "refund"
+    ],
+    "preferKeepItem": true,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:53:08.445Z",
+  "turns": [
+    {
+      "prompt": "The left earphone is dead and I'm abroad from tomorrow for a month, so I can't post anything back for weeks.",
+      "fromProfile": false,
+      "durationMs": 21288,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__browser__click",
+        "mcp__browser__read_page"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__browser__read_page",
+          "input": {}
+        }
+      ],
+      "finalText": "Given your situation, the best option is **Keep Item + Partial Refund**:\n\n- **Processed immediately** — no waiting\n- **No return needed** — since you're traveling tomorrow and can't post anything back for weeks, this is the only option that doesn't require you to ship the headphones back\n- You get **$40.00 USD back** and keep the headphones (even with the dead left earphone, they may still be useful for calls/one-ear use, or you can dispose of them)\n\nThe other two options (Replacement and Refund) both require returning the original item, which isn't feasible for you right now — and mailing it back later could risk missing the return window while you're abroad.\n\nWant me to select **\"Keep Item + Partial Refund\"** for you to review? I won't finalize anything — you'll still need to approve/complete it yourself.",
+      "stateAfter": "ORDER_ACTIVE",
+      "agentAskedChoice": false
+    },
+    {
+      "prompt": "I'd like to keep the item and take the partial refund. I want to keep the item rather than send it back. I do not want my money back. It needs to work within about 1 day. Set it up for me but do not complete it yourself.",
+      "fromProfile": true,
+      "durationMs": 16307,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__browser__click",
+        "mcp__browser__read_page"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__browser__click",
+          "input": {
+            "ref": "c6"
+          }
+        }
+      ],
+      "finalText": "I've set it up: **Keep Item + Partial Refund** is now prepared and ready for your review.\n\n**Summary:**\n- ✅ You keep the Wireless Headphones — no return required\n- 💵 $40.00 USD refund, processed immediately\n- ⏱ No shipping needed, so it fits well within your 1-day timeframe before you travel\n\nNothing has been issued yet — as requested, I have **not** completed it. When you're ready, click **\"✓ Approve & complete\"** on the page to finalize it yourself (or \"Choose another\" / \"Cancel\" if you change your mind).",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "b8b9a0ae-1946-4f83-bc3e-c5ddee67fd04",
+  "clarificationTurns": 1,
+  "customerTurns": 2,
+  "agentToolCalls": 2,
+  "msToPrepared": 40480,
+  "preparedResolution": "keep_partial_refund",
+  "preparedBy": "CUSTOMER",
+  "agentReasoning": null,
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:53:49.968Z",
+  "msTotal": 41523,
+  "msToCompleted": 41523,
+  "finalState": "RESOLVED",
+  "resolutionResult": "PR-1042",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "CUSTOMER",
+      "action": "Prepared Keep Item + Partial Refund"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Keep Item + Partial Refund"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created PR-1042"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "read_page",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "click",
+      "ok": true,
+      "args": {
+        "ref": "c6"
+      }
+    }
+  ],
+  "timedOut": false
+}

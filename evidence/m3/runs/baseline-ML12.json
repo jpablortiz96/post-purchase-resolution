@@ -1,0 +1,113 @@
+{
+  "runId": "baseline-ML12",
+  "milestone": "M3",
+  "mode": "baseline",
+  "intentId": "ML12",
+  "scenario": "arrived_late",
+  "prompt": "Shipping was late and the gift missed the day. I'd like the full amount back and I'll return it.",
+  "profile": {
+    "goal": "return_and_refund",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "return_refund",
+    "acceptable": [
+      "return_refund"
+    ],
+    "unacceptable": [
+      "keep_shipping_refund",
+      "keep_store_credit"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T21:05:37.781Z",
+  "turns": [
+    {
+      "prompt": "Shipping was late and the gift missed the day. I'd like the full amount back and I'll return it.",
+      "fromProfile": false,
+      "durationMs": 21255,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__browser__click",
+        "mcp__browser__read_page"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__browser__read_page",
+          "input": {}
+        },
+        {
+          "name": "mcp__browser__click",
+          "input": {
+            "ref": "c4"
+          }
+        }
+      ],
+      "finalText": "I've prepared the **Return + Refund** option for Order #3155:\n\n- **Refund:** $74.00 to your original payment method\n- **Timing:** 3–5 business days\n- **Return:** Required — prepaid return label included\n\nNothing has been issued yet — this is only ready for your review. Since you asked for this, would you like me to go ahead and click **\"Approve & complete\"** to finalize it?",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": true
+    }
+  ],
+  "session": "3d742f9f-62b3-43bf-bf94-39b35f523bb2",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 23720,
+  "preparedResolution": "return_refund",
+  "preparedBy": "CUSTOMER",
+  "agentReasoning": null,
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T21:06:02.546Z",
+  "msTotal": 24765,
+  "msToCompleted": 24765,
+  "finalState": "RESOLVED",
+  "resolutionResult": "RF-3155",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "CUSTOMER",
+      "action": "Prepared Return + Refund"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Return + Refund"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created RF-3155"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "read_page",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "click",
+      "ok": true,
+      "args": {
+        "ref": "c4"
+      }
+    }
+  ],
+  "timedOut": false
+}

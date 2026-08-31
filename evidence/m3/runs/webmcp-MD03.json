@@ -1,0 +1,119 @@
+{
+  "runId": "webmcp-MD03",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "MD03",
+  "scenario": "damaged",
+  "prompt": "Left ear is dead. Honestly they're still fine for calls, so I'd rather keep them and get something back than post anything anywhere.",
+  "profile": {
+    "goal": "keep_item_with_compensation",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "keep_partial_refund",
+    "acceptable": [
+      "keep_partial_refund"
+    ],
+    "unacceptable": [
+      "refund",
+      "replacement"
+    ],
+    "preferKeepItem": true,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:49:12.151Z",
+  "turns": [
+    {
+      "prompt": "Left ear is dead. Honestly they're still fine for calls, so I'd rather keep them and get something back than post anything anywhere.",
+      "fromProfile": false,
+      "durationMs": 18369,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        },
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "keep_partial_refund",
+            "reason": "Customer wants to keep the headphones since they're still usable for calls, and prefers a partial refund over returning/replacing them."
+          }
+        }
+      ],
+      "finalText": "I've staged the **Keep Item + Partial Refund** option for you:\n\n- Keep the Wireless Headphones — no return needed\n- Receive **$40.00 USD** back\n- Processed immediately\n\nYou'll see it ready to review on the page — just confirm it there to finalize.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "4eb7a954-950e-486a-8ed3-a742b13fff6d",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 20810,
+  "preparedResolution": "keep_partial_refund",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Customer wants to keep the headphones since they're still usable for calls, and prefers a partial refund over returning/replacing them.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:49:33.985Z",
+  "msTotal": 21834,
+  "msToCompleted": 21834,
+  "finalState": "RESOLVED",
+  "resolutionResult": "PR-1042",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #1042 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Keep Item + Partial Refund"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Keep Item + Partial Refund"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created PR-1042"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "keep_partial_refund",
+        "reason": "Customer wants to keep the headphones since they're still usable for calls, and prefers a partial refund over returning/replacing them."
+      }
+    }
+  ],
+  "timedOut": false
+}

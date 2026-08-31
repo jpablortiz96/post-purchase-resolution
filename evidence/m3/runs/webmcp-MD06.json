@@ -1,0 +1,119 @@
+{
+  "runId": "webmcp-MD06",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "MD06",
+  "scenario": "damaged",
+  "prompt": "These arrived broken. I'd like the same pair again rather than a refund. Run it past me before finalising.",
+  "profile": {
+    "goal": "same_product_again",
+    "urgency": "medium",
+    "maxWaitDays": 3,
+    "preferred": "replacement",
+    "acceptable": [
+      "replacement"
+    ],
+    "unacceptable": [
+      "refund",
+      "keep_partial_refund"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:50:32.537Z",
+  "turns": [
+    {
+      "prompt": "These arrived broken. I'd like the same pair again rather than a refund. Run it past me before finalising.",
+      "fromProfile": false,
+      "durationMs": 20171,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        },
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "replacement",
+            "reason": "Customer wants the same item replaced rather than a refund, and the item arrived damaged (non-functional left earphone). Replacement is eligible, in stock, and will arrive tomorrow — which matches the customer's urgent travel timeline."
+          }
+        }
+      ],
+      "finalText": "I've staged the **Replacement** option for your review:\n\n- New Wireless Headphones ship, arriving **tomorrow**\n- Return the broken pair within 14 days (prepaid label included)\n- No cost to you\n\nIt's ready on the page for you to confirm — nothing has been finalized yet. Just complete it there when you're ready.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "51ea6427-6af7-4210-8656-ad6f11065361",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 22617,
+  "preparedResolution": "replacement",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Customer wants the same item replaced rather than a refund, and the item arrived damaged (non-functional left earphone). Replacement is eligible, in stock, and will arrive tomorrow — which matches the customer's urgent travel timeline.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:50:56.180Z",
+  "msTotal": 23643,
+  "msToCompleted": 23643,
+  "finalState": "RESOLVED",
+  "resolutionResult": "R-1042",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #1042 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Replacement"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Replacement"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created R-1042"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "replacement",
+        "reason": "Customer wants the same item replaced rather than a refund, and the item arrived damaged (non-functional left earphone). Replacement is eligible, in stock, and will arrive tomorrow — which matches the customer's urgent travel timeline."
+      }
+    }
+  ],
+  "timedOut": false
+}

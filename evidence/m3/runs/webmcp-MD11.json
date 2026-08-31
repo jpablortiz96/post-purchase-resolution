@@ -1,0 +1,118 @@
+{
+  "runId": "webmcp-MD11",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "MD11",
+  "scenario": "damaged",
+  "prompt": "The left earphone is dead and I'm abroad from tomorrow for a month, so I can't post anything back for weeks.",
+  "profile": {
+    "goal": "no_return_possible",
+    "urgency": "high",
+    "maxWaitDays": 1,
+    "preferred": "keep_partial_refund",
+    "acceptable": [
+      "keep_partial_refund"
+    ],
+    "unacceptable": [
+      "refund"
+    ],
+    "preferKeepItem": true,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:53:03.646Z",
+  "turns": [
+    {
+      "prompt": "The left earphone is dead and I'm abroad from tomorrow for a month, so I can't post anything back for weeks.",
+      "fromProfile": false,
+      "durationMs": 21350,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        },
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "keep_partial_refund",
+            "reason": "Customer is traveling abroad starting tomorrow for a month and cannot return the item for weeks. Replacement and refund both require a return shipment, which isn't feasible before departure. The keep-item + partial refund option requires no return and processes immediately, fitting the customer's time constraint."
+          }
+        }
+      ],
+      "finalText": "I've staged the **Keep Item + Partial Refund** option for you — it's ready on the page but not yet finalized, since only you can complete that step.\n\nSummary:\n- Keep the headphones (right side still works, no return hassle)\n- Get **$40 back**, processed immediately — should land before you leave tomorrow\n- No shipping or return label needed while you're away\n\nJust go to the page and confirm it to complete the process. Safe travels!",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "9a8e4bca-81cd-4d08-b236-72a7b1433f89",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 23803,
+  "preparedResolution": "keep_partial_refund",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Customer is traveling abroad starting tomorrow for a month and cannot return the item for weeks. Replacement and refund both require a return shipment, which isn't feasible before departure. The keep-item + partial refund option requires no return and processes immediately, fitting the customer's time constraint.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:53:28.478Z",
+  "msTotal": 24832,
+  "msToCompleted": 24832,
+  "finalState": "RESOLVED",
+  "resolutionResult": "PR-1042",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #1042 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Keep Item + Partial Refund"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Keep Item + Partial Refund"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created PR-1042"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "keep_partial_refund",
+        "reason": "Customer is traveling abroad starting tomorrow for a month and cannot return the item for weeks. Replacement and refund both require a return shipment, which isn't feasible before departure. The keep-item + partial refund option requires no return and processes immediately, fitting the customer's time constraint."
+      }
+    }
+  ],
+  "timedOut": false
+}

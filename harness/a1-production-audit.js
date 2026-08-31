@@ -64,7 +64,9 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
   const tools = await page.evaluate(async () => (await document.modelContext.getTools()).map(t => t.name));
   rec('tools register in a supported WebMCP environment',
-    tools.length === 3 && tools.includes('prepare_resolution'), tools);
+    tools.length === 2 && tools.includes('get_order') && tools.includes('prepare_resolution'), tools);
+  rec('no completion capability is exposed to agents',
+    !tools.some(t => /confirm|commit|complete|approve|finali/i.test(t)), tools);
 
   // ── the real question: can a customer operate this WITHOUT an agent? ──
   console.log('\n  customer-visible controls in the initial state:');

@@ -1,0 +1,119 @@
+{
+  "runId": "webmcp-MW02",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "MW02",
+  "scenario": "wrong_variant",
+  "prompt": "Wrong size arrived. I've gone off the idea, just refund me.",
+  "profile": {
+    "goal": "money_back",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "refund",
+    "acceptable": [
+      "refund"
+    ],
+    "unacceptable": [
+      "exchange",
+      "store_credit"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:54:41.546Z",
+  "turns": [
+    {
+      "prompt": "Wrong size arrived. I've gone off the idea, just refund me.",
+      "fromProfile": false,
+      "durationMs": 19455,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        },
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "refund",
+            "reason": "Wrong size was shipped and you no longer want the item, so a full refund of $96.00 to your original payment method is the right fit. You'll just need to return the Size 8 pair using the prepaid label; funds arrive in 3–5 business days."
+          }
+        }
+      ],
+      "finalText": "I've prepared a **refund of $96.00** to your original payment method for the wrong-size Running Shoes order. Details:\n\n- You'll need to return the Size 8 pair — a prepaid return label is included.\n- Refund takes 3–5 business days to process once the return is on its way.\n\nThis is just staged for you — please go to the order page to review and confirm it yourself.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "affbf6c9-d8d7-4960-a573-30f52615da99",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 21893,
+  "preparedResolution": "refund",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Wrong size was shipped and you no longer want the item, so a full refund of $96.00 to your original payment method is the right fit. You'll just need to return the Size 8 pair using the prepaid label; funds arrive in 3–5 business days.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:55:04.459Z",
+  "msTotal": 22913,
+  "msToCompleted": 22913,
+  "finalState": "RESOLVED",
+  "resolutionResult": "RF-2087",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #2087 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Refund"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Refund"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created RF-2087"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "refund",
+        "reason": "Wrong size was shipped and you no longer want the item, so a full refund of $96.00 to your original payment method is the right fit. You'll just need to return the Size 8 pair using the prepaid label; funds arrive in 3–5 business days."
+      }
+    }
+  ],
+  "timedOut": false
+}

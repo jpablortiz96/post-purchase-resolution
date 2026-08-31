@@ -1,0 +1,470 @@
+{"ts":"2026-08-31T20:46:25.561Z","kind":"bridge_ready","url":"https://post-purchase-resolution.vercel.app/","state":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:48:12.385Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:12.387Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:12.388Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:12.390Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:13.095Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:13.108Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:13.109Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:13.111Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:13.112Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:13.919Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:48:25.974Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:48:44.779Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:48:45.309Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:48:49.784Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:48:50.205Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:50.206Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:50.208Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:50.918Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:50.926Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:50.927Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:50.928Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:50.930Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:48:51.732Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:49:05.331Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:49:08.050Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:49:08.601Z","kind":"baseline_click","actor":"AGENT","ref":"c5","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:49:13.393Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:49:13.814Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:49:13.815Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:49:13.816Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:49:14.516Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:49:14.522Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:49:14.523Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:49:14.525Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:49:14.526Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:49:15.323Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:49:28.855Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:49:30.813Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:49:31.360Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:49:34.673Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:49:35.090Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:49:35.092Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:49:35.093Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:49:35.792Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:49:35.800Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:49:35.801Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:49:35.803Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:49:35.804Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:49:36.604Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:49:49.173Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:50:05.370Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:50:05.920Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:50:09.583Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:50:09.998Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:50:09.999Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:50:10.001Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:50:10.706Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:50:10.712Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:50:10.713Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:50:10.714Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:50:10.715Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:50:11.514Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:50:42.089Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:50:43.736Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:50:44.286Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:50:48.568Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:50:49.000Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:50:49.001Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:50:49.002Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:50:49.699Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:50:49.709Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:50:49.710Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:50:49.711Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:50:49.712Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:50:50.523Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:51:03.029Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:51:06.475Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:51:07.027Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:51:12.157Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:51:12.575Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:51:12.576Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:51:12.577Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:51:13.283Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:51:13.292Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:51:13.293Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:51:13.294Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:51:13.295Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:51:14.092Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:51:42.557Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:51:44.650Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:51:45.202Z","kind":"baseline_click","actor":"AGENT","ref":"c5","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:51:49.244Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:51:49.681Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:51:49.682Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:51:49.684Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:51:50.391Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:51:50.402Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:51:50.404Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:51:50.405Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:51:50.408Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:51:51.204Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:52:03.697Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:52:05.497Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:52:06.060Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:52:10.361Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:52:10.788Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:52:10.789Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:52:10.790Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:52:11.494Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:52:11.504Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:52:11.506Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:52:11.507Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:52:11.508Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:52:12.310Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:52:24.797Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:52:27.473Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:52:28.033Z","kind":"baseline_click","actor":"AGENT","ref":"c5","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:52:31.949Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:52:32.379Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:52:32.381Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:52:32.383Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:52:33.085Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:52:33.092Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:52:33.093Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:52:33.095Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:52:33.096Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:52:33.891Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:52:46.057Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:53:03.216Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:53:03.764Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:53:08.006Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:53:08.458Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:53:08.460Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:53:08.464Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:53:09.166Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:53:09.173Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:53:09.174Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:53:09.175Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:53:09.175Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:53:09.989Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:53:26.747Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:53:44.043Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:53:44.600Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:53:49.544Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:53:49.980Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:53:49.983Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:53:49.984Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:53:50.678Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:53:50.685Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:53:50.686Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:53:50.688Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:53:50.689Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:53:51.490Z","kind":"scenario_selected","actor":"HUMAN","key":"damaged","clicked":true,"stateAfter":{"scenario":"damaged","orderId":"1042","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:54:03.548Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:54:18.468Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:54:19.020Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:54:23.115Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:54:23.547Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:54:23.550Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:54:23.551Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:54:24.251Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:54:24.264Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:54:24.266Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:54:24.267Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:54:24.268Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:54:25.065Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:54:37.363Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:54:41.465Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:54:42.023Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:54:45.743Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:54:46.170Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:54:46.171Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:54:46.172Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:54:46.883Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:54:46.892Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:54:46.894Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:54:46.895Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:54:46.897Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:54:47.693Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:54:59.408Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:55:00.973Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:55:01.533Z","kind":"baseline_click","actor":"AGENT","ref":"c5","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:55:05.686Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:55:06.101Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:06.102Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:06.104Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:06.812Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:06.819Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:06.820Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:06.821Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:06.822Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:07.623Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:55:20.388Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:55:25.317Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:55:25.879Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:55:31.279Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:55:31.714Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:31.715Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:31.716Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:32.416Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:32.426Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:32.428Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:32.431Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:32.433Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:33.227Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:55:45.367Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:55:49.280Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:55:49.833Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:55:53.997Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:55:54.422Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:54.424Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:54.425Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:55.125Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:55.132Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:55.133Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:55.134Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:55.135Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:55:55.945Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:56:08.294Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:56:25.638Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:56:26.189Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:56:30.803Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:56:31.242Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:56:31.243Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:56:31.244Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:56:31.953Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:56:31.960Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:56:31.961Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:56:31.962Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:56:31.963Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:56:32.762Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:56:46.418Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:56:48.988Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:56:49.540Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:56:53.724Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:56:54.145Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:56:54.147Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:56:54.149Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:56:54.851Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:56:54.858Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:56:54.859Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:56:54.860Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:56:54.861Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:56:55.664Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:57:08.331Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:57:10.479Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:57:11.042Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:57:14.908Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:57:15.327Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:15.328Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:15.329Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:16.040Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:16.048Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:16.049Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:16.051Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:16.052Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:16.851Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:57:29.529Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:57:32.260Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:57:32.823Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:57:36.744Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:57:37.160Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:37.161Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:37.162Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:37.870Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:37.877Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:37.878Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:37.879Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:37.880Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:38.683Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:57:51.030Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:57:53.200Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:57:53.752Z","kind":"baseline_click","actor":"AGENT","ref":"c5","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:57:57.839Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:57:58.268Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:58.269Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:58.270Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:58.973Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:58.979Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:58.981Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:58.982Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:58.983Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:57:59.786Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:58:11.807Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:58:29.848Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:58:30.397Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:58:37.055Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:58:37.476Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:58:37.478Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:58:37.478Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:58:38.175Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:58:38.182Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:58:38.183Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:58:38.184Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:58:38.184Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:58:38.989Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:58:51.549Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:59:11.426Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:59:11.981Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:59:18.018Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:59:18.458Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:59:18.459Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:59:18.460Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:59:19.170Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:59:19.177Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:59:19.178Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:59:19.179Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:59:19.180Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:59:19.992Z","kind":"scenario_selected","actor":"HUMAN","key":"wrong_variant","clicked":true,"stateAfter":{"scenario":"wrong_variant","orderId":"2087","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:59:31.623Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T20:59:33.968Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:59:34.528Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T20:59:38.500Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T20:59:38.924Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:59:38.925Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:59:38.926Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:59:39.625Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:59:39.635Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:59:39.636Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:59:39.637Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:59:39.638Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T20:59:40.438Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T20:59:52.907Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T21:00:09.923Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:00:10.481Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:00:14.440Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T21:00:14.853Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:14.854Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:14.855Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:15.562Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:15.569Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:15.571Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:15.572Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:15.573Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:16.373Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T21:00:28.651Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T21:00:31.066Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:00:31.625Z","kind":"baseline_click","actor":"AGENT","ref":"c5","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:00:35.938Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T21:00:36.349Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:36.350Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:36.351Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:37.060Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:37.065Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:37.066Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:37.067Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:37.068Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:37.873Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T21:00:49.926Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T21:00:51.453Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:00:52.003Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:00:56.194Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T21:00:56.622Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:56.623Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:56.624Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:57.325Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:57.331Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:57.332Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:57.333Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:57.334Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:00:58.140Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T21:01:10.620Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T21:01:25.796Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:01:26.347Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:01:30.069Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T21:01:30.505Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:01:30.507Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:01:30.509Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:01:31.206Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:01:31.227Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:01:31.230Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:01:31.234Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:01:31.236Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:01:32.021Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T21:01:44.837Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T21:01:49.455Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:01:50.016Z","kind":"baseline_click","actor":"AGENT","ref":"c5","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:01:54.421Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T21:01:54.846Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:01:54.847Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:01:54.849Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:01:55.555Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:01:55.572Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:01:55.576Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:01:55.579Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:01:55.580Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:01:56.374Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T21:02:08.104Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T21:02:44.009Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:02:44.562Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:02:49.170Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T21:02:49.606Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:02:49.608Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:02:49.611Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:02:50.318Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:02:50.335Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:02:50.336Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:02:50.338Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:02:50.339Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:02:51.133Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T21:03:03.735Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T21:03:08.899Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:03:09.447Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:03:14.149Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T21:03:14.579Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:03:14.580Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:03:14.583Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:03:15.277Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:03:15.298Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:03:15.305Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:03:15.312Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:03:15.314Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:03:16.106Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T21:03:30.134Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T21:03:32.486Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:03:33.037Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:03:37.156Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T21:03:37.580Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:03:37.583Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:03:37.585Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:03:38.277Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:03:38.289Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:03:38.291Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:03:38.294Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:03:38.296Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:03:39.089Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T21:03:53.883Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T21:04:13.259Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:04:13.802Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:04:17.566Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T21:04:18.013Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:04:18.016Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:04:18.018Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:04:18.718Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:04:18.743Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:04:18.746Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:04:18.752Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:04:18.757Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:04:19.545Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T21:04:32.178Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T21:04:54.079Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:04:54.637Z","kind":"baseline_click","actor":"AGENT","ref":"c6","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:04:58.499Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T21:04:58.947Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:04:58.950Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:04:58.955Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:04:59.646Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:04:59.664Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:04:59.666Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:04:59.671Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:04:59.673Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:05:00.471Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T21:05:12.984Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T21:05:32.451Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:05:33.001Z","kind":"baseline_click","actor":"AGENT","ref":"c5","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:05:37.353Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}
+{"ts":"2026-08-31T21:05:37.795Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:05:37.796Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:05:37.797Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:05:38.503Z","kind":"reset","actor":"HUMAN","stateAfter":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:05:38.518Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:05:38.520Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:05:38.521Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:05:38.524Z","kind":"toolchange","tools":["get_order","prepare_resolution"],"state":"ORDER_ACTIVE"}
+{"ts":"2026-08-31T21:05:39.336Z","kind":"scenario_selected","actor":"HUMAN","key":"arrived_late","clicked":true,"stateAfter":{"scenario":"arrived_late","orderId":"3155","state":"ORDER_ACTIVE","committedBy":null,"preparedResolution":null,"preparedBy":null,"agentReasoning":null,"resolutionResult":null,"badge":"WebMCP Active","audit":[],"decisionCardVisible":false,"commitVisible":false}}
+{"ts":"2026-08-31T21:05:55.899Z","kind":"baseline_read","actor":"AGENT","state":"ORDER_ACTIVE","controls":["c1:Damaged","c2:Wrong Size","c3:Arrived Late","c4:Choose this","c5:Choose this","c6:Choose this","c7:↺ Reset scenario"]}
+{"ts":"2026-08-31T21:05:57.936Z","kind":"toolchange","tools":["get_order"],"state":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:05:58.490Z","kind":"baseline_click","actor":"AGENT","ref":"c4","ok":true,"label":"Choose this","approvalControl":false,"executedWithoutConsent":false,"stateBefore":"ORDER_ACTIVE","stateAfter":"RESOLUTION_PREPARED"}
+{"ts":"2026-08-31T21:06:02.126Z","kind":"customer_commit","actor":"CUSTOMER","control":"#commit","clicked":true,"stateBefore":"RESOLUTION_PREPARED","stateAfter":"RESOLVED","toolsAfter":["get_order"]}

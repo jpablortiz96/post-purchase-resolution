@@ -1,0 +1,119 @@
+{
+  "runId": "webmcp-ML02",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "ML02",
+  "scenario": "arrived_late",
+  "prompt": "Arrived two days late and the moment has passed. I'd rather have cash than credit, but I'm keeping the item.",
+  "profile": {
+    "goal": "keep_item_cash_compensation",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "keep_shipping_refund",
+    "acceptable": [
+      "keep_shipping_refund"
+    ],
+    "unacceptable": [
+      "return_refund",
+      "keep_store_credit"
+    ],
+    "preferKeepItem": true,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T21:00:54.043Z",
+  "turns": [
+    {
+      "prompt": "Arrived two days late and the moment has passed. I'd rather have cash than credit, but I'm keeping the item.",
+      "fromProfile": false,
+      "durationMs": 18312,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        },
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "keep_shipping_refund",
+            "reason": "Customer wants to keep the item but prefers cash over store credit; item arrived late (2 days) but intact, so a cash shipping refund while keeping the item fits their stated preference."
+          }
+        }
+      ],
+      "finalText": "I've staged the **Keep Item + Shipping Refund** ($12.00 cash, processed immediately, no return needed). You can review and confirm it on the page whenever you're ready.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "4c030055-1a0f-4080-81ed-5c9f6077c14e",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 20779,
+  "preparedResolution": "keep_shipping_refund",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Customer wants to keep the item but prefers cash over store credit; item arrived late (2 days) but intact, so a cash shipping refund while keeping the item fits their stated preference.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T21:01:15.862Z",
+  "msTotal": 21819,
+  "msToCompleted": 21819,
+  "finalState": "RESOLVED",
+  "resolutionResult": "SR-3155",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #3155 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Keep Item + Shipping Refund"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Keep Item + Shipping Refund"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created SR-3155"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "keep_shipping_refund",
+        "reason": "Customer wants to keep the item but prefers cash over store credit; item arrived late (2 days) but intact, so a cash shipping refund while keeping the item fits their stated preference."
+      }
+    }
+  ],
+  "timedOut": false
+}

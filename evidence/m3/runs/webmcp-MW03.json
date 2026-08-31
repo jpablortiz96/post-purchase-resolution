@@ -1,0 +1,133 @@
+{
+  "runId": "webmcp-MW03",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "MW03",
+  "scenario": "wrong_variant",
+  "prompt": "Got an 8 instead of a 9. I shop here a lot, so if credit is worth more than the refund I'd take that.",
+  "profile": {
+    "goal": "maximise_value_staying_with_merchant",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "store_credit",
+    "acceptable": [
+      "store_credit"
+    ],
+    "unacceptable": [
+      "refund"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": true,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:55:04.462Z",
+  "turns": [
+    {
+      "prompt": "Got an 8 instead of a 9. I shop here a lot, so if credit is worth more than the refund I'd take that.",
+      "fromProfile": false,
+      "durationMs": 20830,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        }
+      ],
+      "finalText": "Store credit is the better deal here — **$105 in store credit** vs **$96 cash refund**, plus it's available immediately.\n\nOne thing to flag though: your order notes you need the shoes for an event in 3 days. The **Exchange** option would get you the correct Size 9 pair delivered in 2 days — the only option that actually solves the event problem. Store credit and refund both just get you money back, not shoes in hand.\n\nIf the event isn't a concern anymore (or you're sourcing shoes another way), I'll go ahead and stage the store credit. Just confirm and I'll prepare it.",
+      "stateAfter": "ORDER_ACTIVE",
+      "agentAskedChoice": false
+    },
+    {
+      "prompt": "I'd like the store credit. Store credit is fine by me if it is worth more than cash. I do not want my money back. Set it up for me but do not complete it yourself.",
+      "fromProfile": true,
+      "durationMs": 16252,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "store_credit",
+            "reason": "Customer received the wrong size (8 instead of 9) and, being a frequent shopper, prefers store credit over a cash refund since it's worth more ($105 vs $96) and is available immediately. They explicitly do not want a cash refund."
+          }
+        }
+      ],
+      "finalText": "Done — the store credit resolution is staged and ready:\n\n- **You'll receive:** $105.00 in store credit (available immediately once completed)\n- **Requirement:** Return the Size 8 pair (prepaid return label included)\n\nI haven't finalized it — you'll need to review and confirm/complete it yourself on the page. Let me know if you'd like anything changed before you do.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "dafcecaf-ffaa-4717-b89b-0314920ace33",
+  "clarificationTurns": 1,
+  "customerTurns": 2,
+  "agentToolCalls": 2,
+  "msToPrepared": 39941,
+  "preparedResolution": "store_credit",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Customer received the wrong size (8 instead of 9) and, being a frequent shopper, prefers store credit over a cash refund since it's worth more ($105 vs $96) and is available immediately. They explicitly do not want a cash refund.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:55:45.435Z",
+  "msTotal": 40973,
+  "msToCompleted": 40973,
+  "finalState": "RESOLVED",
+  "resolutionResult": "SC-2087",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #2087 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Store Credit"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Store Credit"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created SC-2087"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "store_credit",
+        "reason": "Customer received the wrong size (8 instead of 9) and, being a frequent shopper, prefers store credit over a cash refund since it's worth more ($105 vs $96) and is available immediately. They explicitly do not want a cash refund."
+      }
+    }
+  ],
+  "timedOut": false
+}

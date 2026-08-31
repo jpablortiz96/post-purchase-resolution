@@ -1,0 +1,112 @@
+{
+  "runId": "baseline-MD02",
+  "milestone": "M3",
+  "mode": "baseline",
+  "intentId": "MD02",
+  "scenario": "damaged",
+  "prompt": "Bought these last week, one earpiece is silent. I'm not travelling, I just want my money back.",
+  "profile": {
+    "goal": "money_back",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "refund",
+    "acceptable": [
+      "refund"
+    ],
+    "unacceptable": [
+      "replacement"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:48:50.197Z",
+  "turns": [
+    {
+      "prompt": "Bought these last week, one earpiece is silent. I'm not travelling, I just want my money back.",
+      "fromProfile": false,
+      "durationMs": 20119,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__browser__click",
+        "mcp__browser__read_page"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__browser__read_page",
+          "input": {}
+        },
+        {
+          "name": "mcp__browser__click",
+          "input": {
+            "ref": "c5"
+          }
+        }
+      ],
+      "finalText": "I've prepared the refund for order #1042:\n\n- **You receive:** $129.00 refunded to your original payment method\n- **Timing:** 3–5 business days\n- **Return required:** Yes — you'll need to send back the original item, but a prepaid return label is included\n\nNothing has been submitted yet — this is just staged and waiting for your go-ahead. Since I can't complete this step myself, please confirm and I'll click **\"Approve & complete\"** for you, or let me know if you'd like to change anything first.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "a98f4d6b-6e91-4ed1-a3e7-72a77e7d4e2b",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 22576,
+  "preparedResolution": "refund",
+  "preparedBy": "CUSTOMER",
+  "agentReasoning": null,
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:49:13.801Z",
+  "msTotal": 23604,
+  "msToCompleted": 23604,
+  "finalState": "RESOLVED",
+  "resolutionResult": "RF-1042",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "CUSTOMER",
+      "action": "Prepared Refund"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Refund"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created RF-1042"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "read_page",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "click",
+      "ok": true,
+      "args": {
+        "ref": "c5"
+      }
+    }
+  ],
+  "timedOut": false
+}

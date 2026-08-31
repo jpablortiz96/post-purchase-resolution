@@ -1,0 +1,119 @@
+{
+  "runId": "webmcp-MW08",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "MW08",
+  "scenario": "wrong_variant",
+  "prompt": "Not the size I ordered. Sort out the swap but let me approve it first.",
+  "profile": {
+    "goal": "correct_variant",
+    "urgency": "medium",
+    "maxWaitDays": 4,
+    "preferred": "exchange",
+    "acceptable": [
+      "exchange"
+    ],
+    "unacceptable": [
+      "refund",
+      "store_credit"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T20:57:50.385Z",
+  "turns": [
+    {
+      "prompt": "Not the size I ordered. Sort out the swap but let me approve it first.",
+      "fromProfile": false,
+      "durationMs": 20058,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        },
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "exchange",
+            "reason": "You received Size 8 instead of your ordered Size 9. An exchange gets the correct Size 9 pair shipped to you, arriving in about 2 days — in time for your event in 3 days. You'll get a prepaid label to return the Size 8 pair."
+          }
+        }
+      ],
+      "finalText": "I've staged an **exchange** for your Running Shoes — swapping the Size 8 you received for the correct Size 9.\n\n- **You'll receive:** Size 9 Running Shoes\n- **Timing:** Arrives in ~2 days (fits your event deadline)\n- **Return:** Send back the Size 8 pair using the included prepaid label\n- **Cost to you:** $0\n\nIt's ready for your review on the page — nothing will happen until you approve and complete it yourself. Let me know if you'd rather go with a refund ($96 to original payment, 3–5 days) or store credit ($105, available immediately) instead.",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "7856cd7c-74c9-4085-9b8f-78111d3ec7d2",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 22500,
+  "preparedResolution": "exchange",
+  "preparedBy": "AGENT",
+  "agentReasoning": "You received Size 8 instead of your ordered Size 9. An exchange gets the correct Size 9 pair shipped to you, arriving in about 2 days — in time for your event in 3 days. You'll get a prepaid label to return the Size 8 pair.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T20:58:13.915Z",
+  "msTotal": 23530,
+  "msToCompleted": 23530,
+  "finalState": "RESOLVED",
+  "resolutionResult": "X-2087",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #2087 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Exchange"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Exchange"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created X-2087"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "exchange",
+        "reason": "You received Size 8 instead of your ordered Size 9. An exchange gets the correct Size 9 pair shipped to you, arriving in about 2 days — in time for your event in 3 days. You'll get a prepaid label to return the Size 8 pair."
+      }
+    }
+  ],
+  "timedOut": false
+}

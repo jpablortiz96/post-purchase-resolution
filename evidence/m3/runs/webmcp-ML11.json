@@ -1,0 +1,119 @@
+{
+  "runId": "webmcp-ML11",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "ML11",
+  "scenario": "arrived_late",
+  "prompt": "Two days late. I want actual money back rather than a voucher, and I'm happy to keep the item.",
+  "profile": {
+    "goal": "keep_item_cash_compensation",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "keep_shipping_refund",
+    "acceptable": [
+      "keep_shipping_refund"
+    ],
+    "unacceptable": [
+      "keep_store_credit",
+      "return_refund"
+    ],
+    "preferKeepItem": true,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T21:05:32.386Z",
+  "turns": [
+    {
+      "prompt": "Two days late. I want actual money back rather than a voucher, and I'm happy to keep the item.",
+      "fromProfile": false,
+      "durationMs": 24163,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        },
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "keep_shipping_refund",
+            "reason": "Customer wants to keep the item and receive actual money back (not store credit) due to the 2-day late delivery. This option provides a real cash refund of the shipping cost to the original payment method while letting them keep the item."
+          }
+        }
+      ],
+      "finalText": "I've staged the **Keep Item + Shipping Refund** option: you keep the Birthday Gift and get **$12.00 refunded to your original payment method**, processed immediately — no return needed and no store credit involved.\n\nYou'll see this on the page now — just confirm it there to complete the refund yourself (I can't finalize it for you).",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "2405d05f-6a2a-4a57-948d-637e3d71cae2",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 26621,
+  "preparedResolution": "keep_shipping_refund",
+  "preparedBy": "AGENT",
+  "agentReasoning": "Customer wants to keep the item and receive actual money back (not store credit) due to the 2-day late delivery. This option provides a real cash refund of the shipping cost to the original payment method while letting them keep the item.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T21:06:00.034Z",
+  "msTotal": 27648,
+  "msToCompleted": 27648,
+  "finalState": "RESOLVED",
+  "resolutionResult": "SR-3155",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #3155 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Keep Item + Shipping Refund"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Keep Item + Shipping Refund"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created SR-3155"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "keep_shipping_refund",
+        "reason": "Customer wants to keep the item and receive actual money back (not store credit) due to the 2-day late delivery. This option provides a real cash refund of the shipping cost to the original payment method while letting them keep the item."
+      }
+    }
+  ],
+  "timedOut": false
+}

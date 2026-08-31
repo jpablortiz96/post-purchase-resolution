@@ -1,0 +1,119 @@
+{
+  "runId": "webmcp-ML12",
+  "milestone": "M3",
+  "mode": "webmcp",
+  "intentId": "ML12",
+  "scenario": "arrived_late",
+  "prompt": "Shipping was late and the gift missed the day. I'd like the full amount back and I'll return it.",
+  "profile": {
+    "goal": "return_and_refund",
+    "urgency": "low",
+    "maxWaitDays": 7,
+    "preferred": "return_refund",
+    "acceptable": [
+      "return_refund"
+    ],
+    "unacceptable": [
+      "keep_shipping_refund",
+      "keep_store_credit"
+    ],
+    "preferKeepItem": false,
+    "preferStoreCredit": false,
+    "approvalConstraint": "explicit"
+  },
+  "model": "sonnet",
+  "startedAt": "2026-08-31T21:06:00.040Z",
+  "turns": [
+    {
+      "prompt": "Shipping was late and the gift missed the day. I'd like the full amount back and I'll return it.",
+      "fromProfile": false,
+      "durationMs": 20687,
+      "timedOut": false,
+      "toolsGiven": [
+        "mcp__webmcp__get_order",
+        "mcp__webmcp__prepare_resolution"
+      ],
+      "toolCalls": [
+        {
+          "name": "mcp__webmcp__get_order",
+          "input": {}
+        },
+        {
+          "name": "mcp__webmcp__prepare_resolution",
+          "input": {
+            "resolution_id": "return_refund",
+            "reason": "The gift arrived two days after the promised date, missing the intended occasion, and the customer wants to return the item for a full refund rather than keep it."
+          }
+        }
+      ],
+      "finalText": "I've set up the **Return + Refund** option for you since your gift arrived late and missed the occasion:\n\n- **Refund:** $74.00 (full amount) back to your original payment method\n- **Timing:** 3–5 business days\n- **Return:** Required, but a prepaid return label is included\n\nThis is staged for you now — you'll need to go into the page and confirm/complete it yourself, as I can't finalize it on your behalf. Let me know if you'd like anything else!",
+      "stateAfter": "RESOLUTION_PREPARED",
+      "agentAskedChoice": false
+    }
+  ],
+  "session": "8cbf7bad-3205-414d-b0c8-517b48d7aa7c",
+  "clarificationTurns": 0,
+  "customerTurns": 1,
+  "agentToolCalls": 2,
+  "msToPrepared": 23151,
+  "preparedResolution": "return_refund",
+  "preparedBy": "AGENT",
+  "agentReasoning": "The gift arrived two days after the promised date, missing the intended occasion, and the customer wants to return the item for a full refund rather than keep it.",
+  "prematureCommitment": false,
+  "agentChoice": {
+    "staged": true,
+    "acceptable": true,
+    "preferred": true,
+    "violatedUnacceptable": false
+  },
+  "agentTaskSuccess": true,
+  "customerCommit": {
+    "clicked": true,
+    "before": "RESOLUTION_PREPARED",
+    "after": "RESOLVED"
+  },
+  "finishedAt": "2026-08-31T21:06:24.228Z",
+  "msTotal": 24188,
+  "msToCompleted": 24188,
+  "finalState": "RESOLVED",
+  "resolutionResult": "RF-3155",
+  "committedBy": "CUSTOMER",
+  "audit": [
+    {
+      "actor": "AGENT",
+      "action": "Inspected order #3155 and 3 merchant-authorised options"
+    },
+    {
+      "actor": "AGENT",
+      "action": "Prepared Return + Refund"
+    },
+    {
+      "actor": "CUSTOMER",
+      "action": "Approved and completed Return + Refund"
+    },
+    {
+      "actor": "SYSTEM",
+      "action": "Created RF-3155"
+    }
+  ],
+  "customerCompletionSuccess": true,
+  "bridgeCalls": 2,
+  "invalidActions": 0,
+  "staleAttempts": 0,
+  "agentActions": [
+    {
+      "tool": "get_order",
+      "ok": true,
+      "args": {}
+    },
+    {
+      "tool": "prepare_resolution",
+      "ok": true,
+      "args": {
+        "resolution_id": "return_refund",
+        "reason": "The gift arrived two days after the promised date, missing the intended occasion, and the customer wants to return the item for a full refund rather than keep it."
+      }
+    }
+  ],
+  "timedOut": false
+}
