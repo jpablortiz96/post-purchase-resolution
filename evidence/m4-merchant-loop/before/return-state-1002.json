@@ -1,0 +1,8 @@
+{
+  "capturedAt": "2026-09-01T15:50:50.472Z",
+  "source": "independent read-only Shopify Admin API query",
+  "orderReference": "#1002",
+  "orderReturnStatus": "NO_RETURN",
+  "returns": [],
+  "note": "External truth before the production app was touched."
+}

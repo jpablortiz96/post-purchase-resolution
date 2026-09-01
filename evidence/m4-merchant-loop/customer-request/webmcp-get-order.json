@@ -1,0 +1,34 @@
+{
+  "capturedAt": "2026-09-01T15:50:58.677Z",
+  "note": "Exactly what the agent received from the live production page.",
+  "payload": {
+    "source": "shopify",
+    "externalCommerceSystem": "Shopify",
+    "orderReference": "#1002",
+    "product": "Wireless Headphones",
+    "quantity": 1,
+    "price": 129,
+    "currency": "USD",
+    "financialStatus": "PAID",
+    "fulfillmentStatus": "FULFILLED",
+    "deliveredAt": "2026-09-01T15:46:00Z",
+    "returnable": true,
+    "returnableQuantity": 1,
+    "orderReturnStatus": "NO_RETURN",
+    "existingReturns": [],
+    "resolutionState": "ORDER_ACTIVE",
+    "resolution": null,
+    "permittedResolutions": [
+      {
+        "id": "return_damaged",
+        "type": "RETURN",
+        "label": "Return Wireless Headphones",
+        "reason": "DEFECTIVE",
+        "customerReceives": "A return authorised by the merchant, then a refund once received",
+        "requiresMerchantApproval": true,
+        "note": "Merchant policy and the refund itself are decided in Shopify, not here."
+      }
+    ],
+    "optionsNote": "Shopify reports this order has returnable fulfilled items. A return request requires merchant approval."
+  }
+}

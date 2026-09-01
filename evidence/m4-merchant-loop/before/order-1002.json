@@ -1,0 +1,73 @@
+{
+  "capturedAt": "2026-09-01T15:47:35.022Z",
+  "source": "Shopify Admin GraphQL API",
+  "apiVersion": "2026-07",
+  "note": "Read-only preflight before any mutation. Sanitized: no gid, no PII.",
+  "order": {
+    "reference": "#1002",
+    "product": "Wireless Headphones",
+    "quantity": 1,
+    "price": 129,
+    "currency": "USD",
+    "financialStatus": "PAID",
+    "fulfillmentStatus": "FULFILLED",
+    "deliveredAt": "2026-09-01T15:46:00Z",
+    "fulfillmentDisplayStatus": "DELIVERED",
+    "orderReturnStatus": "NO_RETURN",
+    "existingReturns": [],
+    "returnableLineItems": [
+      {
+        "title": "Wireless Headphones",
+        "quantity": 1
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "1. order #1002 exists in Shopify",
+      "pass": true,
+      "detail": "#1002"
+    },
+    {
+      "name": "2. PAID",
+      "pass": true,
+      "detail": "PAID"
+    },
+    {
+      "name": "3. FULFILLED",
+      "pass": true,
+      "detail": "FULFILLED"
+    },
+    {
+      "name": "4. DELIVERED",
+      "pass": true,
+      "detail": {
+        "deliveredAt": "2026-09-01T15:46:00Z",
+        "displayStatus": "DELIVERED",
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "name": "5. returnableFulfillments queried",
+      "pass": true,
+      "detail": {
+        "count": 1
+      }
+    },
+    {
+      "name": "6. exactly one returnable Wireless Headphones line item",
+      "pass": true,
+      "detail": [
+        {
+          "title": "Wireless Headphones",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "name": "7. no existing Return consumes it",
+      "pass": true,
+      "detail": []
+    }
+  ]
+}

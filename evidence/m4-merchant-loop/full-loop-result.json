@@ -1,0 +1,189 @@
+{
+  "ranAt": "2026-09-01T15:51:35.222Z",
+  "order": "#1002",
+  "productionUrl": "https://post-purchase-resolution.vercel.app",
+  "note": "Every mutation was performed by clicking the live production app. Direct Shopify calls here are read-only verification only.",
+  "externalBefore": {
+    "capturedAt": "2026-09-01T15:50:50.472Z",
+    "source": "independent read-only Shopify Admin API query",
+    "orderReference": "#1002",
+    "orderReturnStatus": "NO_RETURN",
+    "returns": []
+  },
+  "externalAfterRequest": {
+    "capturedAt": "2026-09-01T15:51:06.689Z",
+    "source": "independent read-only Shopify Admin API query",
+    "orderReference": "#1002",
+    "orderReturnStatus": "RETURN_REQUESTED",
+    "returns": [
+      {
+        "reference": "#1002-R1",
+        "status": "REQUESTED",
+        "externalId": "57389547892"
+      }
+    ]
+  },
+  "externalAfterApprove": {
+    "capturedAt": "2026-09-01T15:51:19.275Z",
+    "source": "independent read-only Shopify Admin API query",
+    "orderReference": "#1002",
+    "orderReturnStatus": "IN_PROGRESS",
+    "returns": [
+      {
+        "reference": "#1002-R1",
+        "status": "OPEN",
+        "externalId": "57389547892"
+      }
+    ]
+  },
+  "returnCreated": {
+    "reference": "#1002-R1",
+    "status": "REQUESTED",
+    "externalId": "57389547892"
+  },
+  "returnApproved": {
+    "reference": "#1002-R1",
+    "status": "OPEN",
+    "externalId": "57389547892"
+  },
+  "passed": 19,
+  "total": 19,
+  "steps": [
+    {
+      "name": "0 · BEFORE: Shopify has no Return for #1002",
+      "pass": true,
+      "detail": {
+        "returns": [],
+        "orderReturnStatus": "NO_RETURN"
+      }
+    },
+    {
+      "name": "1 · production page loads the real order",
+      "pass": true,
+      "detail": "#1002"
+    },
+    {
+      "name": "2a · WebMCP contract is still get_order + prepare_resolution",
+      "pass": true,
+      "detail": [
+        "get_order",
+        "prepare_resolution"
+      ]
+    },
+    {
+      "name": "2b · no completion tool exposed",
+      "pass": true,
+      "detail": [
+        "get_order",
+        "prepare_resolution"
+      ]
+    },
+    {
+      "name": "2c · get_order returns real Shopify facts",
+      "pass": true,
+      "detail": {
+        "ref": "#1002",
+        "fin": "PAID",
+        "ful": "FULFILLED",
+        "returnable": true
+      }
+    },
+    {
+      "name": "2d · no PII or secrets in the agent payload",
+      "pass": true
+    },
+    {
+      "name": "3 · prepare_resolution created NO Shopify mutation",
+      "pass": true,
+      "detail": {
+        "prepared": true,
+        "externalReturns": 0
+      }
+    },
+    {
+      "name": "4a · the customer has a Request return control",
+      "pass": true
+    },
+    {
+      "name": "4b · a REAL Shopify Return now exists as REQUESTED",
+      "pass": true,
+      "detail": {
+        "returns": [
+          {
+            "reference": "#1002-R1",
+            "status": "REQUESTED",
+            "externalId": "57389547892"
+          }
+        ],
+        "orderReturnStatus": "RETURN_REQUESTED"
+      }
+    },
+    {
+      "name": "4c · the customer page shows the real return and REQUESTED",
+      "pass": true,
+      "detail": "#1002-R1"
+    },
+    {
+      "name": "4d · still no completion tool after the request",
+      "pass": true,
+      "detail": [
+        "get_order"
+      ]
+    },
+    {
+      "name": "5a · merchant view sees the same external request",
+      "pass": true,
+      "detail": "#1002-R1"
+    },
+    {
+      "name": "5b · merchant has an Approve control",
+      "pass": true
+    },
+    {
+      "name": "5c · the SAME Return is now OPEN in Shopify",
+      "pass": true,
+      "detail": {
+        "returns": [
+          {
+            "reference": "#1002-R1",
+            "status": "OPEN",
+            "externalId": "57389547892"
+          }
+        ],
+        "sameReference": true
+      }
+    },
+    {
+      "name": "5d · merchant view renders OPEN from Shopify",
+      "pass": true
+    },
+    {
+      "name": "6 · customer page reads OPEN back from Shopify",
+      "pass": true,
+      "detail": {
+        "viaPolling": true,
+        "viaReload": false
+      }
+    },
+    {
+      "name": "7 · a fresh session rediscovers the external return",
+      "pass": true,
+      "detail": [
+        {
+          "reference": "#1002-R1",
+          "status": "OPEN",
+          "externalId": "57389547892"
+        }
+      ]
+    },
+    {
+      "name": "8 · no second return can be requested while one is live",
+      "pass": true
+    },
+    {
+      "name": "9 · no console errors across the whole loop",
+      "pass": true,
+      "detail": []
+    }
+  ]
+}

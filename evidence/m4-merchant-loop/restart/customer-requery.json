@@ -1,0 +1,12 @@
+{
+  "capturedAt": "2026-09-01T15:51:34.961Z",
+  "note": "A brand-new browser session with no prior state. The external return is rediscovered from Shopify.",
+  "rediscoveredReturns": [
+    {
+      "reference": "#1002-R1",
+      "status": "OPEN",
+      "externalId": "57389547892"
+    }
+  ],
+  "orderReturnStatus": "IN_PROGRESS"
+}

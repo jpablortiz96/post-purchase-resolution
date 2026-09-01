@@ -49,7 +49,9 @@ function liveToolDefs() {
       execute: async () => {
         await live.refresh();
         note('AGENT', `Inspected Shopify order ${live.order ? live.order.orderReference : ''}`);
-        renderLive();
+        // deferTools: mutating the tool set inside an execute handler
+        // interrupts the in-flight executeTool call (verified in M0.5).
+        renderLive({ deferTools: true });
         return JSON.stringify(live.buildOrderPayload());
       },
     },
@@ -71,8 +73,7 @@ function liveToolDefs() {
       annotations: { readOnlyHint: false },
       execute: async (args = {}) => {
         const out = live.prepare({ reason: args.reason, actor: 'AGENT' });
-        setTimeout(() => { syncTools(); renderProtocol(); }, 50);
-        renderLive();
+        renderLive({ deferTools: true });
         return JSON.stringify(out.ok ? { success: true, ...out } : out);
       },
     },
@@ -480,6 +481,12 @@ function liveRailIndex() {
 function renderLive({ deferTools = false } = {}) {
   renderFixtures();
 
+  // The fixture disclaimer is false in live mode. Say what is actually true.
+  const foot = $('foot-txt');
+  if (foot) foot.textContent =
+    'Live Shopify development store. Returns created here are real Shopify Return objects; ' +
+    'test payments only, so no real money moves and no real customer is involved.';
+
   const idx = liveRailIndex();
   $('rail').innerHTML = LIVE_RAIL.map(([, label], i) => {
     const cls = i < idx ? 'done' : i === idx ? 'now' : '';
@@ -621,6 +628,11 @@ function renderLiveAudit() {
  */
 function render({ deferTools = false } = {}) {
   if (isLive()) return renderLive({ deferTools });
+  const foot = $('foot-txt');
+  if (foot) foot.textContent =
+    'Deterministic merchant fixtures implementing realistic post-purchase policies. ' +
+    'Resolution execution is real within this application’s state machine; ' +
+    'no external commerce system is connected in this mode.';
   renderFixtures();
   renderRail();
   renderOrder();

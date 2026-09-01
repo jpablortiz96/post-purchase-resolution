@@ -1,0 +1,14 @@
+{
+  "capturedAt": "2026-09-01T15:51:06.689Z",
+  "source": "independent read-only Shopify Admin API query",
+  "orderReference": "#1002",
+  "orderReturnStatus": "RETURN_REQUESTED",
+  "returns": [
+    {
+      "reference": "#1002-R1",
+      "status": "REQUESTED",
+      "externalId": "57389547892"
+    }
+  ],
+  "note": "Independent Shopify query AFTER the customer pressed Request return in the production app."
+}

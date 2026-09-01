@@ -1,6 +1,13 @@
 # M4.2 limitations
 
-## 1. The full REQUESTED → OPEN cycle was not re-run in this milestone
+> **SUPERSEDED (order #1002).** The blocker below was resolved: a second
+> fulfilled order was created manually, and the complete loop then ran through
+> the live production app — `#1002-R1` created as `REQUESTED` by a customer
+> click, moved to `OPEN` by the merchant view, 19/19 checks. See
+> `full-loop-result.json`. Sections 2–6 still apply. Section 1 is kept because
+> it is the honest record of what was true before #1002 existed.
+
+## 1. The full REQUESTED → OPEN cycle was not re-run in this milestone *(resolved by #1002)*
 
 This is the honest headline. M4.2's primary proof (§23) is:
 
@@ -78,3 +85,26 @@ values (`REQUESTED` / `OPEN`), never the fixture vocabulary.
 - One model, one host in the agent evaluations.
 - The WebMCP capability boundary is not a security boundary — an agent that can
   drive the DOM can still press buttons (M3 actuation test, 1 of 3 trials).
+
+---
+
+## 7. What the #1002 run does and does not show
+
+**Shows:** the production application created a real Shopify Return and a real
+merchant approval moved it to `OPEN`. Both mutations happened by pressing
+controls in the deployed app; the verification queries were read-only and used
+an independent Shopify client, so the check does not depend on the app's own
+state.
+
+**Does not show:** anything about real customers, real money, or production
+merchants. This is a development store with test payments. `#1002-R1` is `OPEN`,
+which in Shopify means the merchant has authorised the return — no refund was
+issued and none is claimed.
+
+**One run.** n=1 for the full loop. It demonstrates the path works; it is not a
+reliability measurement.
+
+**Repeatability costs a new order.** `#1002` is now consumed exactly as `#1001`
+was. Another full-loop run needs another fulfilled order. No automatic
+destructive reset was added, deliberately — deleting returns to free line items
+would destroy the very evidence this milestone produced.

@@ -175,6 +175,7 @@
     .auth-card--merchant { border-color:rgba(253,203,110,0.22); }
     .fixture-btn--live.on { background:rgba(0,184,148,0.12); border-color:rgba(0,184,148,0.4); color:var(--success); }
     .who--MERCHANT { background:rgba(253,203,110,0.13); color:var(--warning); }
+    .who--CUSTOMER { background:rgba(0,184,148,0.13); color:var(--success); }
 
     /* ── decision card (hero) ───────────────────────────── */
     .decision {
@@ -372,10 +373,8 @@
     </details>
 
     <div class="foot">
-      <div class="foot-txt">
+      <div class="foot-txt" id="foot-txt">
         Deterministic merchant fixtures implementing realistic post-purchase policies.
-        Resolution execution is real within this application's state machine; no external
-        commerce system is connected.
       </div>
       <button class="btn btn-ghost" id="reset">↺ Reset scenario</button>
     </div>

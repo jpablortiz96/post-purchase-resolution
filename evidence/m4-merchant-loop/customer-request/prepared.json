@@ -1,0 +1,27 @@
+{
+  "capturedAt": "2026-09-01T15:51:00.033Z",
+  "note": "Agent preparation. Compare externalAfterPrepare with before/: Shopify is unchanged.",
+  "prepareResult": {
+    "success": true,
+    "ok": true,
+    "resolution": {
+      "type": "RETURN",
+      "label": "Return Wireless Headphones",
+      "agentReasoning": "The headphones arrived damaged and the left earphone does not work. Shopify shows this order as delivered and still returnable, so a return request is the resolution this merchant supports.",
+      "preparedBy": "AGENT",
+      "shopifyReturnReason": "DEFECTIVE",
+      "quantity": 1,
+      "externalSystem": "shopify",
+      "requiresCustomerRequest": true,
+      "committedByCustomer": false,
+      "nextStep": "The customer requests this return themselves in the page. You cannot request it for them."
+    }
+  },
+  "externalAfterPrepare": {
+    "capturedAt": "2026-09-01T15:51:00.033Z",
+    "source": "independent read-only Shopify Admin API query",
+    "orderReference": "#1002",
+    "orderReturnStatus": "NO_RETURN",
+    "returns": []
+  }
+}

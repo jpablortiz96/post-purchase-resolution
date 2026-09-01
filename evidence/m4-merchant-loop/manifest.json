@@ -1,23 +1,30 @@
 {
-  "generatedAt": "2026-09-01T15:19:21.553Z",
+  "generatedAt": "2026-09-01T15:54:39.652Z",
   "milestone": "M4.2",
   "productionUrl": "https://post-purchase-resolution.vercel.app/",
-  "shopifyEnvironment": "development store, test payments, no real money",
-  "externalOrder": "#1001",
-  "externalReturn": "#1001-R1",
-  "externalReturnStatus": "OPEN",
-  "fullRequestedToOpenCycleReRunInThisMilestone": false,
-  "blocker": "Order #1001 has zero returnable fulfillment line items (already consumed by #1001-R1). App scopes read_orders,write_returns cannot create or fulfil a new order. A second fulfilled order is required.",
-  "verifiedAgainstRealShopify": [
-    "client_credentials auth",
-    "get_order real facts",
-    "real return read back",
-    "duplicate protection",
-    "order allowlist",
-    "approval guard",
-    "restart persistence",
-    "no secrets or PII on public surfaces"
+  "shopifyEnvironment": "development store, test payments, no real money moved",
+  "fullLoop": {
+    "order": "#1002",
+    "returnReference": "#1002-R1",
+    "externalId": "57389547892",
+    "statusAfterCustomerRequest": "REQUESTED",
+    "statusAfterMerchantApproval": "OPEN",
+    "sameReturnObject": true,
+    "allMutationsPerformedByClickingTheProductionApp": true,
+    "verificationQueriesWereReadOnlyAndIndependent": true,
+    "checks": "19/19"
+  },
+  "historicalManualSpike": {
+    "order": "#1001",
+    "returnReference": "#1001-R1",
+    "status": "OPEN",
+    "note": "Preserved unchanged. Not used as evidence for the #1002 run."
+  },
+  "webmcpContract": [
+    "get_order",
+    "prepare_resolution"
   ],
+  "completionExposedToWebMCP": false,
   "files": [
     {
       "file": "approve-guard.json",
@@ -25,9 +32,19 @@
       "sha256": "c7dcf752037e7a97"
     },
     {
+      "file": "before/order-1002.json",
+      "bytes": 1616,
+      "sha256": "ca04ad1814004b85"
+    },
+    {
       "file": "before/order.json",
       "bytes": 738,
       "sha256": "5fa30341b9d003b8"
+    },
+    {
+      "file": "before/return-state-1002.json",
+      "bytes": 256,
+      "sha256": "a20e3a3fb67add83"
     },
     {
       "file": "before/return-state.json",
@@ -35,14 +52,44 @@
       "sha256": "cd6a28a79e4ec1fb"
     },
     {
+      "file": "customer-request/external-requested.json",
+      "bytes": 409,
+      "sha256": "294855639366f1d4"
+    },
+    {
+      "file": "customer-request/prepared.json",
+      "bytes": 1059,
+      "sha256": "8d19f82545cf6dad"
+    },
+    {
+      "file": "customer-request/webmcp-get-order.json",
+      "bytes": 1172,
+      "sha256": "9956a28b4ca568fb"
+    },
+    {
       "file": "duplicate-protection.json",
       "bytes": 363,
       "sha256": "627e2eaa515ac6aa"
     },
     {
+      "file": "full-loop-result.json",
+      "bytes": 4606,
+      "sha256": "e31157fdda484403"
+    },
+    {
       "file": "limitations.md",
-      "bytes": 4005,
-      "sha256": "925506adf923a4a1"
+      "bytes": 5590,
+      "sha256": "3378d2697835071b"
+    },
+    {
+      "file": "merchant/approval-response.json",
+      "bytes": 336,
+      "sha256": "efd2965a4f8ca758"
+    },
+    {
+      "file": "merchant/external-open.json",
+      "bytes": 402,
+      "sha256": "aae6bc1815dc505a"
     },
     {
       "file": "methodology.md",
@@ -55,14 +102,44 @@
       "sha256": "131a6f09537aa5cb"
     },
     {
+      "file": "restart/customer-requery.json",
+      "bytes": 329,
+      "sha256": "7655bad224b2c8a8"
+    },
+    {
       "file": "screenshots/01_real_order.png",
-      "bytes": 120039,
-      "sha256": "15ef68ea13edccc6"
+      "bytes": 109458,
+      "sha256": "ed161d68efc1f02c"
+    },
+    {
+      "file": "screenshots/02_resolution_ready.png",
+      "bytes": 171177,
+      "sha256": "c63b9e573ef7ba42"
+    },
+    {
+      "file": "screenshots/03_shopify_requested.png",
+      "bytes": 140070,
+      "sha256": "4a46430adf02277f"
     },
     {
       "file": "screenshots/04_merchant_desk.png",
       "bytes": 52524,
       "sha256": "61a1c72d05628469"
+    },
+    {
+      "file": "screenshots/04_merchant_request.png",
+      "bytes": 57171,
+      "sha256": "cf8dafc93fdb687a"
+    },
+    {
+      "file": "screenshots/05_merchant_approved.png",
+      "bytes": 53363,
+      "sha256": "51b005c2053e5b75"
+    },
+    {
+      "file": "screenshots/06_customer_open.png",
+      "bytes": 120629,
+      "sha256": "b6cfa309bb4fe328"
     }
   ]
 }
