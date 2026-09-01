@@ -10,8 +10,9 @@
 const auth = require('./auth.js');
 
 class CustomerError extends Error {
-  constructor(code, message, detail, diag) {
+  constructor(code, message, detail, diag, extra) {
     super(message); this.code = code; this.detail = detail; this.diag = diag || null;
+    if (extra) Object.assign(this, extra);
   }
 }
 
@@ -149,6 +150,9 @@ function sanitizeOrder(o) {
   // Every level here is optional: an order with nothing to return may omit
   // returnInformation, the summary, or both. Absence must read as "no reasons",
   // never as a crash.
+  const returns = o.returns?.nodes || [];
+  const activeReturn = returns.find(r => r?.status === 'REQUESTED' || r?.status === 'OPEN') || null;
+
   const summaryReasons = ret.nonReturnableSummary?.nonReturnableReasons || [];
   const detailReasons = nonReturnable.flatMap(
     n => (n?.quantityDetails || []).map(q => q?.reasonCode).filter(Boolean));
@@ -168,6 +172,17 @@ function sanitizeOrder(o) {
     returnableQuantity: returnable.reduce((n, r) => n + (r?.quantity || 0), 0),
     nonReturnableQuantity: nonReturnable.reduce((n, r) => n + (r?.quantity || 0), 0),
     nonReturnableReasons: [...new Set([...summaryReasons, ...detailReasons])],
+    existingReturns: returns.map(r => ({
+      reference: r?.name || null,
+      status: r?.status || null,
+      externalId: shortId(r?.id),      // opaque suffix, never the raw gid
+      createdAt: r?.createdAt || null,
+    })),
+    activeReturn: activeReturn ? {
+      reference: activeReturn.name || null,
+      status: activeReturn.status || null,
+      externalId: shortId(activeReturn.id),
+    } : null,
     // no email, no name, no address, no phone, no raw gid — the lineItem ids
     // fetched above stop here.
   };
@@ -185,6 +200,7 @@ const ORDER_FIELDS = `
   id name processedAt financialStatus fulfillmentStatus
   totalPrice { amount currencyCode }
   lineItems(first: 5) { nodes { title quantity } }
+  returns(first: 10) { nodes { id name status createdAt } }
 `;
 
 /**
@@ -216,13 +232,36 @@ const RETURN_FIELDS = `
   }
 `;
 
-/** The authenticated customer's own orders. No parameter widens this. */
-async function listOrders(req, { first = 25 } = {}) {
+/**
+ * The authenticated customer's own orders, raw.
+ *
+ * Server-side only: raw nodes carry Shopify gids, which the return mutation
+ * needs and no caller outside this module may see.
+ */
+async function listOrdersRaw(req, { first = 25 } = {}) {
   const d = await gql(req, `query($first: Int!) {
     customer { orders(first: $first, sortKey: PROCESSED_AT, reverse: true) {
       nodes { ${ORDER_FIELDS} ${RETURN_FIELDS} } } }
   }`, { first: Math.min(Math.max(1, first), 50) });
-  return (d.customer?.orders?.nodes || []).map(sanitizeOrder);
+  return d.customer?.orders?.nodes || [];
+}
+
+/** The authenticated customer's own orders. No parameter widens this. */
+async function listOrders(req, opts) {
+  return (await listOrdersRaw(req, opts)).map(sanitizeOrder);
+}
+
+/**
+ * One raw order, resolved by session-scoped key.
+ *
+ * Same rule as getOrder: the key is matched against the customer's own list
+ * rather than passed to Shopify, so a forged key cannot reach another order.
+ */
+async function getOrderRaw(req, orderKey) {
+  const raw = await listOrdersRaw(req, { first: 50 });
+  const found = raw.find(o => shortId(o.id) === String(orderKey));
+  if (!found) throw new CustomerError('ORDER_NOT_FOUND', 'That order is not in your account.');
+  return found;
 }
 
 /**
@@ -243,7 +282,7 @@ async function getOrder(req, orderKey) {
  * Natural discovery over the customer's own purchases.
  * Never silently picks between plausible matches.
  */
-async function findOrders(req, { productQuery, deliveredOnly = false, sinceDays } = {}) {
+async function findOrders(req, { productQuery, deliveredOnly = false, returnableOnly = false, sinceDays } = {}) {
   let orders = await listOrders(req, { first: 50 });
 
   if (productQuery) {
@@ -257,6 +296,7 @@ async function findOrders(req, { productQuery, deliveredOnly = false, sinceDays 
     orders = orders.filter(o => String(o.fulfillmentStatus || '').toUpperCase().includes('FULFILLED')
       || String(o.fulfillmentStatus || '').toUpperCase() === 'DELIVERED');
   }
+  if (returnableOnly) orders = orders.filter(o => o.returnable);
   if (sinceDays) {
     const cutoff = Date.now() - Number(sinceDays) * 86400000;
     orders = orders.filter(o => o.processedAt && Date.parse(o.processedAt) >= cutoff);
@@ -276,4 +316,88 @@ async function findOrders(req, { productQuery, deliveredOnly = false, sinceDays 
   };
 }
 
-module.exports = { whoami, listOrders, getOrder, findOrders, CustomerError, gql, probe, classify, sanitizeOrder };
+/**
+ * Customer-initiated return request.
+ *
+ * This is the one mutation a customer performs, and it runs under the
+ * *customer's own* access token — not the merchant's Admin token. That is the
+ * point: the authority matches the actor. It produces a Return in REQUESTED;
+ * only the merchant can approve it, and that still happens on the Admin API.
+ *
+ * Shopify decides returnability. Nothing here overrides that verdict.
+ */
+async function requestReturn(req, { orderKey, note, reason } = {}) {
+  // Re-read authoritative state immediately before mutating. A resolution
+  // prepared a minute ago may already be stale.
+  const raw = await getOrderRaw(req, orderKey);
+  const view = sanitizeOrder(raw);
+
+  // Duplicate protection: an existing live return means no second request.
+  if (view.activeReturn) {
+    throw new CustomerError('RETURN_ALREADY_EXISTS',
+      'A return already exists for this order.', undefined, null, { return: view.activeReturn });
+  }
+  if (!view.returnable) {
+    throw new CustomerError('NOT_RETURNABLE',
+      'This order no longer has items that can be returned.', view.nonReturnableReasons);
+  }
+
+  const nodes = raw.returnInformation?.returnableLineItems?.nodes || [];
+  const items = nodes
+    .filter(n => n?.lineItem?.id && (n.quantity || 0) > 0)
+    .map(n => ({ lineItemId: n.lineItem.id, quantity: n.quantity }));
+  if (!items.length) {
+    throw new CustomerError('NOT_RETURNABLE', 'This order no longer has items that can be returned.');
+  }
+
+  const MUTATION = `mutation OrderRequestReturn($orderId: ID!, $requestedLineItems: [RequestedLineItemInput!]!) {
+    orderRequestReturn(orderId: $orderId, requestedLineItems: $requestedLineItems) {
+      return { id name status createdAt }
+      userErrors { field message code }
+    }
+  }`;
+
+  const withReason = items.map(i => ({
+    ...i,
+    returnReason: reason || 'DEFECTIVE',
+    customerNote: note || undefined,
+  }));
+
+  let data;
+  try {
+    data = await gql(req, MUTATION,
+      { orderId: raw.id, requestedLineItems: withReason }, { label: 'orderRequestReturn' });
+  } catch (e) {
+    // A GraphQL *validation* error means the mutation never executed, so
+    // retrying without the optional reason is safe. The mutation reference and
+    // the self-serve guide disagree on how a reason is supplied; rather than
+    // guess, fall back to the minimum the schema certainly accepts.
+    const validation = e.code === 'GRAPHQL_ERROR' &&
+      (e.diag?.errorCategory === 'INVALID_GRAPHQL' ||
+       (e.diag?.upstreamMessages || []).some(m => /returnReason|customerNote/i.test(m)));
+    if (!validation) throw e;
+    data = await gql(req, MUTATION,
+      { orderId: raw.id, requestedLineItems: items }, { label: 'orderRequestReturn:noReason' });
+  }
+
+  const payload = data?.orderRequestReturn || {};
+  const userErrors = payload.userErrors || [];
+  if (userErrors.length) {
+    throw new CustomerError('RETURN_REFUSED', 'Shopify did not accept this return request.',
+      userErrors.map(u => u.message));
+  }
+  const ret = payload.return;
+  if (!ret) throw new CustomerError('RETURN_REFUSED', 'Shopify did not return a created return.');
+
+  return {
+    source: 'shopify-customer-account',
+    authority: 'CUSTOMER',
+    reference: ret.name || null,
+    status: ret.status || null,
+    externalId: shortId(ret.id),
+    createdAt: ret.createdAt || null,
+  };
+}
+
+module.exports = { whoami, listOrders, listOrdersRaw, getOrder, getOrderRaw, findOrders,
+  requestReturn, CustomerError, gql, probe, classify, sanitizeOrder };

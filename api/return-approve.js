@@ -8,7 +8,14 @@ module.exports = async (req, res) => {
   }
   try {
     // Merchant authority: the adapter refuses without an operator token.
-    const out = await shopify.approveReturn({ req });
+    // A returnId names one specific return in the queue; without one this
+    // falls back to the configured order, which is what the signed-out
+    // preview and the M4.2 regression path use.
+    const body = await readBody(req);
+    const returnId = body && body.returnId;
+    const out = returnId
+      ? await shopify.approveReturnById({ req, returnId: String(returnId) })
+      : await shopify.approveReturn({ req });
     return send(res, 200, { ok: true, ...out });
   } catch (e) { return fail(res, e); }
 };

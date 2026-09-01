@@ -8,6 +8,7 @@
 import { SCENARIOS, SCENARIO_KEYS, DEFAULT_SCENARIO, findScenarioByOrderId } from './fixtures.js';
 import { ResolutionSession, STATES, TOOLS_BY_STATE } from './state.js';
 import { LiveSession, LIVE_STATES } from './live.js';
+import { CustomerSession, CUSTOMER_STATES, describeReason, nextAction } from './customer.js';
 
 const session = new ResolutionSession(DEFAULT_SCENARIO);
 
@@ -17,6 +18,13 @@ const live = new LiveSession();
 let liveMode = false;
 let livePoll = null;
 const isLive = () => liveMode;
+
+// AUTHENTICATED CUSTOMER — the signed-in customer's own purchases, read through
+// the Customer Account API. This is the product; live and fixture modes below
+// are the signed-out fallback and the regression surface.
+const customer = new CustomerSession();
+let customerMode = false;
+const isCustomer = () => customerMode;
 
 let webmcpReady = 'modelContext' in document;
 const controllers = {};   // toolName -> AbortController
@@ -78,6 +86,137 @@ function liveToolDefs() {
       },
     },
   };
+}
+
+function customerToolDefs() {
+  return {
+    find_order: {
+      name: 'find_order',
+      description:
+        'Find one of this customer’s own purchases from how they describe it — ' +
+        '"my headphones", "the keyboard that arrived last week". Searches only the ' +
+        'purchases belonging to the signed-in customer; there is no way to reach ' +
+        'anyone else’s order. Returns exactly one match, several to choose ' +
+        'between, or none. It never guesses: if more than one purchase fits, ask ' +
+        'the customer which they mean. Read-only.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          product_query: { type: 'string', description: 'What the customer called the item, e.g. "headphones".' },
+          delivered_only: { type: 'boolean', description: 'Only purchases that have been delivered.' },
+          returnable_only: { type: 'boolean', description: 'Only purchases that still have returnable items.' },
+          recency_days: { type: 'integer', description: 'Only purchases from the last N days.' },
+        },
+        additionalProperties: false,
+      },
+      annotations: { readOnlyHint: true },
+      execute: async (args = {}) => {
+        const out = await customer.find({
+          productQuery: args.product_query,
+          deliveredOnly: args.delivered_only,
+          returnableOnly: args.returnable_only,
+          recencyDays: args.recency_days,
+        });
+        note('AGENT', `Looked for a purchase matching "${args.product_query || 'any'}"`);
+        renderCustomer({ deferTools: true });
+        if (!out.ok) return JSON.stringify(out);
+        return JSON.stringify({
+          matchCount: out.matchCount,
+          resolution: out.resolution,
+          note: out.note,
+          // Opaque, session-scoped handles. They resolve only against this
+          // customer's own purchases.
+          candidates: (out.candidates || []).map(c => ({
+            purchase_id: c.orderKey,
+            product: c.product,
+            purchasedAt: c.processedAt,
+            fulfillmentStatus: c.fulfillmentStatus,
+            returnable: c.returnable,
+            activeReturn: c.activeReturn,
+          })),
+          opened: out.resolution === 'single' ? customer.buildOrderPayload().orderReference : null,
+        });
+      },
+    },
+    get_order: {
+      name: 'get_order',
+      description:
+        'Read the purchase currently open on this page: product, amount, payment and ' +
+        'delivery status, whether it still has returnable items and why not if it does ' +
+        'not, plus any return already raised against it. Every fact comes from Shopify ' +
+        'under this customer’s own account. Pass purchase_id only to open one of ' +
+        'the candidates that find_order returned. Read-only.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          purchase_id: { type: 'string', description: 'A purchase_id from find_order. Omit to read the purchase already open.' },
+        },
+        additionalProperties: false,
+      },
+      annotations: { readOnlyHint: true },
+      execute: async (args = {}) => {
+        if (args.purchase_id) {
+          // Resolves only within this customer's own purchases; an injected or
+          // borrowed id simply does not match.
+          const picked = customer.select(args.purchase_id, 'AGENT');
+          if (!picked.ok) { renderCustomer({ deferTools: true }); return JSON.stringify(picked); }
+        }
+        await customer.refresh();
+        note('AGENT', 'Read the open purchase');
+        renderCustomer({ deferTools: true });
+        return JSON.stringify(customer.buildOrderPayload());
+      },
+    },
+    prepare_resolution: {
+      name: 'prepare_resolution',
+      description:
+        'Stage a return request for the customer to review. This contacts nothing and ' +
+        'creates nothing: only the customer can submit the request, and only the ' +
+        'merchant can approve it. Give the reason a return fits their situation; it is ' +
+        'shown to them as your reasoning.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          reason: { type: 'string', description: 'Short explanation of why a return fits this customer.' },
+        },
+        required: ['reason'],
+        additionalProperties: false,
+      },
+      annotations: { readOnlyHint: false },
+      execute: async (args = {}) => {
+        const out = customer.prepare({ reason: args.reason, actor: 'AGENT' });
+        renderCustomer({ deferTools: true });
+        return JSON.stringify(out.ok ? { success: true, ...out } : out);
+      },
+    },
+  };
+}
+
+/**
+ * Which tools are valid right now for a signed-in customer.
+ *
+ * find_order is always available: a customer may ask about a different purchase
+ * at any point. No completion tool ever appears — submitting the return is the
+ * customer's action, not the agent's.
+ */
+function customerAllowedTools() {
+  switch (customer.state) {
+    case CUSTOMER_STATES.BROWSING:
+    case CUSTOMER_STATES.NO_PURCHASES:
+      return ['find_order', 'get_order'];
+    case CUSTOMER_STATES.ORDER_ACTIVE: {
+      const o = customer.selected;
+      return o && o.returnable && !o.activeReturn
+        ? ['find_order', 'get_order', 'prepare_resolution']
+        : ['find_order', 'get_order'];
+    }
+    case CUSTOMER_STATES.RESOLUTION_PREPARED:
+    case CUSTOMER_STATES.RETURN_REQUESTED:
+    case CUSTOMER_STATES.RETURN_APPROVED:
+      return ['find_order', 'get_order'];
+    default:
+      return [];
+  }
 }
 
 /** Which tools are valid right now in LIVE mode. Never a completion tool. */
@@ -210,8 +349,8 @@ function unregisterTool(name) {
  * Agents must only ever see tools that are valid right now.
  */
 function syncTools({ force = false } = {}) {
-  const want = isLive() ? liveAllowedTools() : session.allowedTools();
-  const defs = isLive() ? liveToolDefs() : toolDefs();
+  const want = isCustomer() ? customerAllowedTools() : isLive() ? liveAllowedTools() : session.allowedTools();
+  const defs = isCustomer() ? customerToolDefs() : isLive() ? liveToolDefs() : toolDefs();
 
   for (const name of Object.keys(controllers)) {
     if (force || !want.includes(name)) unregisterTool(name);
@@ -478,6 +617,253 @@ function liveRailIndex() {
   return i < 0 ? 0 : i;
 }
 
+// ═══════════════════════════════════════════════════════════════════
+// AUTHENTICATED CUSTOMER SURFACE
+// ═══════════════════════════════════════════════════════════════════
+
+const fmtMoney = (n, c) => (n == null ? '' : `${Number(n).toFixed(2)} ${c || ''}`.trim());
+const fmtDate = d => (d ? new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '');
+
+/** The customer product surface. No fixtures, no state rail, no tool chatter. */
+function renderCustomer({ deferTools = false } = {}) {
+  // Developer scaffolding is not part of a customer's experience.
+  const fx = document.querySelector('.fixtures');
+  if (fx) fx.classList.add('hidden');
+  const rail = $('rail');
+  if (rail) rail.classList.add('hidden');
+  const badge = $('badge');
+  if (badge) { badge.textContent = 'Your account'; badge.classList.remove('on'); }
+
+  const foot = $('foot-txt');
+  if (foot) foot.textContent =
+    'Your purchases, read from the merchant’s Shopify store. Returns created here are real.';
+
+  const auth = document.querySelector('.authority');
+  if (auth) auth.innerHTML = `
+    <div class="auth-card auth-card--agent"><h3>Your assistant can</h3>
+      <p>Find the purchase you mean, read it, and get a return ready for you.</p></div>
+    <div class="auth-card auth-card--you"><h3>Only you can</h3>
+      <p>Submit the request. Nothing is sent to the merchant until you do.</p></div>
+    <div class="auth-card auth-card--merchant"><h3>Only the merchant can</h3>
+      <p>Approve it. That decision is theirs, and it lives in their store.</p></div>`;
+
+  const attentionEl = $('attention');
+  const inboxEl = $('inbox');
+
+  if (customer.state === CUSTOMER_STATES.UNAVAILABLE) {
+    if (attentionEl) attentionEl.classList.add('hidden');
+    if (inboxEl) inboxEl.classList.add('hidden');
+    $('order-card').innerHTML = `<div class="order-top"><div class="order-id">Your purchases</div>
+      <div class="pill pill--issue">Unavailable</div></div>
+      <div class="opt-meta" style="margin-top:10px">${esc(customer.error || 'Loading…')}</div>`;
+    $('surface').innerHTML = '';
+    renderCustomerAudit();
+    return;
+  }
+
+  renderAttention();
+  renderInbox();
+
+  const o = customer.selected;
+  if (!o) {
+    $('order-card').classList.add('hidden');
+    $('surface').innerHTML = customer.purchases.length
+      ? `<div class="opt-meta">Pick a purchase above, or just tell your assistant what went wrong.</div>`
+      : `<div class="opt-meta">There are no purchases in this account yet.</div>`;
+    renderCustomerAudit();
+    if (deferTools) setTimeout(() => { syncTools(); renderProtocol(); }, 50);
+    else { syncTools(); renderProtocol(); }
+    return;
+  }
+
+  $('order-card').classList.remove('hidden');
+  const active = o.activeReturn;
+  const act = nextAction(o);
+  const pill = active
+    ? `<div class="pill ${active.status === 'OPEN' ? 'pill--done' : 'pill--working'}">${esc(act ? act.label : active.status)}</div>`
+    : o.returnable ? '<div class="pill pill--working">Eligible for return</div>' : '';
+
+  $('order-card').innerHTML = `
+    <div class="order-top">
+      <div class="order-id">${esc(o.product)}</div>
+      ${pill}
+    </div>
+    <div class="price">${esc(fmtMoney(o.price, o.currency))}</div>
+    <div class="opt-meta">${esc(o.orderReference)} · ordered ${esc(fmtDate(o.processedAt))}${
+      o.fulfillmentStatus ? ' · ' + esc(String(o.fulfillmentStatus).toLowerCase()) : ''}</div>
+    <div style="margin-top:12px"><button class="btn btn-ghost" id="cust-back">← All purchases</button></div>`;
+
+  const el = $('surface');
+
+  if (active) {
+    const approved = active.status === 'OPEN';
+    const d = act || { label: active.status, detail: '' };
+    el.innerHTML = `
+      <div class="${approved ? 'resolved' : 'decision'}">
+        ${approved ? '<div class="check">✓</div>' : ''}
+        <div class="decision-label" ${approved ? 'style="color:var(--success)"' : ''}>${esc(d.label)}</div>
+        <div class="decision-title">${esc(o.product)}</div>
+        <div class="decision-recv">${esc(d.detail)}</div>
+        <div class="block block--merchant">
+          <div class="block-tag">From the merchant’s store</div>
+          <div class="terms">
+            <div class="term"><div class="term-k">Return</div><div class="term-v">${esc(active.reference || '')}</div></div>
+            <div class="term"><div class="term-k">Shopify status</div><div class="term-v"><code>${esc(active.status)}</code></div></div>
+          </div>
+        </div>
+        <div class="opt-meta" style="margin-top:12px">
+          This comes from the merchant’s store, not from this page. Reload and it is still true.
+        </div>
+      </div>`;
+  } else if (customer.state === CUSTOMER_STATES.RESOLUTION_PREPARED) {
+    const p = customer.preparedResolution;
+    const reasoning = p.reason
+      ? `<div class="block block--agent">
+           <div class="block-tag">Your assistant&rsquo;s reasoning <small>&mdash; not merchant policy</small></div>
+           <p>&ldquo;${esc(p.reason)}&rdquo;</p></div>`
+      : '';
+    el.innerHTML = `
+      <div class="decision">
+        <div class="decision-label">Ready for your decision</div>
+        <div class="decision-title">${esc(p.label)}</div>
+        <div class="decision-recv">A return approved by the merchant, then a refund once they receive it</div>
+        ${reasoning}
+        <div class="block block--merchant">
+          <div class="block-tag">What will happen</div>
+          <div class="terms">
+            <div class="term"><div class="term-k">Action</div><div class="term-v">Ask the merchant to accept this return</div></div>
+            <div class="term"><div class="term-k">Items</div><div class="term-v">${esc(p.quantity)}</div></div>
+            <div class="term"><div class="term-k">Then</div><div class="term-v">The merchant reviews it before anything is refunded</div></div>
+          </div>
+        </div>
+        <div class="commit-note">Nothing has been sent yet. Submitting this asks the merchant for a real return.</div>
+        <div class="actions">
+          <button class="btn btn-go" id="cust-request">Request return</button>
+          <button class="btn btn-no" id="cust-cancel">Cancel</button>
+        </div>
+        <div id="cust-error"></div>
+      </div>`;
+  } else if (o.returnable) {
+    el.innerHTML = `
+      <section class="card">
+        <div class="head">What you can do with this purchase</div>
+        <div class="opt"><div class="opt-top"><div class="opt-name">Return ${esc(o.product)}</div>
+          <div class="opt-timing">Needs merchant approval</div></div>
+          <div class="opt-recv">A return approved by the merchant, then a refund once they receive it</div>
+          <div class="opt-meta">${esc(o.returnableQuantity)} item${o.returnableQuantity === 1 ? '' : 's'} eligible</div>
+          <div class="opt-action"><button class="btn btn-alt" id="cust-choose">Choose this</button></div>
+        </div>
+        <div class="opt-meta" style="margin-top:12px">
+          What the merchant allows is set by them. This page reads it; it does not decide it.
+        </div>
+      </section>`;
+  } else {
+    const why = (o.nonReturnableReasons || []).map(describeReason);
+    el.innerHTML = `
+      <section class="card">
+        <div class="head">No return available for this purchase</div>
+        <div class="opt-meta">${why.length ? esc(why.join(' · ')) : 'The merchant’s store reports nothing to return here.'}</div>
+      </section>`;
+  }
+
+  renderCustomerAudit();
+  if (deferTools) setTimeout(() => { syncTools(); renderProtocol(); }, 50);
+  else { syncTools(); renderProtocol(); }
+}
+
+/** Purchases that need something from the customer, derived from real state. */
+function renderAttention() {
+  const el = $('attention');
+  if (!el) return;
+  const rows = customer.buildInbox()
+    .map(p => ({ p, a: p.nextAction }))
+    .filter(x => x.a && (x.a.level === 'action' || x.a.level === 'waiting'));
+  if (!rows.length) { el.classList.add('hidden'); el.innerHTML = ''; return; }
+  el.classList.remove('hidden');
+  el.innerHTML = `<div class="attention-h">Needs your attention</div>` + rows.map(({ p, a }) => `
+    <div class="attention-row"><b>${esc(a.label)}</b> — ${esc(p.product)}</div>
+    <div class="attention-sub">${esc(a.detail)}</div>`).join('');
+}
+
+function renderInbox() {
+  const el = $('inbox');
+  if (!el) return;
+  const items = customer.buildInbox();
+  if (!items.length) { el.classList.add('hidden'); return; }
+  el.classList.remove('hidden');
+  el.innerHTML = `<div class="head">Your purchases</div>` + items.map(p => {
+    const a = p.nextAction;
+    return `<button class="pitem ${p.orderKey === customer.selectedKey ? 'pitem--on' : ''}" data-purchase="${esc(p.orderKey)}">
+      <div class="pitem-main">
+        <div class="pitem-name">${esc(p.product || 'Purchase')}</div>
+        <div class="pitem-sub">${esc(fmtDate(p.purchasedAt))}${
+          p.fulfillmentStatus ? ' · ' + esc(String(p.fulfillmentStatus).toLowerCase()) : ''} · ${esc(fmtMoney(p.price, p.currency))}</div>
+      </div>
+      ${a ? `<div class="pitem-state st-${esc(a.level)}">${esc(a.label)}</div>` : ''}
+    </button>`;
+  }).join('');
+}
+
+function renderCustomerAudit() {
+  const el = $('audit');
+  if (!el) return;
+  if (!customer.audit.length) { el.innerHTML = '<div class="empty">No activity yet</div>'; return; }
+  el.innerHTML = customer.audit.map(e => {
+    const t = new Date(e.timestamp).toLocaleTimeString('en-US', { hour12: false });
+    return `<div class="entry"><div class="entry-actor entry-actor--${esc(String(e.actor).toLowerCase())}">${esc(e.actor)}</div>
+      <div class="entry-body"><div class="entry-action">${esc(e.action)}</div><div class="entry-time">${esc(t)}</div></div></div>`;
+  }).join('');
+}
+
+async function handleCustomerClick(t) {
+  if (t.dataset.purchase) {
+    customer.select(t.dataset.purchase, 'CUSTOMER');
+    renderCustomer();
+    return;
+  }
+  switch (t.id) {
+    case 'cust-back':
+      customer.selectedKey = null; customer.preparedResolution = null;
+      customer.deriveState(); renderCustomer();
+      return;
+    case 'cust-choose':
+      customer.prepare({ reason: null, actor: 'CUSTOMER' });
+      renderCustomer();
+      return;
+    case 'cust-cancel':
+      customer.cancelPrepared();
+      await customer.refresh();
+      renderCustomer();
+      return;
+    case 'cust-request': {
+      const btn = $('cust-request');
+      if (btn) { btn.disabled = true; btn.textContent = 'Requesting…'; }   // double-click guard
+      const out = await customer.requestReturn();
+      renderCustomer();
+      if (!out.ok) {
+        const box = $('cust-error');
+        if (box) box.innerHTML = '<div class="commit-note" style="background:rgba(225,112,85,.1);' +
+          'border-color:rgba(225,112,85,.25);color:#f0b8a4">' + esc(out.error || 'Could not request the return.') +
+          (out.detail ? ' (' + esc([].concat(out.detail).join('; ')) + ')' : '') + '</div>';
+      }
+      return;
+    }
+    case 'reset':
+      await customer.refresh();
+      renderCustomer();
+      return;
+  }
+}
+
+async function enterCustomerMode() {
+  customerMode = true; liveMode = false;
+  if (livePoll) { clearInterval(livePoll); livePoll = null; }
+  await customer.load();
+  if (customer.state === CUSTOMER_STATES.SIGNED_OUT) { customerMode = false; return false; }
+  renderCustomer();
+  return true;
+}
+
 function renderLive({ deferTools = false } = {}) {
   renderFixtures();
 
@@ -627,6 +1013,7 @@ function renderLiveAudit() {
  *   executeTool can resolve first.
  */
 function render({ deferTools = false } = {}) {
+  if (isCustomer()) return renderCustomer({ deferTools });
   if (isLive()) return renderLive({ deferTools });
   const foot = $('foot-txt');
   if (foot) foot.textContent =
@@ -694,6 +1081,9 @@ document.addEventListener('click', (ev) => {
   // The sign-in strip is chrome, not part of either surface. It must be handled
   // before the live-mode branch below, which claims every other id'd button.
   if (t.id === 'signout') { signOut(); return; }
+
+  // A signed-in customer's page has no fixtures and no live-mode controls.
+  if (isCustomer() && !t.dataset.scenario) { handleCustomerClick(t); return; }
 
   if (isLive() && t.id && t.id !== 'reset' && !t.dataset.scenario) {
     handleLiveClick(t.id);
@@ -877,6 +1267,12 @@ renderSignIn();
 (async () => {
   const forceFixtures = new URLSearchParams(location.search).get('mode') === 'fixtures';
   if (!forceFixtures) {
+    // Signed in: their own purchases, through the Customer Account API.
+    try {
+      const sess = await (await fetch('/api/auth/session')).json();
+      if (sess.authenticated && await enterCustomerMode()) return;
+    } catch (e) { /* fall through */ }
+    // Signed out: the merchant-configured order, if the store is connected.
     try {
       const r = await fetch('/api/order');
       const b = await r.json();

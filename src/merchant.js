@@ -35,6 +35,37 @@ async function load() {
   } catch (e) {
     renderUnavailable('Could not reach the commerce system.');
   }
+  loadQueue();
+}
+
+/**
+ * Every return in the store that is waiting on, or has had, a decision.
+ *
+ * A customer can raise a return against any purchase they own, so the desk
+ * reads the whole queue rather than one configured order. Merchant-only data:
+ * without an operator token the server refuses and this stays empty.
+ */
+async function loadQueue() {
+  const el = $('queue');
+  if (!el) return;
+  if (!getToken()) { el.innerHTML = ''; return; }
+  try {
+    const r = await fetch('/api/return-queue', { headers: { 'x-merchant-token': getToken() } });
+    const body = await r.json();
+    if (!body.ok) { el.innerHTML = ''; return; }
+    const rows = body.returns || [];
+    if (!rows.length) {
+      el.innerHTML = '<div class="card"><div class="lbl">Return queue</div>' +
+        '<div class="empty">No returns are waiting.</div></div>';
+      return;
+    }
+    el.innerHTML = '<div class="card"><div class="lbl">Return queue &middot; whole store</div>' +
+      rows.map(r => `<div class="row">
+        <div class="k">${esc(r.orderReference)} &middot; ${esc(r.reference)}</div>
+        <div class="v">${esc(r.status)}${r.status === 'REQUESTED'
+          ? ` <button class="btn" data-approve="${esc(r.externalId)}">Approve</button>` : ''}</div>
+      </div>`).join('') + '</div>';
+  } catch (e) { el.innerHTML = ''; }
 }
 
 function renderUnavailable(msg) {
@@ -109,6 +140,25 @@ document.addEventListener('click', async (ev) => {
     const input = document.getElementById('token-input');
     if (input && input.value.trim()) { setToken(input.value.trim()); lastError = null; }
     return load();
+  }
+
+  if (t.dataset && t.dataset.approve) {
+    if (busy) return;                    // merchant double-click guard
+    busy = true; lastError = null;
+    try {
+      const res = await fetch('/api/return-approve', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-merchant-token': getToken() },
+        body: JSON.stringify({ returnId: t.dataset.approve }),
+      });
+      const body = await res.json();
+      if (!body.ok) lastError = body.error + (body.detail ? ' (' + [].concat(body.detail).join('; ') + ')' : '');
+    } catch (e) {
+      lastError = 'Could not reach the commerce system.';
+    }
+    busy = false;
+    await load();                        // never optimistic: re-read Shopify
+    return;
   }
 
   if (t.id === 'approve') {

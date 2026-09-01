@@ -294,6 +294,78 @@ async function approveReturn({ req } = {}) {
   return { return: sanitizeReturn(r.return) };
 }
 
+/**
+ * Every return awaiting or holding merchant attention, across the store.
+ *
+ * The merchant desk cannot be pinned to one configured order: a customer may
+ * raise a return on any purchase they own, and the merchant has to see it.
+ *
+ * Store-wide return data is merchant-only, so this requires merchant authority
+ * — it is not part of the anonymous surface.
+ */
+async function listPendingReturns({ req, first = 25 } = {}) {
+  if (!merchantAuthorized(req)) {
+    throw new ShopifyError('MERCHANT_UNAUTHORIZED', 'Viewing the return queue requires merchant authority.');
+  }
+  const data = await gql(`query($first: Int!) {
+    orders(first: $first, sortKey: CREATED_AT, reverse: true) {
+      nodes { id name returns(first: 5) { nodes { id name status } } }
+    }
+  }`, { first: Math.min(Math.max(1, first), 50) });
+
+  const out = [];
+  for (const o of (data.orders?.nodes || [])) {
+    for (const r of (o.returns?.nodes || [])) {
+      if (r.status === 'REQUESTED' || r.status === 'OPEN') {
+        out.push({ orderReference: o.name, ...sanitizeReturn(r) });
+      }
+    }
+  }
+  // Requested first: those are the ones waiting on a decision.
+  return out.sort((a, b) => (a.status === 'REQUESTED' ? -1 : 1) - (b.status === 'REQUESTED' ? -1 : 1));
+}
+
+/**
+ * Merchant-initiated approval of one specific return. REQUESTED -> OPEN.
+ *
+ * The id must name a return that is actually REQUESTED; a stale or already
+ * approved id is refused rather than silently re-approved.
+ */
+async function approveReturnById({ req, returnId } = {}) {
+  if (!mutationsEnabled()) {
+    throw new ShopifyError('MUTATIONS_DISABLED', 'Approvals are disabled on this deployment.');
+  }
+  if (!merchantAuthorized(req)) {
+    throw new ShopifyError('MERCHANT_UNAUTHORIZED', 'Approving a return requires merchant authority.');
+  }
+  if (!/^[0-9]+$/.test(String(returnId || ''))) {
+    throw new ShopifyError('BAD_RETURN_ID', 'That is not a valid return reference.');
+  }
+  const gid = `gid://shopify/Return/${returnId}`;
+
+  const check = await gql(`query($id: ID!) { return(id: $id) { id name status } }`, { id: gid });
+  const current = check.return;
+  if (!current) throw new ShopifyError('ORDER_NOT_FOUND', 'That return no longer exists.');
+  if (current.status !== 'REQUESTED') {
+    throw new ShopifyError('NOT_REQUESTED', `This return is already ${current.status}.`,
+      { current: sanitizeReturn(current) });
+  }
+
+  const data = await gql(`mutation($id: ID!) {
+    returnApproveRequest(input: { id: $id }) {
+      return { id name status }
+      userErrors { field message }
+    }
+  }`, { id: gid });
+
+  const r = data.returnApproveRequest;
+  if (r.userErrors && r.userErrors.length) {
+    throw new ShopifyError('USER_ERRORS', 'Shopify rejected the approval.', r.userErrors.map(e => e.message));
+  }
+  if (!r.return) throw new ShopifyError('NO_RETURN', 'Shopify did not return a Return object.');
+  return { return: sanitizeReturn(r.return) };
+}
+
 /** Independent re-read of external state. Never served from local memory. */
 async function returnStatus() {
   const order = await fetchOrderByName(ACTIVE_ORDER);
@@ -306,7 +378,8 @@ async function returnStatus() {
 }
 
 module.exports = {
-  configured, getOrder, requestReturn, approveReturn, returnStatus,
+  configured, getOrder, requestReturn, approveReturn, approveReturnById,
+  listPendingReturns, returnStatus,
   activeReturn, sanitizeReturn, ShopifyError, API_VERSION,
   ACTIVE_ORDER, mutationsEnabled, merchantAuthorized,
   shopHost: () => SHOP,

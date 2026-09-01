@@ -19,9 +19,11 @@ module.exports = async (req, res) => {
   try {
     // Only the authenticated customer's own orders. No parameter widens this.
     if (q.key) return send(res, 200, { ok: true, order: await customer.getOrder(req, q.key) });
-    if (q.q || q.delivered_only || q.since_days) {
+    if (q.q || q.delivered_only || q.returnable_only || q.since_days) {
       return send(res, 200, { ok: true, ...(await customer.findOrders(req, {
-        productQuery: q.q, deliveredOnly: q.delivered_only === 'true',
+        productQuery: q.q,
+        deliveredOnly: q.delivered_only === 'true',
+        returnableOnly: q.returnable_only === 'true',
         sinceDays: q.since_days ? Number(q.since_days) : undefined,
       })) });
     }
