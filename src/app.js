@@ -691,6 +691,10 @@ document.addEventListener('click', (ev) => {
   const t = ev.target.closest('[data-scenario], [data-pick], [data-choose], button');
   if (!t) return;
 
+  // The sign-in strip is chrome, not part of either surface. It must be handled
+  // before the live-mode branch below, which claims every other id'd button.
+  if (t.id === 'signout') { signOut(); return; }
+
   if (isLive() && t.id && t.id !== 'reset' && !t.dataset.scenario) {
     handleLiveClick(t.id);
     return;
@@ -744,9 +748,6 @@ document.addEventListener('click', (ev) => {
       if (chosenId && chosenId !== session.preparedResolution.option.id) session.chooseAnother(chosenId);
       choosing = false; chosenId = null;
       render();
-      break;
-    case 'signout':
-      fetch('/api/auth/logout', { method: 'POST' }).then(() => renderSignIn());
       break;
     case 'reset':
       if (isLive()) { live.refresh().then(() => renderLive()); return; }
@@ -829,6 +830,24 @@ function leaveLiveMode() {
 // Shopify Customer Account sign-in. The product still reads the order through
 // the merchant path; signing in is what will scope orders to the customer once
 // that migration is proven (docs/M4_3_PREFLIGHT.md).
+/**
+ * Signing out has to end the session at Shopify as well as here. Clearing only
+ * our own cookie leaves the issuer session intact, so the next sign-in silently
+ * reuses the existing grant: it looks like sign-out did nothing, and a customer
+ * can never re-consent after the app's scopes change.
+ */
+async function signOut() {
+  const btn = $('signout');
+  if (btn) { btn.disabled = true; btn.textContent = 'Signing out…'; }
+  let redirectUrl = null;
+  try {
+    const r = await fetch('/api/auth/logout', { method: 'POST' });
+    redirectUrl = (await r.json()).redirectUrl;
+  } catch (e) { /* fall through to a local-only sign-out */ }
+  if (redirectUrl) { location.href = redirectUrl; return; }
+  await renderSignIn();
+}
+
 async function renderSignIn() {
   const el = $('signin-strip');
   if (!el) return;

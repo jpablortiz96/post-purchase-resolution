@@ -18,12 +18,22 @@ const SHOP = RAW.includes('.') ? RAW : `${RAW}.myshopify.com`;
 const CLIENT_ID = process.env.SHOPIFY_CLIENT_ID;
 const REDIRECT_URI = process.env.SHOPIFY_CUSTOMER_REDIRECT_URI
   || 'https://post-purchase-resolution.vercel.app/api/auth/callback';
+/** Must match a registered logout_url in shopify.app.toml. */
+const POST_LOGOUT_REDIRECT_URI = process.env.SHOPIFY_POST_LOGOUT_REDIRECT_URI
+  || 'https://post-purchase-resolution.vercel.app';
 
 /** Minimum scopes. `email` is deliberately not requested — nothing needs it. */
 const SCOPES = 'openid customer-account-api:full';
 
 const TXN_COOKIE = 'ppr_txn';
 const SESSION_COOKIE = 'ppr_sess';
+/**
+ * The id_token lives in its own sealed cookie rather than inside the session.
+ * RP-initiated logout requires it as `id_token_hint`, but both it and the
+ * access token are large, and one combined cookie risks the 4KB per-cookie
+ * limit. Splitting them keeps each well clear of it.
+ */
+const IDT_COOKIE = 'ppr_idt';
 const TXN_TTL_MS = 10 * 60 * 1000;
 
 // ── discovery ────────────────────────────────────────────────────────
@@ -191,12 +201,15 @@ async function exchangeCode({ code, state, req }) {
   }
 
   const expiresAt = Date.now() + ((tok.expires_in || 7200) * 1000);
+  const ttl = Math.floor(tok.expires_in || 7200);
   const sess = seal({ at: tok.access_token, exp: expiresAt, sub: subject });
 
-  return {
-    // Clearing the one-time transaction is part of the success path.
-    cookies: [cookie(SESSION_COOKIE, sess, Math.floor((tok.expires_in || 7200))), clearCookie(TXN_COOKIE)],
-  };
+  const cookies = [cookie(SESSION_COOKIE, sess, ttl), clearCookie(TXN_COOKIE)];
+  // Kept server-side only, solely so sign-out can end the session at Shopify
+  // rather than merely dropping our own cookie.
+  if (tok.id_token) cookies.push(cookie(IDT_COOKIE, seal({ idt: tok.id_token }), ttl));
+
+  return { cookies };
 }
 
 function decodeJwtPayload(jwt) {
@@ -228,9 +241,46 @@ async function logoutRedirect() {
   return d.endSessionEndpoint || null;
 }
 
+/**
+ * RP-initiated logout URL.
+ *
+ * Clearing our own cookie only signs the customer out of *this* app: Shopify's
+ * own session survives, so the next authorization returns a token from the
+ * existing grant. That makes sign-out look broken, and — more importantly —
+ * means a customer cannot re-consent after the app's scopes change. Ending the
+ * session at the issuer is what makes the next sign-in a genuine one.
+ */
+async function buildLogoutUrl(req) {
+  const d = await discover();
+  if (!d.endSessionEndpoint) return null;
+  const held = unseal(parseCookies(req)[IDT_COOKIE]);
+  if (!held || !held.idt) return null;          // id_token_hint is required
+  const url = new URL(d.endSessionEndpoint);
+  url.searchParams.set('id_token_hint', held.idt);
+  url.searchParams.set('post_logout_redirect_uri', POST_LOGOUT_REDIRECT_URI);
+  return url.toString();
+}
+
+/**
+ * Shape of the held access token — for diagnosis only.
+ *
+ * Reports whether the token carries the documented public `shcat_` prefix that
+ * the Customer Account API requires. A prefix is not credential material: no
+ * token bytes, length or entropy leave this function.
+ */
+function tokenShape(req) {
+  const s = getSession(req);
+  if (!s || !s.at) return { present: false };
+  return {
+    present: true,
+    hasCustomerApiPrefix: String(s.at).startsWith('shcat_'),
+    looksLikeJwt: String(s.at).split('.').length === 3,
+  };
+}
+
 module.exports = {
   discover, buildAuthorizationUrl, exchangeCode, getSession, publicSession,
-  logoutRedirect, parseCookies, clearCookie, seal, unseal,
-  AuthError, SESSION_COOKIE, TXN_COOKIE, REDIRECT_URI, SCOPES,
+  logoutRedirect, buildLogoutUrl, tokenShape, parseCookies, clearCookie, seal, unseal,
+  AuthError, SESSION_COOKIE, TXN_COOKIE, IDT_COOKIE, REDIRECT_URI, SCOPES,
   shopHost: () => SHOP,
 };
