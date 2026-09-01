@@ -50,10 +50,12 @@ async function loadQueue() {
   if (!el) return;
   if (!getToken()) { el.innerHTML = ''; return; }
   try {
-    const r = await fetch('/api/return-queue', { headers: { 'x-merchant-token': getToken() } });
+    // The queue rides along with the status read, and only for a caller the
+    // server accepts as the merchant.
+    const r = await fetch('/api/return-status', { headers: { 'x-merchant-token': getToken() } });
     const body = await r.json();
-    if (!body.ok) { el.innerHTML = ''; return; }
-    const rows = body.returns || [];
+    if (!body.ok || !body.queue) { el.innerHTML = ''; return; }
+    const rows = body.queue;
     if (!rows.length) {
       el.innerHTML = '<div class="card"><div class="lbl">Return queue</div>' +
         '<div class="empty">No returns are waiting.</div></div>';
