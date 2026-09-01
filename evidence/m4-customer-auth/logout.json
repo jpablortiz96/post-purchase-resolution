@@ -1,0 +1,18 @@
+{
+  "capturedAt": "2026-09-01T17:21:57.116Z",
+  "route": "POST /api/auth/logout",
+  "httpStatus": 200,
+  "response": {
+    "ok": true,
+    "authenticated": false,
+    "shopifyEndSessionEndpoint": "discovered"
+  },
+  "clearsCookies": [
+    "ppr_sess",
+    "ppr_txn"
+  ],
+  "getIsRefused": 405,
+  "sessionAfterLogout": {
+    "authenticated": false
+  }
+}

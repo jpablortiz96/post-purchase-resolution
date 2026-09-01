@@ -1,0 +1,28 @@
+{
+  "capturedAt": "2026-09-01T17:21:57.116Z",
+  "status": "NOT_RUN",
+  "reason": "Requires an authenticated customer session.",
+  "sanitizedShape": {
+    "source": "shopify-customer-account",
+    "orderReference": "#NNNN",
+    "orderKey": "opaque, session-scoped",
+    "processedAt": "ISO",
+    "product": "string",
+    "quantity": 1,
+    "price": 0,
+    "currency": "USD",
+    "financialStatus": "PAID",
+    "fulfillmentStatus": "FULFILLED",
+    "returnable": true,
+    "returnableQuantity": 1,
+    "nonReturnableReasons": []
+  },
+  "deliberatelyAbsent": [
+    "email",
+    "name",
+    "address",
+    "phone",
+    "raw gid",
+    "admin url"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "capturedAt": "2026-09-01T17:21:57.115Z",
+  "status": "NOT_CAPTURED",
+  "reason": "Shopify customer sign-in is an email one-time code. Completing it requires a person with access to a customer mailbox; it cannot be driven from this environment.",
+  "observedLoginPage": {
+    "url": "shopify.com/authentication/<id>/login",
+    "inputs": [
+      {
+        "type": "email",
+        "name": "customer-authentication-web-email"
+      },
+      {
+        "type": "checkbox",
+        "name": "marketing-consent"
+      }
+    ],
+    "buttons": [
+      "Enviar"
+    ]
+  },
+  "unauthenticatedSessionResponse": {
+    "authenticated": false
+  },
+  "shapeWhenAuthenticated": {
+    "authenticated": true,
+    "expiresInSeconds": "<number>"
+  },
+  "deliberatelyAbsent": [
+    "access_token",
+    "id_token",
+    "email",
+    "phone",
+    "address",
+    "sub",
+    "customer id"
+  ]
+}

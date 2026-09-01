@@ -745,6 +745,9 @@ document.addEventListener('click', (ev) => {
       choosing = false; chosenId = null;
       render();
       break;
+    case 'signout':
+      fetch('/api/auth/logout', { method: 'POST' }).then(() => renderSignIn());
+      break;
     case 'reset':
       if (isLive()) { live.refresh().then(() => renderLive()); return; }
       session.reset(session.scenario.key);
@@ -821,7 +824,33 @@ function leaveLiveMode() {
   syncTools({ force: true });
 }
 
+// ── customer sign-in state ────────────────────────────────────────
+//
+// Shopify Customer Account sign-in. The product still reads the order through
+// the merchant path; signing in is what will scope orders to the customer once
+// that migration is proven (docs/M4_3_PREFLIGHT.md).
+async function renderSignIn() {
+  const el = $('signin-strip');
+  if (!el) return;
+  let sess = { authenticated: false };
+  try { sess = await (await fetch('/api/auth/session')).json(); } catch (e) {}
+
+  const params = new URLSearchParams(location.search);
+  const justFailed = params.get('signin') === 'failed';
+
+  el.innerHTML = sess.authenticated
+    ? `<div class="signin signin--in">
+         <span><b>Signed in</b> to your customer account.</span>
+         <button class="btn btn-ghost" id="signout">Sign out</button>
+       </div>`
+    : `<div class="signin">
+         <span>${justFailed ? 'That sign-in did not complete. ' : ''}<b>Sign in</b> to see your own orders.</span>
+         <a class="btn btn-alt" href="/api/auth/login" style="text-decoration:none">Sign in</a>
+       </div>`;
+}
+
 setBadge(webmcpReady);
+renderSignIn();
 
 // Live commerce is the hero flow when the backend is configured; fall back to
 // fixtures if it is not. ?mode=fixtures forces the deterministic scenarios,

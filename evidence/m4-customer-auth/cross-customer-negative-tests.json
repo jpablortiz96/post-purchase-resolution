@@ -1,0 +1,45 @@
+{
+  "capturedAt": "2026-09-01T17:22:56.756Z",
+  "status": "PARTIAL — negative direction only",
+  "provenNow": "No request without a valid customer session reaches any customer data, and no parameter widens scope.",
+  "notProven": "That customer A cannot see customer B data WHILE authenticated. Needs two customer accounts with orders.",
+  "attempts": [
+    {
+      "probe": "GET /api/customer/orders (no session)",
+      "result": "401 NOT_AUTHENTICATED"
+    },
+    {
+      "probe": "GET /api/customer/whoami (no session)",
+      "result": "401 NOT_AUTHENTICATED"
+    },
+    {
+      "probe": "?key=gid://shopify/Order/12602041500020",
+      "result": "401"
+    },
+    {
+      "probe": "?key=1001",
+      "result": "401"
+    },
+    {
+      "probe": "?key=#1002",
+      "result": "401"
+    },
+    {
+      "probe": "?key=../../admin",
+      "result": "401"
+    },
+    {
+      "probe": "?key=999999999",
+      "result": "401"
+    },
+    {
+      "probe": "?customerId=1234567890",
+      "result": "401"
+    },
+    {
+      "probe": "forged ppr_sess cookie",
+      "result": "401 — AEAD rejects"
+    }
+  ],
+  "designNote": "getOrder(key) resolves the key against the authenticated customer own order list rather than passing an identifier to Shopify, so a forged or borrowed key cannot resolve."
+}

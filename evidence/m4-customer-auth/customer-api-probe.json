@@ -1,0 +1,9 @@
+{
+  "capturedAt": "2026-09-01T17:21:57.115Z",
+  "status": "NOT_RUN",
+  "reason": "Requires an authenticated customer session (see authenticated-session.json).",
+  "plannedSmallestQuery": "query { customer { id } }",
+  "endpoint": "discovered via /.well-known/customer-account-api (graphql_api, 2026-07)",
+  "authorizationHeader": "the customer access token, held server-side only",
+  "note": "No Admin API order enumeration is used for buyer order discovery."
+}

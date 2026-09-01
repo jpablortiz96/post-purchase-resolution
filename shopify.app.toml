@@ -1,0 +1,32 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "0d61c7faf3f935bb11af2e5a36555e90"
+name = "WebMCP Resolution Connector"
+application_url = "https://shopify.dev/apps/default-app-home"
+embedded = true
+
+[webhooks]
+api_version = "2026-07"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "read_orders,read_returns,write_returns"
+optional_scopes = [ ]
+use_legacy_install_flow = false
+
+[auth]
+redirect_urls = [ ]
+
+[customer_authentication]
+
+redirect_uris = [
+  "https://post-purchase-resolution.vercel.app/api/auth/callback"
+]
+
+javascript_origins = [
+  "https://post-purchase-resolution.vercel.app"
+]
+
+logout_urls = [
+  "https://post-purchase-resolution.vercel.app"
+]

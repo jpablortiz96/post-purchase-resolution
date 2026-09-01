@@ -1,0 +1,154 @@
+{
+  "ranAt": "2026-09-01T17:23:21.933Z",
+  "target": "https://post-purchase-resolution.vercel.app",
+  "passed": 32,
+  "total": 32,
+  "note": "No authorization code, access token, id token or PKCE verifier is recorded anywhere in this file.",
+  "tests": [
+    {
+      "name": "login redirects to the discovered Shopify endpoint",
+      "pass": true,
+      "detail": 302
+    },
+    {
+      "name": "login sets an HttpOnly, Secure, SameSite transaction cookie",
+      "pass": true
+    },
+    {
+      "name": "code_verifier never appears in the authorization URL",
+      "pass": true
+    },
+    {
+      "name": "client_secret never appears in the authorization URL",
+      "pass": true
+    },
+    {
+      "name": "PKCE S256 is requested",
+      "pass": true
+    },
+    {
+      "name": "callback without a code is rejected, not a 500",
+      "pass": true,
+      "detail": 400
+    },
+    {
+      "name": "callback without state is rejected, not a 500",
+      "pass": true,
+      "detail": 400
+    },
+    {
+      "name": "callback with a wrong state is rejected",
+      "pass": true,
+      "detail": "STATE_MISMATCH"
+    },
+    {
+      "name": "callback with no transaction cookie is rejected",
+      "pass": true,
+      "detail": "NO_TRANSACTION"
+    },
+    {
+      "name": "a tampered transaction cookie is rejected (AEAD)",
+      "pass": true,
+      "detail": "NO_TRANSACTION"
+    },
+    {
+      "name": "a forged transaction cookie is rejected",
+      "pass": true,
+      "detail": "NO_TRANSACTION"
+    },
+    {
+      "name": "an OAuth error response redirects cleanly, no 500",
+      "pass": true,
+      "detail": 302
+    },
+    {
+      "name": "session is unauthenticated by default",
+      "pass": true
+    },
+    {
+      "name": "session exposes no token or identity",
+      "pass": true
+    },
+    {
+      "name": "/api/customer/whoami requires authentication",
+      "pass": true,
+      "detail": 401
+    },
+    {
+      "name": "/api/customer/orders requires authentication",
+      "pass": true,
+      "detail": 401
+    },
+    {
+      "name": "order key \"gid://shopify/Order/126020\" cannot bypass the customer session",
+      "pass": true,
+      "detail": 401
+    },
+    {
+      "name": "order key \"1001\" cannot bypass the customer session",
+      "pass": true,
+      "detail": 401
+    },
+    {
+      "name": "order key \"#1002\" cannot bypass the customer session",
+      "pass": true,
+      "detail": 401
+    },
+    {
+      "name": "order key \"../../admin\" cannot bypass the customer session",
+      "pass": true,
+      "detail": 401
+    },
+    {
+      "name": "order key \"999999999\" cannot bypass the customer session",
+      "pass": true,
+      "detail": 401
+    },
+    {
+      "name": "a customerId parameter cannot widen scope",
+      "pass": true,
+      "detail": 401
+    },
+    {
+      "name": "a forged session cookie does not authenticate",
+      "pass": true
+    },
+    {
+      "name": "a forged session cookie cannot reach customer data",
+      "pass": true
+    },
+    {
+      "name": "logout is not reachable by GET",
+      "pass": true,
+      "detail": 405
+    },
+    {
+      "name": "logout clears the session and reports unauthenticated",
+      "pass": true
+    },
+    {
+      "name": "logout clears both cookies",
+      "pass": true
+    },
+    {
+      "name": "no token or secret on /",
+      "pass": true
+    },
+    {
+      "name": "no token or secret on /merchant.html",
+      "pass": true
+    },
+    {
+      "name": "no token or secret on /src/app.js",
+      "pass": true
+    },
+    {
+      "name": "no token or secret on /src/live.js",
+      "pass": true
+    },
+    {
+      "name": "no token or secret on /api/auth/session",
+      "pass": true
+    }
+  ]
+}

@@ -176,6 +176,13 @@
     .fixture-btn--live.on { background:rgba(0,184,148,0.12); border-color:rgba(0,184,148,0.4); color:var(--success); }
     .who--MERCHANT { background:rgba(253,203,110,0.13); color:var(--warning); }
     .who--CUSTOMER { background:rgba(0,184,148,0.13); color:var(--success); }
+    .signin {
+      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      padding:12px 15px; border-radius:12px; margin-bottom:16px; font-size:13px;
+      background:var(--bg-card); border:1px solid var(--border); color:var(--text-secondary);
+    }
+    .signin--in { border-color:rgba(0,184,148,0.25); }
+    .signin b { color:var(--text); font-weight:600; }
 
     /* ── decision card (hero) ───────────────────────────── */
     .decision {
@@ -338,6 +345,8 @@
     </section>
 
     <div class="rail" id="rail"></div>
+
+    <div id="signin-strip"></div>
 
     <section class="authority">
       <div class="auth-card auth-card--agent">

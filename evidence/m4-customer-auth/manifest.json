@@ -1,0 +1,87 @@
+{
+  "generatedAt": "2026-09-01T17:23:14.529Z",
+  "milestone": "M4.3 customer auth",
+  "productionUrl": "https://post-purchase-resolution.vercel.app/",
+  "result": "CONDITIONAL PASS — flow implemented and deployed; end-to-end sign-in requires a human (email one-time code)",
+  "verified": {
+    "shopifyCallbackRegistered": true,
+    "loginRouteLive": true,
+    "redirectToShopify": true,
+    "pkceS256": true,
+    "verifierNeverInUrl": true,
+    "adminSecretNotReused": true,
+    "authSecurityTests": "32/32",
+    "expectedInvalidInputNever500": true
+  },
+  "notVerified": {
+    "tokenExchange": true,
+    "sessionEstablished": true,
+    "customerAccountApiCall": true,
+    "customerScopedOrdersPositive": true,
+    "findOrderBehaviour": true,
+    "orderRequestReturnSpike": true
+  },
+  "webmcpContract": [
+    "get_order",
+    "prepare_resolution"
+  ],
+  "findOrderExposedToWebMCP": false,
+  "secretsRecorded": "none — no code, token, id_token, verifier or PII appears in any file here",
+  "files": [
+    {
+      "file": "authenticated-session.json",
+      "bytes": 872,
+      "sha256": "c011b7263765cbac"
+    },
+    {
+      "file": "callback-result.md",
+      "bytes": 1066,
+      "sha256": "4e4c06d66bfe01ee"
+    },
+    {
+      "file": "configuration-status.md",
+      "bytes": 2167,
+      "sha256": "134eb221c767446a"
+    },
+    {
+      "file": "cross-customer-negative-tests.json",
+      "bytes": 1295,
+      "sha256": "633521a517de037a"
+    },
+    {
+      "file": "customer-api-probe.json",
+      "bytes": 461,
+      "sha256": "e57260a86be0898d"
+    },
+    {
+      "file": "customer-orders-sanitized.json",
+      "bytes": 647,
+      "sha256": "a405ebf5c88b9afd"
+    },
+    {
+      "file": "limitations.md",
+      "bytes": 4247,
+      "sha256": "195de142e318206e"
+    },
+    {
+      "file": "login-redirect.json",
+      "bytes": 1100,
+      "sha256": "28e2a3af530ca9ab"
+    },
+    {
+      "file": "logout.json",
+      "bytes": 351,
+      "sha256": "595899a9ecc31378"
+    },
+    {
+      "file": "oauth-flow.md",
+      "bytes": 2415,
+      "sha256": "4d2ca4bec6633cd6"
+    },
+    {
+      "file": "security-tests.json",
+      "bytes": 3687,
+      "sha256": "cc1853ff026a3a68"
+    }
+  ]
+}
