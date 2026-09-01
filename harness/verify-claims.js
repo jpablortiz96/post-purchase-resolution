@@ -16,7 +16,7 @@ const out=[];const rec=(n,p,d)=>{out.push({n,p,d});console.log(`${p?'PASS':'FAIL
   rec('live mode states it is a Shopify development store', /shopify development store/i.test(lt));
   rec('live mode says no real money moves', /no real money/i.test(lt));
   rec('live mode shows the real return and OPEN', /#1002-R1/.test(lt) && /OPEN/.test(lt));
-  await live.screenshot({path:'evidence/m4-merchant-loop/screenshots/06_customer_open.png',fullPage:true});
+  await live.screenshot({path:'evidence/m4-chatgpt-native/live-mode-claims.png',fullPage:true});
 
   const fx=await b.newPage();
   await fx.goto(URL+'/?mode=fixtures',{waitUntil:'networkidle0'}); await sleep(2500);

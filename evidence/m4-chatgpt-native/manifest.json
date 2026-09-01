@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T16:22:08.239Z",
+  "generatedAt": "2026-09-01T16:23:11.210Z",
   "milestone": "M4.3",
   "status": "AWAITING_HUMAN_VERIFICATION",
   "note": "ChatGPT Desktop Site Tools and Voice cannot be exercised from an automated environment. protocol.md is the procedure; claim-matrix.md binds each possible observation to what it would license. No ChatGPT observation has been made.",
@@ -15,6 +15,11 @@
       "file": "expected-tools.json",
       "bytes": 1314,
       "sha256": "f7e66c606f136499"
+    },
+    {
+      "file": "live-mode-claims.png",
+      "bytes": 120582,
+      "sha256": "01ba0d18e967f817"
     },
     {
       "file": "protocol.md",
