@@ -5,3 +5,4 @@ evidence
 src/package.json
 tests
 harness
+.env

@@ -53,7 +53,7 @@ const names = l => l.map(t => t.name).sort();
   });
   const page = await browser.newPage();
   page.on('pageerror', e => console.log('  [page-exception]', e.message));
-  await page.goto(URL, { waitUntil: 'networkidle0', timeout: 45000 });
+  await page.goto(URL + (URL.includes('?') ? '&' : '?') + 'mode=fixtures', { waitUntil: 'networkidle0', timeout: 45000 });
   await sleep(1600);
 
   rec('A · WebMCP runtime available', await page.evaluate(() => 'modelContext' in document));

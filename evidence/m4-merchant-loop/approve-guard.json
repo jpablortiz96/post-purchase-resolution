@@ -1,0 +1,16 @@
+{
+  "capturedAt": "2026-09-01T15:18:19.137Z",
+  "note": "Approval is refused unless a return is actually REQUESTED.",
+  "result": {
+    "refused": true,
+    "code": "NOT_REQUESTED",
+    "message": "This return is already OPEN.",
+    "detail": {
+      "current": {
+        "reference": "#1001-R1",
+        "status": "OPEN",
+        "externalId": "57385222516"
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-09-01T15:19:21.553Z",
+  "milestone": "M4.2",
+  "productionUrl": "https://post-purchase-resolution.vercel.app/",
+  "shopifyEnvironment": "development store, test payments, no real money",
+  "externalOrder": "#1001",
+  "externalReturn": "#1001-R1",
+  "externalReturnStatus": "OPEN",
+  "fullRequestedToOpenCycleReRunInThisMilestone": false,
+  "blocker": "Order #1001 has zero returnable fulfillment line items (already consumed by #1001-R1). App scopes read_orders,write_returns cannot create or fulfil a new order. A second fulfilled order is required.",
+  "verifiedAgainstRealShopify": [
+    "client_credentials auth",
+    "get_order real facts",
+    "real return read back",
+    "duplicate protection",
+    "order allowlist",
+    "approval guard",
+    "restart persistence",
+    "no secrets or PII on public surfaces"
+  ],
+  "files": [
+    {
+      "file": "approve-guard.json",
+      "bytes": 378,
+      "sha256": "c7dcf752037e7a97"
+    },
+    {
+      "file": "before/order.json",
+      "bytes": 738,
+      "sha256": "5fa30341b9d003b8"
+    },
+    {
+      "file": "before/return-state.json",
+      "bytes": 336,
+      "sha256": "cd6a28a79e4ec1fb"
+    },
+    {
+      "file": "duplicate-protection.json",
+      "bytes": 363,
+      "sha256": "627e2eaa515ac6aa"
+    },
+    {
+      "file": "limitations.md",
+      "bytes": 4005,
+      "sha256": "925506adf923a4a1"
+    },
+    {
+      "file": "methodology.md",
+      "bytes": 3031,
+      "sha256": "73b2070b55275d2f"
+    },
+    {
+      "file": "order-allowlist.json",
+      "bytes": 302,
+      "sha256": "131a6f09537aa5cb"
+    },
+    {
+      "file": "screenshots/01_real_order.png",
+      "bytes": 120039,
+      "sha256": "15ef68ea13edccc6"
+    },
+    {
+      "file": "screenshots/04_merchant_desk.png",
+      "bytes": 52524,
+      "sha256": "61a1c72d05628469"
+    }
+  ]
+}

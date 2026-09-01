@@ -21,7 +21,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     return t ? await document.modelContext.executeTool(t, JSON.stringify(a || {})) : null;
   }, n, a);
 
-  await p.goto(URL, { waitUntil: 'networkidle0' });
+  await p.goto(URL + (URL.includes('?') ? '&' : '?') + 'mode=fixtures', { waitUntil: 'networkidle0' });
   await sleep(1500);
   await p.screenshot({ path: path.join(OUT, '01_initial.png'), fullPage: true });
 

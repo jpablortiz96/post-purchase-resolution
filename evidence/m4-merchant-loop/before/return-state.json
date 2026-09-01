@@ -1,0 +1,17 @@
+{
+  "capturedAt": "2026-09-01T15:18:17.584Z",
+  "orderReference": "#1001",
+  "orderReturnStatus": "IN_PROGRESS",
+  "returns": [
+    {
+      "reference": "#1001-R1",
+      "status": "OPEN",
+      "externalId": "57385222516"
+    }
+  ],
+  "active": {
+    "reference": "#1001-R1",
+    "status": "OPEN",
+    "externalId": "57385222516"
+  }
+}

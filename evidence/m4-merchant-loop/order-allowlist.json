@@ -1,0 +1,14 @@
+{
+  "capturedAt": "2026-09-01T15:18:18.527Z",
+  "note": "The public demo may only touch seeded demo orders.",
+  "result": {
+    "refused": true,
+    "code": "NOT_A_DEMO_ORDER",
+    "message": "That order is not part of this demo.",
+    "detail": {
+      "allowed": [
+        "#1001"
+      ]
+    }
+  }
+}

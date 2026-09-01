@@ -3,4 +3,5 @@ node_modules/
 *.log
 harness/run/
 .env
+.env.*
 .env.local

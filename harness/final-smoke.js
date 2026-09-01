@@ -28,7 +28,7 @@ const CASES = [
     return t ? await document.modelContext.executeTool(t, JSON.stringify(a || {})) : null; }, n, a);
   const st = () => p.evaluate(() => window.__session.state);
 
-  await p.goto(URL, { waitUntil: 'networkidle0', timeout: 45000 });
+  await p.goto(URL + (URL.includes('?') ? '&' : '?') + 'mode=fixtures', { waitUntil: 'networkidle0', timeout: 45000 });
   await sleep(1800);
   rec('live URL loads over HTTPS', URL.startsWith('https://'));
   rec('WebMCP discovery works',

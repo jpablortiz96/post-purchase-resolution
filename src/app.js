@@ -7,8 +7,16 @@
 
 import { SCENARIOS, SCENARIO_KEYS, DEFAULT_SCENARIO, findScenarioByOrderId } from './fixtures.js';
 import { ResolutionSession, STATES, TOOLS_BY_STATE } from './state.js';
+import { LiveSession, LIVE_STATES } from './live.js';
 
 const session = new ResolutionSession(DEFAULT_SCENARIO);
+
+// LIVE COMMERCE — a real Shopify order. The fixture scenarios remain available
+// for regression; this is the hero flow.
+const live = new LiveSession();
+let liveMode = false;
+let livePoll = null;
+const isLive = () => liveMode;
 
 let webmcpReady = 'modelContext' in document;
 const controllers = {};   // toolName -> AbortController
@@ -25,6 +33,66 @@ const money = (n, c) => `${n.toFixed(2)} ${c}`;
 // ═══════════════════════════════════════════════════════════════════
 // WEBMCP
 // ═══════════════════════════════════════════════════════════════════
+
+function liveToolDefs() {
+  return {
+    get_order: {
+      name: 'get_order',
+      description:
+        'Read the order the customer is currently viewing. This order lives in ' +
+        'Shopify: product, amount, financial and fulfilment status, delivery, ' +
+        'whether it still has returnable fulfilled items, and any return already ' +
+        'open against it. Every fact comes from the merchant system of record. ' +
+        'Read-only.',
+      inputSchema: { type: 'object', properties: {}, additionalProperties: false },
+      annotations: { readOnlyHint: true },
+      execute: async () => {
+        await live.refresh();
+        note('AGENT', `Inspected Shopify order ${live.order ? live.order.orderReference : ''}`);
+        renderLive();
+        return JSON.stringify(live.buildOrderPayload());
+      },
+    },
+    prepare_resolution: {
+      name: 'prepare_resolution',
+      description:
+        'Stage a return request for the customer to review. This does NOT contact ' +
+        'Shopify and creates nothing: only the customer can submit the request, and ' +
+        'only the merchant can approve it. Supply the reason this fits their ' +
+        'situation; it is shown to them as your reasoning.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          reason: { type: 'string', description: 'Short explanation of why a return fits this customer.' },
+        },
+        required: ['reason'],
+        additionalProperties: false,
+      },
+      annotations: { readOnlyHint: false },
+      execute: async (args = {}) => {
+        const out = live.prepare({ reason: args.reason, actor: 'AGENT' });
+        setTimeout(() => { syncTools(); renderProtocol(); }, 50);
+        renderLive();
+        return JSON.stringify(out.ok ? { success: true, ...out } : out);
+      },
+    },
+  };
+}
+
+/** Which tools are valid right now in LIVE mode. Never a completion tool. */
+function liveAllowedTools() {
+  switch (live.state) {
+    case LIVE_STATES.ORDER_ACTIVE:
+      return live.order && live.order.returnable
+        ? ['get_order', 'prepare_resolution'] : ['get_order'];
+    case LIVE_STATES.RESOLUTION_PREPARED:
+    case LIVE_STATES.RETURN_REQUESTED:
+    case LIVE_STATES.RETURN_APPROVED:
+      return ['get_order'];
+    default:
+      return [];
+  }
+}
 
 function toolDefs() {
   const order = session.order;
@@ -141,8 +209,8 @@ function unregisterTool(name) {
  * Agents must only ever see tools that are valid right now.
  */
 function syncTools({ force = false } = {}) {
-  const want = session.allowedTools();
-  const defs = toolDefs();
+  const want = isLive() ? liveAllowedTools() : session.allowedTools();
+  const defs = isLive() ? liveToolDefs() : toolDefs();
 
   for (const name of Object.keys(controllers)) {
     if (force || !want.includes(name)) unregisterTool(name);
@@ -173,9 +241,15 @@ function railIndex() {
 }
 
 function renderFixtures() {
-  $('fixtures').innerHTML = SCENARIO_KEYS.map(k =>
-    `<button class="fixture-btn ${k === session.scenario.key ? 'on' : ''}" data-scenario="${k}">${esc(SCENARIOS[k].label)}</button>`
+  const liveBtn = `<button class="fixture-btn fixture-btn--live ${isLive() ? 'on' : ''}" data-scenario="live">● Live Shopify order</button>`;
+  const fixtures = SCENARIO_KEYS.map(k =>
+    `<button class="fixture-btn ${!isLive() && k === session.scenario.key ? 'on' : ''}" data-scenario="${k}">${esc(SCENARIOS[k].label)}</button>`
   ).join('');
+  $('fixtures').innerHTML = liveBtn + fixtures;
+  const lbl = document.querySelector('.fixtures-label');
+  if (lbl) lbl.textContent = isLive()
+    ? 'Live commerce — a real order in a Shopify development store'
+    : 'Demo fixture — pick a scenario';
 }
 
 function renderRail() {
@@ -387,6 +461,157 @@ function renderProtocol() {
     : 'No tool calls yet.';
 }
 
+// ═══════════════════════════════════════════════════════════════════
+// LIVE COMMERCE RENDER
+// ═══════════════════════════════════════════════════════════════════
+
+const LIVE_RAIL = [
+  [LIVE_STATES.ORDER_ACTIVE, 'Order'],
+  [LIVE_STATES.RESOLUTION_PREPARED, 'Ready for you'],
+  [LIVE_STATES.RETURN_REQUESTED, 'Requested'],
+  [LIVE_STATES.RETURN_APPROVED, 'Approved'],
+];
+
+function liveRailIndex() {
+  const i = LIVE_RAIL.findIndex(([k]) => k === live.state);
+  return i < 0 ? 0 : i;
+}
+
+function renderLive({ deferTools = false } = {}) {
+  renderFixtures();
+
+  const idx = liveRailIndex();
+  $('rail').innerHTML = LIVE_RAIL.map(([, label], i) => {
+    const cls = i < idx ? 'done' : i === idx ? 'now' : '';
+    const step = `<div class="step ${cls}"><div class="dot"></div><span>${esc(label)}</span></div>`;
+    return i < LIVE_RAIL.length - 1 ? step + `<div class="conn ${i < idx ? 'done' : ''}"></div>` : step;
+  }).join('');
+
+  // In live mode the merchant is a real third authority, so it gets a card.
+  const auth = document.querySelector('.authority');
+  if (auth) auth.innerHTML = `
+    <div class="auth-card auth-card--agent"><h3>Your assistant can</h3>
+      <p>Read this Shopify order and get a return request ready for you.</p></div>
+    <div class="auth-card auth-card--you"><h3>Only you can</h3>
+      <p>Submit the request. It creates a real return in Shopify.</p></div>
+    <div class="auth-card auth-card--merchant"><h3>Only the merchant can</h3>
+      <p>Approve it. Shopify holds that decision, not this page.</p></div>`;
+
+  const o = live.order;
+  if (live.state === LIVE_STATES.UNAVAILABLE || !o) {
+    $('order-card').innerHTML = `<div class="order-top"><div class="order-id">Live commerce</div>
+      <div class="pill pill--issue">Unavailable</div></div>
+      <div class="opt-meta" style="margin-top:10px">${esc(live.error || 'Loading…')}</div>`;
+    $('surface').innerHTML = '';
+    renderLiveAudit();
+    return;
+  }
+
+  const active = live.activeReturn;
+  const pill = active
+    ? `<div class="pill ${active.status === 'OPEN' ? 'pill--done' : 'pill--working'}">${esc(active.status)}</div>`
+    : '<div class="pill pill--issue">Damaged</div>';
+
+  $('order-card').innerHTML = `
+    <div class="order-top">
+      <div class="order-id">Shopify order ${esc(o.orderReference)}</div>
+      ${pill}
+    </div>
+    <div class="product">${esc(o.product)}</div>
+    <div class="price">${o.price != null ? esc(o.price.toFixed(2) + ' ' + o.currency) : ''}</div>
+    <div class="opt-meta">${esc(o.financialStatus)} · ${esc(o.fulfillmentStatus)}${o.deliveredAt ? ' · delivered ' + esc(o.deliveredAt.slice(0, 10)) : ''}</div>
+    <div class="note note--issue"><span class="note-ico">⚠</span><span>Product arrived damaged. Left earphone is not working.</span></div>`;
+
+  const el = $('surface');
+
+  if (active) {
+    const approved = active.status === 'OPEN';
+    el.innerHTML = `
+      <div class="${approved ? 'resolved' : 'decision'}">
+        ${approved ? '<div class="check">✓</div>' : ''}
+        <div class="decision-label" ${approved ? 'style="color:var(--success)"' : ''}>
+          ${approved ? 'Return approved by the merchant' : 'Return requested — waiting for the merchant'}</div>
+        <div class="decision-title">Return ${esc(o.product)}</div>
+        <div class="decision-recv">${esc(live.statusLabel() || '')}</div>
+        <div class="block block--merchant">
+          <div class="block-tag">Shopify · system of record</div>
+          <div class="terms">
+            <div class="term"><div class="term-k">Return</div><div class="term-v">${esc(active.reference)}</div></div>
+            <div class="term"><div class="term-k">Status</div><div class="term-v"><code>${esc(active.status)}</code></div></div>
+            <div class="term"><div class="term-k">Order status</div><div class="term-v">${esc(o.orderReturnStatus)}</div></div>
+          </div>
+        </div>
+        <div class="opt-meta" style="margin-top:12px">
+          This status is read from Shopify, not from this page. Reload and it is still true.
+        </div>
+      </div>`;
+  } else if (live.state === LIVE_STATES.RESOLUTION_PREPARED) {
+    const p = live.preparedResolution;
+    const reasoning = p.reason
+      ? `<div class="block block--agent">
+           <div class="block-tag">Your assistant&rsquo;s reasoning <small>&mdash; not merchant policy</small></div>
+           <p>&ldquo;${esc(p.reason)}&rdquo;</p></div>`
+      : '';
+    el.innerHTML = `
+      <div class="decision">
+        <div class="decision-label">Ready for your decision</div>
+        <div class="decision-title">${esc(p.label)}</div>
+        <div class="decision-recv">A return authorised by the merchant, then a refund once received</div>
+        ${reasoning}
+        <div class="block block--merchant">
+          <div class="block-tag">What will happen <small>&mdash; in Shopify</small></div>
+          <div class="terms">
+            <div class="term"><div class="term-k">Action</div><div class="term-v">Create a return request in Shopify</div></div>
+            <div class="term"><div class="term-k">Reason</div><div class="term-v">Damaged or defective</div></div>
+            <div class="term"><div class="term-k">Quantity</div><div class="term-v">${esc(p.quantity)}</div></div>
+            <div class="term"><div class="term-k">Then</div><div class="term-v">Status <code>REQUESTED</code> until the merchant approves it</div></div>
+          </div>
+        </div>
+        <div class="commit-note">Nothing has been sent yet. Submitting this creates a real return in Shopify.</div>
+        <div class="actions">
+          <button class="btn btn-go" id="request-return">Request return</button>
+          <button class="btn btn-no" id="live-cancel">Cancel</button>
+        </div>
+        <div id="live-error"></div>
+      </div>`;
+  } else {
+    const returnable = o.returnable;
+    const offer = returnable
+      ? `<div class="opt"><div class="opt-top"><div class="opt-name">Return ${esc(o.product)}</div>
+           <div class="opt-timing">Needs merchant approval</div></div>
+           <div class="opt-recv">A return authorised by the merchant, then a refund once received</div>
+           <div class="opt-meta">Reason: damaged or defective &middot; ${esc(o.returnableQuantity)} item</div>
+           <div class="opt-action"><button class="btn btn-alt" id="live-choose">Choose this</button></div>
+         </div>`
+      : `<div class="opt-meta">Shopify reports no returnable fulfilled items for ${esc(o.orderReference)}.
+           ${(o.existingReturns || []).length ? 'A return already exists against it.' : ''}</div>`;
+    el.innerHTML = `
+      <section class="card">
+        <div class="head">${returnable ? 'What you can do with this order' : 'This order has no returnable items'}</div>
+        ${offer}
+        <div class="opt-meta" style="margin-top:12px">
+          Merchant policy lives in Shopify. This page reads it; it does not decide it.
+        </div>
+      </section>`;
+  }
+
+  renderLiveAudit();
+  if (deferTools) setTimeout(() => { syncTools(); renderProtocol(); }, 50);
+  else { syncTools(); renderProtocol(); }
+}
+
+function renderLiveAudit() {
+  const el = $('audit');
+  if (!live.audit.length) { el.innerHTML = '<div class="empty">No activity yet</div>'; return; }
+  el.innerHTML = live.audit.map(e => {
+    const t = new Date(e.timestamp).toLocaleTimeString('en-US', { hour12: false });
+    return `<div class="entry">
+      <span class="who who--${esc(e.actor)}">${esc(e.actor)}</span>
+      <span class="what">${esc(e.action)}</span>
+      <span class="when">${esc(t)}</span></div>`;
+  }).join('');
+}
+
 /**
  * @param deferTools  Registering or unregistering a tool synchronously from
  *   inside an execute handler interrupts the in-flight executeTool call in the
@@ -395,6 +620,7 @@ function renderProtocol() {
  *   executeTool can resolve first.
  */
 function render({ deferTools = false } = {}) {
+  if (isLive()) return renderLive({ deferTools });
   renderFixtures();
   renderRail();
   renderOrder();
@@ -417,9 +643,46 @@ function note(actor, action, metadata) {
   renderAudit();
 }
 
+async function handleLiveClick(id) {
+  if (id === 'live-choose') {
+    live.prepare({ reason: null, actor: 'CUSTOMER' });
+    renderLive();
+    return true;
+  }
+  if (id === 'live-cancel') {
+    live.preparedResolution = null;
+    await live.refresh();
+    renderLive();
+    return true;
+  }
+  if (id === 'request-return') {
+    const btn = document.getElementById('request-return');
+    if (btn) { btn.disabled = true; btn.textContent = 'Requesting…'; }   // double-click guard
+    const out = await live.requestReturn();
+    if (!out.ok) {
+      renderLive();
+      const box = document.getElementById('live-error');
+      if (box) {
+        box.innerHTML = '<div class="commit-note" style="background:rgba(225,112,85,.1);' +
+          'border-color:rgba(225,112,85,.25);color:#f0b8a4">' + esc(out.error || 'Could not create the return.') +
+          (out.detail ? ' (' + esc([].concat(out.detail).join('; ')) + ')' : '') + '</div>';
+      }
+    } else {
+      renderLive();
+    }
+    return true;
+  }
+  return false;
+}
+
 document.addEventListener('click', (ev) => {
   const t = ev.target.closest('[data-scenario], [data-pick], [data-choose], button');
   if (!t) return;
+
+  if (isLive() && t.id && t.id !== 'reset' && !t.dataset.scenario) {
+    handleLiveClick(t.id);
+    return;
+  }
 
   // Customer stages a resolution themselves, without an assistant.
   if (t.dataset.choose) {
@@ -428,7 +691,13 @@ document.addEventListener('click', (ev) => {
     return;
   }
 
+  if (t.dataset.scenario === 'live') {
+    enterLiveMode();
+    return;
+  }
+
   if (t.dataset.scenario) {
+    leaveLiveMode();
     session.reset(t.dataset.scenario);
     choosing = false; chosenId = null; lastCall = null;
     syncTools({ force: true });
@@ -465,6 +734,7 @@ document.addEventListener('click', (ev) => {
       render();
       break;
     case 'reset':
+      if (isLive()) { live.refresh().then(() => renderLive()); return; }
       session.reset(session.scenario.key);
       choosing = false; chosenId = null; lastCall = null;
       syncTools({ force: true });
@@ -510,8 +780,52 @@ function watch(timeoutMs = 15000) {
   }, 150);
 }
 
+// ── live mode entry / exit ────────────────────────────────────────
+
+async function enterLiveMode() {
+  liveMode = true;
+  choosing = false; chosenId = null; lastCall = null;
+  syncTools({ force: true });
+  renderLive();
+  await live.refresh();
+  renderLive();
+  // The merchant may approve at any time; discover it by re-reading Shopify.
+  if (livePoll) clearInterval(livePoll);
+  livePoll = setInterval(async () => {
+    if (!isLive()) return;
+    const before = live.activeReturn ? live.activeReturn.status : null;
+    await live.refresh();
+    const after = live.activeReturn ? live.activeReturn.status : null;
+    if (before !== after) {
+      if (after === 'OPEN') live.log('MERCHANT', `Merchant approved ${live.activeReturn.reference} — Shopify status OPEN`);
+      renderLive();
+    }
+  }, 6000);
+}
+
+function leaveLiveMode() {
+  liveMode = false;
+  if (livePoll) { clearInterval(livePoll); livePoll = null; }
+  syncTools({ force: true });
+}
+
 setBadge(webmcpReady);
-render();
+
+// Live commerce is the hero flow when the backend is configured; fall back to
+// fixtures if it is not. ?mode=fixtures forces the deterministic scenarios,
+// which is how the M0-M3 regression suites keep running unchanged.
+(async () => {
+  const forceFixtures = new URLSearchParams(location.search).get('mode') === 'fixtures';
+  if (!forceFixtures) {
+    try {
+      const r = await fetch('/api/order');
+      const b = await r.json();
+      if (b.ok) { await enterLiveMode(); return; }
+    } catch (e) { /* fall through to fixtures */ }
+  }
+  render();
+})();
+
 watch();
 
 // exposed for the browser-side WebMCP verification harness only

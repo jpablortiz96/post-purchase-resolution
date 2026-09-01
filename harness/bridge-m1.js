@@ -165,7 +165,7 @@ async function main() {
   page.on('console', m => { if (m.type() === 'error') logEvent({ kind: 'console-error', text: m.text() }); });
   page.on('pageerror', e => logEvent({ kind: 'pageerror', text: e.message }));
 
-  await page.goto(APP_URL, { waitUntil: 'networkidle0', timeout: 45000 });
+  await page.goto(APP_URL + (APP_URL.includes('?') ? '&' : '?') + 'mode=fixtures', { waitUntil: 'networkidle0', timeout: 45000 });
   await sleep(2500);
 
   await page.exposeFunction('__tc', p => logEvent({ kind: 'toolchange', ...p }));

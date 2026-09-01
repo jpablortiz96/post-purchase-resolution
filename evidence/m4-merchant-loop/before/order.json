@@ -1,0 +1,28 @@
+{
+  "capturedAt": "2026-09-01T15:18:17.583Z",
+  "source": "Shopify Admin GraphQL API",
+  "apiVersion": "2026-07",
+  "note": "Sanitized exactly as served to the browser. No PII, no gid, no token.",
+  "order": {
+    "source": "shopify",
+    "orderReference": "#1001",
+    "product": "Wireless Headphones",
+    "variant": null,
+    "quantity": 1,
+    "price": 129,
+    "currency": "USD",
+    "financialStatus": "PAID",
+    "fulfillmentStatus": "FULFILLED",
+    "deliveredAt": "2026-09-01T14:25:17Z",
+    "orderReturnStatus": "IN_PROGRESS",
+    "returnable": false,
+    "returnableQuantity": 0,
+    "existingReturns": [
+      {
+        "reference": "#1001-R1",
+        "status": "OPEN",
+        "externalId": "57385222516"
+      }
+    ]
+  }
+}

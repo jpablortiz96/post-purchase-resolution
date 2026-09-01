@@ -34,7 +34,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   page.on('console', m => { if (m.type() === 'error') consoleErrors.push(m.text()); });
   page.on('pageerror', e => consoleErrors.push('EXCEPTION: ' + e.message));
 
-  const resp = await page.goto(URL, { waitUntil: 'networkidle0', timeout: 45000 });
+  const resp = await page.goto(URL + (URL.includes('?') ? '&' : '?') + 'mode=fixtures', { waitUntil: 'networkidle0', timeout: 45000 });
   await sleep(2500);
 
   rec('https + 200', URL.startsWith('https://') && resp.status() === 200, resp.status());
