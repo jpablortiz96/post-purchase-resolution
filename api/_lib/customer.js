@@ -143,8 +143,16 @@ function sanitizeOrder(o) {
   const line = (o.lineItems?.nodes || [])[0] || null;
   const total = o.totalPrice || {};
   const ret = o.returnInformation || {};
-  const returnable = (ret.returnableLineItems?.nodes || []);
-  const nonReturnable = (ret.nonReturnableLineItems?.nodes || []);
+  const returnable = ret.returnableLineItems?.nodes || [];
+  const nonReturnable = ret.nonReturnableLineItems?.nodes || [];
+
+  // Every level here is optional: an order with nothing to return may omit
+  // returnInformation, the summary, or both. Absence must read as "no reasons",
+  // never as a crash.
+  const summaryReasons = ret.nonReturnableSummary?.nonReturnableReasons || [];
+  const detailReasons = nonReturnable.flatMap(
+    n => (n?.quantityDetails || []).map(q => q?.reasonCode).filter(Boolean));
+
   return {
     source: 'shopify-customer-account',
     orderReference: o.name,
@@ -157,11 +165,11 @@ function sanitizeOrder(o) {
     financialStatus: o.financialStatus,
     fulfillmentStatus: o.fulfillmentStatus,
     returnable: returnable.length > 0,
-    returnableQuantity: returnable.reduce((n, r) => n + (r.quantity || 0), 0),
-    nonReturnableReasons: nonReturnable
-      .map(n => n.unreturnableReason || n.reason)
-      .filter(Boolean),
-    // no email, no name, no address, no phone, no raw gid
+    returnableQuantity: returnable.reduce((n, r) => n + (r?.quantity || 0), 0),
+    nonReturnableQuantity: nonReturnable.reduce((n, r) => n + (r?.quantity || 0), 0),
+    nonReturnableReasons: [...new Set([...summaryReasons, ...detailReasons])],
+    // no email, no name, no address, no phone, no raw gid — the lineItem ids
+    // fetched above stop here.
   };
 }
 
@@ -179,10 +187,32 @@ const ORDER_FIELDS = `
   lineItems(first: 5) { nodes { title quantity } }
 `;
 
+/**
+ * Return eligibility, per the 2026-07 Customer Account API schema.
+ *
+ * `NonReturnableLineItem` exposes lineItem / quantity / quantityDetails. It has
+ * no `unreturnableReason` — the reason lives on `quantityDetails.reasonCode`,
+ * with an order-level rollup on `nonReturnableSummary`.
+ *
+ * `lineItem { id }` is selected because the return mutation will need it, but
+ * it is a raw gid and sanitizeOrder deliberately never emits it.
+ */
 const RETURN_FIELDS = `
   returnInformation {
-    returnableLineItems(first: 10) { nodes { quantity } }
-    nonReturnableLineItems(first: 10) { nodes { unreturnableReason } }
+    returnableLineItems(first: 20) {
+      nodes {
+        quantity
+        lineItem { id name quantity }
+      }
+    }
+    nonReturnableLineItems(first: 20) {
+      nodes {
+        quantity
+        lineItem { id name quantity }
+        quantityDetails { quantity reasonCode }
+      }
+    }
+    nonReturnableSummary { nonReturnableReasons }
   }
 `;
 
@@ -246,4 +276,4 @@ async function findOrders(req, { productQuery, deliveredOnly = false, sinceDays 
   };
 }
 
-module.exports = { whoami, listOrders, getOrder, findOrders, CustomerError, gql, probe, classify };
+module.exports = { whoami, listOrders, getOrder, findOrders, CustomerError, gql, probe, classify, sanitizeOrder };

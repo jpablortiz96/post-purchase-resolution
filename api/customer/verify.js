@@ -68,7 +68,9 @@ module.exports = async (req, res) => {
     ['+processedAt',    `query { ${ORDER_NODE('id processedAt')} }`],
     ['orders.nodes',    `query { customer { orders(first: 2) { nodes { id } } } }`],
     ['+lineItems',      `query { ${ORDER_NODE('id lineItems(first: 5) { edges { node { title quantity } } }')} }`],
-    ['+returnInfo',     `query { ${ORDER_NODE('id returnInformation { returnableLineItems(first: 10) { edges { node { quantity } } } }')} }`],
+    ['+returnable',     `query { ${ORDER_NODE('id returnInformation { returnableLineItems(first: 20) { nodes { quantity lineItem { id name quantity } } } }')} }`],
+    ['+nonReturnable',  `query { ${ORDER_NODE('id returnInformation { nonReturnableLineItems(first: 20) { nodes { quantity lineItem { id name quantity } quantityDetails { quantity reasonCode } } } }')} }`],
+    ['+nonReturnableSummary', `query { ${ORDER_NODE('id returnInformation { nonReturnableSummary { nonReturnableReasons } }')} }`],
   ];
 
   report.ladder = [];
@@ -112,11 +114,24 @@ module.exports = async (req, res) => {
       price: o.price, currency: o.currency,
       financialStatus: o.financialStatus, fulfillmentStatus: o.fulfillmentStatus,
       returnable: o.returnable, returnableQuantity: o.returnableQuantity,
+      nonReturnableQuantity: o.nonReturnableQuantity,
       nonReturnableReasons: o.nonReturnableReasons, processedAt: o.processedAt,
     }));
     const blob = JSON.stringify(report.orders).toLowerCase();
     bool('order payload carries no PII',
       !/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}|\bphone\b|\baddress\d?\b|gid:\/\//.test(blob));
+
+    // Return eligibility must actually parse. Fetching the fields is not the
+    // same as reading them: the previous defect was in the parse shape.
+    const shaped = orders.every(o =>
+      typeof o.returnable === 'boolean' &&
+      Number.isFinite(o.returnableQuantity) &&
+      Array.isArray(o.nonReturnableReasons));
+    bool('returnable data parsing', shaped, orders.map(o => ({
+      ref: o.orderReference, returnable: o.returnable,
+      returnableQuantity: o.returnableQuantity,
+      nonReturnableQuantity: o.nonReturnableQuantity,
+      nonReturnableReasons: o.nonReturnableReasons })));
   } catch (e) {
     orders = null;
     add('orders retrieved through the Customer Account API', FAIL, {
