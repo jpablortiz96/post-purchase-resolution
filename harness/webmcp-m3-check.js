@@ -11,7 +11,10 @@ const path = require('path');
 
 const URL = process.env.APP_URL || 'http://localhost:3000/';
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe';
-const OUT = process.env.OUT_DIR || path.join(__dirname, '..', 'evidence', 'm3', 'capability-boundary');
+// Defaults to a scratch directory, never the historical M3 evidence: running
+// this check must not be able to rewrite the artefacts of the run that
+// produced them. Point OUT_DIR at a milestone directory deliberately.
+const OUT = process.env.OUT_DIR || path.join(__dirname, '..', 'evidence', '_latest', 'capability-boundary');
 fs.mkdirSync(OUT, { recursive: true });
 
 const results = [];

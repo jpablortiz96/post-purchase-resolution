@@ -855,6 +855,110 @@ async function handleCustomerClick(t) {
   }
 }
 
+/**
+ * Self-check for the authenticated customer surface (?verify=1).
+ *
+ * Runs against the *real* registered WebMCP tools in the customer's own signed-in
+ * browser, because that is the only place the authenticated contract exists.
+ * It reads and prepares; it never submits a return.
+ */
+async function runSelfCheck() {
+  const checks = [];
+  const add = (name, status, detail) => checks.push({ name, status, detail });
+  const ok = (name, cond, detail) => add(name, cond ? 'PASS' : 'FAIL', detail);
+  const call = async (name, args) => {
+    const list = await document.modelContext.getTools();
+    const t = list.find(x => x.name === name);
+    if (!t) return { __missing: true };
+    try { return JSON.parse(await document.modelContext.executeTool(t, JSON.stringify(args || {}))); }
+    catch (e) { return { __error: String(e && e.message || e) }; }
+  };
+
+  const names = (await document.modelContext.getTools()).map(t => t.name).sort();
+  ok('WebMCP surface is find_order / get_order / prepare_resolution',
+    ['find_order', 'get_order'].every(n => names.includes(n)), names);
+  ok('no completion tool is exposed',
+    !names.some(n => /confirm|commit|complete|approve|finali|submit|request_return/i.test(n)), names);
+
+  // ── discovery: one match, none, and ambiguity ─────────────────────
+  const inbox = customer.buildInbox();
+  const first = inbox[0];
+  const single = await call('find_order', { product_query: (first && first.product || '').split(' ')[0] });
+  ok('find_order finds a purchase from a plain description',
+    single && !single.__missing && single.matchCount >= 1,
+    { matchCount: single && single.matchCount, resolution: single && single.resolution });
+
+  const none = await call('find_order', { product_query: 'zzzznonexistentproduct' });
+  ok('find_order returns none rather than inventing a purchase',
+    none && none.matchCount === 0 && none.resolution === 'none', none && none.resolution);
+
+  const all = await call('find_order', {});
+  const ambiguous = all && all.matchCount > 1;
+  add('find_order refuses to guess when several purchases match',
+    !ambiguous ? 'NOT_PROVEN' : (all.resolution === 'ambiguous' && all.candidates.length > 1) ? 'PASS' : 'FAIL',
+    ambiguous ? { resolution: all.resolution, candidates: all.candidates.length }
+              : `only ${all && all.matchCount} purchase(s) in this account — ambiguity cannot arise`);
+
+  ok('find_order never exposes a raw Shopify gid',
+    !/gid:\/\//.test(JSON.stringify(all || {})));
+
+  // ── reading ───────────────────────────────────────────────────────
+  const order = await call('get_order', {});
+  ok('get_order reads a customer-scoped purchase',
+    order && order.source === 'shopify-customer-account', order && order.source);
+  ok('get_order carries no PII or credential material',
+    !/gid:\/\/|shcat_|shpat_|[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/i.test(JSON.stringify(order || {})));
+
+  const foreign = await call('get_order', { purchase_id: '999999999' });
+  ok('an injected purchase id cannot select another order',
+    foreign && foreign.ok === false, foreign && (foreign.error || foreign.code));
+
+  // ── preparation must not mutate ───────────────────────────────────
+  const before = await (await fetch('/api/customer/orders')).json();
+  const beforeReturns = JSON.stringify((before.orders || []).map(o => o.existingReturns));
+  const prep = await call('prepare_resolution', { reason: 'Self-check: staged, never submitted.' });
+  const after = await (await fetch('/api/customer/orders')).json();
+  const afterReturns = JSON.stringify((after.orders || []).map(o => o.existingReturns));
+
+  add('prepare_resolution creates no return in Shopify',
+    beforeReturns === afterReturns ? 'PASS' : 'FAIL',
+    { before: JSON.parse(beforeReturns), after: JSON.parse(afterReturns) });
+  add('the prepared resolution stays uncommitted',
+    prep && prep.__missing ? 'NOT_RUN'
+      : (prep && prep.resolution && prep.resolution.committedByCustomer === false) ? 'PASS' : 'FAIL',
+    prep && prep.resolution ? { committedByCustomer: prep.resolution.committedByCustomer,
+                                requiresCustomerRequest: prep.resolution.requiresCustomerRequest }
+                            : (prep && (prep.error || 'prepare_resolution not offered in this state')));
+
+  customer.cancelPrepared();
+  await customer.refresh();
+  renderCustomer();
+
+  const count = s => checks.filter(c => c.status === s).length;
+  const report = {
+    capturedAt: new Date().toISOString(),
+    surface: names,
+    purchases: inbox.map(p => ({
+      orderReference: p.orderReference, product: p.product,
+      fulfillmentStatus: p.fulfillmentStatus, returnable: p.returnable,
+      activeReturn: p.activeReturn, nextAction: p.nextAction && p.nextAction.label,
+    })),
+    checks,
+    summary: { passed: count('PASS'), failed: count('FAIL'),
+               notRun: count('NOT_RUN'), notProven: count('NOT_PROVEN'), total: checks.length },
+  };
+  report.ok = report.summary.passed === report.summary.total;
+
+  const box = document.createElement('section');
+  box.className = 'card';
+  box.innerHTML = '<div class="head">Self-check &middot; authenticated customer surface</div>' +
+    '<pre class="last" id="selfcheck-json" style="max-height:420px;overflow:auto">' +
+    esc(JSON.stringify(report, null, 2)) + '</pre>';
+  document.querySelector('.wrap').appendChild(box);
+  window.__selfCheck = report;
+  return report;
+}
+
 async function enterCustomerMode() {
   customerMode = true; liveMode = false;
   if (livePoll) { clearInterval(livePoll); livePoll = null; }
@@ -1270,7 +1374,12 @@ renderSignIn();
     // Signed in: their own purchases, through the Customer Account API.
     try {
       const sess = await (await fetch('/api/auth/session')).json();
-      if (sess.authenticated && await enterCustomerMode()) return;
+      if (sess.authenticated && await enterCustomerMode()) {
+        if (new URLSearchParams(location.search).get('verify') === '1') {
+          setTimeout(() => runSelfCheck().catch(e => console.error('[selfcheck]', e)), 400);
+        }
+        return;
+      }
     } catch (e) { /* fall through */ }
     // Signed out: the merchant-configured order, if the store is connected.
     try {

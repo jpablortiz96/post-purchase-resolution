@@ -1,0 +1,150 @@
+{
+  "url": "https://post-purchase-resolution.vercel.app/",
+  "at": "2026-09-01T20:45:44.995Z",
+  "passed": 22,
+  "total": 22,
+  "toolsEverRegistered": [
+    "get_order",
+    "prepare_resolution"
+  ],
+  "results": [
+    {
+      "name": "A · WebMCP runtime available",
+      "pass": true
+    },
+    {
+      "name": "B · contract is exactly two tools",
+      "pass": true,
+      "detail": [
+        "get_order",
+        "prepare_resolution"
+      ]
+    },
+    {
+      "name": "C · no completion-shaped tool is registered",
+      "pass": true,
+      "detail": [
+        "get_order",
+        "prepare_resolution"
+      ]
+    },
+    {
+      "name": "C2 · no guessable completion tool is callable",
+      "pass": true
+    },
+    {
+      "name": "D · get_order carries the merchant options",
+      "pass": true,
+      "detail": [
+        "replacement",
+        "refund",
+        "keep_partial_refund"
+      ]
+    },
+    {
+      "name": "D2 · options state they are the only permitted ones",
+      "pass": true
+    },
+    {
+      "name": "D3 · get_order is annotated read-only",
+      "pass": true
+    },
+    {
+      "name": "E · prepare enumerates only eligible options",
+      "pass": true,
+      "detail": [
+        "replacement",
+        "refund",
+        "keep_partial_refund"
+      ]
+    },
+    {
+      "name": "F · ineligible option rejected",
+      "pass": true
+    },
+    {
+      "name": "G · prepare stages it and withdraws prepare_resolution",
+      "pass": true,
+      "detail": [
+        "get_order"
+      ]
+    },
+    {
+      "name": "H · still no completion tool once a resolution is staged",
+      "pass": true,
+      "detail": [
+        "get_order"
+      ]
+    },
+    {
+      "name": "I · payload tells the agent the customer must complete it",
+      "pass": true,
+      "detail": "The customer completes this themselves in the page. You cannot complete it for them."
+    },
+    {
+      "name": "J · one customer action approves and completes",
+      "pass": true,
+      "detail": {
+        "before": "RESOLUTION_PREPARED",
+        "after": "RESOLVED"
+      }
+    },
+    {
+      "name": "J2 · result is recorded as committed by the customer",
+      "pass": true,
+      "detail": "R-1042"
+    },
+    {
+      "name": "K · post-completion payload does not ask for commitment again",
+      "pass": true,
+      "detail": {
+        "committed": true,
+        "requires": false
+      }
+    },
+    {
+      "name": "K2 · options withdrawn after resolution",
+      "pass": true
+    },
+    {
+      "name": "L · customer can choose another option",
+      "pass": true,
+      "detail": "store_credit"
+    },
+    {
+      "name": "M · a commit against a stale selection is refused",
+      "pass": true,
+      "detail": "The prepared resolution is not the one supplied"
+    },
+    {
+      "name": "N · committing the current selection succeeds",
+      "pass": true,
+      "detail": "SC-2087"
+    },
+    {
+      "name": "O · third scenario exposes its own policy",
+      "pass": true,
+      "detail": [
+        "return_refund",
+        "keep_shipping_refund",
+        "keep_store_credit"
+      ]
+    },
+    {
+      "name": "P · reset mid-flow restores a clean state and contract",
+      "pass": true,
+      "detail": [
+        "get_order",
+        "prepare_resolution"
+      ]
+    },
+    {
+      "name": "Q · across every state observed, no completion tool ever appeared",
+      "pass": true,
+      "detail": [
+        "get_order",
+        "prepare_resolution"
+      ]
+    }
+  ]
+}

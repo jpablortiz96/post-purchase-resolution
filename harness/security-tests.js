@@ -47,7 +47,9 @@ const j=async(u,o)=>{const r=await fetch(u,o);let b;try{b=await r.json();}catch(
 
   const passed=out.filter(o=>o.pass).length;
   console.log(`\n${'='.repeat(54)}\nSECURITY: ${passed}/${out.length}\n${'='.repeat(54)}`);
-  require('fs').writeFileSync('evidence/m4-chatgpt-native/security-tests.json',
+  const OUT = process.env.OUT_DIR || 'evidence/_latest';
+  require('fs').mkdirSync(OUT, { recursive: true });
+  require('fs').writeFileSync(require('path').join(OUT, 'security-tests.json'),
     JSON.stringify({ranAt:new Date().toISOString(),target:BASE,passed,total:out.length,tests:out},null,2));
   process.exit(passed===out.length?0:1);
 })().catch(e=>{console.error('FATAL',e.message);process.exit(1);});

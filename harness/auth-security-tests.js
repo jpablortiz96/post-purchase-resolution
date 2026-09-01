@@ -115,8 +115,9 @@ const get = async (p, headers) => {
 
   const passed = out.filter(o => o.pass).length;
   console.log(`\n${'='.repeat(56)}\nAUTH SECURITY: ${passed}/${out.length}\n${'='.repeat(56)}`);
-  require('fs').mkdirSync('evidence/m4-customer-auth', { recursive: true });
-  require('fs').writeFileSync('evidence/m4-customer-auth/security-tests.json',
+  const OUT = process.env.OUT_DIR || 'evidence/_latest';
+  require('fs').mkdirSync(OUT, { recursive: true });
+  require('fs').writeFileSync(require('path').join(OUT, 'auth-security-tests.json'),
     JSON.stringify({ ranAt: new Date().toISOString(), target: BASE, passed, total: out.length,
       note: 'No authorization code, access token, id token or PKCE verifier is recorded anywhere in this file.',
       tests: out }, null, 2));

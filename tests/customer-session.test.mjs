@@ -121,3 +121,24 @@ test('the inbox is customer-safe and complete', () => {
   assert.ok(inbox.every(i => i.product && i.nextAction));
   assert.ok(!/gid:\/\/|@/.test(JSON.stringify(inbox)));
 });
+
+test('prepare() cannot reach the network at all', async () => {
+  const { readFileSync } = await import('node:fs');
+  const src = readFileSync(new URL('../src/customer.js', import.meta.url), 'utf8');
+  // Isolate the prepare method body and prove no request can originate there.
+  const start = src.indexOf('prepare({ reason');
+  const end = src.indexOf('cancelPrepared()');
+  assert.ok(start > 0 && end > start);
+  const body = src.slice(start, end);
+  assert.ok(!/fetch\(|XMLHttpRequest|sendBeacon|WebSocket/.test(body),
+    'staging a resolution must not be able to contact anything');
+});
+
+test('only requestReturn talks to the mutation route', async () => {
+  const { readFileSync } = await import('node:fs');
+  const src = readFileSync(new URL('../src/customer.js', import.meta.url), 'utf8');
+  const hits = src.match(/\/api\/customer\/return-request/g) || [];
+  assert.equal(hits.length, 1, 'exactly one call site for the customer mutation');
+  const start = src.indexOf('async requestReturn');
+  assert.ok(src.indexOf('/api/customer/return-request') > start, 'and it lives inside requestReturn');
+});
