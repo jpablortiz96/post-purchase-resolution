@@ -14,15 +14,26 @@ const rec = (n, p, d) => { out.push({n,p,d}); console.log(`${p?'PASS':'FAIL'}  $
   const errs=[]; p.on('pageerror',e=>errs.push(e.message));
   p.on('console',m=>{ if(m.type()==='error') errs.push(m.text()); });
 
+  // Expectations come from the live API, never hard-coded: the deployment can
+  // serve a different order without this test needing an edit.
+  const api = await (await fetch(URL.replace(/\/$/, '') + '/api/order')).json();
+  const EXPECT = api.order;
+  console.log(`  (expecting ${EXPECT.orderReference}, returnable=${EXPECT.returnable})\n`);
+
   await p.goto(URL, { waitUntil:'networkidle0', timeout:45000 });
   await sleep(2500);
 
   const text = await p.evaluate(() => document.querySelector('.wrap').innerText);
   rec('live mode boots by default', /Live Shopify order/i.test(text));
-  rec('real order reference rendered', text.includes('#1001'), text.match(/#1001[^\n]*/)?.[0]);
-  rec('real product rendered', text.includes('Wireless Headphones'));
-  rec('real Shopify status rendered', /OPEN/.test(text));
-  rec('shows the existing return reference', text.includes('#1001-R1'));
+  rec('real order reference rendered', text.includes(EXPECT.orderReference), EXPECT.orderReference);
+  rec('real product rendered', text.includes(EXPECT.product), EXPECT.product);
+  const activeRet = (EXPECT.existingReturns || [])[0];
+  rec('real Shopify status rendered',
+    activeRet ? text.includes(activeRet.status) : /returnable|Choose this/i.test(text),
+    activeRet ? activeRet.status : 'no active return');
+  rec('shows the existing return reference',
+    activeRet ? text.includes(activeRet.reference) : true,
+    activeRet ? activeRet.reference : 'n/a');
 
   const tools = await p.evaluate(async () => (await document.modelContext.getTools()).map(t=>t.name));
   rec('WebMCP contract still minimal in live mode',
@@ -35,8 +46,9 @@ const rec = (n, p, d) => { out.push({n,p,d}); console.log(`${p?'PASS':'FAIL'}  $
     return t ? JSON.parse(await document.modelContext.executeTool(t, '{}')) : null;
   });
   rec('get_order returns Shopify-backed facts',
-    order && order.source==='shopify' && order.orderReference==='#1001' && order.financialStatus==='PAID',
-    order && { ref: order.orderReference, fin: order.financialStatus, ful: order.fulfillmentStatus });
+    order && order.source==='shopify' && order.orderReference===EXPECT.orderReference &&
+    order.financialStatus===EXPECT.financialStatus && order.returnable===EXPECT.returnable,
+    order && { ref: order.orderReference, fin: order.financialStatus, returnable: order.returnable });
   const blob = JSON.stringify(order).toLowerCase();
   rec('get_order leaks no PII or secrets',
     !/\bemail\b|[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}|\bphone\b|\baddress\d?\b|gid:\/\/|shpat_|myshopify/.test(blob));
@@ -47,7 +59,9 @@ const rec = (n, p, d) => { out.push({n,p,d}); console.log(`${p?'PASS':'FAIL'}  $
   await sleep(2000);
   const mtext = await m.evaluate(() => document.querySelector('.wrap').innerText);
   rec('merchant desk reads the same external return',
-    mtext.includes('#1001-R1') && /OPEN/.test(mtext), mtext.match(/#1001-R\d[^\n]*/)?.[0]);
+    activeRet ? (mtext.includes(activeRet.reference) && mtext.includes(activeRet.status))
+              : /NO ACTIVE RETURN/i.test(mtext),
+    activeRet ? activeRet.reference : 'no active return');
   rec('merchant desk offers no approve button when nothing is REQUESTED',
     !(await m.evaluate(() => !!document.getElementById('approve'))));
 

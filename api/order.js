@@ -6,8 +6,8 @@ module.exports = async (req, res) => {
     return send(res, 503, { ok: false, code: 'NOT_CONFIGURED', error: 'Live commerce is not configured.' });
   }
   try {
-    const name = String(req.query?.order || shopify.DEMO_ORDERS[0]);
-    const { sanitized } = await shopify.getOrder(name);
+    // No caller-chosen order: the adapter serves the active order only.
+    const { sanitized } = await shopify.getOrder();
     return send(res, 200, { ok: true, order: sanitized });
   } catch (e) { return fail(res, e); }
 };

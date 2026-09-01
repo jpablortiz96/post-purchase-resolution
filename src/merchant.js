@@ -13,6 +13,19 @@ const esc = s => String(s === null || s === undefined ? '' : s).replace(/[&<>"']
 let busy = false;
 let lastError = null;
 
+/**
+ * Merchant authority credential.
+ *
+ * Deliberately NOT embedded in this file — a public page cannot hold a secret.
+ * The operator pastes it once per browser session and it is sent as a bearer
+ * header. This is a stopgap that stops anonymous approval; it is not merchant
+ * identity, and the UI says so. Real merchant sessions are tracked in
+ * docs/M4_3_PREFLIGHT.md.
+ */
+const tokenKey = 'ppr_merchant_operator_token';
+const getToken = () => { try { return sessionStorage.getItem(tokenKey) || ''; } catch (e) { return ''; } };
+const setToken = v => { try { sessionStorage.setItem(tokenKey, v); } catch (e) {} };
+
 async function load() {
   try {
     const oRes = await fetch('/api/order');
@@ -68,7 +81,22 @@ function render(order) {
   }
 
   const err = lastError ? `<div class="err">${esc(lastError)}</div>` : '';
-  $('desk').innerHTML = `<div class="card">${head}${actions}${err}</div>`;
+
+  // Only shown when a decision is actually pending and no credential is held.
+  const needsToken = !!pending && !getToken();
+  const tokenBox = needsToken ? `
+    <div class="note" style="margin-top:16px">
+      Approving is a merchant action. Paste the operator credential for this store
+      to continue. It is held for this browser session only and never stored in the page source.
+      <div class="acts" style="margin-top:12px">
+        <input id="token-input" type="password" placeholder="Operator credential"
+          style="flex:1;min-width:240px;padding:10px 13px;border-radius:9px;background:var(--raised);
+                 border:1px solid var(--bd);color:var(--tx);font-family:inherit;font-size:13px">
+        <button class="btn go" id="save-token">Continue</button>
+      </div>
+    </div>` : '';
+
+  $('desk').innerHTML = `<div class="card">${head}${needsToken ? tokenBox : actions}${err}</div>`;
 }
 
 document.addEventListener('click', async (ev) => {
@@ -77,6 +105,12 @@ document.addEventListener('click', async (ev) => {
 
   if (t.id === 'refresh') { lastError = null; return load(); }
 
+  if (t.id === 'save-token') {
+    const input = document.getElementById('token-input');
+    if (input && input.value.trim()) { setToken(input.value.trim()); lastError = null; }
+    return load();
+  }
+
   if (t.id === 'approve') {
     if (busy) return;                    // merchant double-click guard
     busy = true;
@@ -84,7 +118,9 @@ document.addEventListener('click', async (ev) => {
     await load();                        // re-read before mutating
     try {
       const res = await fetch('/api/return-approve', {
-        method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}',
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-merchant-token': getToken() },
+        body: '{}',
       });
       const body = await res.json();
       if (!body.ok) {

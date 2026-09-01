@@ -14,11 +14,42 @@ const SHOP = RAW.includes('.') ? RAW : `${RAW}.myshopify.com`;
 const API_VERSION = process.env.SHOPIFY_API_VERSION || '2026-07';
 
 /**
- * The public demo may only touch explicitly seeded orders. Without this an
- * anonymous visitor could drive returns against any order in the store.
+ * The order this deployment serves.
+ *
+ * SECURITY NOTE. Until Customer Account authentication is wired (see
+ * docs/M4_3_PREFLIGHT.md), there is no authenticated customer to scope orders
+ * to. So the surface exposes exactly ONE order chosen server-side and offers no
+ * way for a caller to select a different one — callers cannot pass an order at
+ * all. That removes cross-order lookup; it is not a substitute for customer
+ * scoping, and is documented as such.
  */
-const DEMO_ORDERS = (process.env.SHOPIFY_DEMO_ORDER_NAMES || '#1001')
+const ORDER_LIST = (process.env.SHOPIFY_DEMO_ORDER_NAMES || '#1001')
   .split(',').map(s => s.trim()).filter(Boolean);
+const ACTIVE_ORDER = ORDER_LIST[0];
+
+/** Is a caller allowed to perform commerce mutations at all? */
+function mutationsEnabled() {
+  return process.env.COMMERCE_MUTATIONS_ENABLED !== 'false';
+}
+
+/**
+ * Merchant approval is merchant authority and must never be anonymous.
+ *
+ * This checks a high-entropy operator token held server-side. It is NOT
+ * merchant identity and is not presented as production authentication: it is a
+ * stopgap that prevents anonymous approval until a real merchant session
+ * exists. If no token is configured, approval is refused outright rather than
+ * left open.
+ */
+function merchantAuthorized(req) {
+  const expected = process.env.MERCHANT_OPERATOR_TOKEN;
+  if (!expected) return false;
+  const got = (req.headers['x-merchant-token'] || '').trim();
+  if (!got || got.length !== expected.length) return false;
+  let diff = 0;
+  for (let i = 0; i < expected.length; i++) diff |= got.charCodeAt(i) ^ expected.charCodeAt(i);
+  return diff === 0;
+}
 
 let cached = null;   // { token, expiresAt }
 
@@ -125,10 +156,13 @@ const ORDER_FIELDS = `
 `;
 
 async function fetchOrderByName(name) {
-  if (!DEMO_ORDERS.includes(name)) {
-    throw new ShopifyError('NOT_A_DEMO_ORDER',
-      'That order is not part of this demo.', { allowed: DEMO_ORDERS });
+  // Callers cannot choose an order. Any supplied name is ignored in favour of
+  // the server-side active order, so there is no cross-order lookup surface.
+  if (name && name !== ACTIVE_ORDER) {
+    throw new ShopifyError('ORDER_NOT_ACCESSIBLE',
+      'This application does not expose that order.');
   }
+  name = ACTIVE_ORDER;
   const data = await gql(
     `query($q: String!) { orders(first: 1, query: $q) { nodes { ${ORDER_FIELDS} } } }`,
     { q: `name:${name}` });
@@ -181,8 +215,12 @@ function activeReturn(order) {
  * Customer-initiated. Produces a Return in REQUESTED status, preserving the
  * merchant approval boundary. Refuses if a live return already exists.
  */
-async function requestReturn({ orderName, reason = 'DEFECTIVE', customerNote }) {
-  const { _internal } = await getOrder(orderName);
+async function requestReturn({ reason = 'DEFECTIVE', customerNote } = {}) {
+  if (!mutationsEnabled()) {
+    throw new ShopifyError('MUTATIONS_DISABLED',
+      'Return requests are disabled on this deployment.');
+  }
+  const { _internal } = await getOrder(ACTIVE_ORDER);
   const { order, returnable } = _internal;
 
   const existing = activeReturn(order);
@@ -223,8 +261,15 @@ async function requestReturn({ orderName, reason = 'DEFECTIVE', customerNote }) 
 }
 
 /** Merchant-initiated. REQUESTED -> OPEN. */
-async function approveReturn({ orderName }) {
-  const { _internal } = await getOrder(orderName);
+async function approveReturn({ req } = {}) {
+  if (!mutationsEnabled()) {
+    throw new ShopifyError('MUTATIONS_DISABLED', 'Approvals are disabled on this deployment.');
+  }
+  if (!merchantAuthorized(req)) {
+    throw new ShopifyError('MERCHANT_UNAUTHORIZED',
+      'Approving a return requires merchant authority.');
+  }
+  const { _internal } = await getOrder(ACTIVE_ORDER);
   const pending = (_internal.order.returns?.nodes || []).find(r => r.status === 'REQUESTED');
   if (!pending) {
     const any = activeReturn(_internal.order);
@@ -250,8 +295,8 @@ async function approveReturn({ orderName }) {
 }
 
 /** Independent re-read of external state. Never served from local memory. */
-async function returnStatus(orderName) {
-  const order = await fetchOrderByName(orderName);
+async function returnStatus() {
+  const order = await fetchOrderByName(ACTIVE_ORDER);
   return {
     orderReference: order.name,
     orderReturnStatus: order.returnStatus,
@@ -262,6 +307,7 @@ async function returnStatus(orderName) {
 
 module.exports = {
   configured, getOrder, requestReturn, approveReturn, returnStatus,
-  activeReturn, sanitizeReturn, ShopifyError, DEMO_ORDERS, API_VERSION,
+  activeReturn, sanitizeReturn, ShopifyError, API_VERSION,
+  ACTIVE_ORDER, mutationsEnabled, merchantAuthorized,
   shopHost: () => SHOP,
 };

@@ -1,0 +1,46 @@
+{
+  "note": "What a verifier should see in the ChatGPT desktop address-bar tool list on the production URL. Generated from the deployed contract, not aspirational.",
+  "productionUrl": "https://post-purchase-resolution.vercel.app/",
+  "capturedAt": "2026-09-01T16:13:05.286Z",
+  "expectedTools": [
+    {
+      "name": "get_order",
+      "kind": "read-only",
+      "annotations": {
+        "readOnlyHint": true
+      },
+      "expectedBehaviour": "Returns the live Shopify order: product, amount, financial/fulfilment status, delivery, returnability and any existing return. No PII."
+    },
+    {
+      "name": "prepare_resolution",
+      "kind": "write, non-final",
+      "annotations": {
+        "readOnlyHint": false
+      },
+      "expectedBehaviour": "Stages a return request for the customer to review. Creates nothing in Shopify."
+    }
+  ],
+  "mustNotAppear": [
+    "confirm_resolution",
+    "commit_resolution",
+    "complete_resolution",
+    "approve_resolution",
+    "return_request",
+    "returnApproveRequest"
+  ],
+  "stateAwareness": {
+    "order returnable, nothing staged": [
+      "get_order",
+      "prepare_resolution"
+    ],
+    "order not returnable": [
+      "get_order"
+    ],
+    "resolution staged": [
+      "get_order"
+    ],
+    "return REQUESTED or OPEN": [
+      "get_order"
+    ]
+  }
+}

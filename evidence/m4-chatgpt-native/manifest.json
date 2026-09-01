@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-09-01T16:22:08.239Z",
+  "milestone": "M4.3",
+  "status": "AWAITING_HUMAN_VERIFICATION",
+  "note": "ChatGPT Desktop Site Tools and Voice cannot be exercised from an automated environment. protocol.md is the procedure; claim-matrix.md binds each possible observation to what it would license. No ChatGPT observation has been made.",
+  "productionUrl": "https://post-purchase-resolution.vercel.app/",
+  "securityTests": "security-tests.json (21/21 against production)",
+  "files": [
+    {
+      "file": "claim-matrix.md",
+      "bytes": 1970,
+      "sha256": "8e24273fc15de458"
+    },
+    {
+      "file": "expected-tools.json",
+      "bytes": 1314,
+      "sha256": "f7e66c606f136499"
+    },
+    {
+      "file": "protocol.md",
+      "bytes": 4725,
+      "sha256": "503903bf605a6456"
+    },
+    {
+      "file": "security-tests.json",
+      "bytes": 2707,
+      "sha256": "f0c437c982f3cf40"
+    }
+  ]
+}
