@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-09-01T01:18:48.042Z",
+  "milestone": "M4.1",
+  "result": "BLOCKED_CREDENTIALS",
+  "externalCallsMade": 0,
+  "shopifyCodeWritten": false,
+  "note": "Gated on Shopify credentials that do not exist in this environment. No simulation, stub or mock was created. See preflight.md.",
+  "files": [
+    {
+      "file": "limitations.md",
+      "bytes": 1644,
+      "sha256": "5e4fe0e396e1b88a"
+    },
+    {
+      "file": "preflight.md",
+      "bytes": 1589,
+      "sha256": "acde2d731ca99965"
+    }
+  ]
+}
