@@ -83,7 +83,7 @@ public refs:
 | Check | Result |
 |---|---|
 | Claude co-author trailers | **0** |
-| `noreply@anthropic.com` in any commit message | **0** |
+| Anthropic no-reply co-author address in any commit message | **0** |
 | The redacted email in any blob | **0** |
 | Credential material (`shpat_`/`shcat_` + token characters) | **0** |
 | `.env` ever committed | **no** |
