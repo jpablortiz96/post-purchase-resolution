@@ -602,6 +602,12 @@ discipline this repository holds itself to. [`SECURITY.md`](SECURITY.md) covers
 responsible reporting — please do not open a public issue containing
 credentials or personal data.
 
+This repository's git history was rewritten before public release, to redact an
+email address an agent transcript had recorded into an evidence file. Commit
+hashes changed; evidence content did not.
+[`PUBLIC_HISTORY_SANITIZATION.md`](PUBLIC_HISTORY_SANITIZATION.md) explains
+exactly what was and was not touched.
+
 ## License
 
 [MIT](LICENSE).
