@@ -1,0 +1,40 @@
+{
+  "capturedAt": "2026-09-02T17:49:13.954Z",
+  "source": "shopify-admin-api \u00b7 order events (read-only)",
+  "order": "#1004",
+  "note": "Personal names replaced with roles. No email, address or phone is recorded.",
+  "howToRead": {
+    "attributedToUser=false with an app title": "performed by the application, not by a person in Shopify Admin",
+    "attributedToUser=true": "performed by a signed-in staff member inside Shopify Admin"
+  },
+  "timeline": [
+    {
+      "at": "2026-09-02T15:25:24Z",
+      "attributedToApp": true,
+      "attributedToUser": true,
+      "app": "Shopify Web",
+      "event": "[merchant staff] marked 1 item as fulfilled from Shop location."
+    },
+    {
+      "at": "2026-09-02T15:40:39Z",
+      "attributedToApp": true,
+      "attributedToUser": false,
+      "app": "WebMCP Resolution Connector",
+      "event": "Test payment gateway requested return #1004-R1 through WebMCP Resolution Connector."
+    },
+    {
+      "at": "2026-09-02T15:40:39Z",
+      "attributedToApp": false,
+      "attributedToUser": false,
+      "app": null,
+      "event": "Return request confirmation email was sent to Test payment gateway ([email])."
+    },
+    {
+      "at": "2026-09-02T17:43:12Z",
+      "attributedToApp": true,
+      "attributedToUser": false,
+      "app": "WebMCP Resolution Connector",
+      "event": "WebMCP Resolution Connector approved return #1004-R1."
+    }
+  ]
+}
