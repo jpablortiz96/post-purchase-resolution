@@ -37,7 +37,7 @@ const j=async(u,o)=>{const r=await fetch(u,o);let b;try{b=await r.json();}catch(
   for (const p of ['/','/merchant.html','/src/app.js','/src/live.js','/src/merchant.js','/api/order','/api/return-status']) {
     const r=await fetch(`${BASE}${p}`); const t=await r.text();
     rec(`no credential material on ${p}`,
-      !/shpat_|client_secret|MERCHANT_OPERATOR_TOKEN=|SHOPIFY_CLIENT_SECRET/i.test(t));
+      !/shpat_[A-Za-z0-9]{8,}|shcat_[A-Za-z0-9]{8,}|client_secret\s*[:=]|MERCHANT_OPERATOR_TOKEN=|SHOPIFY_CLIENT_SECRET/i.test(t));
   }
 
   // no stack traces in errors

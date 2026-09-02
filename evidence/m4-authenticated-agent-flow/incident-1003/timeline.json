@@ -1,0 +1,85 @@
+{
+  "capturedAt": "2026-09-02T15:03:56.752Z",
+  "source": "shopify-admin-api \u00b7 order events (read-only)",
+  "order": "#1003",
+  "note": "Personal names replaced with roles. No email, address or phone is recorded.",
+  "timeline": [
+    {
+      "at": "2026-09-02T14:31:55Z",
+      "attributedToApp": true,
+      "attributedToUser": true,
+      "app": "Shopify Web",
+      "event": "[merchant staff] marked 1 item as fulfilled from Shop location."
+    },
+    {
+      "at": "2026-09-02T14:42:13Z",
+      "attributedToApp": true,
+      "attributedToUser": false,
+      "app": "WebMCP Resolution Connector",
+      "event": "Test payment gateway requested return #1003-R1 through WebMCP Resolution Connector."
+    },
+    {
+      "at": "2026-09-02T14:42:13Z",
+      "attributedToApp": false,
+      "attributedToUser": false,
+      "app": null,
+      "event": "Return request confirmation email was sent to Test payment gateway ([email])."
+    },
+    {
+      "at": "2026-09-02T14:49:03Z",
+      "attributedToApp": true,
+      "attributedToUser": true,
+      "app": "Shopify Web",
+      "event": "[merchant staff] approved return #1003-R1."
+    },
+    {
+      "at": "2026-09-02T14:49:03Z",
+      "attributedToApp": true,
+      "attributedToUser": true,
+      "app": "Shopify Web",
+      "event": "[merchant staff] sent a return approved email to themself ([email])."
+    },
+    {
+      "at": "2026-09-02T14:50:52Z",
+      "attributedToApp": true,
+      "attributedToUser": true,
+      "app": "Shopify Web",
+      "event": "[merchant staff] processed 1 item from return #1003-R1."
+    },
+    {
+      "at": "2026-09-02T14:50:53Z",
+      "attributedToApp": true,
+      "attributedToUser": true,
+      "app": "Shopify Web",
+      "event": "[merchant staff] refunded $89.00 USD using a Bogus ending in \u2022\u2022 1 for return #1003-R1."
+    },
+    {
+      "at": "2026-09-02T14:50:54Z",
+      "attributedToApp": true,
+      "attributedToUser": true,
+      "app": "Shopify Web",
+      "event": "[merchant staff] refunded 1 item from return #1003-R1."
+    },
+    {
+      "at": "2026-09-02T14:50:54Z",
+      "attributedToApp": true,
+      "attributedToUser": true,
+      "app": "Shopify Web",
+      "event": "[merchant staff] sent a refund notification email to themself ([email])."
+    },
+    {
+      "at": "2026-09-02T14:50:54Z",
+      "attributedToApp": true,
+      "attributedToUser": true,
+      "app": "Shopify Web",
+      "event": "[merchant staff] inspected 1 item for return #1003-R1."
+    },
+    {
+      "at": "2026-09-02T14:50:54Z",
+      "attributedToApp": false,
+      "attributedToUser": false,
+      "app": null,
+      "event": "Return #1003-R1 was closed."
+    }
+  ]
+}

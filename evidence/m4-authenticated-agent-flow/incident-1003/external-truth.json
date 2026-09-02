@@ -1,0 +1,55 @@
+{
+  "capturedAt": "2026-09-02T15:03:40.354Z",
+  "source": "shopify-admin-api",
+  "apiVersion": "2026-07",
+  "order": {
+    "reference": "#1003",
+    "externalId": "12604761997684",
+    "createdAt": "2026-09-02T14:31:26Z",
+    "updatedAt": "2026-09-02T14:50:53Z",
+    "financialStatus": "REFUNDED",
+    "fulfillmentStatus": "FULFILLED",
+    "returnStatus": "RETURNED",
+    "total": {
+      "amount": "89.0",
+      "currencyCode": "USD"
+    },
+    "totalRefunded": {
+      "amount": "89.0",
+      "currencyCode": "USD"
+    },
+    "refundCount": 1,
+    "refunds": [
+      {
+        "externalId": "1113245155700",
+        "createdAt": "2026-09-02T14:50:53Z",
+        "amount": {
+          "amount": "89.0",
+          "currencyCode": "USD"
+        }
+      }
+    ],
+    "lineItems": [
+      {
+        "title": "Portable Bluetooth Speaker",
+        "quantity": 1,
+        "unfulfilledQuantity": 0
+      }
+    ]
+  },
+  "returns": [
+    {
+      "reference": "#1003-R1",
+      "externalId": "57457082740",
+      "status": "CLOSED",
+      "totalQuantity": 1,
+      "lineItems": [
+        {
+          "quantity": 1,
+          "reason": "DEFECTIVE",
+          "product": "Portable Bluetooth Speaker"
+        }
+      ]
+    }
+  ]
+}

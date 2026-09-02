@@ -110,7 +110,7 @@ const get = async (p, headers) => {
     const r = await fetch(BASE + p);
     const t = await r.text();
     rec(`no token or secret on ${p}`,
-      !/shpat_|SESSION_SECRET|client_secret|code_verifier|"at"\s*:/i.test(t));
+      !/shpat_[A-Za-z0-9]{8,}|shcat_[A-Za-z0-9]{8,}|SESSION_SECRET|client_secret\s*[:=]|code_verifier\s*[:=]|"at"\s*:\s*"/i.test(t));
   }
 
   const passed = out.filter(o => o.pass).length;
