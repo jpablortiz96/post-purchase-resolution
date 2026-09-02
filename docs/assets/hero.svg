@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" width="1600" height="700" role="img" aria-label="Post-Purchase Resolution — an agent-native post-purchase resolution layer built on WebMCP and Shopify">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b0c12"/>
+      <stop offset="55%" stop-color="#0e1018"/>
+      <stop offset="100%" stop-color="#0a0b10"/>
+    </linearGradient>
+    <linearGradient id="violet" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b7cf6"/>
+      <stop offset="100%" stop-color="#6c5ce7"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#0ea5b7"/>
+    </linearGradient>
+    <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6c5ce7" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#22d3ee" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6c5ce7" stop-opacity="0.15"/>
+      <stop offset="40%" stop-color="#6c5ce7" stop-opacity="0.55"/>
+      <stop offset="75%" stop-color="#22d3ee" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.15"/>
+    </linearGradient>
+    <radialGradient id="glowV" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#6c5ce7" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#6c5ce7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowC" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.022" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="700" fill="url(#bg)"/>
+  <rect width="1600" height="700" fill="url(#grid)"/>
+  <ellipse cx="210" cy="120" rx="520" ry="330" fill="url(#glowV)"/>
+  <ellipse cx="1400" cy="620" rx="520" ry="300" fill="url(#glowC)"/>
+
+  <!-- ── masthead ─────────────────────────────────────────────── -->
+  <g font-family="ui-sans-serif,-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,Helvetica,Arial,sans-serif">
+
+    <g transform="translate(96,92)">
+      <rect x="0" y="0" width="9" height="9" rx="2" fill="url(#violet)"/>
+      <text x="24" y="9" fill="#8b93a7" font-size="13" letter-spacing="3.4" font-weight="600">AGENT-NATIVE COMMERCE · WEBMCP</text>
+    </g>
+
+    <text x="96" y="196" fill="#f2f4f9" font-size="70" font-weight="700" letter-spacing="-1.8">Post-Purchase Resolution</text>
+    <rect x="96" y="222" width="620" height="2" fill="url(#rule)"/>
+
+    <text x="96" y="292" fill="#c9cfdd" font-size="30" font-weight="500">Shopping agents know how to buy.</text>
+    <text x="96" y="336" fill="#8b7cf6" font-size="30" font-weight="600">What happens when something goes wrong?</text>
+
+    <text x="96" y="392" fill="#7e879b" font-size="17.5" font-weight="400">An agent-native post-purchase resolution layer. WebMCP lets an agent find the right purchase and</text>
+    <text x="96" y="418" fill="#7e879b" font-size="17.5" font-weight="400">prepare the next step — while the customer and the merchant each keep their own authority.</text>
+
+    <!-- ── the flow ──────────────────────────────────────────── -->
+    <g transform="translate(96,486)">
+      <rect x="0" y="34" width="1408" height="2" fill="url(#flow)"/>
+
+      <!-- 1 · customer intent -->
+      <g transform="translate(0,0)">
+        <circle cx="18" cy="35" r="7" fill="#6c5ce7"/>
+        <circle cx="18" cy="35" r="13" fill="none" stroke="#6c5ce7" stroke-opacity="0.35" stroke-width="1.5"/>
+        <text x="0" y="80" fill="#e6e9f2" font-size="15.5" font-weight="600">Customer intent</text>
+        <text x="0" y="102" fill="#6b7488" font-size="13.5">“my earbuds arrived damaged”</text>
+      </g>
+
+      <!-- 2 · agent -->
+      <g transform="translate(268,0)">
+        <circle cx="18" cy="35" r="7" fill="#7d6ef0"/>
+        <circle cx="18" cy="35" r="13" fill="none" stroke="#7d6ef0" stroke-opacity="0.35" stroke-width="1.5"/>
+        <text x="0" y="80" fill="#e6e9f2" font-size="15.5" font-weight="600">Agent</text>
+        <text x="0" y="102" fill="#6b7488" font-size="13.5">reads · never commits</text>
+      </g>
+
+      <!-- 3 · webmcp site tools -->
+      <g transform="translate(536,0)">
+        <circle cx="18" cy="35" r="7" fill="#8b7cf6"/>
+        <circle cx="18" cy="35" r="13" fill="none" stroke="#8b7cf6" stroke-opacity="0.4" stroke-width="1.5"/>
+        <text x="0" y="80" fill="#e6e9f2" font-size="15.5" font-weight="600">WebMCP Site Tools</text>
+        <text x="0" y="102" fill="#6b7488" font-size="13.5" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">find_order · get_order · prepare</text>
+      </g>
+
+      <!-- 4 · shopify purchase -->
+      <g transform="translate(838,0)">
+        <circle cx="18" cy="35" r="7" fill="#22d3ee"/>
+        <circle cx="18" cy="35" r="13" fill="none" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="1.5"/>
+        <text x="0" y="80" fill="#e6e9f2" font-size="15.5" font-weight="600">Shopify purchase</text>
+        <text x="0" y="102" fill="#6b7488" font-size="13.5">the system of record</text>
+      </g>
+
+      <!-- 5 · customer decision -->
+      <g transform="translate(1094,0)">
+        <circle cx="18" cy="35" r="7" fill="#22d3ee"/>
+        <circle cx="18" cy="35" r="13" fill="none" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="1.5"/>
+        <text x="0" y="80" fill="#e6e9f2" font-size="15.5" font-weight="600">Customer decides</text>
+        <text x="0" y="102" fill="#6b7488" font-size="13.5">their credential, their call</text>
+      </g>
+
+      <!-- 6 · merchant decision -->
+      <g transform="translate(1310,0)">
+        <circle cx="18" cy="35" r="7" fill="#2ee6a8"/>
+        <circle cx="18" cy="35" r="13" fill="none" stroke="#2ee6a8" stroke-opacity="0.35" stroke-width="1.5"/>
+        <text x="0" y="80" fill="#e6e9f2" font-size="15.5" font-weight="600">Merchant decides</text>
+        <text x="0" y="102" fill="#6b7488" font-size="13.5">separate authority</text>
+      </g>
+    </g>
+
+    <!-- ── status moments ────────────────────────────────────── -->
+    <g transform="translate(96,636)" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="12.5" font-weight="600">
+      <g>
+        <rect x="0" y="0" width="86" height="27" rx="13.5" fill="#6c5ce7" fill-opacity="0.12" stroke="#6c5ce7" stroke-opacity="0.45"/>
+        <text x="43" y="18" fill="#a99bff" text-anchor="middle" letter-spacing="1.2">FOUND</text>
+      </g>
+      <g transform="translate(98,0)">
+        <rect x="0" y="0" width="108" height="27" rx="13.5" fill="#6c5ce7" fill-opacity="0.12" stroke="#6c5ce7" stroke-opacity="0.45"/>
+        <text x="54" y="18" fill="#a99bff" text-anchor="middle" letter-spacing="1.2">PREPARED</text>
+      </g>
+      <g transform="translate(218,0)">
+        <rect x="0" y="0" width="120" height="27" rx="13.5" fill="#22d3ee" fill-opacity="0.10" stroke="#22d3ee" stroke-opacity="0.45"/>
+        <text x="60" y="18" fill="#67e8f9" text-anchor="middle" letter-spacing="1.2">REQUESTED</text>
+      </g>
+      <g transform="translate(350,0)">
+        <rect x="0" y="0" width="76" height="27" rx="13.5" fill="#2ee6a8" fill-opacity="0.12" stroke="#2ee6a8" stroke-opacity="0.5"/>
+        <text x="38" y="18" fill="#6ee7c0" text-anchor="middle" letter-spacing="1.2">OPEN</text>
+      </g>
+      <text x="452" y="18" fill="#5d6578" font-size="12.5" font-weight="400" font-family="ui-sans-serif,-apple-system,'Segoe UI',sans-serif">real Shopify Return objects · development store · test payments</text>
+    </g>
+  </g>
+</svg>
