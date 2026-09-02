@@ -1,0 +1,82 @@
+{
+  "capturedAt": "2026-09-02T19:54:40.087Z",
+  "source": "shopify-admin-api \u00b7 order events (read-only)",
+  "order": "#1005",
+  "claim": "The agent performed no commerce mutation on this order.",
+  "howThisProvesIt": "Every mutation this application performs is attributed by Shopify to \"WebMCP Resolution Connector\" \u2014 as it was on #1003-R1 and #1004-R1. This order has no such event, and no return, refund or approval event of any kind.",
+  "returnRefundApprovalEvents": 0,
+  "eventsAttributedToThisApp": 0,
+  "note": "Personal names replaced with roles. No email, address or phone recorded.",
+  "timeline": [
+    {
+      "at": "2026-09-02T18:22:51Z",
+      "attributedToApp": false,
+      "attributedToUser": false,
+      "app": null,
+      "event": "Test payment gateway placed this order on Online Store (checkout #66507966644596)."
+    },
+    {
+      "at": "2026-09-02T18:22:51Z",
+      "attributedToApp": false,
+      "attributedToUser": false,
+      "app": null,
+      "event": "Confirmation #VV0DCXZXG was generated for this order."
+    },
+    {
+      "at": "2026-09-02T18:22:52Z",
+      "attributedToApp": false,
+      "attributedToUser": false,
+      "app": null,
+      "event": "$119.00 USD was authorized using a Bogus ending in \u2022\u2022 1."
+    },
+    {
+      "at": "2026-09-02T18:22:52Z",
+      "attributedToApp": false,
+      "attributedToUser": false,
+      "app": null,
+      "event": "Unknown event Order#tax_finalization_capture_started..."
+    },
+    {
+      "at": "2026-09-02T18:22:52Z",
+      "attributedToApp": false,
+      "attributedToUser": false,
+      "app": null,
+      "event": "Order confirmation email was sent to Test payment gateway ([email])."
+    },
+    {
+      "at": "2026-09-02T18:22:52Z",
+      "attributedToApp": false,
+      "attributedToUser": false,
+      "app": null,
+      "event": "$119.00 USD was captured using a Bogus ending in \u2022\u2022 1."
+    },
+    {
+      "at": "2026-09-02T18:22:53Z",
+      "attributedToApp": false,
+      "attributedToUser": false,
+      "app": null,
+      "event": "Received new order <a href=\"[link] by Test payment gateway."
+    },
+    {
+      "at": "2026-09-02T18:23:30Z",
+      "attributedToApp": true,
+      "attributedToUser": true,
+      "app": "Shopify Web",
+      "event": "[merchant staff] marked 1 item as fulfilled from Shop location."
+    },
+    {
+      "at": "2026-09-02T18:23:31Z",
+      "attributedToApp": false,
+      "attributedToUser": false,
+      "app": null,
+      "event": "This order was archived."
+    },
+    {
+      "at": "2026-09-02T18:23:35Z",
+      "attributedToApp": true,
+      "attributedToUser": true,
+      "app": "Shopify Web",
+      "event": "[merchant staff] marked 1 item as delivered."
+    }
+  ]
+}

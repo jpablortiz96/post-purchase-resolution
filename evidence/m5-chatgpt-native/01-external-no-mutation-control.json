@@ -1,0 +1,38 @@
+{
+  "capturedAt": "2026-09-02T19:54:37.019Z",
+  "step": "01-external-no-mutation-control",
+  "note": "External control after both ChatGPT tests. The agent read and prepared; it created nothing.",
+  "source": "shopify-admin-api · independent read-only re-query",
+  "apiVersion": "2026-07",
+  "independence": "Read directly from Shopify. The customer page and its session play no part in this query.",
+  "order": {
+    "reference": "#1005",
+    "externalId": "12605156491636",
+    "financialStatus": "PAID",
+    "fulfillmentStatus": "FULFILLED",
+    "delivery": [
+      {
+        "displayStatus": "DELIVERED",
+        "deliveredAt": "2026-09-02T18:23:35Z"
+      }
+    ],
+    "returnStatus": "NO_RETURN",
+    "total": {
+      "amount": "119.0",
+      "currencyCode": "USD"
+    },
+    "totalRefunded": {
+      "amount": "0.0",
+      "currencyCode": "USD"
+    },
+    "refundCount": 0,
+    "lineItems": [
+      {
+        "title": "Noise Cancelling Earbuds",
+        "quantity": 1
+      }
+    ]
+  },
+  "returns": [],
+  "returnCount": 0
+}
