@@ -1,0 +1,123 @@
+{
+  "ranAt": "2026-09-02T15:46:59.236Z",
+  "target": "https://post-purchase-resolution.vercel.app",
+  "passed": 21,
+  "total": 21,
+  "tests": [
+    {
+      "name": "order param \"%231001\" cannot select another order",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "served": "#1002"
+      }
+    },
+    {
+      "name": "order param \"%239999\" cannot select another order",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "served": "#1002"
+      }
+    },
+    {
+      "name": "order param \"#1001\" cannot select another order",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "served": "#1002"
+      }
+    },
+    {
+      "name": "order param \"garbage\" cannot select another order",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "served": "#1002"
+      }
+    },
+    {
+      "name": "order param \"../admin\" cannot select another order",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "served": "#1002"
+      }
+    },
+    {
+      "name": "order param \"gid://shopify/Order/12602041\" cannot select another order",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "served": "#1002"
+      }
+    },
+    {
+      "name": "approve without a credential is refused",
+      "pass": true,
+      "detail": 401
+    },
+    {
+      "name": "approve with a wrong credential is refused",
+      "pass": true,
+      "detail": 401
+    },
+    {
+      "name": "approve with an empty credential is refused",
+      "pass": true,
+      "detail": 401
+    },
+    {
+      "name": "GET /api/return-approve is refused",
+      "pass": true,
+      "detail": 405
+    },
+    {
+      "name": "GET /api/return-request is refused",
+      "pass": true,
+      "detail": 405
+    },
+    {
+      "name": "oversized note handled without a crash",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "malformed JSON handled without a crash",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "no credential material on /",
+      "pass": true
+    },
+    {
+      "name": "no credential material on /merchant.html",
+      "pass": true
+    },
+    {
+      "name": "no credential material on /src/app.js",
+      "pass": true
+    },
+    {
+      "name": "no credential material on /src/live.js",
+      "pass": true
+    },
+    {
+      "name": "no credential material on /src/merchant.js",
+      "pass": true
+    },
+    {
+      "name": "no credential material on /api/order",
+      "pass": true
+    },
+    {
+      "name": "no credential material on /api/return-status",
+      "pass": true
+    },
+    {
+      "name": "errors contain no stack traces or internal paths",
+      "pass": true
+    }
+  ]
+}
