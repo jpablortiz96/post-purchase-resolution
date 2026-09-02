@@ -150,8 +150,17 @@ function sanitizeOrder(o) {
   // Every level here is optional: an order with nothing to return may omit
   // returnInformation, the summary, or both. Absence must read as "no reasons",
   // never as a crash.
-  const returns = o.returns?.nodes || [];
+  // Newest first. Shopify does not promise an order on this connection, and the
+  // customer cares about the most recent return, not an arbitrary one.
+  const returns = (o.returns?.nodes || []).slice().sort(
+    (a, b) => Date.parse(b?.createdAt || 0) - Date.parse(a?.createdAt || 0));
+
+  // A return in REQUESTED or OPEN is *actionable*. A return that reached CLOSED,
+  // DECLINED or CANCELED is not actionable but is still the truth about this
+  // purchase — reporting only the actionable one made a completed return
+  // disappear from the page instead of reading as finished.
   const activeReturn = returns.find(r => r?.status === 'REQUESTED' || r?.status === 'OPEN') || null;
+  const latestReturn = returns[0] || null;
 
   const summaryReasons = ret.nonReturnableSummary?.nonReturnableReasons || [];
   const detailReasons = nonReturnable.flatMap(
@@ -182,6 +191,13 @@ function sanitizeOrder(o) {
       reference: activeReturn.name || null,
       status: activeReturn.status || null,
       externalId: shortId(activeReturn.id),
+    } : null,
+    // Whatever the most recent return is, in any state.
+    latestReturn: latestReturn ? {
+      reference: latestReturn.name || null,
+      status: latestReturn.status || null,
+      externalId: shortId(latestReturn.id),
+      createdAt: latestReturn.createdAt || null,
     } : null,
     // no email, no name, no address, no phone, no raw gid — the lineItem ids
     // fetched above stop here.

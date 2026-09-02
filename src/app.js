@@ -677,11 +677,15 @@ function renderCustomer({ deferTools = false } = {}) {
   }
 
   $('order-card').classList.remove('hidden');
-  const active = o.activeReturn;
+  // The most recent return in ANY state. Rendering only the actionable one made
+  // a completed return vanish from the page.
+  const shown = o.latestReturn || o.activeReturn;
   const act = nextAction(o);
-  const pill = active
-    ? `<div class="pill ${active.status === 'OPEN' ? 'pill--done' : 'pill--working'}">${esc(act ? act.label : active.status)}</div>`
-    : o.returnable ? '<div class="pill pill--working">Eligible for return</div>' : '';
+  const pillClass = act && (act.level === 'done' || act.level === 'action') ? 'pill--done'
+    : act && act.level === 'waiting' ? 'pill--working'
+    : o.returnable ? 'pill--working' : 'pill--issue';
+  const pill = shown || o.returnable
+    ? `<div class="pill ${pillClass}">${esc(act ? act.label : shown.status)}</div>` : '';
 
   $('order-card').innerHTML = `
     <div class="order-top">
@@ -695,20 +699,20 @@ function renderCustomer({ deferTools = false } = {}) {
 
   const el = $('surface');
 
-  if (active) {
-    const approved = active.status === 'OPEN';
-    const d = act || { label: active.status, detail: '' };
+  if (shown) {
+    const settled = act && (act.level === 'action' || act.level === 'done');
+    const d = act || { label: shown.status, detail: '' };
     el.innerHTML = `
-      <div class="${approved ? 'resolved' : 'decision'}">
-        ${approved ? '<div class="check">✓</div>' : ''}
-        <div class="decision-label" ${approved ? 'style="color:var(--success)"' : ''}>${esc(d.label)}</div>
+      <div class="${settled ? 'resolved' : 'decision'}">
+        ${settled ? '<div class="check">✓</div>' : ''}
+        <div class="decision-label" ${settled ? 'style="color:var(--success)"' : ''}>${esc(d.label)}</div>
         <div class="decision-title">${esc(o.product)}</div>
         <div class="decision-recv">${esc(d.detail)}</div>
         <div class="block block--merchant">
           <div class="block-tag">From the merchant’s store</div>
           <div class="terms">
-            <div class="term"><div class="term-k">Return</div><div class="term-v">${esc(active.reference || '')}</div></div>
-            <div class="term"><div class="term-k">Shopify status</div><div class="term-v"><code>${esc(active.status)}</code></div></div>
+            <div class="term"><div class="term-k">Return</div><div class="term-v">${esc(shown.reference || '')}</div></div>
+            <div class="term"><div class="term-k">Shopify status</div><div class="term-v"><code>${esc(shown.status)}</code></div></div>
           </div>
         </div>
         <div class="opt-meta" style="margin-top:12px">
@@ -838,7 +842,9 @@ async function handleCustomerClick(t) {
     case 'cust-request': {
       const btn = $('cust-request');
       if (btn) { btn.disabled = true; btn.textContent = 'Requesting…'; }   // double-click guard
+      customerBusy = true;
       const out = await customer.requestReturn();
+      customerBusy = false;
       renderCustomer();
       if (!out.ok) {
         const box = $('cust-error');
@@ -959,12 +965,35 @@ async function runSelfCheck() {
   return report;
 }
 
+let customerPoll = null;
+let customerBusy = false;    // set while the customer's own mutation is in flight
+
+/**
+ * Keep the page in step with Shopify.
+ *
+ * Synchronisation must not stop when the merchant approves: a return goes on to
+ * CLOSED, and a page that stopped listening at OPEN keeps claiming "Return
+ * approved" long after the refund. No state is terminal for polling purposes.
+ */
+function startCustomerPolling() {
+  if (customerPoll) clearInterval(customerPoll);
+  customerPoll = setInterval(async () => {
+    if (!isCustomer() || customerBusy) return;
+    if (document.hidden) return;                       // don't poll a hidden tab
+    const before = JSON.stringify(customer.purchases.map(p => [p.orderKey, p.latestReturn, p.returnable]));
+    await customer.refresh();
+    const after = JSON.stringify(customer.purchases.map(p => [p.orderKey, p.latestReturn, p.returnable]));
+    if (before !== after) renderCustomer();            // re-render only on real change
+  }, 10000);
+}
+
 async function enterCustomerMode() {
   customerMode = true; liveMode = false;
   if (livePoll) { clearInterval(livePoll); livePoll = null; }
   await customer.load();
   if (customer.state === CUSTOMER_STATES.SIGNED_OUT) { customerMode = false; return false; }
   renderCustomer();
+  startCustomerPolling();
   return true;
 }
 

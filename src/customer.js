@@ -23,13 +23,19 @@ export const CUSTOMER_STATES = {
   UNAVAILABLE: 'UNAVAILABLE',
 };
 
-/** Shopify's return states, in the customer's language. */
+/**
+ * Shopify's return states, in the customer's language.
+ *
+ * Every state Shopify can report has an entry. A missing state used to fall
+ * through to "already returned", which is how a CLOSED return read as though
+ * nothing had happened.
+ */
 const RETURN_LANGUAGE = {
-  REQUESTED: { headline: 'Return requested', detail: 'Waiting for the merchant to review your request.' },
-  OPEN:      { headline: 'Return approved',  detail: 'The merchant approved your return.' },
-  CLOSED:    { headline: 'Return closed',    detail: 'This return has been completed.' },
-  DECLINED:  { headline: 'Return declined',  detail: 'The merchant did not approve this return.' },
-  CANCELED:  { headline: 'Return cancelled', detail: 'This return was cancelled.' },
+  REQUESTED: { headline: 'Return requested', detail: 'Waiting for the merchant to review your request.', level: 'waiting' },
+  OPEN:      { headline: 'Return approved',  detail: 'Your return is in progress.', level: 'action' },
+  CLOSED:    { headline: 'Return completed', detail: 'This return is complete.', level: 'done' },
+  DECLINED:  { headline: 'Return declined',  detail: 'The merchant did not approve this return.', level: 'none' },
+  CANCELED:  { headline: 'Return cancelled', detail: 'This return was cancelled.', level: 'none' },
 };
 
 /** Why an item cannot be returned, in the customer's language. */
@@ -41,8 +47,22 @@ const REASON_LANGUAGE = {
   NOT_FULFILLED: 'Not delivered yet',
 };
 
-export function describeReturn(status) {
-  return RETURN_LANGUAGE[status] || { headline: `Return ${String(status || '').toLowerCase()}`, detail: '' };
+/**
+ * A return state in customer language.
+ *
+ * `refunded` is only ever passed when Shopify itself reports the order as
+ * refunded. A refund is never claimed on the strength of a CLOSED return alone:
+ * a return can close without money moving.
+ */
+export function describeReturn(status, { refunded = false } = {}) {
+  const base = RETURN_LANGUAGE[status];
+  if (!base) {
+    return { headline: `Return ${String(status || '').toLowerCase()}`, detail: '', level: 'none' };
+  }
+  if (status === 'CLOSED' && refunded) {
+    return { ...base, detail: 'Your refund has been issued.' };
+  }
+  return base;
 }
 
 export function describeReason(code) {
@@ -51,18 +71,23 @@ export function describeReason(code) {
 
 /**
  * The one line a customer most needs on a purchase.
+ *
  * Derived strictly from authoritative state — nothing about carriers or
  * shipping is invented, because Shopify does not tell us those here.
  */
 export function nextAction(order) {
   if (!order) return null;
-  const active = order.activeReturn;
-  if (active && active.status === 'OPEN') {
-    return { level: 'action', label: 'Return approved', detail: 'Follow the merchant’s return instructions.' };
+
+  // The most recent return, whatever state it reached. Using only the
+  // *actionable* return meant a completed one silently disappeared and the
+  // purchase read as "already returned" instead of "return completed".
+  const r = order.latestReturn || order.activeReturn;
+  if (r && r.status) {
+    const refunded = order.financialStatus === 'REFUNDED';
+    const d = describeReturn(r.status, { refunded });
+    return { level: d.level, label: d.headline, detail: d.detail };
   }
-  if (active && active.status === 'REQUESTED') {
-    return { level: 'waiting', label: 'Return requested', detail: 'Waiting for merchant review.' };
-  }
+
   if (order.returnable) {
     return { level: 'available', label: 'Eligible for return', detail: 'You can request a return for this purchase.' };
   }
@@ -283,6 +308,7 @@ export class CustomerSession {
       whyNotReturnable: (o.nonReturnableReasons || []).map(describeReason),
       existingReturns: o.existingReturns,
       activeReturn: o.activeReturn,
+      latestReturn: o.latestReturn,
       customerFacingStatus: action ? action.label : null,
       resolutionState: this.state,
       resolution: this.buildPreparedPayload(),
@@ -296,8 +322,8 @@ export class CustomerSession {
             note: 'Merchant policy and the refund itself are decided in Shopify, not here.',
           }]
         : [],
-      optionsNote: o.activeReturn
-        ? `Shopify already has return ${o.activeReturn.reference} for this purchase (${o.activeReturn.status}).`
+      optionsNote: o.latestReturn
+        ? `Shopify has return ${o.latestReturn.reference} for this purchase (${o.latestReturn.status}).`
         : o.returnable
           ? 'Shopify reports returnable items on this purchase. A return request needs merchant approval.'
           : 'Shopify reports no returnable items for this purchase.',
@@ -317,6 +343,7 @@ export class CustomerSession {
       fulfillmentStatus: o.fulfillmentStatus,
       returnable: o.returnable,
       activeReturn: o.activeReturn,
+      latestReturn: o.latestReturn,
       nextAction: nextAction(o),
     }));
   }

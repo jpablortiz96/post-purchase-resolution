@@ -5,7 +5,7 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { CustomerSession, CUSTOMER_STATES, nextAction, describeReason } from '../src/customer.js';
+import { CustomerSession, CUSTOMER_STATES, nextAction, describeReason, describeReturn } from '../src/customer.js';
 
 const purchase = (over = {}) => ({
   orderKey: '111', orderReference: '#1001', product: 'Wireless Headphones',
@@ -26,18 +26,21 @@ const seeded = (purchases) => {
 
 test('next action is derived from authoritative state only', () => {
   assert.equal(nextAction(purchase()).level, 'available');
-  assert.equal(nextAction(purchase({ activeReturn: { status: 'REQUESTED' } })).level, 'waiting');
-  assert.equal(nextAction(purchase({ activeReturn: { status: 'OPEN' } })).level, 'action');
+  assert.equal(nextAction(purchase({ latestReturn: { status: 'REQUESTED' } })).level, 'waiting');
+  assert.equal(nextAction(purchase({ latestReturn: { status: 'OPEN' } })).level, 'action');
   assert.equal(
     nextAction(purchase({ returnable: false, nonReturnableReasons: ['RETURNED'] })).label,
     'Already returned');
   assert.equal(nextAction(null), null);
 });
 
-test('an approved return never invents shipping instructions', () => {
-  const a = nextAction(purchase({ activeReturn: { status: 'OPEN' } }));
-  assert.match(a.detail, /merchant/i);
-  assert.ok(!/carrier|tracking|label|ups|fedex|dhl/i.test(a.detail));
+test('no return state invents carrier or shipping instructions', () => {
+  for (const status of ['REQUESTED', 'OPEN', 'CLOSED', 'DECLINED', 'CANCELED']) {
+    const a = nextAction(purchase({ latestReturn: { status } }));
+    assert.ok(a && a.detail !== undefined);
+    assert.ok(!/carrier|tracking|label|ups|fedex|dhl|courier/i.test(a.detail),
+      `${status} must not invent shipping detail`);
+  }
 });
 
 test('reason codes are translated, unknown ones degrade readably', () => {
@@ -141,4 +144,60 @@ test('only requestReturn talks to the mutation route', async () => {
   assert.equal(hits.length, 1, 'exactly one call site for the customer mutation');
   const start = src.indexOf('async requestReturn');
   assert.ok(src.indexOf('/api/customer/return-request') > start, 'and it lives inside requestReturn');
+});
+
+// ── post-refund lifecycle (the #1003 incident) ─────────────────────────
+
+test('a CLOSED return reads as completed, never as "already returned"', () => {
+  const a = nextAction(purchase({
+    latestReturn: { status: 'CLOSED', reference: '#1003-R1' }, activeReturn: null,
+    returnable: false, nonReturnableReasons: ['RETURNED'], financialStatus: 'PAID' }));
+  assert.equal(a.label, 'Return completed');
+  assert.equal(a.level, 'done');
+});
+
+test('CLOSED is never rendered as OPEN', () => {
+  for (const status of ['CLOSED', 'DECLINED', 'CANCELED']) {
+    const a = nextAction(purchase({ latestReturn: { status }, activeReturn: null }));
+    assert.notEqual(a.label, 'Return approved', `${status} must not read as approved`);
+  }
+});
+
+test('a refund is only claimed when Shopify reports the order refunded', () => {
+  const refunded = nextAction(purchase({
+    latestReturn: { status: 'CLOSED' }, activeReturn: null, financialStatus: 'REFUNDED' }));
+  assert.match(refunded.detail, /refund has been issued/i);
+
+  for (const fin of ['PAID', 'PARTIALLY_REFUNDED', 'PENDING', undefined]) {
+    const a = nextAction(purchase({
+      latestReturn: { status: 'CLOSED' }, activeReturn: null, financialStatus: fin }));
+    assert.ok(!/refund/i.test(a.detail), `must not claim a refund when financialStatus is ${fin}`);
+  }
+});
+
+test('every state Shopify can report has customer language', () => {
+  for (const status of ['REQUESTED', 'OPEN', 'CLOSED', 'DECLINED', 'CANCELED']) {
+    const d = describeReturn(status);
+    assert.ok(d.headline && d.level, `${status} needs a headline and level`);
+    assert.ok(!/^return [a-z]+$/.test(d.headline) || status === 'CLOSED',
+      `${status} must not fall through to the generic label`);
+  }
+  // An unknown future state degrades readably rather than throwing.
+  assert.ok(describeReturn('SOMETHING_NEW').headline.length > 0);
+});
+
+test('a settled return still surfaces on the purchase', () => {
+  const s = seeded([purchase({
+    latestReturn: { status: 'CLOSED', reference: '#1003-R1' }, activeReturn: null,
+    returnable: false, nonReturnableReasons: ['RETURNED'], financialStatus: 'REFUNDED' })]);
+  s.select('111');
+  const p = s.buildOrderPayload();
+  assert.equal(p.latestReturn.status, 'CLOSED');
+  assert.match(p.optionsNote, /#1003-R1/);
+  assert.match(p.customerFacingStatus, /completed/i);
+});
+
+test('a completed return does not ask for the customer’s attention', () => {
+  const s = seeded([purchase({ latestReturn: { status: 'CLOSED' }, activeReturn: null, returnable: false })]);
+  assert.equal(s.buildInbox()[0].nextAction.level, 'done');
 });

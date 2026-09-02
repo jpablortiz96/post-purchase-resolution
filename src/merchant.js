@@ -48,19 +48,34 @@ async function load() {
 async function loadQueue() {
   const el = $('queue');
   if (!el) return;
-  if (!getToken()) { el.innerHTML = ''; return; }
+  // Silence is the wrong answer here. Rendering nothing without a token is
+  // indistinguishable from "no returns are waiting", and a merchant reading an
+  // empty page concluded exactly that while a REQUESTED return was pending.
+  if (!getToken()) {
+    el.innerHTML = '<div class="card"><div class="lbl">Return queue</div>' +
+      '<div class="empty">Enter your operator token above to see returns waiting for a decision. ' +
+      'Until then this desk shows nothing — not even an empty queue.</div></div>';
+    return;
+  }
   try {
     // The queue rides along with the status read, and only for a caller the
     // server accepts as the merchant.
     const r = await fetch('/api/return-status', { headers: { 'x-merchant-token': getToken() } });
     const body = await r.json();
-    if (!body.ok || !body.queue) { el.innerHTML = ''; return; }
+    if (!body.ok || !body.queue) {
+      el.innerHTML = '<div class="card"><div class="lbl">Return queue</div>' +
+        '<div class="empty">That operator token was not accepted, so the queue could not be read.</div></div>';
+      return;
+    }
     const rows = body.queue;
     if (!rows.length) {
       el.innerHTML = '<div class="card"><div class="lbl">Return queue</div>' +
         '<div class="empty">No returns are waiting.</div></div>';
       return;
     }
+    // Only REQUESTED is actionable. OPEN is shown for awareness without an
+    // approve control, and settled returns (CLOSED / DECLINED / CANCELED) are
+    // excluded by the server.
     el.innerHTML = '<div class="card"><div class="lbl">Return queue &middot; whole store</div>' +
       rows.map(r => `<div class="row">
         <div class="k">${esc(r.orderReference)} &middot; ${esc(r.reference)}</div>
