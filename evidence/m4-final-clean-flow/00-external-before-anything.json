@@ -1,0 +1,38 @@
+{
+  "capturedAt": "2026-09-02T15:28:14.306Z",
+  "step": "00-external-before-anything",
+  "note": "Baseline before any agent or customer action. No return exists.",
+  "source": "shopify-admin-api · independent read-only re-query",
+  "apiVersion": "2026-07",
+  "independence": "Read directly from Shopify. The customer page and its session play no part in this query.",
+  "order": {
+    "reference": "#1004",
+    "externalId": "12604852896116",
+    "financialStatus": "PAID",
+    "fulfillmentStatus": "FULFILLED",
+    "delivery": [
+      {
+        "displayStatus": "DELIVERED",
+        "deliveredAt": "2026-09-02T15:25:27Z"
+      }
+    ],
+    "returnStatus": "NO_RETURN",
+    "total": {
+      "amount": "99.0",
+      "currencyCode": "USD"
+    },
+    "totalRefunded": {
+      "amount": "0.0",
+      "currencyCode": "USD"
+    },
+    "refundCount": 0,
+    "lineItems": [
+      {
+        "title": "Smart Fitness Watch",
+        "quantity": 1
+      }
+    ]
+  },
+  "returns": [],
+  "returnCount": 0
+}
