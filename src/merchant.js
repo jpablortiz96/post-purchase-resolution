@@ -30,8 +30,11 @@ async function load() {
   try {
     const oRes = await fetch('/api/order');
     const order = await oRes.json();
-    if (!order.ok) return renderUnavailable(order.error);
-    render(order.order);
+    // Not `return`: the access panel and the queue must still render even when
+    // the configured order cannot be read. Merchant sign-in does not depend on
+    // any particular order existing.
+    if (!order.ok) renderUnavailable(order.error);
+    else render(order.order);
   } catch (e) {
     renderUnavailable('Could not reach the commerce system.');
   }
@@ -45,32 +48,57 @@ async function load() {
  * reads the whole queue rather than one configured order. Merchant-only data:
  * without an operator token the server refuses and this stays empty.
  */
+/**
+ * Merchant access state.
+ *
+ * 'none'     — no credential held in this browser session
+ * 'rejected' — a credential was sent and the server refused it
+ * 'ok'       — the server accepted it
+ *
+ * This is about whether the *merchant* is authenticated. It used to be inferred
+ * from whether one configured order happened to have a pending return, which is
+ * unrelated — and meant the credential field was never rendered at all.
+ */
+let merchantAccess = 'none';
+
+/**
+ * Every return in the store that is waiting on, or has had, a decision.
+ *
+ * A customer can raise a return against any purchase they own, so the desk
+ * reads the whole queue rather than one configured order. Merchant-only data:
+ * without an accepted credential the server refuses and the queue stays hidden.
+ */
 async function loadQueue() {
   const el = $('queue');
   if (!el) return;
-  // Silence is the wrong answer here. Rendering nothing without a token is
-  // indistinguishable from "no returns are waiting", and a merchant reading an
-  // empty page concluded exactly that while a REQUESTED return was pending.
+
   if (!getToken()) {
-    el.innerHTML = '<div class="card"><div class="lbl">Return queue</div>' +
-      '<div class="empty">Enter your operator token above to see returns waiting for a decision. ' +
-      'Until then this desk shows nothing — not even an empty queue.</div></div>';
+    merchantAccess = 'none';
+    renderAccess();
+    el.innerHTML = '';
     return;
   }
+
   try {
     // The queue rides along with the status read, and only for a caller the
     // server accepts as the merchant.
     const r = await fetch('/api/return-status', { headers: { 'x-merchant-token': getToken() } });
     const body = await r.json();
-    if (!body.ok || !body.queue) {
-      el.innerHTML = '<div class="card"><div class="lbl">Return queue</div>' +
-        '<div class="empty">That operator token was not accepted, so the queue could not be read.</div></div>';
+
+    if (!body.ok || (body.merchant && !body.merchant.authorized) || !body.queue) {
+      merchantAccess = 'rejected';
+      renderAccess();
+      el.innerHTML = '';
       return;
     }
+
+    merchantAccess = 'ok';
+    renderAccess();
+
     const rows = body.queue;
     if (!rows.length) {
-      el.innerHTML = '<div class="card"><div class="lbl">Return queue</div>' +
-        '<div class="empty">No returns are waiting.</div></div>';
+      el.innerHTML = '<div class="card"><div class="lbl">Return queue &middot; whole store</div>' +
+        '<div class="empty">No returns are waiting for a decision.</div></div>';
       return;
     }
     // Only REQUESTED is actionable. OPEN is shown for awareness without an
@@ -80,9 +108,47 @@ async function loadQueue() {
       rows.map(r => `<div class="row">
         <div class="k">${esc(r.orderReference)} &middot; ${esc(r.reference)}</div>
         <div class="v">${esc(r.status)}${r.status === 'REQUESTED'
-          ? ` <button class="btn" data-approve="${esc(r.externalId)}">Approve</button>` : ''}</div>
+          ? ` <button class="btn go" data-approve="${esc(r.externalId)}">Approve</button>` : ''}</div>
       </div>`).join('') + '</div>';
-  } catch (e) { el.innerHTML = ''; }
+  } catch (e) {
+    merchantAccess = 'rejected';
+    renderAccess();
+    el.innerHTML = '';
+  }
+}
+
+const CREDENTIAL_FIELD = `
+  <div class="acts" style="margin-top:12px">
+    <input id="token-input" type="password" placeholder="Operator credential" autocomplete="off"
+      style="flex:1;min-width:240px;padding:10px 13px;border-radius:9px;background:var(--raised);
+             border:1px solid var(--bd);color:var(--tx);font-family:inherit;font-size:13px">
+    <button class="btn go" id="save-token">Continue</button>
+  </div>`;
+
+/** Always rendered, so the desk never asks for something it has not shown. */
+function renderAccess() {
+  const el = $('access');
+  if (!el) return;
+
+  if (merchantAccess === 'ok') {
+    el.innerHTML = `<div class="card">
+      <div class="lbl">Merchant access</div>
+      <div class="row">
+        <div class="k">Operator credential accepted for this browser session</div>
+        <div class="v"><button class="btn ghost" id="clear-token">Sign out of this desk</button></div>
+      </div></div>`;
+    return;
+  }
+
+  const rejected = merchantAccess === 'rejected';
+  el.innerHTML = `<div class="card">
+    <div class="lbl">${rejected ? 'Merchant access rejected' : 'Merchant access required'}</div>
+    <div class="note"${rejected ? ' style="background:rgba(225,112,85,.1);border-color:rgba(225,112,85,.25);color:#f0b8a4"' : ''}>
+      ${rejected
+        ? 'That operator credential was not accepted, so the return queue stays hidden. Check it and try again.'
+        : 'Approving a return is a merchant action. Paste this store&rsquo;s operator credential to see returns waiting for a decision. It is held for this browser session only and never stored in the page source.'}
+      ${CREDENTIAL_FIELD}
+    </div></div>`;
 }
 
 function renderUnavailable(msg) {
@@ -130,21 +196,9 @@ function render(order) {
 
   const err = lastError ? `<div class="err">${esc(lastError)}</div>` : '';
 
-  // Only shown when a decision is actually pending and no credential is held.
-  const needsToken = !!pending && !getToken();
-  const tokenBox = needsToken ? `
-    <div class="note" style="margin-top:16px">
-      Approving is a merchant action. Paste the operator credential for this store
-      to continue. It is held for this browser session only and never stored in the page source.
-      <div class="acts" style="margin-top:12px">
-        <input id="token-input" type="password" placeholder="Operator credential"
-          style="flex:1;min-width:240px;padding:10px 13px;border-radius:9px;background:var(--raised);
-                 border:1px solid var(--bd);color:var(--tx);font-family:inherit;font-size:13px">
-        <button class="btn go" id="save-token">Continue</button>
-      </div>
-    </div>` : '';
-
-  $('desk').innerHTML = `<div class="card">${head}${needsToken ? tokenBox : actions}${err}</div>`;
+  // Merchant authentication is not this card's business: it belongs to the
+  // access panel, which renders whether or not any order has a pending return.
+  $('desk').innerHTML = `<div class="card">${head}${actions}${err}</div>`;
 }
 
 document.addEventListener('click', async (ev) => {
@@ -152,6 +206,13 @@ document.addEventListener('click', async (ev) => {
   if (!t) return;
 
   if (t.id === 'refresh') { lastError = null; return load(); }
+
+  if (t.id === 'clear-token') {
+    try { sessionStorage.removeItem(tokenKey); } catch (e) {}
+    lastError = null;
+    merchantAccess = 'none';
+    return load();
+  }
 
   if (t.id === 'save-token') {
     const input = document.getElementById('token-input');
