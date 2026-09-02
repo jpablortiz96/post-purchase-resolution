@@ -5,3 +5,7 @@ harness/run/
 .env
 .env.*
 .env.local
+
+# Harness scratch output. OUT_DIR defaults here so a re-run can never
+# overwrite a milestone's evidence.
+evidence/_latest/
